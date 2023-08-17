@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   HStack,
   Image,
   Link,
@@ -24,37 +25,28 @@ function NewsTwo({ source, title }) {
   };
 
   return (
-    <Box>
-      <VStack
-        w={"265px"}
-        h={"167px"}
-        alignItems={"flex-end"}
+    <Box maxW={"260px"} marginLeft={"5px"}>
+      <Box
         position="relative"
+        overflow={"hidden"}
+        mb={0}
+        rounded="xl"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        _hover={{
+          boxShadow: "4px 4px 48px 0px rgba(0, 0, 0, 0.25)",
+          transitionDuration: "0.2s",
+        }}
       >
-        <Box
-          position="relative"
-          overflow={"hidden"}
-          mb={0}
-          rounded="xl"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          _hover={{
-            boxShadow: "4px 4px 48px 0px rgba(0, 0, 0, 0.25)",
-            transitionDuration: "0.2s",
-          }}
-        >
-          <Image maxW="275px" objectFit="cover" src={source} />
-        </Box>
-        <HStack>
-          {" "}
-          <Text fontSize={"15px"}>
-            <Link style={{ textDecoration: "none" }}>{title}</Link>
-          </Text>
-          <Box cursor={"pointer"} color="black">
-            <FaRegHeart size="15px" />
-          </Box>
-        </HStack>
-      </VStack>
+        <Image maxW="250px" objectFit="cover" src={source} />
+      </Box>
+      <Flex alignItems={"center"}>
+        {" "}
+        <Text fontSize={"15px"}>
+          <Link style={{ textDecoration: "none" }}>{title}</Link>
+        </Text>
+        <FaRegHeart size="15px" />
+      </Flex>
     </Box>
   );
 }

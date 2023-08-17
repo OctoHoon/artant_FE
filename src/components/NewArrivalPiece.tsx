@@ -23,7 +23,7 @@ function NewArrivalPiece({ pk, source, price, originalPrice }) {
   };
 
   return (
-    <VStack w={"400px"} alignItems={"center"} position="relative">
+    <VStack maxW={"395px"} alignItems={"center"} position="relative">
       <a href={`listings/${pk}`}>
         <Box
           position="relative"

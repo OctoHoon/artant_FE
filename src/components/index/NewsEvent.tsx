@@ -41,7 +41,7 @@ export default function NewsEvent() {
       "num1 num3 num4 num6"
                     `}
         gridTemplateRows={"187px 187px"}
-        gridTemplateColumns={"330px 270px 330px 270px"}
+        gridTemplateColumns={"320px 260px 320px 260px"}
         h="374px"
         columnGap={"0px"}
         rowGap={"0px"}
@@ -54,19 +54,19 @@ export default function NewsEvent() {
         <GridItem pl="0" area={"num1"}>
           <NewsOne source={arts[0].source} title={arts[0].title} />
         </GridItem>
-        <GridItem pl="2" area={"num2"}>
+        <GridItem area={"num2"}>
           <NewsTwo source={arts[1].source} title={arts[0].title} />
         </GridItem>
-        <GridItem pl="2" area={"num3"}>
+        <GridItem area={"num3"}>
           <NewsTwo source={arts[2].source} title={arts[0].title} />
         </GridItem>
-        <GridItem pl="2" area={"num4"}>
+        <GridItem area={"num4"}>
           <NewsOne source={arts[3].source} title={arts[0].title} />
         </GridItem>
-        <GridItem pl="4" area={"num5"}>
+        <GridItem area={"num5"}>
           <NewsTwo source={arts[4].source} title={arts[0].title} />
         </GridItem>
-        <GridItem pl="4" area={"num6"}>
+        <GridItem area={"num6"}>
           <NewsTwo source={arts[5].source} title={arts[0].title} />
         </GridItem>
       </Grid>

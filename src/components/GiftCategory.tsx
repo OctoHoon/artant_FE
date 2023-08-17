@@ -23,7 +23,7 @@ function GiftCategory({ source, category }) {
 
   return (
     <Box>
-      <VStack w={"290px"} alignItems={"center"} position="relative">
+      <VStack maxW={"290px"} alignItems={"center"} position="relative">
         <Box
           position="relative"
           overflow={"hidden"}

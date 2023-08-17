@@ -25,7 +25,7 @@ function NewsOne({ source, title }) {
 
   return (
     <Box>
-      <VStack w={"324px"} alignItems={"flex-end"} position="relative">
+      <VStack maxW={"320px"} alignItems={"flex-end"} position="relative">
         <Box
           position="relative"
           overflow={"hidden"}
@@ -38,7 +38,7 @@ function NewsOne({ source, title }) {
             transitionDuration: "0.2s",
           }}
         >
-          <Image maxW="324px" src={source} />
+          <Image maxW="320px" src={source} />
         </Box>
         <HStack>
           {" "}
