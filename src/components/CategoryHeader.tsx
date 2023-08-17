@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { subCategory, subsubCategory } from "./data/options";
 
 interface Category {
   name: string;
@@ -36,17 +37,16 @@ export default function CategoryHeader() {
   const [hoveredSubCategory, setHoveredSubCategory] = useState<string | null>(
     null
   );
+  const [hoverOnCat, setHoverOnCat] = useState<boolean>(false);
+
+  const [hoverOnSub, setHoverOnSub] = useState<boolean>(false);
 
   const handleCategoryMouseEnter = (categoryName: string) => {
     setHoveredCategory(categoryName);
   };
 
   const handleCategoryMouseLeave = () => {
-    const isMouseOnSubCategory = categories.some(
-      (category) =>
-        hoveredSubCategory &&
-        category.subcategories.includes(hoveredSubCategory)
-    );
+    const isMouseOnSubCategory = categories.some((category) => hoverOnSub);
 
     // If the mouse is not on a subcategory, reset hoveredCategory
     if (!isMouseOnSubCategory) {
@@ -61,75 +61,90 @@ export default function CategoryHeader() {
   const handleSubCategoryMouseLeave = () => {
     setHoveredSubCategory(null);
   };
+
   return (
-    <Flex
-      ml={40}
-      justifyContent="flex-start"
-      width="1280px"
-      height="58px"
-      flex={1}
-    >
-      {categories.map((category) => (
-        <Box
-          key={category.name}
-          p={2}
-          mx={2}
-          cursor="pointer"
-          onMouseEnter={() => handleCategoryMouseEnter(category.name)}
-          onMouseLeave={handleCategoryMouseLeave}
-          position="relative"
-        >
-          <a href={`/items/${encodeURIComponent(category.name)}`}>
-            <Text
-              _hover={{ textDecoration: "underline" }}
-              textDecoration={
-                hoveredCategory === category.name ? "underline" : "none"
-              }
-            >
-              {category.name}
-            </Text>
-          </a>
-        </Box>
-      ))}
+    <Flex>
       <Flex
         ml={40}
-        direction="row"
-        bg="white"
-        position="absolute"
-        top="129px"
-        left={0}
-        right={0} // Span across the whole width
-        p={2}
-        zIndex={1}
-        boxShadow="md"
-        display={hoveredCategory ? "flex" : "none"}
-        alignItems="left" // Align subcategories horizontally
+        justifyContent="flex-start"
+        width="1280px"
+        height="58px"
+        flex={1}
+        onMouseEnter={() => setHoverOnSub(true)}
+        onMouseLeave={() => setHoverOnSub(false)}
       >
-        {categories.map((category) =>
-          hoveredCategory === category.name
-            ? category.subcategories.map((subCategory) => (
-                <a
-                  key={subCategory}
-                  href={`/items/${encodeURIComponent(subCategory)}`}
-                >
-                  <Text
-                    mx={2}
-                    _hover={{ textDecoration: "underline" }}
-                    textDecoration={
-                      hoveredSubCategory === subCategory ? "underline" : "none"
-                    }
-                    onMouseEnter={() =>
-                      handleSubCategoryMouseEnter(subCategory)
-                    }
-                    onMouseLeave={() => handleSubCategoryMouseLeave()}
-                  >
-                    {subCategory}
-                  </Text>
-                </a>
-              ))
-            : null
-        )}
+        {subCategory.map((category) => (
+          <Box
+            key={category}
+            p={2}
+            mx={2}
+            cursor="pointer"
+            onMouseEnter={() => handleCategoryMouseEnter(category)}
+            onMouseLeave={handleCategoryMouseLeave}
+            position="relative"
+          >
+            <Link to={`/items/${encodeURIComponent(category)}`}>
+              <Text
+                _hover={{ textDecoration: "underline" }}
+                textDecoration={
+                  (hoverOnSub || hoverOnCat) && hoveredCategory === category
+                    ? "underline"
+                    : "none"
+                }
+              >
+                {category}
+              </Text>
+            </Link>
+          </Box>
+        ))}
       </Flex>
+      {hoverOnSub || hoverOnCat ? (
+        <Flex
+          direction="row"
+          bg="white"
+          position="absolute"
+          top="130px"
+          left={0}
+          right={0} // Span across the whole width
+          p={2}
+          zIndex={1}
+          boxShadow="md"
+          display={hoveredCategory ? "flex" : "none"}
+          alignItems="left" // Align subcategories horizontally
+          onMouseEnter={() => setHoverOnCat(true)}
+          onMouseLeave={() => setHoverOnCat(false)}
+        >
+          <Box height="20px" />
+          <Box width="151px" />
+          {subCategory.map((category) =>
+            hoveredCategory === category
+              ? subsubCategory[category].map((subCategory) => (
+                  <Link
+                    key={subCategory}
+                    to={`/items/${encodeURIComponent(subCategory)}`}
+                  >
+                    <Text
+                      p={2}
+                      mx={2}
+                      _hover={{ textDecoration: "underline" }}
+                      textDecoration={
+                        hoveredSubCategory === subCategory
+                          ? "underline"
+                          : "none"
+                      }
+                      onMouseEnter={() =>
+                        handleSubCategoryMouseEnter(subCategory)
+                      }
+                      onMouseLeave={() => handleSubCategoryMouseLeave()}
+                    >
+                      {subCategory}
+                    </Text>
+                  </Link>
+                ))
+              : null
+          )}
+        </Flex>
+      ) : null}
     </Flex>
   );
 }
