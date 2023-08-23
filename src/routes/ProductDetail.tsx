@@ -20,7 +20,10 @@ export default function ProductDetail() {
       <ItemDetail />
       <RecentlyViewed title="판매자의 다른 작품" />
       <RecentlyViewed title="당신이 좋아할 만한 작품" />
-      <CollectionList title="아트앤아트 쇼핑객이 직접 선택한 컬렉션" />
+      <CollectionList
+        title="아트앤아트 쇼핑객이 직접 선택한 컬렉션"
+        option={true}
+      />
       <RelatedKeywords />
 
       <Footer />

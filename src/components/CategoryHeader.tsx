@@ -9,29 +9,6 @@ interface Category {
   subcategories: string[];
 }
 
-const categories: Category[] = [
-  {
-    name: "회화",
-    link: "/",
-    subcategories: ["유화", "수채화", "어크릴", "스프레이", "혼합기법", "잉크"],
-  },
-  { name: "프린트", link: "/", subcategories: ["풍경화", "인물화", "추상화"] },
-  { name: "사진", link: "/", subcategories: ["풍경화", "인물화", "추상화"] },
-  {
-    name: "일러스트레이션",
-    link: "/",
-    subcategories: ["풍경화", "인물화", "추상화"],
-  },
-  { name: "공예", link: "/", subcategories: ["풍경화", "인물화", "추상화"] },
-  { name: "조각", link: "/", subcategories: ["풍경화", "인물화", "추상화"] },
-  { name: "K-아트", link: "/", subcategories: ["풍경화", "인물화", "추상화"] },
-  {
-    name: "혼합미디어",
-    link: "/",
-    subcategories: ["풍경화", "인물화", "추상화"],
-  },
-];
-
 export default function CategoryHeader() {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const [hoveredSubCategory, setHoveredSubCategory] = useState<string | null>(
@@ -46,10 +23,7 @@ export default function CategoryHeader() {
   };
 
   const handleCategoryMouseLeave = () => {
-    const isMouseOnSubCategory = categories.some((category) => hoverOnSub);
-
-    // If the mouse is not on a subcategory, reset hoveredCategory
-    if (!isMouseOnSubCategory) {
+    if (!hoverOnSub) {
       setHoveredCategory(null);
     }
   };

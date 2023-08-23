@@ -5,6 +5,7 @@ import NotFound from "./routes/NotFound";
 import Items from "./routes/items";
 import ProductDetail from "./routes/ProductDetail";
 import ShopDetail from "./routes/ShopDetail";
+import People from "./routes/People";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "shop/:pk",
         element: <ShopDetail />,
+      },
+      {
+        path: "people/:pk",
+        element: <People />,
       },
     ],
   },

@@ -43,7 +43,7 @@ export default function ShopProductCard({
 
   return (
     <VStack
-      maxW={"290px"}
+      maxW={"280px"}
       alignItems={"flex-start"}
       position="relative"
       onMouseEnter={handleMouseEnter}

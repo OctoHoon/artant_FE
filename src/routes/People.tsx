@@ -18,11 +18,12 @@ import ShopMiddle from "../components/ShopDetail/ShopMiddle";
 import ShopReviews from "../components/ShopDetail/ShopReviews";
 import ShopIntro from "../components/ShopDetail/ShopIntro";
 import ShopPolicy from "../components/ShopDetail/ShopPolicy";
+import FavoriteItems from "../components/People/ProfileHeader";
+import ProfileHeader from "../components/People/ProfileHeader";
 
 export default function ShopDetail() {
   return (
     <Box>
-      <ShopHeader />
       <Box
         display="flex"
         flexDirection="column"
@@ -31,10 +32,8 @@ export default function ShopDetail() {
         gap={10}
         px={40}
       >
-        <ShopMiddle />
-        <ShopReviews />
-        <ShopIntro />
-        <ShopPolicy />
+        <ProfileHeader />
+
         <Footer />
       </Box>
     </Box>

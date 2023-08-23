@@ -20,7 +20,7 @@ const images = [
   "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
 ];
 
-export default function CollectionList({ title }) {
+export default function CollectionList({ title, option }) {
   const arts = [
     {
       pk: 1,
@@ -82,10 +82,10 @@ export default function CollectionList({ title }) {
   return (
     <Box my={10} maxW="1216px">
       <Flex justifyContent="space-between" alignItems="center">
-        <Text fontSize={"30px"} as="b">
+        <Text fontSize={"24px"} fontWeight={"500"}>
           {title}
         </Text>
-        <Button>더 보기</Button>
+        {option ? <Button>더 보기</Button> : null}
       </Flex>
       <Box height={"24px"} />
 

@@ -32,7 +32,7 @@ export default function TopBanner() {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get("http://127.0.0.1:8000/api/v1/users/shop")
+      .get("http://127.0.0.1:8000/api/v1/users/shops")
       .then((response) => {
         // Update the state with the fetched data
         setShopData(response.data);

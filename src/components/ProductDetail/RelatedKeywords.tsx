@@ -92,7 +92,7 @@ export default function RelatedKeywords() {
       <Flex width="1216px">
         {arts.map((art, index) => (
           <Box marginRight={"24px"}>
-            <RelatedKeyword />
+            <RelatedKeyword width={"60px"} height={"60px"} />
           </Box>
         ))}
       </Flex>
