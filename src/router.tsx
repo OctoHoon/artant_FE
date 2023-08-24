@@ -6,6 +6,7 @@ import Items from "./routes/items";
 import ProductDetail from "./routes/ProductDetail";
 import ShopDetail from "./routes/ShopDetail";
 import People from "./routes/People";
+import ShopManager from "./routes/ShopManager";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         element: <People />,
       },
     ],
+  },
+  {
+    path: "/your/shops",
+    element: <ShopManager />,
   },
 ]);
 
