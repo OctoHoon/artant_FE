@@ -25,7 +25,7 @@ export default function ArtistRecommend() {
   useEffect(() => {
     // Make the API request when the component mounts
     axios
-      .get("http://127.0.0.1:8000/api/v1/users/shop")
+      .get("http://127.0.0.1:8000/api/v1/users/shops")
       .then((response) => {
         setArtistRecommend(response.data); // Update state with API data
       })

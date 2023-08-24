@@ -16,6 +16,10 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import SocialLogin from "../index/SocialLogin";
+import { usernameLogIn } from "../../api";
+import useUser from "../../lib/useUser";
+
+import { useQueryClient } from "@tanstack/react-query";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -27,25 +31,18 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
+  const queryClient = useQueryClient();
   const handleLogin = async () => {
     console.log(username);
     console.log(password);
-    console.log({
-      username: username,
-      password: password,
-    });
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/users/log-in",
-        {
-          username: username,
-          password: password,
-        }
-      );
+      // API를 호출하고 응답 받기
+      const response = await usernameLogIn({ username, password });
 
       // Handle successful login here (e.g., redirect, update user context, etc.)
       console.log("Login successful:", response.data);
+      queryClient.refetchQueries(["me"]);
       onClose(); // Close the modal after successful login
     } catch (error) {
       // Handle login error here
