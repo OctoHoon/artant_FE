@@ -7,6 +7,7 @@ import ProductDetail from "./routes/ProductDetail";
 import ShopDetail from "./routes/ShopDetail";
 import People from "./routes/People";
 import ShopManager from "./routes/ShopManager";
+import Cart from "./routes/Cart";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "people/:pk",
         element: <People />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },
