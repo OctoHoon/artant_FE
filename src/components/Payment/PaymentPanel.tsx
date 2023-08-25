@@ -1,6 +1,6 @@
-import { Box, Flex, Image, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Image } from "@chakra-ui/react";
 
-export default function CartPanel() {
+export default function PaymentPanel() {
   return (
     <Box
       maxW="412px"
@@ -47,89 +47,11 @@ export default function CartPanel() {
             width={"100%"}
             borderRadius={"0px"}
           >
-            여러 곳으로 한방에
-          </Button>
-          <Button
-            border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-            background="var(--maincolorsbg-white, #FFF)"
-            width={"100%"}
-            borderRadius={"0px"}
-          >
             배송지 변경
           </Button>
         </Flex>
       </Box>
-      <Box
-        display="flex"
-        padding="20px 20px 10px 20px"
-        alignItems="center"
-        gap="4px"
-        alignSelf="stretch"
-        fontSize="13px"
-        color="var(--maincolorstextblack-222222, #222)"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <mask
-            id="mask0_746_10073"
-            maskUnits="userSpaceOnUse"
-            x="0"
-            y="0"
-            width="24"
-            height="24"
-          >
-            <rect width="24" height="24" fill="#D9D9D9" />
-          </mask>
-          <g mask="url(#mask0_746_10073)">
-            <path
-              d="M5.61538 21C5.16794 21 4.78685 20.8426 4.4721 20.5279C4.15737 20.2131 4 19.8321 4 19.3846V8.61538C4 8.16794 4.15737 7.78685 4.4721 7.4721C4.78685 7.15737 5.16794 7 5.61538 7H8C8 5.8859 8.38814 4.94071 9.16442 4.16443C9.94071 3.38814 10.8859 3 12 3C13.1141 3 14.0593 3.38814 14.8356 4.16443C15.6119 4.94071 16 5.8859 16 7H18.3846C18.8321 7 19.2132 7.15737 19.5279 7.4721C19.8426 7.78685 20 8.16794 20 8.61538V19.3846C20 19.8321 19.8426 20.2131 19.5279 20.5279C19.2132 20.8426 18.8321 21 18.3846 21H5.61538ZM5.61538 20H18.3846C18.5385 20 18.6795 19.9359 18.8077 19.8077C18.9359 19.6795 19 19.5385 19 19.3846V8.61538C19 8.46154 18.9359 8.32052 18.8077 8.1923C18.6795 8.0641 18.5385 8 18.3846 8H5.61538C5.46154 8 5.32052 8.0641 5.1923 8.1923C5.0641 8.32052 5 8.46154 5 8.61538V19.3846C5 19.5385 5.0641 19.6795 5.1923 19.8077C5.32052 19.9359 5.46154 20 5.61538 20ZM12 13C13.1141 13 14.0593 12.6119 14.8356 11.8356C15.6119 11.0593 16 10.1141 16 9H15C15 9.83333 14.7083 10.5417 14.125 11.125C13.5417 11.7083 12.8333 12 12 12C11.1667 12 10.4583 11.7083 9.875 11.125C9.29167 10.5417 9 9.83333 9 9H8C8 10.1141 8.38814 11.0593 9.16442 11.8356C9.94071 12.6119 10.8859 13 12 13ZM9 7H15C15 6.16667 14.7083 5.45833 14.125 4.875C13.5417 4.29167 12.8333 4 12 4C11.1667 4 10.4583 4.29167 9.875 4.875C9.29167 5.45833 9 6.16667 9 7Z"
-              fill="#1C1B1F"
-            />
-          </g>
-        </svg>
-        전체 상품 : 1개
-      </Box>
-      <Box
-        display="flex"
-        padding="0px 20px"
-        justifyContent="space-between"
-        alignItems="flex-start"
-        alignContent="flex-start"
-        rowGap="10px"
-        alignSelf="stretch"
-        flexWrap="wrap"
-      >
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-      </Box>
+
       <Box
         display={"flex"}
         padding="20px"
@@ -149,6 +71,17 @@ export default function CartPanel() {
               418,000 {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
+
+          <Flex
+            justifyContent={"space-between"}
+            alignItems={"baseline"}
+            alignSelf={"stretch"}
+          >
+            <div>배송비</div>
+            <Flex fontSize={"22px"} alignItems={"baseline"}>
+              +0 {<Text fontSize={"16px"}>원</Text>}
+            </Flex>
+          </Flex>
           <Flex
             justifyContent={"space-between"}
             alignItems={"baseline"}
@@ -163,8 +96,45 @@ export default function CartPanel() {
             justifyContent={"space-between"}
             alignItems={"baseline"}
             alignSelf={"stretch"}
+            color={"var(--maincolorstextgray-595959, #666)"}
           >
-            <div>배송비</div>
+            <Flex gap="4px">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <mask
+                  id="mask0_746_11324"
+                  maskUnits="userSpaceOnUse"
+                  x="0"
+                  y="0"
+                  width="16"
+                  height="16"
+                >
+                  <rect width="16" height="16" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_746_11324)">
+                  <path
+                    d="M9.33333 13.3333L8.85768 12.8577L11.3859 10.3333H4V3.33331H4.66667V9.66665H11.3859L8.85768 7.13845L9.32948 6.6628L12.6667 9.99998L9.33333 13.3333Z"
+                    fill="#1C1B1F"
+                  />
+                </g>
+              </svg>
+              상품할인
+            </Flex>
+            <Flex fontSize={"22px"} alignItems={"baseline"}>
+              -50,760 {<Text fontSize={"16px"}>원</Text>}
+            </Flex>
+          </Flex>
+          <Flex
+            justifyContent={"space-between"}
+            alignItems={"baseline"}
+            alignSelf={"stretch"}
+          >
+            <div>포인트 사용</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
               +0 {<Text fontSize={"16px"}>원</Text>}
             </Flex>
@@ -188,18 +158,35 @@ export default function CartPanel() {
             418,000 {<Text fontSize={"13px"}>원</Text>}
           </Flex>
         </Flex>
-        <Button
-          height={"65px"}
-          padding={"10px"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          alignSelf={"stretch"}
-          borderRadius={"0px"}
-          color={"white"}
-          background={" var(--maincolorsbgredf-12-e-24, #F12E24)"}
-        >
-          주문하기
-        </Button>
+        <Flex flexDirection={"column"} gap={"10px"} alignSelf={"stretch"}>
+          <Flex
+            justifyContent={"space-between"}
+            alignItems={"baseline"}
+            alignSelf={"stretch"}
+            color="var(--maincolorstextgray-595959, #666);"
+          >
+            <Text fontSize={"13px"}>
+              주문정보 및 서비스 이용약관에 동의합니다.
+            </Text>
+          </Flex>
+          <Button
+            height={"65px"}
+            padding={"10px"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            alignSelf={"stretch"}
+            borderRadius={"0px"}
+            color={"white"}
+            background={" var(--maincolorsbgredf-12-e-24, #F12E24)"}
+          >
+            <Flex alignItems={"baseline"}>
+              <Text fontSize={"24px"} fontWeight={"500"}>
+                418,000
+              </Text>
+              <Text fontSize={"16px"}>원 결제하기</Text>
+            </Flex>
+          </Button>
+        </Flex>
       </Box>
     </Box>
   );

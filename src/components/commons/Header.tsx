@@ -210,7 +210,9 @@ export default function Header() {
                     <MenuItem>구매내역 및 리뷰</MenuItem>
                     <MenuItem>메시지</MenuItem>
                     <MenuItem>특별 제공</MenuItem>
-                    <MenuItem>계정 설정</MenuItem>
+                    <Link to="/your/account">
+                      <MenuItem>계정 설정</MenuItem>
+                    </Link>
                     <MenuItem onClick={onLogOut}>로그 아웃</MenuItem>
                   </MenuList>
                 </Menu>
