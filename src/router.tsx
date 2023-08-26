@@ -12,6 +12,13 @@ import ShopManagerListings from "./routes/ShopManagerListings";
 import ShopManagerMessages from "./routes/ShopManagerMessages";
 import ShopManagerOrders from "./routes/ShopManagerOrders";
 import ShopManagerRoot from "./components/ShopManager/ShopManagerRoot";
+import ShopManager from "./routes/ShopManager";
+import Cart from "./routes/Cart";
+import Payment from "./routes/Payment";
+import Messages from "./routes/Messages";
+import Account from "./routes/Account";
+import AccountBody from "./components/Account/AccountBody";
+import SecurityBody from "./components/Account/SecurityBody";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +45,32 @@ const router = createBrowserRouter([
       {
         path: "people/:pk",
         element: <People />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
+      },
+      {
+        path: "messages",
+        element: <Messages />,
+      },
+      {
+        path: "your/account",
+        element: <Account />,
+        children: [
+          {
+            index: true,
+            element: <AccountBody />,
+          },
+          {
+            path: "security",
+            element: <SecurityBody />,
+          },
+        ],
       },
     ],
   },
