@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-function NewArrivalPiece({ pk, source, price, originalPrice }) {
+function NewArrivalCard({ pk, source, price, originalPrice }) {
   const gray = useColorModeValue("gray.600", "gray.300");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -104,11 +104,11 @@ function NewArrivalPiece({ pk, source, price, originalPrice }) {
   );
 }
 
-NewArrivalPiece.propTypes = {
+NewArrivalCard.propTypes = {
   pk: PropTypes.number.isRequired,
   source: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   originalPrice: PropTypes.number.isRequired,
 };
 
-export default NewArrivalPiece;
+export default NewArrivalCard;

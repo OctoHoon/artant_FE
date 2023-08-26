@@ -7,12 +7,8 @@ import {
   Image,
   Checkbox,
 } from "@chakra-ui/react";
-import CollectionList from "../ProductDetail/CollectionList";
-import RelatedKeyword from "../RelatedKeyword";
-import ShopProductCard from "../ShopDetail/ShopProductCard";
 import PaginationController from "../commons/PaginationController";
 import SearchBar from "../commons/SearchBar";
-import StarRating from "../commons/StarRating";
 import FavoriteShop from "./FavoriteShop";
 import SquareShop from "./SquareShop";
 

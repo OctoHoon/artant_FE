@@ -56,6 +56,16 @@ export const getShops = () =>
 export const getProducts = () =>
   instance.get("products/").then((response) => response.data);
 
+export const getProductsParameter = ({ queryKey }: QueryFunctionContext) => {
+  const [category, location, selectedOption] = queryKey;
+
+  return instance
+    .get(
+      `http://127.0.0.1:8000/api/v1/products/?category=${category}&sort=${selectedOption}${location}`
+    )
+    .then((response) => response.data);
+};
+
 export const getProductsRecommended = () =>
   instance
     .get("products/?sort=order&limit=8")
@@ -73,6 +83,9 @@ export const getProductDetails = ({ queryKey }: QueryFunctionContext) => {
     .then((response) => response.data);
 };
 
+export const getArtistRecommended = () =>
+  instance.get("/users/shops").then((response) => response.data);
+
 export const getShopDetails = ({ queryKey }: QueryFunctionContext) => {
   const [_, pk] = queryKey;
   return instance.get(`users/shops/${pk}`).then((response) => response.data);
@@ -82,5 +95,32 @@ export const getShopProducts = ({ queryKey }: QueryFunctionContext) => {
   const [_, pk] = queryKey;
   return instance
     .get(`users/shops/${pk}/products`)
+    .then((response) => response.data);
+};
+
+export const toggleLikeProduct = (pk) => {
+  return instance
+    .put(`favorites/items/toggle/${pk}`, null, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const toggleLikeShop = (pk) => {
+  return instance
+    .put(`favorites/shops/toggle/${pk}`, null, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const getReviews = ({ queryKey }: QueryFunctionContext) => {
+  const [pk, page, selectedOption] = queryKey;
+  return instance
+    .get(`products/${pk}/reviews?page=${page}&sort=${selectedOption}`)
     .then((response) => response.data);
 };

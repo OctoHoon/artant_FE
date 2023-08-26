@@ -1,21 +1,8 @@
-import { FaStar, FaRegHeart } from "react-icons/fa";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  HStack,
-  Image,
-  Text,
-  VStack,
-  Wrap,
-} from "@chakra-ui/react";
-import ArtPiece from "./commons/Card/ArtPiece";
-import PdpCard from "./commons/Card/PdpCard";
-import ProductSmallCard from "./commons/Card/ProductSmallCard";
-import CardSmall from "./commons/Card/CardSmall";
+import { Flex, Text } from "@chakra-ui/react";
+import PdpCard from "../commons/Card/PdpCard";
+import SimilarProductCard from "../commons/Card/SimilarProductCard";
 
-export default function ItemList({ title }) {
+export default function SimilarItemList({ title }) {
   const arts = [
     {
       pk: 1,
@@ -145,21 +132,18 @@ export default function ItemList({ title }) {
       alignItems={"flex-start"}
       width={"1280px"}
     >
-      <Text fontSize={"30px"} fontWeight={"500"}>
-        최근 본 작품
+      <Text fontSize={"24px"} fontWeight={"500"}>
+        {title}
       </Text>
 
-      <Wrap spacing={"45px"}>
+      <Flex gap={"40px"} flexWrap={"wrap"}>
         {arts.map((art, index) => (
-          <CardSmall
+          <SimilarProductCard
             pk={art.pk}
             source={art.source}
-            category={art.category}
             title={art.title}
             description={art.description}
             artist={art.artist}
-            star={art.star}
-            reviews={art.reviews}
             price={art.price}
             originalPrice={art.originalPrice}
             free_shipping={art.free_shipping}
@@ -168,7 +152,7 @@ export default function ItemList({ title }) {
             key={index}
           />
         ))}
-      </Wrap>
+      </Flex>
     </Flex>
   );
 }

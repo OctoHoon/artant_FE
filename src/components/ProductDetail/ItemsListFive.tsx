@@ -9,7 +9,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import PdpCard from "../commons/PdpCard";
+import PdpCard from "../commons/Card/PdpCard";
 
 export default function ItemListFive({ title }) {
   const arts = [

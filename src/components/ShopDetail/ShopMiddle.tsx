@@ -1,19 +1,10 @@
-import {
-  Flex,
-  Box,
-  Text,
-  Grid,
-  Button,
-  ButtonGroup,
-  Wrap,
-} from "@chakra-ui/react";
+import { Flex, Box, Text } from "@chakra-ui/react";
 import ShopSideBar from "./ShopSideBar";
-import ShopProductCard from "./ShopProductCard";
 import CustomSelect from "../Items/CustomSelect";
 import PaginationController from "../commons/PaginationController";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import PdpCard from "../commons/PdpCard";
+import PdpCard from "../commons/Card/PdpCard";
 import { getShopProducts } from "../../api";
 
 const itemCount = 24;

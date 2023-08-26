@@ -1,6 +1,6 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 
-import GiftCategory from "./GiftCategory";
+import GiftCategory from "../commons/Card/GiftCategory";
 
 export default function GiftCategories() {
   const arts = [

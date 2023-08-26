@@ -16,6 +16,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import ReviewPhotos from "./ReviewPhotos";
 import PaginationController from "../../commons/PaginationController";
+import { useQuery } from "@tanstack/react-query";
+import { getReviews } from "../../../api";
 
 interface IReview {
   user: {
@@ -53,23 +55,7 @@ export default function ReviewList() {
   console.log(reviews);
   console.log(totalCount);
 
-  useEffect(() => {
-    axios
-      .get(
-        `http://127.0.0.1:8000/api/v1/products/${pk}/reviews?page=${page}&sort=${selectedOption}`
-      )
-      .then((response) => {
-        console.log(
-          `http://127.0.0.1:8000/api/v1/products/${pk}/reviews?page=${page}&sort=${selectedOption}`
-        );
-        console.log(response.data["reviews"]);
-        setReviews(response.data["reviews"]);
-        setTotalCount(response.data["total_count"]);
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error);
-      });
-  }, [selectedOption, page]);
+  const { isLoading, data } = useQuery([pk, page, selectedOption], getReviews);
 
   return (
     <div>
@@ -121,11 +107,17 @@ export default function ReviewList() {
           </MenuList>
         </Menu>
       </Box>
-      {reviews.map((review: IReview, index) => (
-        <ReviewItem review={review} key={index} />
-      ))}
-
-      <PaginationController itemCount={totalCount} pagination={3} />
+      {isLoading ? null : (
+        <>
+          {data["reviews"].map((review: IReview, index) => (
+            <ReviewItem review={review} key={index} />
+          ))}
+          <PaginationController
+            itemCount={data["total_count"]}
+            pagination={3}
+          />
+        </>
+      )}
     </div>
   );
 }

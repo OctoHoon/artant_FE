@@ -13,7 +13,7 @@ import {
   AspectRatio,
   Wrap,
 } from "@chakra-ui/react";
-import ProductSmall from "./ProductSmall";
+import ProductSmall from "../commons/Card/ProductSmallCard";
 import {
   IoMdCheckmarkCircle,
   IoMdCheckmarkCircleOutline,

@@ -40,11 +40,6 @@ export default function MessagesPreview() {
           </Box>
         </Flex>
       </Flex>
-      <Box
-        height="1px"
-        alignSelf={"stretch"}
-        background=" var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9);"
-      />
     </Flex>
   );
 }
