@@ -66,6 +66,7 @@ export default function Header() {
   const onLogOut = async () => {
     mutation.mutate();
   };
+  console.log(user);
   return (
     <Box width={"1280px"}>
       <Stack
@@ -238,7 +239,7 @@ export default function Header() {
                   </Link>
                 </Box>
                 <Box color={"#1C1B1F"} height={"24px"}>
-                  <Link to={"/"}>
+                  <Link to={"/cart"}>
                     <AiOutlineShopping size="24px" />
                   </Link>
                 </Box>
