@@ -1,5 +1,9 @@
 import { Text } from "@chakra-ui/react";
 
 export default function ShopManager() {
-  return <Text>Hi</Text>;
+  return (
+    <Text flex={"start"} fontSize={"48px"}>
+      Hi
+    </Text>
+  );
 }
