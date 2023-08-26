@@ -1,4 +1,5 @@
 export const subCategory = [
+  "모든작품",
   "회화",
   "프린트",
   "사진",

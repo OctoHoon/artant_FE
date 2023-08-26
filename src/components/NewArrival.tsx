@@ -1,8 +1,10 @@
-import { Box, Grid, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 
 import NewArrivalPiece from "./NewArrivalPiece";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { getProductsNew } from "../api";
 
 interface Product {
   pk: number;
@@ -28,36 +30,38 @@ export default function NewArrival() {
       });
   }, []); //
 
+  const { isLoading, data } = useQuery(["ProductsNew"], getProductsNew);
+
   return (
-    <Box alignItems={"center"} justifyContent={"center"}>
-      <Text fontSize={"30px"} as="b" mx={180}>
+    <Flex
+      flexDirection={"column"}
+      gap={"24px"}
+      alignItems={"flex-start"}
+      width={"1280px"}
+    >
+      <Text fontSize={"30px"} fontWeight={"500"}>
         New Arrivals
       </Text>
-      <Grid
-        mt={10}
-        px={{
-          base: 10,
-          lg: 40,
-        }}
-        columnGap={4}
-        rowGap={8}
-        templateColumns={{
-          sm: "1fr",
-          md: "1fr 1fr",
-          lg: "repeat(3, 1fr)",
-        }}
-      >
-        {newArrival.map((art: Product, index) => (
-          <NewArrivalPiece
-            key={art.pk}
-            pk={art.pk}
-            source={art.thumbnail}
-            price={art.price}
-            originalPrice={art.original_price}
-          />
-        ))}
-      </Grid>
-      <Box height="50px" />
-    </Box>
+      {isLoading ? null : (
+        <Grid
+          gap={"40px"}
+          templateColumns={{
+            sm: "1fr",
+            md: "1fr 1fr",
+            lg: "repeat(3, 1fr)",
+          }}
+        >
+          {data.map((art: Product, index) => (
+            <NewArrivalPiece
+              key={art.pk}
+              pk={art.pk}
+              source={art.thumbnail}
+              price={art.price}
+              originalPrice={art.original_price}
+            />
+          ))}
+        </Grid>
+      )}
+    </Flex>
   );
 }

@@ -81,58 +81,56 @@ export default function RelatedKeywords() {
     },
   ];
   return (
-    <Box my={10} maxW="1216px">
-      <Flex justifyContent="space-between" alignItems="center">
-        <Text fontSize={"30px"} as="b">
-          관련 검색어
-        </Text>
-      </Flex>
-      <Box height={"24px"} />
-
-      <Flex width="1216px">
-        {arts.map((art, index) => (
-          <Box marginRight={"24px"}>
-            <RelatedKeyword width={"60px"} height={"60px"} />
-          </Box>
-        ))}
-      </Flex>
-      <Box height={"48px"} />
-      <Flex justifyContent="space-between" alignItems="center">
-        <Text fontSize={"30px"} as="b">
-          더 많은 관련 검색어
-        </Text>
-      </Flex>
-      <Box height={"24px"} />
-      <Flex width="1216px">
-        {arts.map((art, index) => (
-          <Box
-            marginRight={"8px"}
-            border="1px solid #5365AE"
-            padding={"12px 24px"}
-            color={"#5365AE"}
-            borderRadius={"5px"}
-            width={"127px"}
-            textAlign={"center"}
-          >
-            {art.artist}
-          </Box>
-        ))}
-      </Flex>
-      <Box height="48px" />
-      <Flex justifyContent="space-between" alignItems="center">
-        <Box>
-          <Flex alignItems={"center"}>
-            <Text fontSize={"14px"}>2023년 8월 14일 상장</Text>
-            <Box width="6px" />
-            <Text as="u">1901 즐겨찾기</Text>
+    <Box maxW="1280px">
+      <Flex flexDirection={"column"} gap={"80px"}>
+        <Flex flexDirection={"column"} gap={"24px"}>
+          <Text fontSize={"24px"} fontWeight={"500"}>
+            관련 검색어
+          </Text>
+          <Flex width="1280px" gap={"32px"}>
+            {arts.map((art, index) => (
+              <RelatedKeyword width={"60px"} height={"60px"} />
+            ))}
           </Flex>
-        </Box>
-        <Text>아트앤트에 이 항목 신고</Text>
+        </Flex>
+
+        <Flex flexDirection={"column"} gap={"24px"}>
+          <Text fontSize={"24px"} fontWeight={"500"}>
+            더 많은 관련 검색어
+          </Text>
+          <Flex width="1280px">
+            {arts.map((art, index) => (
+              <Box
+                marginRight={"8px"}
+                border="1px solid #5365AE"
+                padding={"12px 24px"}
+                color={"#5365AE"}
+                borderRadius={"5px"}
+                width={"127px"}
+                textAlign={"center"}
+              >
+                {art.artist}
+              </Box>
+            ))}
+          </Flex>
+        </Flex>
+        <Flex flexDirection={"column"} gap={"16px"}>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Box>
+              <Flex alignItems={"center"}>
+                <Text fontSize={"14px"}>2023년 8월 14일 상장</Text>
+                <Box width="6px" />
+                <Text as="u">1901 즐겨찾기</Text>
+              </Flex>
+            </Box>
+            <Text>아트앤트에 이 항목 신고</Text>
+          </Flex>
+          <Text>
+            아트앤트/프린트/{""}
+            <Text as="u">수채화</Text>
+          </Text>
+        </Flex>
       </Flex>
-      <Text>
-        아트앤트/프린트/{""}
-        <Text as="u">수채화</Text>
-      </Text>
     </Box>
   );
 }

@@ -68,12 +68,11 @@ export default function Header() {
     mutation.mutate();
   };
   return (
-    <Box>
+    <Box width={"1280px"}>
       <Stack
+        alignSelf={"stretch"}
         justifyContent={"space-between"}
         alignItems="center"
-        py={5}
-        px={40}
         direction={{
           // sm: "column",
           md: "row",
@@ -82,8 +81,6 @@ export default function Header() {
           sm: 4,
           md: 0,
         }}
-        borderBottomWidth={"1px"}
-        borderBottomColor={"#F1F1F5"}
         height={90}
       >
         <Box mr={0} color={"black"}>

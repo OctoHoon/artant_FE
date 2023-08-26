@@ -1,11 +1,14 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Image } from "@chakra-ui/react";
+import { Image, Box } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getShops } from "../../api";
 
-interface Shop {
+interface IShop {
   pk: number;
   shop_name: string;
   avatar: string;
@@ -29,30 +32,28 @@ export default function TopBanner() {
     usetransform: false,
   };
 
-  useEffect(() => {
-    // Fetch data from the API
-    axios
-      .get("http://127.0.0.1:8000/api/v1/users/shops")
-      .then((response) => {
-        // Update the state with the fetched data
-        setShopData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching shop data:", error);
-      });
-  }, []);
+  const { isLoading, data } = useQuery(["shops"], getShops);
+  console.log(data);
 
   return (
-    <Slider {...settings}>
-      {shopData.map((shop: Shop) => (
-        <Image
-          key={shop.pk}
-          width="690px"
-          height="300px"
-          objectFit="cover"
-          src={shop.background_pic}
-        />
-      ))}
-    </Slider>
+    <Box width={"1600px"}>
+      {isLoading ? null : (
+        <>
+          <Slider {...settings}>
+            {data.map((shop: IShop) => (
+              <Link to={`shop/${shop.pk}`}>
+                <Image
+                  key={shop.pk}
+                  width="1000px"
+                  height="300px"
+                  objectFit="cover"
+                  src={shop.background_pic}
+                />
+              </Link>
+            ))}
+          </Slider>
+        </>
+      )}
+    </Box>
   );
 }

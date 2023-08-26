@@ -25,12 +25,8 @@ function NewsTwo({ source, title }) {
   };
 
   return (
-    <Box maxW={"260px"} marginLeft={"5px"}>
+    <VStack gap={"4px"} alignItems={"flex-end"}>
       <Box
-        position="relative"
-        overflow={"hidden"}
-        mb={0}
-        rounded="xl"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         _hover={{
@@ -38,16 +34,17 @@ function NewsTwo({ source, title }) {
           transitionDuration: "0.2s",
         }}
       >
-        <Image maxW="250px" objectFit="cover" src={source} />
+        <Image width="275px" height="158px" objectFit="cover" src={source} />
       </Box>
-      <Flex alignItems={"center"}>
-        {" "}
-        <Text fontSize={"15px"}>
+      <HStack alignItems={"center"}>
+        <Text fontSize={"15px"} align={"center"}>
           <Link style={{ textDecoration: "none" }}>{title}</Link>
         </Text>
-        <FaRegHeart size="15px" />
-      </Flex>
-    </Box>
+        <Box cursor={"pointer"} color="black">
+          <FaRegHeart size="15px" />
+        </Box>
+      </HStack>
+    </VStack>
   );
 }
 

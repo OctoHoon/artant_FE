@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Root from "./components/commons/Root";
+import Root from "./routes/Root";
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
 import Items from "./routes/items";
@@ -12,7 +12,6 @@ import ShopManagerListings from "./routes/ShopManagerListings";
 import ShopManagerMessages from "./routes/ShopManagerMessages";
 import ShopManagerOrders from "./routes/ShopManagerOrders";
 import ShopManagerRoot from "./components/ShopManager/ShopManagerRoot";
-import ShopManager from "./routes/ShopManager";
 import Cart from "./routes/Cart";
 import Payment from "./routes/Payment";
 import Messages from "./routes/Messages";

@@ -23,12 +23,13 @@ function GiftCategory({ source, category }) {
 
   return (
     <Box>
-      <VStack maxW={"290px"} alignItems={"center"} position="relative">
+      <VStack
+        maxW={"290px"}
+        alignItems={"center"}
+        position="relative"
+        gap={"16px"}
+      >
         <Box
-          position="relative"
-          overflow={"hidden"}
-          mb={0}
-          rounded="xl"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           _hover={{
@@ -38,7 +39,7 @@ function GiftCategory({ source, category }) {
         >
           <Image maxH="290" src={source} />
         </Box>
-        <Text>
+        <Text fontSize={"20px"} fontWeight={"500"}>
           <Link>{category}</Link>
         </Text>
       </VStack>

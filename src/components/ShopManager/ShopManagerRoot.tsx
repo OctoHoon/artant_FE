@@ -1,7 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 
-import CategoryHeader from "../CategoryHeader";
 import ShopManagerSideBar from "./ShopManagerSideBar";
 
 export default function Root() {
