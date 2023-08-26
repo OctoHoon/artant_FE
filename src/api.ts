@@ -60,9 +60,7 @@ export const getProductsParameter = ({ queryKey }: QueryFunctionContext) => {
   const [category, location, selectedOption] = queryKey;
 
   return instance
-    .get(
-      `http://127.0.0.1:8000/api/v1/products/?category=${category}&sort=${selectedOption}${location}`
-    )
+    .get(`products/?category=${category}&sort=${selectedOption}${location}`)
     .then((response) => response.data);
 };
 
