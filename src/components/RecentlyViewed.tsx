@@ -34,7 +34,7 @@ export default function ItemList({ title }) {
     },
     {
       pk: 2,
-      source: "http://localhost:3000/assets/images/card_image_custom-1.png",
+      source: "assets/images/card_image_custom-1.png",
       category: "Print",
       title: "우리의 꿈은",
       description: "애니메이션화, CG, 스타 서정배",

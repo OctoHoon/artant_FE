@@ -5,19 +5,19 @@ import GiftCategory from "../commons/Card/GiftCategory";
 export default function GiftCategories() {
   const arts = [
     {
-      source: "http://localhost:3000/assets/images/Rectangle_85.png",
+      source: "assets/images/Rectangle_85.png",
       category: "기념일 & 결혼",
     },
     {
-      source: "http://localhost:3000/assets/images/Rectangle_85-1.png",
+      source: "assets/images/Rectangle_85-1.png",
       category: "여성",
     },
     {
-      source: "http://localhost:3000/assets/images/Rectangle_85-2.png",
+      source: "assets/images/Rectangle_85-2.png",
       category: "남성",
     },
     {
-      source: "http://localhost:3000/assets/images/Rectangle_85-3.png",
+      source: "assets/images/Rectangle_85-3.png",
       category: "맞춤 제작",
     },
   ];
