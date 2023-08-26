@@ -6,7 +6,12 @@ import Items from "./routes/items";
 import ProductDetail from "./routes/ProductDetail";
 import ShopDetail from "./routes/ShopDetail";
 import People from "./routes/People";
-import ShopManager from "./routes/ShopManager";
+import ShopManagerDashboard from "./routes/ShopManagerDashboard";
+import ShopManagerSettings from "./routes/ShopManagerSettings";
+import ShopManagerListings from "./routes/ShopManagerListings";
+import ShopManagerMessages from "./routes/ShopManagerMessages";
+import ShopManagerOrders from "./routes/ShopManagerOrders";
+import ShopManagerRoot from "./components/ShopManager/ShopManagerRoot";
 
 const router = createBrowserRouter([
   {
@@ -37,8 +42,31 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/your/shops",
-    element: <ShopManager />,
+    path: "/your/shops/me/",
+    element: <ShopManagerRoot />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "",
+        element: <ShopManagerSettings />,
+      },
+      {
+        path: "dashboard",
+        element: <ShopManagerDashboard />,
+      },
+      {
+        path: "listings",
+        element: <ShopManagerListings />,
+      },
+      {
+        path: "messages",
+        element: <ShopManagerMessages />,
+      },
+      {
+        path: "orders-shipping",
+        element: <ShopManagerOrders />,
+      },
+    ],
   },
 ]);
 
