@@ -14,8 +14,8 @@ const CenteredText: React.FC = () => {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      height="40vh" /* Adjust the height as needed */
     >
+      <Box height={"96px"} />
       {lines.map((line, index) => (
         <div key={index}>
           <Text
@@ -27,6 +27,7 @@ const CenteredText: React.FC = () => {
           </Text>
         </div>
       ))}
+      <Box height={"48px"} />
     </Box>
   );
 };

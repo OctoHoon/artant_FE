@@ -1,43 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
-  Grid,
   Image,
-  VStack,
-  Text,
   AspectRatio,
-  HStack,
   IconButton,
   Fade,
+  Flex,
 } from "@chakra-ui/react";
-import { Carousel } from "react-responsive-carousel";
 import {
   FaChevronLeft,
   FaChevronRight,
   FaPlayCircle,
   FaRegHeart,
-  FaRegStar,
 } from "react-icons/fa";
-
-const images = [
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/video/upload/ac_none,du_15,q_auto:good/poster_movie_vxlej8.mp4",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-];
-
-const videos = [
-  "https://v.etsystatic.com/video/upload/ac_none,du_15,q_auto:good/poster_movie_vxlej8.mp4",
-];
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails } from "../../api";
 
 export default function ProductImage() {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLength, setImageLength] = useState(0);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -54,7 +36,7 @@ export default function ProductImage() {
   };
 
   const handleNextIndex = () => {
-    if (activeIndex != images.length - 1) {
+    if (activeIndex != imageLength - 1) {
       setActiveIndex(activeIndex + 1);
     } else {
       setActiveIndex(0);
@@ -65,121 +47,143 @@ export default function ProductImage() {
     if (activeIndex != 0) {
       setActiveIndex(activeIndex - 1);
     } else {
-      setActiveIndex(images.length - 1);
+      setActiveIndex(imageLength - 1);
     }
   };
 
+  const { pk } = useParams();
+  const { isLoading, data } = useQuery(["products", pk], getProductDetails);
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setImageLength(data.images.length);
+    }
+  }, [isLoading, data]);
+
+  console.log(data);
   return (
-    <Box>
-      <HStack>
-        <Box maxH="550px" width="65px" overflowY="scroll">
-          <VStack spacing={2} align={"start"}>
-            {images.map((image, index) => (
-              <Box
-                key={index}
-                borderColor={index === activeIndex ? "black" : "transparent"}
-                borderWidth={"1px"}
-                borderRadius="4"
-                position="relative"
-              >
-                <AspectRatio w="60px" ratio={1 / 1}>
-                  <Image
-                    maxW="60px"
-                    maxH="60px"
+    <>
+      {isLoading ? (
+        <Box alignSelf={"stretch"} height={"500px"} />
+      ) : (
+        <Box>
+          <Flex gap={"20px"}>
+            <Box maxH="550px" width="65px" overflowY="scroll">
+              <Flex gap="8px" align={"start"} flexDirection="column">
+                {data["images"].map((image, index) => (
+                  <Box
                     key={index}
-                    src={image}
-                    alt={`Thumbnail ${index + 1}`}
-                    cursor="pointer"
-                    borderColor={"black"}
+                    borderColor={
+                      index === activeIndex ? "black" : "transparent"
+                    }
+                    borderWidth={"1px"}
                     borderRadius="4"
-                    objectFit="fill"
-                    onClick={() => handleThumbnailClick(index)}
+                    position="relative"
+                  >
+                    <AspectRatio w="60px" ratio={1 / 1}>
+                      <Image
+                        maxW="60px"
+                        maxH="60px"
+                        key={index}
+                        src={image["image"]}
+                        alt={`Thumbnail ${index + 1}`}
+                        cursor="pointer"
+                        borderColor={"black"}
+                        borderRadius="4"
+                        objectFit="fill"
+                        onClick={() => handleThumbnailClick(index)}
+                      />
+                    </AspectRatio>
+                    {image["image"].endsWith(".mp4") ? (
+                      <Box
+                        position="absolute"
+                        top="50%"
+                        left="50%"
+                        transform="translate(-50%, -50%)"
+                        zIndex="1"
+                      >
+                        <FaPlayCircle size={24} color="white" />
+                      </Box>
+                    ) : null}
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+            <Box position="relative" maxW="740px" maxH="620px">
+              {/* Image */}
+              <Box
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                {data["images"][activeIndex]["image"].endsWith(".mp4") ? (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    width="100%"
+                    height="100%"
+                    src={data["images"][activeIndex]["image"]}
                   />
-                </AspectRatio>
-                {image.endsWith(".mp4") ? (
+                ) : (
+                  <Image
+                    src={data["images"][activeIndex]["image"]}
+                    alt={`Image ${activeIndex}`}
+                    width={"740px"}
+                    height="620px"
+                    fit={"contain"}
+                  />
+                )}
+                <Fade in={isHovered}>
                   <Box
                     position="absolute"
-                    top="50%"
-                    left="50%"
-                    transform="translate(-50%, -50%)"
-                    zIndex="1"
+                    top={2}
+                    right={2}
+                    w="36px"
+                    h="36px"
+                    rounded="full"
+                    bg="white"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                   >
-                    <FaPlayCircle size={24} color="white" />
+                    <Box cursor={"pointer"} color="black">
+                      <FaRegHeart size="20px" />
+                    </Box>
                   </Box>
-                ) : null}
+                </Fade>
               </Box>
-            ))}
-          </VStack>
-        </Box>
-        <Box position="relative" maxW="700px" maxH="635.19px">
-          {/* Image */}
-          <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            {images[activeIndex].endsWith(".mp4") ? (
-              <video
-                autoPlay
-                muted
-                loop
-                width="100%"
-                height="100%"
-                src="https://v.etsystatic.com/video/upload/ac_none,du_15,q_auto:good/poster_movie_vxlej8.mp4"
-              />
-            ) : (
-              <Image
-                src={images[activeIndex]}
-                width="100%"
-                height="100%"
-                alt={`Image ${activeIndex}`}
-              />
-            )}
-            <Fade in={isHovered}>
+
+              {/* Button */}
               <Box
                 position="absolute"
-                top={2}
-                right={2}
-                w="36px"
-                h="36px"
-                rounded="full"
-                bg="white"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
+                top="50%"
+                left="5%"
+                transform="translate(-50%, -50%)"
+                zIndex="1" // Ensure the button appears on top of the image
               >
-                <Box cursor={"pointer"} color="black">
-                  <FaRegHeart size="20px" />
-                </Box>
+                <IconButton
+                  icon={<FaChevronLeft />}
+                  onClick={() => handlePrevIndex()}
+                  aria-label="Previous"
+                />
               </Box>
-            </Fade>
-          </Box>
-
-          {/* Button */}
-          <Box
-            position="absolute"
-            top="50%"
-            left="5%"
-            transform="translate(-50%, -50%)"
-            zIndex="1" // Ensure the button appears on top of the image
-          >
-            <IconButton
-              icon={<FaChevronLeft />}
-              onClick={() => handlePrevIndex()}
-              aria-label="Previous"
-            />
-          </Box>
-          <Box
-            position="absolute"
-            top="50%"
-            right="0%"
-            transform="translate(-50%, -50%)"
-            zIndex="1" // Ensure the button appears on top of the image
-          >
-            <IconButton
-              icon={<FaChevronRight />}
-              onClick={() => handleNextIndex()}
-              aria-label="Next"
-            />
-          </Box>
+              <Box
+                position="absolute"
+                top="50%"
+                right="0%"
+                transform="translate(-50%, -50%)"
+                zIndex="1" // Ensure the button appears on top of the image
+              >
+                <IconButton
+                  icon={<FaChevronRight />}
+                  onClick={() => handleNextIndex()}
+                  aria-label="Next"
+                />
+              </Box>
+            </Box>
+          </Flex>
         </Box>
-      </HStack>
-    </Box>
+      )}
+    </>
   );
 }

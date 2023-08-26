@@ -26,8 +26,8 @@ export default function ReviewPhotos() {
     <Box>
       <Text
         color="#000"
-        fontSize="16px"
-        fontWeight="400"
+        fontSize="24px"
+        fontWeight="500"
         letterSpacing="-0.048px"
       >
         리뷰사진

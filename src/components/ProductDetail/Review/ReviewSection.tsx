@@ -22,7 +22,7 @@ import ReviewPhotos from "./ReviewPhotos";
 
 export default function ReveiwSection() {
   return (
-    <div>
+    <Box>
       <Flex alignItems="center" marginBottom={"8px"}>
         <Text
           color="#222"
@@ -47,7 +47,12 @@ export default function ReveiwSection() {
         <StarRating star={5} reviews={3500} include_count={true} />
       </Flex>
 
-      <Tabs position="relative" color="black" colorScheme="black">
+      <Tabs
+        position="relative"
+        color="black"
+        colorScheme="black"
+        width={"764px"}
+      >
         <TabList>
           <Tab _selected={{ fontWeight: 600 }}>
             <Text>이 작품 리뷰</Text>
@@ -67,15 +72,15 @@ export default function ReveiwSection() {
         </TabList>
         <TabIndicator mt="-1.5px" height="2px" bg="black" borderRadius="1px" />
         <TabPanels>
-          <TabPanel>
+          <TabPanel padding={"0px"}>
             <ReviewList />
           </TabPanel>
-          <TabPanel>
+          <TabPanel padding={"0px"}>
             <ReviewList />
           </TabPanel>
         </TabPanels>
       </Tabs>
       <ReviewPhotos />
-    </div>
+    </Box>
   );
 }

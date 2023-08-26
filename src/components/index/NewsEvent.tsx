@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 
 import GiftCategory from "../GiftCategory";
 import NewsOne from "./NewsOne";
@@ -32,44 +32,31 @@ export default function NewsEvent() {
     },
   ];
   return (
-    <Box my={10}>
-      <Text fontSize={"30px"} as="b" mx={180}>
-        News Event
+    <Flex
+      flexDirection={"column"}
+      gap={"24px"}
+      alignItems={"flex-start"}
+      width={"1280px"}
+    >
+      <Text fontSize={"30px"} fontWeight={"500"}>
+        Gift Categories
       </Text>
-      <Grid
-        templateAreas={`"num1 num2 num4 num5"
-      "num1 num3 num4 num6"
-                    `}
-        gridTemplateRows={"187px 187px"}
-        gridTemplateColumns={"320px 260px 320px 260px"}
-        h="374px"
-        columnGap={"0px"}
-        rowGap={"0px"}
-        mt={10}
-        px={{
-          base: 10,
-          lg: 40,
-        }}
-      >
-        <GridItem pl="0" area={"num1"}>
+      <Flex alignItems={"flex-start"} gap={"10px"}>
+        <Flex alignItems={"flex-start"} gap={"10px"}>
           <NewsOne source={arts[0].source} title={arts[0].title} />
-        </GridItem>
-        <GridItem area={"num2"}>
-          <NewsTwo source={arts[1].source} title={arts[0].title} />
-        </GridItem>
-        <GridItem area={"num3"}>
-          <NewsTwo source={arts[2].source} title={arts[0].title} />
-        </GridItem>
-        <GridItem area={"num4"}>
-          <NewsOne source={arts[3].source} title={arts[0].title} />
-        </GridItem>
-        <GridItem area={"num5"}>
-          <NewsTwo source={arts[4].source} title={arts[0].title} />
-        </GridItem>
-        <GridItem area={"num6"}>
-          <NewsTwo source={arts[5].source} title={arts[0].title} />
-        </GridItem>
-      </Grid>
-    </Box>
+          <Flex flexDirection={"column"} alignItems={"flex-start"} gap={"10px"}>
+            <NewsTwo source={arts[1].source} title={arts[1].title} />
+            <NewsTwo source={arts[2].source} title={arts[2].title} />
+          </Flex>
+        </Flex>
+        <Flex alignItems={"flex-start"} gap={"10px"}>
+          <NewsOne source={arts[3].source} title={arts[3].title} />
+          <Flex flexDirection={"column"} alignItems={"flex-start"} gap={"10px"}>
+            <NewsTwo source={arts[4].source} title={arts[4].title} />
+            <NewsTwo source={arts[5].source} title={arts[5].title} />
+          </Flex>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 }

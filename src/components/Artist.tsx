@@ -1,35 +1,30 @@
-import {
-  Box,
-  HStack,
-  Image,
-  Link,
-  Text,
-  useColorModeValue,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-function Artist({ source, name, description }) {
+function Artist({ pk, source, name, description }) {
   return (
-    <Box w={"300px"}>
-      <Link style={{ textDecoration: "none" }}>
-        <HStack
-          w={"300px"}
-          h={"100px"}
-          alignItems={"center"}
-          position="relative"
-        >
-          <Box position="relative" overflow={"hidden"} mb={0} rounded="full">
-            <Image maxH="100px" src={source} />
-          </Box>
-          <VStack ml={5} w={"150px"} align={"flex-start"}>
-            <Text fontSize={"20px"}>{name} 작가</Text>
-            <Text fontSize={"15px"}>{description}</Text>
-          </VStack>
-        </HStack>
-      </Link>
-    </Box>
+    <Link to={`/shop/${pk}`}>
+      <Flex alignItems="center" gap="16px">
+        <Image
+          width={"100px"}
+          height="100px"
+          borderRadius="100px"
+          border="1px solid #FFF"
+          src={source}
+        />
+        <Flex flexDirection={"column"} gap={"5ps"}>
+          <Text fontSize={"20px"}>{name} 작가</Text>
+          <Text
+            fontSize={"15px"}
+            color={" var(--maincolorstextgray-969696, #969696);"}
+          >
+            {description}
+          </Text>
+        </Flex>
+      </Flex>
+    </Link>
   );
 }
 

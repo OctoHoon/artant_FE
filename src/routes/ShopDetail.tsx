@@ -18,10 +18,12 @@ import ShopMiddle from "../components/ShopDetail/ShopMiddle";
 import ShopReviews from "../components/ShopDetail/ShopReviews";
 import ShopIntro from "../components/ShopDetail/ShopIntro";
 import ShopPolicy from "../components/ShopDetail/ShopPolicy";
+import ScrollToTop from "../components/commons/ScrollToTop";
 
 export default function ShopDetail() {
   return (
     <Box>
+      <ScrollToTop />
       <ShopHeader />
       <Box
         display="flex"

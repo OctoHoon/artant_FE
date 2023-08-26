@@ -2,6 +2,7 @@ import { FaStar, FaRegHeart } from "react-icons/fa";
 import {
   Box,
   Button,
+  Flex,
   Grid,
   HStack,
   Image,
@@ -18,30 +19,38 @@ import Footer from "../components/commons/Footer";
 import TopBanner from "../components/index/TopBanner";
 import RegisterButton from "../components/index/RegisterButton";
 import CenteredText from "../components/index/CenterCopy";
+import ItemListFive from "../components/ProductDetail/ItemsListFive";
 
 export default function Home() {
   return (
     <Box>
       <TopBanner />
-      <CenteredText />
-      <NewArrival />
-      <ArtantRecommend />
-      <GiftCategories />
-      <NewsEvent />
-      <ArtistRecommend />
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center" // Center horizontally
-        justifyContent="center" // Center vertically
-        gap={10}
-        px={40}
+
+      <Flex
+        flexDirection={"column"}
+        gap={"120px"}
+        alignItems="center"
+        justifyContent="center"
       >
-        {" "}
-        <RecentlyViewed title="최근 본 작품" />
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center" // Center horizontally
+          justifyContent="center" // Center vertically
+          gap={"96px"}
+        >
+          <CenteredText />
+
+          <NewArrival />
+          <ArtantRecommend />
+          <GiftCategories />
+          <NewsEvent />
+          <ArtistRecommend />
+          <ItemListFive title="최근 본 작품" />
+        </Box>
         <RegisterButton />
-        <Footer />
-      </Box>
+      </Flex>
+      <Footer />
     </Box>
   );
 }

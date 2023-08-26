@@ -24,33 +24,26 @@ function NewsOne({ source, title }) {
   };
 
   return (
-    <Box>
-      <VStack maxW={"320px"} alignItems={"flex-end"} position="relative">
-        <Box
-          position="relative"
-          overflow={"hidden"}
-          mb={0}
-          rounded="xl"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          _hover={{
-            boxShadow: "4px 4px 48px 0px rgba(0, 0, 0, 0.25)",
-            transitionDuration: "0.2s",
-          }}
-        >
-          <Image maxW="320px" src={source} />
+    <VStack alignItems={"flex-end"} position="relative" gap={"4px"}>
+      <Box
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        _hover={{
+          boxShadow: "4px 4px 48px 0px rgba(0, 0, 0, 0.25)",
+          transitionDuration: "0.2s",
+        }}
+      >
+        <Image width={"350px"} height={"350px"} src={source} />
+      </Box>
+      <HStack alignItems={"center"}>
+        <Text fontSize={"15px"} align={"center"}>
+          <Link style={{ textDecoration: "none" }}>{title}</Link>
+        </Text>
+        <Box cursor={"pointer"} color="black">
+          <FaRegHeart size="15px" />
         </Box>
-        <HStack>
-          {" "}
-          <Text fontSize={"15px"} align={"center"}>
-            <Link style={{ textDecoration: "none" }}>{title}</Link>
-          </Text>
-          <Box cursor={"pointer"} color="black">
-            <FaRegHeart size="15px" />
-          </Box>
-        </HStack>
-      </VStack>
-    </Box>
+      </HStack>
+    </VStack>
   );
 }
 

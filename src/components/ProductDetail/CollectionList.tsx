@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import ArtPiece from "../ArtPiece";
 import Collection from "../Collection";
+import MoreButton from "../commons/MoreButton";
 
 const images = [
   "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
@@ -80,16 +81,16 @@ export default function CollectionList({ title, option }) {
     },
   ];
   return (
-    <Box my={10} maxW="1216px">
+    <Box width="1280px">
       <Flex justifyContent="space-between" alignItems="center">
         <Text fontSize={"24px"} fontWeight={"500"}>
           {title}
         </Text>
-        {option ? <Button>더 보기</Button> : null}
+        {option ? <MoreButton /> : null}
       </Flex>
       <Box height={"24px"} />
 
-      <Flex width="1216px" justifyContent="space-between">
+      <Flex width="1280px" justifyContent="space-between">
         {arts.map((art, index) => (
           <Collection images={images} />
         ))}

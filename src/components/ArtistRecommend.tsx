@@ -2,6 +2,7 @@ import { FaStar, FaRegHeart } from "react-icons/fa";
 import {
   Box,
   Button,
+  Flex,
   Grid,
   HStack,
   Image,
@@ -34,34 +35,26 @@ export default function ArtistRecommend() {
       });
   }, []);
   return (
-    <Box my={10}>
-      <Text fontSize={"30px"} as="b" mx={180}>
+    <Flex
+      flexDirection={"column"}
+      gap={"24px"}
+      alignItems={"flex-start"}
+      width={"1280px"}
+    >
+      <Text fontSize={"30px"} fontWeight={"500"}>
         판매자 추천
       </Text>
-      <Grid
-        mt={10}
-        px={{
-          base: 10,
-          lg: 40,
-        }}
-        columnGap={4}
-        rowGap={8}
-        templateColumns={{
-          sm: "1fr",
-          md: "1fr 1fr",
-          lg: "repeat(3, 1fr)",
-          xl: "repeat(4, 1fr)",
-        }}
-      >
+      <Flex alignSelf={"stretch"} justifyContent={"space-between"}>
         {artistRecommend.map((artist: Shop, index) => (
           <Artist
             key={artist.pk}
+            pk={artist.pk}
             source={artist.avatar}
             name={artist.shop_name}
             description={"작가"}
           />
         ))}
-      </Grid>
-    </Box>
+      </Flex>
+    </Flex>
   );
 }
