@@ -36,7 +36,7 @@ export default function AddCartDrawer({ isOpen, toggleOpen }) {
                 <Image
                   marginRight={"16px"}
                   width="80px"
-                  src="http://localhost:3000/assets/images/card_image_custom-1.png"
+                  src="/assets/images/card_image_custom-1.png"
                 />
                 <Box ml="auto" position="relative" top="-14px" right={"26px"}>
                   <IoMdCheckmarkCircle size={24} color="#5365AE" />
