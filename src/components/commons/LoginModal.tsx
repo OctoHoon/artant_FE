@@ -14,10 +14,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import axios from "axios";
 import SocialLogin from "../index/SocialLogin";
 import { usernameLogIn } from "../../api";
-import useUser from "../../lib/useUser";
 
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -73,6 +71,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               focusBorderColor="black"
               placeholder="비밀번호를 입력하세요"
               value={password}
+              type={"password"}
               onChange={(e) => setPassword(e.target.value)}
             />
             <HStack spacing={24}>

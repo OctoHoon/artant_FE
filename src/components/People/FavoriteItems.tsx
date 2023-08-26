@@ -1,9 +1,11 @@
 import { Flex, Wrap, Box, Text } from "@chakra-ui/react";
 import CollectionList from "../ProductDetail/CollectionList";
 import RelatedKeyword from "../RelatedKeyword";
-import ShopProductCard from "../ShopDetail/ShopProductCard";
 import PaginationController from "../commons/PaginationController";
 import SearchBar from "../commons/SearchBar";
+import FavoriteItemCard from "../commons/Card/FavoriteItemCard";
+import ItemListFive from "../ProductDetail/ItemsListFive";
+import SimilarItemList from "./SimilarItemList";
 
 export default function FavoriteItems() {
   return (
@@ -61,8 +63,8 @@ export default function FavoriteItems() {
         </Box>
       </Flex>
       <Box height={"40px"} />
-      <Wrap spacing={2} justify={"space-around"}>
-        <ShopProductCard
+      <Wrap spacing="40px">
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -71,9 +73,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -82,9 +86,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -93,9 +99,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -104,9 +112,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -115,9 +125,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -126,9 +138,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -137,9 +151,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -148,9 +164,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -159,9 +177,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -170,9 +190,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -181,9 +203,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -192,9 +216,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -203,9 +229,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -214,9 +242,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -225,9 +255,11 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
-        <ShopProductCard
+        <FavoriteItemCard
           pk={4}
           source="/assets/images/card_image_custom-3.png"
           title="우리의 꿈은"
@@ -236,199 +268,18 @@ export default function FavoriteItems() {
           originalPrice={200000}
           free_shipping={true}
           is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
+          is_liked={false}
+          artist={"가나다라아트"}
+          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
         />
       </Wrap>
       <PaginationController itemCount={20} pagination={40} />
       <Box height="40px" />
-      <Text fontSize={"24px"} fontWeight={"500"}>
-        이 컬렉션과 유사한 상품
-      </Text>
-      <Box height="40px" />
-      <Wrap spacing={2} justify={"space-around"}>
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-        <ShopProductCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          artist={undefined}
-        />
-      </Wrap>
+      <SimilarItemList title={"이 컬렉션과 유사한 작품"} />
+
       <Box height="40px" />
       <CollectionList title={"당신이 좋아할 컬렉션"} option={false} />
       <Box height="40px" />
-      <Text fontSize={"24px"} fontWeight={"500"}>
-        당신이 좋아할 컬렉션
-      </Text>
       <Box height="40px" />
       <Wrap spacing={3} justify={"space-around"}>
         <RelatedKeyword width={"120px"} height={"120px"} />

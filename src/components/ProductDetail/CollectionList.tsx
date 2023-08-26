@@ -10,8 +10,8 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import ArtPiece from "../ArtPiece";
-import Collection from "../Collection";
+import ArtPiece from "../commons/Card/ArtPiece";
+import Collection from "../commons/Card/Collection";
 import MoreButton from "../commons/MoreButton";
 
 const images = [

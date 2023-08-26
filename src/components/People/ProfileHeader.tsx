@@ -1,25 +1,21 @@
 import { Flex, Box, Avatar, Text, Image, Wrap } from "@chakra-ui/react";
 import { useState } from "react";
-import SearchBar from "../commons/SearchBar";
-import ProductSmall from "../ProductDetail/ProductSmall";
-import ShopProductCard from "../ShopDetail/ShopProductCard";
-import PaginationController from "../commons/PaginationController";
-import CollectionList from "../ProductDetail/CollectionList";
-import RelatedKeyword from "../RelatedKeyword";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import FavoriteItems from "./FavoriteItems";
 import FavoriteShops from "./FavoriteShops";
+import useUser from "../../lib/useUser";
 
 export default function ProfileHeader() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const tab = queryParams.get("tab");
   const [index, setIndex] = useState(tab === "shops" ? 1 : 0);
+  const { pk } = useParams();
 
   return (
     <Box width="100%">
       <Flex justifyContent={"space-between"} width={"100%"}>
-        <Flex>
+        <Flex alignItems={"center"}>
           <Avatar />
           <Box width="10px" />
           <Box>

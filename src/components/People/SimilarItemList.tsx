@@ -1,17 +1,8 @@
-import { FaStar, FaRegHeart } from "react-icons/fa";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import PdpCard from "../commons/Card/PdpCard";
+import SimilarProductCard from "../commons/Card/SimilarProductCard";
 
-export default function ItemListFive({ title }) {
+export default function SimilarItemList({ title }) {
   const arts = [
     {
       pk: 1,
@@ -90,7 +81,7 @@ export default function ItemListFive({ title }) {
     },
     {
       pk: 2,
-      source: "assets/images/card_image_custom-1.png",
+      source: "/assets/images/card_image_custom-1.png",
       category: "Print",
       title: "우리의 꿈은",
       description: "애니메이션화, CG, 스타 서정배",
@@ -145,9 +136,9 @@ export default function ItemListFive({ title }) {
         {title}
       </Text>
 
-      <Flex gap={"20px"} flexWrap={"wrap"}>
+      <Flex gap={"40px"} flexWrap={"wrap"}>
         {arts.map((art, index) => (
-          <PdpCard
+          <SimilarProductCard
             pk={art.pk}
             source={art.source}
             title={art.title}

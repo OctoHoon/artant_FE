@@ -1,8 +1,6 @@
-import { FaBug, FaMoon, FaSun, FaRegHeart, FaRegBell } from "react-icons/fa";
-import { BsTruck, BsShop } from "react-icons/bs";
+import { FaRegBell } from "react-icons/fa";
 import { CiShop } from "react-icons/ci";
 import { AiOutlineShopping, AiOutlineHeart } from "react-icons/ai";
-import { HiOutlineUserCircle } from "react-icons/hi";
 import {
   Box,
   HStack,
@@ -17,6 +15,7 @@ import {
   MenuItem,
   useToast,
   ToastId,
+  Flex,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import LoginModal from "./LoginModal";
@@ -67,6 +66,7 @@ export default function Header() {
   const onLogOut = async () => {
     mutation.mutate();
   };
+  console.log(user);
   return (
     <Box width={"1280px"}>
       <Stack
@@ -176,7 +176,7 @@ export default function Header() {
                   mx={2}
                 />{" "}
                 <Box color={"#1C1B1F"} height={"24px"}>
-                  <Link to={"/"}>
+                  <Link to={`/people/${user?.pk}`}>
                     <AiOutlineHeart size="24px" />
                   </Link>
                 </Box>
@@ -188,7 +188,7 @@ export default function Header() {
                 <Menu>
                   <MenuButton>
                     <Box color={"#1C1B1F"} height={"24px"}>
-                      <Link to={"/"}>
+                      <Link to={`people/${user?.pk}`}>
                         <Avatar
                           name={user?.name}
                           src={user?.avatar}
@@ -203,7 +203,27 @@ export default function Header() {
                         <MenuItem>Upload room</MenuItem>
                       </Link>
                     ) : null} */}
-                    <MenuItem>이름</MenuItem>
+                    <Link to={`people/${user?.pk}`}>
+                      <MenuItem>
+                        <Flex
+                          padding="6px 18px"
+                          gap="12px"
+                          alignItems={"center"}
+                        >
+                          <Avatar
+                            src={user?.avatar}
+                            width={"24px"}
+                            height={"24px"}
+                          />
+                          <Flex flexDirection={"column"}>
+                            <Text fontSize={"16px"} fontWeight={"500"}>
+                              이름
+                            </Text>
+                            <Text>프로필 보기</Text>
+                          </Flex>
+                        </Flex>
+                      </MenuItem>
+                    </Link>
                     <MenuItem>구매내역 및 리뷰</MenuItem>
                     <MenuItem>메시지</MenuItem>
                     <MenuItem>특별 제공</MenuItem>
@@ -219,7 +239,7 @@ export default function Header() {
                   </Link>
                 </Box>
                 <Box color={"#1C1B1F"} height={"24px"}>
-                  <Link to={"/"}>
+                  <Link to={"/cart"}>
                     <AiOutlineShopping size="24px" />
                   </Link>
                 </Box>

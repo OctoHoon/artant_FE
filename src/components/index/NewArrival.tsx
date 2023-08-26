@@ -1,10 +1,10 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 
-import NewArrivalPiece from "./NewArrivalPiece";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { getProductsNew } from "../api";
+import { getProductsNew } from "../../api";
+import NewArrivalCard from "../commons/Card/NewArrivalCard";
 
 interface Product {
   pk: number;
@@ -15,21 +15,6 @@ interface Product {
 }
 
 export default function NewArrival() {
-  const [newArrival, setNewArrival] = useState([]);
-
-  useEffect(() => {
-    // Make the API request when the component mounts
-    axios
-      .get("http://127.0.0.1:8000/api/v1/products/?sort=created_at&limit=3")
-      .then((response) => {
-        console.log("API Response:", response.data);
-        setNewArrival(response.data["products"]); // Update state with API data
-      })
-      .catch((error) => {
-        console.error("Error fetching recently viewed products:", error);
-      });
-  }, []); //
-
   const { isLoading, data } = useQuery(["ProductsNew"], getProductsNew);
 
   return (
@@ -52,7 +37,7 @@ export default function NewArrival() {
           }}
         >
           {data.map((art: Product, index) => (
-            <NewArrivalPiece
+            <NewArrivalCard
               key={art.pk}
               pk={art.pk}
               source={art.thumbnail}

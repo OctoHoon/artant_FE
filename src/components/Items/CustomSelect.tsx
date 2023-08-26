@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const options = [
   { value: "order_desc", label: "판매량순" },
-  { value: "price_desc", label: "낮은가격순" },
-  { value: "price_asc", label: "높은가격순" },
+  { value: "price_asc", label: "낮은가격순" },
+  { value: "price_desc", label: "높은가격순" },
   { value: "discount_desc", label: "할인율순" },
   { value: "created_at", label: "신상품순" },
   { value: "review_desc", label: "리뷰많은순" },

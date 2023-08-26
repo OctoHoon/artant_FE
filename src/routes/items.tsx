@@ -11,6 +11,7 @@ import {
 import Itemlists from "../components/Items/itemlists";
 import RecentlyViewed from "../components/RecentlyViewed";
 import Footer from "../components/commons/Footer";
+import ItemListFive from "../components/ProductDetail/ItemsListFive";
 
 export default function Items() {
   return (
