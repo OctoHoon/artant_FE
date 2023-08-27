@@ -34,7 +34,7 @@ export default function SocialLogin() {
             alignItems="center"
             border="1px solid gray"
           >
-            <Image maxH="100px" src="/assets/images/google_logo.png" />
+            <Image maxH="28px" src="/assets/images/google.png" />
           </Box>
           <Box
             as="button"
@@ -60,7 +60,7 @@ export default function SocialLogin() {
             alignItems="center"
             border="1px solid gray"
           >
-            <Image maxH="100px" src="/assets/images/google_logo.png" />
+            <Image maxH="32px" src="/assets/images/kakao.png" />
           </Box>
         </HStack>
         {/* <Button
