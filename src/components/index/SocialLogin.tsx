@@ -34,7 +34,7 @@ export default function SocialLogin() {
             alignItems="center"
             border="1px solid gray"
           >
-            <Image maxH="28px" src="/assets/images/google.png" />
+            <Image maxH="30px" src="/images/구글__2_1000.png" />
           </Box>
           <Box
             as="button"
@@ -47,7 +47,7 @@ export default function SocialLogin() {
             alignItems="center"
             border="1px solid gray"
           >
-            <Image maxH="100px" src="/assets/images/naver_logo.png" />
+            <Image maxH="100px" src="/images/naver_logo.png" />
           </Box>
           <Box
             as="button"
@@ -60,7 +60,7 @@ export default function SocialLogin() {
             alignItems="center"
             border="1px solid gray"
           >
-            <Image maxH="32px" src="/assets/images/kakao.png" />
+            <Image maxH="40px" src="/images/카카오톡 로고 Yellow.png" />
           </Box>
         </HStack>
         {/* <Button

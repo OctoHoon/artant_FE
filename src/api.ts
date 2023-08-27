@@ -122,6 +122,3 @@ export const getReviews = ({ queryKey }: QueryFunctionContext) => {
     .get(`products/${pk}/reviews?page=${page}&sort=${selectedOption}`)
     .then((response) => response.data);
 };
-
-export const getRecentlyViewdProducts = () =>
-  instance.get("products/recently-viewed").then((response) => response.data);

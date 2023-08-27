@@ -10,10 +10,8 @@ import RegisterButton from "../components/index/RegisterButton";
 import CenteredText from "../components/index/CenterCopy";
 import ItemListFive from "../components/ProductDetail/ItemsListFive";
 import RecentlyViewed from "../components/RecentlyViewed";
-import useUser from "../lib/useUser";
 
 export default function Home() {
-  const { userLoading, isLoggedIn, user } = useUser();
   return (
     <Box>
       <TopBanner />
@@ -36,7 +34,7 @@ export default function Home() {
           <GiftCategories />
           <NewsEvent />
           <ArtistRecommend />
-          {isLoggedIn ? <RecentlyViewed title={"최근 본 작품"} /> : null}
+          <RecentlyViewed title={"최근 본 작품"} />
         </Box>
         <RegisterButton />
       </Flex>
