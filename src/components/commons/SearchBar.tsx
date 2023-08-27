@@ -11,6 +11,12 @@ import { FiSearch } from "react-icons/fi";
 const SearchBar = ({ placeholder, width, height, type, onSearch }) => {
   const [keyword, setKeyword] = useState("");
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onSearch(keyword);
+    }
+  };
+
   return (
     <InputGroup w={width} h={height}>
       <Input
@@ -21,8 +27,9 @@ const SearchBar = ({ placeholder, width, height, type, onSearch }) => {
         bg={type ? "#F1F1F5" : "white"}
         focusBorderColor="gray.400"
         border={type ? "" : "1px solid #222"}
-        value={keyword} // 검색창의 값
+        value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <InputRightElement borderRadius="full" h={height}>
         <IconButton
