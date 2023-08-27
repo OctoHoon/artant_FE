@@ -15,6 +15,7 @@ export default function MessagesHeader() {
           width={"252px"}
           type={false}
           height={undefined}
+          onSearch={() => {}}
         />
       </Flex>
       <Flex alignItems={"center"} gap={"4px"}>

@@ -67,6 +67,15 @@ export default function Header() {
     mutation.mutate();
   };
   console.log(user);
+
+  const handleSearchClick = (keyword) => {
+    if (keyword.trim() !== "") {
+      const newUrl = `/items/${encodeURIComponent(
+        "모든작품"
+      )}?&search=${keyword}`;
+      window.location.href = newUrl;
+    }
+  };
   return (
     <Box width={"1280px"}>
       <Stack
@@ -95,6 +104,7 @@ export default function Header() {
           width="640px"
           height={"48px"}
           type={true}
+          onSearch={handleSearchClick}
         />
 
         <HStack spacing={2} alignItems={"center"}>

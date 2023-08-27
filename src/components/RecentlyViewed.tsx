@@ -15,7 +15,7 @@ import PdpCard from "./commons/Card/PdpCard";
 import ProductSmallCard from "./commons/Card/ProductSmallCard";
 import CardSmall from "./commons/Card/CardSmall";
 import { useQuery } from "@tanstack/react-query";
-import { getRecentlyViewdProducts } from "../api";
+import { getRecentlyViewedProducts } from "../api";
 import useUser from "../lib/useUser";
 
 interface Product {
@@ -37,7 +37,7 @@ interface Product {
 export default function RecentlyViewed({ title }) {
   const { isLoading, data } = useQuery(
     ["RecentlyViewedProducts"],
-    getRecentlyViewdProducts
+    getRecentlyViewedProducts
   );
   const arts = [
     {
