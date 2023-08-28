@@ -18,6 +18,7 @@ import Messages from "./routes/Messages";
 import Account from "./routes/Account";
 import AccountBody from "./components/Account/AccountBody";
 import SecurityBody from "./components/Account/SecurityBody";
+import RegisterShop from "./routes/RegisterShop";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
             element: <SecurityBody />,
           },
         ],
+      },
+      {
+        path: "your/shops/register",
+        element: <RegisterShop />,
       },
     ],
   },
