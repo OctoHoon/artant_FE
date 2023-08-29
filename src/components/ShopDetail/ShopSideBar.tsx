@@ -25,6 +25,7 @@ export default function ShopSideBar() {
         width="100%"
         height={"36px"}
         type={false}
+        onSearch={() => {}}
       />
       <Box height="29px" />
 

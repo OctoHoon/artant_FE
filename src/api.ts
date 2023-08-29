@@ -58,7 +58,9 @@ export const getProducts = () =>
 
 export const getProductsParameter = ({ queryKey }: QueryFunctionContext) => {
   const [category, location, selectedOption] = queryKey;
-
+  console.log(
+    `products/?category=${category}&sort=${selectedOption}${location}`
+  );
   return instance
     .get(`products/?category=${category}&sort=${selectedOption}${location}`)
     .then((response) => response.data);
@@ -123,5 +125,5 @@ export const getReviews = ({ queryKey }: QueryFunctionContext) => {
     .then((response) => response.data);
 };
 
-export const getRecentlyViewdProducts = () =>
+export const getRecentlyViewedProducts = () =>
   instance.get("products/recently-viewed").then((response) => response.data);

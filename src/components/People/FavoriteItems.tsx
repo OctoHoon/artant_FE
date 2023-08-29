@@ -59,6 +59,7 @@ export default function FavoriteItems() {
             width="700px"
             height={"48px"}
             type={false}
+            onSearch={() => {}}
           />
         </Box>
       </Flex>

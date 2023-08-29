@@ -33,6 +33,7 @@ export default function Itemlists() {
   };
 
   const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   const { category } = useParams();
 
