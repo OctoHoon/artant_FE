@@ -127,3 +127,85 @@ export const getReviews = ({ queryKey }: QueryFunctionContext) => {
 
 export const getRecentlyViewedProducts = () =>
   instance.get("products/recently-viewed").then((response) => response.data);
+
+export const getUploadURL = () =>
+  instance
+    .post(`products/photos/get-url`, null, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
+
+export interface IUploadImageVarialbes {
+  file: File;
+  uploadURL: string;
+}
+
+export const uploadImage = ({ file, uploadURL }: IUploadImageVarialbes) => {
+  const form = new FormData();
+  form.append("file", file);
+  return axios
+    .post(uploadURL, form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export interface ICreatePhotoVariables {
+  image: string;
+  productPK: string;
+}
+
+export const createPhoto = ({ image, productPK }: ICreatePhotoVariables) =>
+  instance
+    .post(
+      `products/${productPK}/photos`,
+      { image },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+
+export const getVideoUploadURL = () =>
+  instance
+    .post(`products/videos/get-url`, null, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
+
+export interface IUploadVideoVarialbes {
+  file: FileList;
+  uploadURL: string;
+}
+
+export const uploadVideo = ({ file, uploadURL }: IUploadVideoVarialbes) => {
+  const form = new FormData();
+  form.append("file", file[0]);
+  return axios.post(uploadURL, form).then((response) => response.data);
+};
+
+export interface ICreateVideoVariables {
+  video: string;
+  productPK: string;
+}
+
+export const createVideo = ({ video, productPK }: ICreateVideoVariables) =>
+  instance
+    .post(
+      `products/${productPK}/videos`,
+      { video },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
