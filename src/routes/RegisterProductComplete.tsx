@@ -31,7 +31,7 @@ export default function RegisterShopName() {
   };
 
   // data["thumbnail"] 값과 비교하여 필요한 경우 데이터 가져오기
-  while (
+  if (
     !isLoading &&
     data["thumbnail"] ===
       "https://static9.depositphotos.com/1022647/1077/i/950/depositphotos_10770202-stock-photo-modern-art-gallery-empty-picture.jpg"

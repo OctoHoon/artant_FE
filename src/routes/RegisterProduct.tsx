@@ -273,7 +273,9 @@ export default function UploadPhotos() {
           await onSubmitVideo(); // product에 video 등록
         }
         await onSubmitImages(); // product에 images 등록
-        navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
+        setTimeout(() => {
+          navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
+        }, 1000);
       } catch (error) {
         alert(
           "작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!"
