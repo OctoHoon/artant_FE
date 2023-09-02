@@ -20,10 +20,27 @@ export default function RegisterShopName() {
   const { shopPk, productPk } = useParams();
 
   const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 생성
-  const { isLoading, data } = useQuery(
+  const { isLoading, data, refetch } = useQuery(
     ["products", productPk],
-    getProductDetails
+    getProductDetails,
+    {
+      enabled: false, // 초기에 데이터를 가져오지 않음
+    }
   );
+
+  // 데이터가 필요한 시점에 수동으로 가져오기
+  const fetchProductDetails = () => {
+    refetch(); // getProductDetails를 호출하여 데이터를 가져옴
+  };
+
+  // data["thumbnail"] 값과 비교하여 필요한 경우 데이터 가져오기
+  while (
+    !isLoading &&
+    data["thumbnail"] ===
+      "https://static9.depositphotos.com/1022647/1077/i/950/depositphotos_10770202-stock-photo-modern-art-gallery-empty-picture.jpg"
+  ) {
+    fetchProductDetails(); // 데이터가 필요한 경우 다시 가져옴
+  }
 
   return (
     <Flex

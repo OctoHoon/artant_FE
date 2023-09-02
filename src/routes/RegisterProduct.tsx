@@ -269,10 +269,11 @@ export default function UploadPhotos() {
       try {
         // 순차적으로 비동기 함수 실행
         const result = await onSubmitProduct(); // shop에 product 등록
+
+        await onSubmitImages(); // product에 images 등록
         if (watch("file")) {
           await onSubmitVideo(); // product에 video 등록
         }
-        await onSubmitImages(); // product에 images 등록
 
         navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
       } catch (error) {
