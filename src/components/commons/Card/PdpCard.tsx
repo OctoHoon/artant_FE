@@ -56,7 +56,7 @@ export default function PdpCard({
   const titleMaxLength = 50;
 
   return (
-    <a href={`/listings/${pk}`}>
+    <Link to={`/listings/${pk}`}>
       <Flex
         width="240px"
         height={"345px"}
@@ -250,6 +250,6 @@ export default function PdpCard({
           </Flex>
         </Flex>
       </Flex>
-    </a>
+    </Link>
   );
 }

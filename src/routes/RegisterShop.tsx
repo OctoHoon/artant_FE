@@ -21,8 +21,8 @@ export default function RegisterShop() {
           gap={"40px"}
           position={"absolute"}
           left={"50%"}
-          top={"7%"}
-          transform="translate(-50%, 0%)"
+          top={"5%"}
+          transform="translate(-50%, -5%)"
         >
           <Flex flexDirection={"column"} alignItems={"flex-start"} zIndex="1">
             <Flex
@@ -592,6 +592,789 @@ export default function RegisterShop() {
                 * 외부 광고는 대부분의 판매자에게 선택 사항이지만, 12개월 동안
                 Etsy에서 벌어들인 매출에 따라 필요할 수도 있습니다. 외부 광고
                 수수료에 대한 자세한 내용을 보려면 도움말 센터를 방문하세요
+              </Flex>
+            </Flex>
+          </Flex>
+          <Flex
+            padding={"120px 0px"}
+            flexDirection={"column"}
+            alignItems={"center"}
+            gap={"60px"}
+          >
+            <Flex
+              width={"1060px"}
+              padding={"0px 20px"}
+              alignItems={"center"}
+              gap={"40px"}
+            >
+              <Flex
+                flexDirection={"column"}
+                alignItems={"flex-start"}
+                gap={"16px"}
+                flex={"1 0 0"}
+              >
+                <Text fontSize={"30px"} letterSpacing={"0.5px"}>
+                  간편하고 강력한 도구
+                </Text>
+                <Text fontSize={"16px"} lineHeight={"150%"}>
+                  매장 관리 시간을 줄이고 재미있는 일에 더 많은 시간을
+                  투자하세요. 이제 막 시작했거나 1만 번째 판매를 앞두고 있는
+                  경우에 도움이 되는 도구가 있습니다.
+                </Text>
+              </Flex>
+              <Box width={"540px"} height={"480px"} background={"#D9D9D9"} />
+            </Flex>
+            <Flex
+              flexDirection={"column"}
+              alignItems={"flex-start"}
+              gap={"40px"}
+            >
+              <Flex width={"1060px"} alignItems={"flex-start"}>
+                <Flex
+                  padding={"0px 20px"}
+                  alignItems={"flex-start"}
+                  gap={"12px"}
+                  flex={"1 0 0"}
+                >
+                  <Box width={"20px"} height={"30px"}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="30"
+                      viewBox="0 0 20 30"
+                      fill="none"
+                    >
+                      <rect
+                        opacity="0.96"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        x="10"
+                        y="10"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        y="20"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                    </svg>
+                  </Box>
+                  <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                    <Text fontSize={"24px"}>간편하고 강력한 도구</Text>
+                    <Text fontSize={"16px"} lineHeight={"150%"}>
+                      ARTANT Seller 앱을 사용하여 이동 중에도 주문을 관리하고,
+                      품목을 업데이트하고, 고객에게 응답하세요.
+                    </Text>
+                  </Flex>
+                  <Box width={"20px"} height={"30px"}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="30"
+                      viewBox="0 0 20 30"
+                      fill="none"
+                    >
+                      <rect
+                        opacity="0.96"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        x="10"
+                        y="10"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        y="20"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                    </svg>
+                  </Box>
+                  <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                    <Text fontSize={"24px"}>
+                      트래픽을 유도하는 프로모션 도구
+                    </Text>
+                    <Text fontSize={"16px"} lineHeight={"150%"}>
+                      검색에서 귀하의 목록을 홍보하거나 당사의 무료 도구를
+                      사용하여 ARTANT 및 소셜 미디어에서 귀하의 품목을
+                      공유함으로써 더 많은 구매자에게 다가가십시오.
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+              <Flex width={"1060px"} alignItems={"flex-start"}>
+                <Flex
+                  padding={"0px 20px"}
+                  alignItems={"flex-start"}
+                  gap={"12px"}
+                  flex={"1 0 0"}
+                >
+                  <Box width={"20px"} height={"30px"}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="30"
+                      viewBox="0 0 20 30"
+                      fill="none"
+                    >
+                      <rect
+                        opacity="0.96"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        x="10"
+                        y="10"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        y="20"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                    </svg>
+                  </Box>
+                  <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                    <Text fontSize={"24px"}>매출 향상을 위한 분석</Text>
+                    <Text fontSize={"16px"} lineHeight={"150%"}>
+                      실적 추세와 트래픽 소스를 보여주는 자세한 통계를 통해
+                      비즈니스를 최신 상태로 유지할 수 있습니다.
+                    </Text>
+                  </Flex>
+                  <Box width={"20px"} height={"30px"}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="30"
+                      viewBox="0 0 20 30"
+                      fill="none"
+                    >
+                      <rect
+                        opacity="0.96"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        x="10"
+                        y="10"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        opacity="0.96"
+                        y="20"
+                        width="10"
+                        height="10"
+                        fill="#D9D9D9"
+                      />
+                    </svg>
+                  </Box>
+                  <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                    <Text fontSize={"24px"}>원활하게 결제 수락</Text>
+                    <Text fontSize={"16px"} lineHeight={"150%"}>
+                      구매자가 원하는 방식으로 쉽게 결제할 수 있도록 PayPal로
+                      결제 처리를 관리하세요.
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex
+              flexDirection={"column"}
+              alignItems={"center"}
+              gap={"8px"}
+              width={"1920px"}
+              flex={"1 0 0"}
+              background={"#FFFDEA"}
+            >
+              <Flex height={"726px"} flexDirection={"column"} gap={"8px"} />
+              <Flex
+                padding={"120px 0px"}
+                flexDirection={"column"}
+                alignItems={"flex-start"}
+                gap={"40px"}
+                position={"absolute"}
+                left={"50%"}
+                transform="translate(-50%, 0%)"
+              >
+                <Flex
+                  width={"1060px"}
+                  padding={"0px 20px 40px 20px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  gap={"40px"}
+                >
+                  <Flex
+                    flexDirection={"column"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    gap={"16px"}
+                    flex={"1 0 0"}
+                  >
+                    <Text
+                      textAlign={"center"}
+                      fontSize={"30px"}
+                      letterSpacing={"0.5px"}
+                    >
+                      필요할 때 도움을 받으세요!
+                    </Text>
+                    <Text
+                      width={"408px"}
+                      fontSize={"16px"}
+                      lineHeight={"150%"}
+                      textAlign={"center"}
+                    >
+                      우리는 크고 작은 매장을 위한 지원과 교육을 통해 180만 명의
+                      판매자가 성공할 수 있도록 돕기 위해 최선을 다하고
+                      있습니다.
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex flexDirection="column" gap={"40px"}>
+                  <Flex width={"1060px"} alignItems={"center"}>
+                    <Flex
+                      padding={"0px 20px"}
+                      alignItems={"center"}
+                      gap={"24px"}
+                      flex={"1 0 0"}
+                    >
+                      <Box
+                        width={"112px"}
+                        height={"112px"}
+                        borderRadius={"100px"}
+                        opacity={"0.96"}
+                        background="#D9D9D9"
+                      />
+                      <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                        <Text fontSize={"24px"}>우리에게 이야기하세요</Text>
+                        <Text fontSize={"16px"} lineHeight={"150%"}>
+                          질문이 있을 때마다 이메일로 지원 담당자에게 연락하거나
+                          전화 통화를 요청하세요.
+                        </Text>
+                      </Flex>
+                    </Flex>
+                    <Flex
+                      padding={"0px 20px"}
+                      alignItems={"center"}
+                      gap={"24px"}
+                      flex={"1 0 0"}
+                    >
+                      <Box
+                        width={"112px"}
+                        height={"112px"}
+                        borderRadius={"100px"}
+                        opacity={"0.96"}
+                        background="#D9D9D9"
+                      />
+                      <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                        <Text fontSize={"24px"}>성공을 위한 팁</Text>
+                        <Text fontSize={"16px"} lineHeight={"150%"}>
+                          항상 업데이트되는 판매자 핸드북을 통해 귀하의
+                          비즈니스에 대한 모범 사례를 알아보세요.
+                        </Text>
+                      </Flex>
+                    </Flex>
+                  </Flex>
+                  <Flex width={"1060px"} alignItems={"center"}>
+                    <Flex
+                      padding={"0px 20px"}
+                      alignItems={"center"}
+                      gap={"24px"}
+                      flex={"1 0 0"}
+                    >
+                      <Box
+                        width={"112px"}
+                        height={"112px"}
+                        borderRadius={"100px"}
+                        opacity={"0.96"}
+                        background="#D9D9D9"
+                      />
+                      <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                        <Text fontSize={"24px"}>판매자 뉴스레터</Text>
+                        <Text fontSize={"16px"} lineHeight={"150%"}>
+                          받은 편지함으로 바로 전달되는 ARTANT Success
+                          뉴스레터를 읽고 매장 개선에 대한 팁을 알아보세요.
+                        </Text>
+                      </Flex>
+                    </Flex>
+                    <Flex
+                      padding={"0px 20px"}
+                      alignItems={"center"}
+                      gap={"24px"}
+                      flex={"1 0 0"}
+                    >
+                      <Box
+                        width={"112px"}
+                        height={"112px"}
+                        borderRadius={"100px"}
+                        opacity={"0.96"}
+                        background="#D9D9D9"
+                      />
+                      <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
+                        <Text fontSize={"24px"}>조언 받기</Text>
+                        <Text fontSize={"16px"} lineHeight={"150%"}>
+                          ARTANT 포럼과 Teams에서 질문을 하고 귀하와 같은 판매자
+                          커뮤니티를 찾아보세요.
+                        </Text>
+                      </Flex>
+                    </Flex>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex flexDirection={"column"} alignItems={"flex-start"}>
+              <Flex
+                padding={"120px 0px"}
+                flexDirection={"column"}
+                alignItems={"center"}
+                gap={"40px"}
+              >
+                <Flex
+                  width={"1060px"}
+                  padding={"0px 20px 40px 20px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  gap={"40px"}
+                >
+                  <Flex
+                    flexDirection={"column"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    gap={"16px"}
+                    flex={"1 0 0"}
+                  >
+                    <Text fontSize={"30px"} letterSpacing={"0.5px"}>
+                      판매자 이야기
+                    </Text>
+                    <Text
+                      width={"408px"}
+                      fontSize={"16px"}
+                      lineHeight={"150%"}
+                      textAlign={"center"}
+                    >
+                      우리는 ARTANT가 꽤 훌륭하다고 생각하지만 우리의 말을
+                      그대로 받아들이지는 마세요. ARTANT가 어떻게 변화를
+                      가져왔는지 판매자로부터 이야기를 들어보세요.
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex
+                  width={"1080px"}
+                  padding={"0px 40px 0px 20px"}
+                  alignItems={"center"}
+                  gap={"40px"}
+                >
+                  <Box
+                    width={"510px"}
+                    height={"400px"}
+                    opacity={"0.96"}
+                    background="#D9D9D9"
+                  />
+                  <Flex
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    gap={"12px"}
+                    flex={"1 0 0"}
+                  >
+                    <Text fontSize={"20px"} fontWeight={"500"}>
+                      니콜 루이스
+                    </Text>
+                    <Text color={"#666"} fontSize={"16px"} lineHeight={"150%"}>
+                      "내 가게는 취미로 시작했지만, 나중에는 교사라는 직업을
+                      지원하기 위한 부업으로 시작했습니다. 2014년에 첫 아들이
+                      태어났을 때 저는 이 사업을 본격적인 사업으로 성장시키기로
+                      결정했습니다. ARTANT에서 판매하는 것을 지켜볼 기회가
+                      생겼습니다. 우리 아이들은 가족으로서 사업을 구축하면서
+                      성장합니다."
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex
+                  width={"1080px"}
+                  padding={"0px 40px 0px 20px"}
+                  alignItems={"center"}
+                  gap={"40px"}
+                >
+                  <Flex
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    gap={"12px"}
+                    flex={"1 0 0"}
+                  >
+                    <Text fontSize={"20px"} fontWeight={"500"}>
+                      샤이나 아담스
+                    </Text>
+                    <Text color={"#666"} fontSize={"16px"} lineHeight={"150%"}>
+                      "빈티지 매장을 운영하면서 사람들의 집에 기쁨을 가져다주는
+                      것 같은 느낌을 받을 수 있을 거라고는 상상도 못했는데, 그게
+                      바로 제가 경험하게 된 것입니다. 저는 이것이 쇼핑객이자
+                      판매자로서 매우 개인적인 경험처럼 느껴진다는 점이 마음에
+                      듭니다."
+                    </Text>
+                  </Flex>
+                  <Box
+                    width={"510px"}
+                    height={"400px"}
+                    opacity={"0.96"}
+                    background="#D9D9D9"
+                  />
+                </Flex>
+                <Flex
+                  width={"1080px"}
+                  padding={"0px 40px 0px 20px"}
+                  alignItems={"center"}
+                  gap={"40px"}
+                >
+                  <Box
+                    width={"510px"}
+                    height={"400px"}
+                    opacity={"0.96"}
+                    background="#D9D9D9"
+                  />
+                  <Flex
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    gap={"12px"}
+                    flex={"1 0 0"}
+                  >
+                    <Text fontSize={"20px"} fontWeight={"500"}>
+                      미샤 곤잘레스
+                    </Text>
+                    <Text color={"#666"} fontSize={"16px"} lineHeight={"150%"}>
+                      "세 아프리카계 미국인 자녀의 어머니로서 저는 장난감에서
+                      자신의 모습을 보는 데 익숙하지 않은 제 아이들과 그들과
+                      같은 아이들을 위해 무언가를 만들고 싶은 충동을 느꼈습니다.
+                      제가 가게를 시작했을 때 가장 큰 기쁨 중 하나는 아이들이
+                      와서 내 지문을 보고 '아! 저거 나야?'라고 묻습니다."
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+              <Box
+                width={"1060px"}
+                height={"1px"}
+                background={" var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9);"}
+              />
+            </Flex>
+            <Flex flexDirection={"column"} alignItems={"flex-start"}>
+              <Flex
+                padding={"120px 0px"}
+                flexDirection={"column"}
+                alignItems={"center"}
+              >
+                <Flex
+                  width={"1060px"}
+                  padding={"0px 20px 40px 20px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  gap={"40px"}
+                >
+                  <Text fontSize={"30px"} letterSpacing={"0.5px"}>
+                    ARTANT에서 무엇을 판매할 수 있나요?
+                  </Text>
+                </Flex>
+                <Flex
+                  width={"1060px"}
+                  padding={"0px 40px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                >
+                  <Flex
+                    padding={"0px 20px"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    gap={"8px"}
+                  >
+                    <Flex
+                      flexDirection={"column"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        width={"300px"}
+                        height={"300px"}
+                        opacity={"0.96"}
+                        background="#D9D9D9"
+                      />
+                      <Text
+                        padding={"20px 0px"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        fontSize={"20px"}
+                      >
+                        수공예품
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Flex
+                    padding={"0px 20px"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    gap={"8px"}
+                  >
+                    <Flex
+                      flexDirection={"column"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        width={"300px"}
+                        height={"300px"}
+                        opacity={"0.96"}
+                        background="#D9D9D9"
+                      />
+                      <Text
+                        padding={"20px 0px"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        fontSize={"20px"}
+                      >
+                        빈티지
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Flex
+                    padding={"0px 20px"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    gap={"8px"}
+                  >
+                    <Flex
+                      flexDirection={"column"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        width={"300px"}
+                        height={"300px"}
+                        opacity={"0.96"}
+                        background="#D9D9D9"
+                      />
+                      <Text
+                        padding={"20px 0px"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        fontSize={"20px"}
+                      >
+                        공예용품
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </Flex>
+                <Flex
+                  paddingTop={"10px"}
+                  flexDirection={"column"}
+                  alignItems={"center"}
+                  gap={"12px"}
+                >
+                  <Text fontWeight={"500"}>판매는 20세 이상 가능</Text>
+                  <Text
+                    width={"889px"}
+                    textAlign={"center"}
+                    lineHeight={"150%"}
+                    color={"#666"}
+                  >
+                    ARTANT는 전 세계 수백만 명의 사람들이 연결되어 독특한 상품을
+                    만들고, 판매하고, 구매하는 마켓플레이스입니다. ARTANT에서는
+                    핸드메이드 제품, 빈티지 아이템, 공예품 등을 판매할 수
+                    있습니다. 더 알아보기
+                  </Text>
+                </Flex>
+              </Flex>
+              <Box
+                width={"1060px"}
+                height={"1px"}
+                background={" var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9);"}
+              />
+            </Flex>
+          </Flex>
+          <Flex
+            padding={"120px 0px"}
+            flexDirection={"column"}
+            alignItems={"center"}
+          >
+            <Flex
+              width={"1060px"}
+              padding={"0px 20px 40px 20px"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={"40px"}
+            >
+              <Flex
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                gap={"16px"}
+                flex={"1 0 0"}
+                paddingBottom={"40px"}
+              >
+                <Text fontSize={"30px"} letterSpacing={"0.5px"}>
+                  자주 묻는 질문
+                </Text>
+                <Text
+                  width={"408px"}
+                  fontSize={"16px"}
+                  lineHeight={"150%"}
+                  textAlign={"center"}
+                >
+                  다음은 ARTANT 판매에 관한 몇 가지 일반적이 질문입니다.
+                </Text>
+              </Flex>
+            </Flex>
+            <Flex
+              padding={"0px 40px 0px 20px"}
+              justifyContent={"center"}
+              gap={"60px"}
+              width={"1060px"}
+            >
+              <Flex
+                flexDirection={"column"}
+                alignItems={"center"}
+                gap={"40px"}
+                flex={"1 0 0"}
+              >
+                <Flex
+                  flexDirection={"column"}
+                  alignItems={"flex-start"}
+                  gap={"12px"}
+                  alignSelf={"stretch"}
+                >
+                  <Text fontSize={"24px"}>
+                    Etsy의 수수료는 어떻게 책정되나요?
+                  </Text>
+                  <Text
+                    alignSelf={"stretch"}
+                    color={"#666"}
+                    lineHeight={"180%"}
+                  >
+                    ARTANT에 가입하고 상점을 시작하는 것은 무료입니다. 기본 판매
+                    수수료에는 상장 수수료, 거래 수수료, 결제 처리 수수료의 세
+                    가지가 있습니다. 시장에 목록을 게시하는 데는 USD 0.20의
+                    비용이 듭니다. 목록은 4개월 동안 또는 품목이 판매될 때까지
+                    지속됩니다. 상품이 판매되면 판매 가격(설정한 배송비 포함)에
+                    6.5%의 거래 수수료가 부과됩니다. PayPal로 결제를 수락하는
+                    경우 수수료 구조에 따라 결제 처리 수수료도 부과됩니다. 등록
+                    수수료는 $0.20 USD로 청구되므로 은행 통화가 USD가 아닌 경우
+                    환율 변동에 따라 금액이 달라질 수 있습니다. 귀하는
+                    오프사이트 광고를 통해 발생한 모든 판매에 대해 광고 수수료를
+                    지불합니다. ARTANT 매장을 열 때 ARTANT의 광고 서비스에
+                    참여할지 여부를 결정할 수 있습니다.{" "}
+                    <Text as="u">더 알아보기</Text>
+                  </Text>
+                </Flex>
+                <Flex
+                  flexDirection={"column"}
+                  alignItems={"flex-start"}
+                  gap={"12px"}
+                  alignSelf={"stretch"}
+                >
+                  <Text fontSize={"24px"}>
+                    상점을 만들려면 어떻게 해야 하나요?
+                  </Text>
+                  <Text
+                    alignSelf={"stretch"}
+                    color={"#666"}
+                    lineHeight={"180%"}
+                  >
+                    ARTANT에서 상점을 개설하는 것은 쉽습니다. ARTANT 계정
+                    만들기(아직 계정이 없는 경우), 상점 위치 및 통화 설정, 상점
+                    이름 선택, 목록 생성, 결제 방법(지급 받고 싶은 방법) 설정,
+                    마지막으로 청구 방법 설정 (ARTANT 수수료 지불 방법).{" "}
+                    <Text as="u">더 알아보기</Text>
+                  </Text>
+                </Flex>
+              </Flex>
+              <Flex
+                flexDirection={"column"}
+                alignItems={"center"}
+                gap={"40px"}
+                flex={"1 0 0"}
+              >
+                <Flex
+                  flexDirection={"column"}
+                  alignItems={"flex-start"}
+                  gap={"12px"}
+                  alignSelf={"stretch"}
+                >
+                  <Text fontSize={"24px"}>어떻게 돈을 받나요?</Text>
+                  <Text
+                    alignSelf={"stretch"}
+                    color={"#666"}
+                    lineHeight={"180%"}
+                  >
+                    PayPal 결제를 수락하면 ARTANT에서 PayPal 판매로 발생한
+                    자금이 PayPal 계정에 입금됩니다. 개인 계정에는 월별 수신
+                    한도가 적용되고 신용 카드로 자금을 조달하는 구매자의 결제를
+                    받을 수 없으므로 판매자는 개인 계정이 아닌 PayPal 비즈니스
+                    계정을 사용하는 것이 좋습니다.{" "}
+                    <Text as="u">더 알아보기</Text>
+                  </Text>
+                </Flex>
+                <Flex
+                  flexDirection={"column"}
+                  alignItems={"flex-start"}
+                  gap={"12px"}
+                  alignSelf={"stretch"}
+                >
+                  <Text fontSize={"24px"}>
+                    상점을 만들려면 신용카드나 직불카드가 필요합니까?
+                  </Text>
+                  <Text
+                    alignSelf={"stretch"}
+                    color={"#666"}
+                    lineHeight={"180%"}
+                  >
+                    아니요. 상점을 만드는 데 신용카드나 직불카드가 필요하지
+                    않습니다. 판매자로 인증받으려면 신용카드를 사용하거나
+                    PayPal을 통해 등록할 수 있습니다. 상점을 열고 목록을 게시할
+                    때까지는 비용이 발생하지 않습니다.{" "}
+                    <Text as="u">더 알아보기</Text>
+                  </Text>
+                </Flex>
+                <Flex
+                  flexDirection={"column"}
+                  alignItems={"flex-start"}
+                  gap={"12px"}
+                  alignSelf={"stretch"}
+                >
+                  <Text fontSize={"24px"}>
+                    ARTANT에서 무엇을 판매할 수 있나요?
+                  </Text>
+                  <Text
+                    alignSelf={"stretch"}
+                    color={"#666"}
+                    lineHeight={"180%"}
+                  >
+                    ARTANT는 수공예품, 빈티지 제품(20년 이상), 수공예품 및
+                    비수공예품을 모두 판매할 수 있는 공예가, 예술가 및 수집가를
+                    위한 마켓플레이스를 제공합니다.{" "}
+                    <Text as="u">더 알아보기</Text>
+                  </Text>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
