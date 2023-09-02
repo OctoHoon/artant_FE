@@ -22,10 +22,7 @@ export default function RegisterShopName() {
   const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 생성
   const { isLoading, data, refetch } = useQuery(
     ["products", productPk],
-    getProductDetails,
-    {
-      enabled: false, // 초기에 데이터를 가져오지 않음
-    }
+    getProductDetails
   );
 
   // 데이터가 필요한 시점에 수동으로 가져오기
