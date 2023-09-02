@@ -21,6 +21,7 @@ import SecurityBody from "./components/Account/SecurityBody";
 import RegisterShop from "./routes/RegisterShop";
 import RegisterProduct from "./routes/RegisterProduct";
 import RegisterShopName from "./routes/RegisterShopName";
+import RegisterProductComplete from "./routes/RegisterProductComplete";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
       {
         path: "your/shops/:shopPk/onboarding/listings/create",
         element: <RegisterProduct />,
+      },
+      {
+        path: "your/shops/:shopPk/onboarding/listings/:productPk",
+        element: <RegisterProductComplete />,
       },
     ],
   },
