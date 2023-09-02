@@ -93,6 +93,7 @@ export default function UploadPhotos() {
       console.log(result);
 
       if (productPK) {
+        console.log("upload image ahs pk ", productPK);
         putProduct({
           thumbnail: `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${result.id}/public`,
           productPK: productPK, // 제품 PK 값 설정
@@ -162,16 +163,10 @@ export default function UploadPhotos() {
   const uploadVideoMutation = useMutation(uploadVideo, {
     onSuccess: (response: any) => {
       console.log("upload video success");
-      if (productPK) {
-        createVideoMutation.mutate({
-          video: cloudflareStreamUrl, // 사용 가능
-          productPK,
-        });
-      }
     },
   });
 
-  const onSubmitVideo = () => {
+  const onSubmitVideo = async () => {
     console.log(watch("file"));
     uploadVideoURLMutation.mutate();
   };
@@ -250,12 +245,23 @@ export default function UploadPhotos() {
       const result = await uploadProduct(productData);
       setProductPK(result["id"]);
 
+      // setProductPK가 완료되면 createVideoMutation.mutate 호출
+      createVideoNow(result["id"]);
+
       return result;
     } catch (error) {
       console.error("상품 업로드 실패", error);
       throw error;
     }
   };
+
+  const createVideoNow = (productPK) => {
+    createVideoMutation.mutate({
+      video: cloudflareStreamUrl,
+      productPK,
+    });
+  };
+
   const navigate = useNavigate();
   const onSubmitAll = async () => {
     if (
@@ -269,9 +275,9 @@ export default function UploadPhotos() {
       try {
         // 순차적으로 비동기 함수 실행
         const result = await onSubmitProduct(); // shop에 product 등록
-        if (watch("file")) {
-          await onSubmitVideo(); // product에 video 등록
-        }
+
+        console.log("setprodut pk from result", result["id"], productPK);
+
         await onSubmitImages(); // product에 images 등록
         setTimeout(() => {
           navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
@@ -3641,12 +3647,7 @@ export default function UploadPhotos() {
       </Flex>
       <Box pb={40} mt={10} px={{ base: 10, lg: 40 }}>
         <Container>
-          <VStack
-            as="form"
-            onSubmit={handleSubmit(onSubmitImages)}
-            spacing={5}
-            mt={10}
-          >
+          <VStack as="form" spacing={5} mt={10}>
             <FormControl>
               <Input
                 type="file"
