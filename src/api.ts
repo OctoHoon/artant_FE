@@ -209,3 +209,45 @@ export const createVideo = ({ video, productPK }: ICreateVideoVariables) =>
       }
     )
     .then((response) => response.data);
+
+export interface IUploadProductVariables {
+  name: string;
+  description: string;
+  price: number;
+  thumbnail: string;
+  category_name: string;
+  shopPK: string;
+}
+
+export const uploadProduct = ({
+  name,
+  description,
+  price,
+  thumbnail,
+  category_name,
+  shopPK,
+}: IUploadProductVariables) =>
+  instance
+    .post(
+      `/users/shops/${shopPK}/products/create`,
+      { name, description, price, category_name, thumbnail },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+
+export interface IPutProductVariables {
+  thumbnail: string;
+  productPK: string;
+}
+export const putProduct = (variables: IPutProductVariables) =>
+  instance
+    .put(`/products/${variables.productPK}`, variables, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);

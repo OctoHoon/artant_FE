@@ -240,7 +240,10 @@ export default function Header() {
                     <Link to="/your/account">
                       <MenuItem>계정 설정</MenuItem>
                     </Link>
-                    <MenuItem onClick={onLogOut}>로그 아웃</MenuItem>
+                    <Link to="/your/shops/register">
+                      <MenuItem>상점 개설</MenuItem>
+                    </Link>
+                    <MenuItem onClick={onLogOut}>로그아웃</MenuItem>
                   </MenuList>
                 </Menu>
                 <Box color={"#1C1B1F"} height={"24px"}>

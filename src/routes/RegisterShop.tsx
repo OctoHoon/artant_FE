@@ -2,6 +2,7 @@ import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import ShopIntro from "../components/ShopDetail/ShopIntro";
 import Footer from "../components/commons/Footer";
 import ScrollToTop from "../components/commons/ScrollToTop";
+import { Link } from "react-router-dom";
 
 export default function RegisterShop() {
   return (
@@ -37,20 +38,22 @@ export default function RegisterShop() {
               <Text>무엇이 있는지 보고 싶어합니다.</Text>
             </Flex>
           </Flex>
-          <Button
-            height={"47px"}
-            padding={"12px 56px"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            borderRadius={"100px"}
-            background={" var(--maincolorsbgblack-222222, #222);"}
-            fontSize={"18px"}
-            fontWeight={"500"}
-            textAlign={"center"}
-            color={"var(--maincolorstext-white, #FFF)"}
-          >
-            시작하기
-          </Button>
+          <Link to="/your/shops/onboarding/name">
+            <Button
+              height={"47px"}
+              padding={"12px 56px"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              borderRadius={"100px"}
+              background={" var(--maincolorsbgblack-222222, #222);"}
+              fontSize={"18px"}
+              fontWeight={"500"}
+              textAlign={"center"}
+              color={"var(--maincolorstext-white, #FFF)"}
+            >
+              시작하기
+            </Button>
+          </Link>
         </Flex>
       </Flex>
       <Flex
