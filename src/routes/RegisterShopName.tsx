@@ -4,8 +4,12 @@ import ProfileHeader from "../components/People/ProfileHeader";
 import RegisterProcess from "../components/RegisterShop/RegisterProcess";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useUser from "../lib/useUser";
 
 export default function RegisterShopName() {
+  const { userLoading, isLoggedIn, user } = useUser();
+  const firstShopPK = user?.shop_pks[0] || null;
+
   const [inputText, setInputText] = useState(""); // 입력된 텍스트 상태 추가
 
   const isLengthValid = inputText.length >= 4 && inputText.length <= 20;
@@ -17,9 +21,9 @@ export default function RegisterShopName() {
 
   // 이벤트 핸들러
   const handleButtonClick = () => {
-    if (isLengthValid && !hasSpecialCharsOrSpaces) {
+    if (isLengthValid && !hasSpecialCharsOrSpaces && firstShopPK) {
       // 조건이 만족되면 페이지 이동
-      navigate("/your/shops/1/onboarding/listings/create");
+      navigate(`/your/shops/${firstShopPK}/onboarding/listings/create`);
     } else {
       // 조건이 만족되지 않으면 아무 작업도 하지 않음
     }
@@ -29,174 +33,182 @@ export default function RegisterShopName() {
       display={"inline-flex"}
       flexDirection={"column"}
       alignItems={"center"}
-      gap={"60px"}
+      gap={"120px"}
     >
-      <RegisterProcess currentPage={1}></RegisterProcess>
       <Flex
-        display={"flex"}
+        display={"inline-flex"}
         flexDirection={"column"}
         alignItems={"center"}
-        gap={"38px"}
+        gap={"60px"}
       >
-        {" "}
-        <Text
-          color="#000"
-          textAlign="center"
-          fontFamily="Spoqa Han Sans Neo"
-          fontSize="22px"
-          fontStyle="normal"
-          fontWeight={500}
-          lineHeight="normal"
-          letterSpacing="-0.3px"
-          textTransform="capitalize"
-        >
-          상점 이름을 지정하세요
-        </Text>
-        <Text
-          width={"620px"}
-          color="#000"
-          textAlign="center"
-          fontFamily="Spoqa Han Sans Neo"
-          fontSize="16px"
-          fontStyle="normal"
-          fontWeight={400}
-          lineHeight="150%"
-          letterSpacing="-0.048px"
-        >
-          땀을 흘리지 마십시오! 지금 이름 초안을 작성하고 나중에 변경할 수
-          있습니다. 판매자는 자신이 <br />
-          판매하는 제품, 스타일 등 거의 모든 것에서 영감을 얻는 경우가 많습니다.
-          추가 이름 지정 팁
-        </Text>
+        <RegisterProcess currentPage={1}></RegisterProcess>
         <Flex
-          width={"620px"}
           display={"flex"}
           flexDirection={"column"}
-          alignItems={"flex-start"}
-          gap={"40px"}
+          alignItems={"center"}
+          gap={"38px"}
         >
+          {" "}
+          <Text
+            color="#000"
+            textAlign="center"
+            fontFamily="Spoqa Han Sans Neo"
+            fontSize="22px"
+            fontStyle="normal"
+            fontWeight={500}
+            lineHeight="normal"
+            letterSpacing="-0.3px"
+            textTransform="capitalize"
+          >
+            상점 이름을 지정하세요
+          </Text>
+          <Text
+            width={"620px"}
+            color="#000"
+            textAlign="center"
+            fontFamily="Spoqa Han Sans Neo"
+            fontSize="16px"
+            fontStyle="normal"
+            fontWeight={400}
+            lineHeight="150%"
+            letterSpacing="-0.048px"
+          >
+            땀을 흘리지 마십시오! 지금 이름 초안을 작성하고 나중에 변경할 수
+            있습니다. 판매자는 자신이 <br />
+            판매하는 제품, 스타일 등 거의 모든 것에서 영감을 얻는 경우가
+            많습니다. 추가 이름 지정 팁
+          </Text>
           <Flex
-            width={"100%"}
+            width={"620px"}
             display={"flex"}
             flexDirection={"column"}
             alignItems={"flex-start"}
-            gap={"12px"}
+            gap={"40px"}
           >
-            <Input
-              display="flex"
-              padding="11px 16px"
-              alignItems="center"
-              gap="8px"
-              flex="1 0 0"
-              alignSelf="stretch"
-              borderRadius="5px"
-              border="1px solid var(--maincolorsstrokegrayc-4-c-4-c-4, #C4C4C4)"
-              background="var(--maincolorsbg-white, #FFF)"
-              placeholder="상점 이름을 입력하세요"
-              onChange={(e) => setInputText(e.target.value)}
-            />
             <Flex
+              width={"100%"}
               display={"flex"}
               flexDirection={"column"}
               alignItems={"flex-start"}
+              gap={"12px"}
             >
-              <HStack>
-                {isLengthValid ? <CorrectCheck /> : <NormalCheck />}
-                <Text
-                  color="#000"
-                  textAlign="center"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="14px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.042px"
-                >
-                  4~20자 사이
-                </Text>
-              </HStack>
-              <HStack>
-                {inputText.length > 0 && !hasSpecialCharsOrSpaces ? (
-                  <CorrectCheck />
-                ) : (
-                  <NormalCheck />
-                )}
-                <Text
-                  color="#000"
-                  textAlign="center"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="14px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.042px"
-                >
-                  특수 문자 및 공백이 없습니다.
-                </Text>
-              </HStack>
+              <Input
+                display="flex"
+                padding="11px 16px"
+                alignItems="center"
+                gap="8px"
+                flex="1 0 0"
+                alignSelf="stretch"
+                borderRadius="5px"
+                border="1px solid var(--maincolorsstrokegrayc-4-c-4-c-4, #C4C4C4)"
+                background="var(--maincolorsbg-white, #FFF)"
+                placeholder="상점 이름을 입력하세요"
+                onChange={(e) => setInputText(e.target.value)}
+              />
+              <Flex
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"flex-start"}
+              >
+                <HStack>
+                  {isLengthValid ? <CorrectCheck /> : <NormalCheck />}
+                  <Text
+                    color="#000"
+                    textAlign="center"
+                    fontFamily="Spoqa Han Sans Neo"
+                    fontSize="14px"
+                    fontStyle="normal"
+                    fontWeight={400}
+                    lineHeight="normal"
+                    letterSpacing="-0.042px"
+                  >
+                    4~20자 사이
+                  </Text>
+                </HStack>
+                <HStack>
+                  {inputText.length > 0 && !hasSpecialCharsOrSpaces ? (
+                    <CorrectCheck />
+                  ) : (
+                    <NormalCheck />
+                  )}
+                  <Text
+                    color="#000"
+                    textAlign="center"
+                    fontFamily="Spoqa Han Sans Neo"
+                    fontSize="14px"
+                    fontStyle="normal"
+                    fontWeight={400}
+                    lineHeight="normal"
+                    letterSpacing="-0.042px"
+                  >
+                    특수 문자 및 공백이 없습니다.
+                  </Text>
+                </HStack>
+              </Flex>
             </Flex>
+            <HStack>
+              {inputText !== "" && !hasSpecialCharsOrSpaces && isLengthValid ? (
+                <>
+                  <SvgHeart />
+                  <Text
+                    color="#000"
+                    textAlign="center"
+                    fontFamily="Spoqa Han Sans Neo"
+                    fontSize="16px"
+                    fontStyle="normal"
+                    fontWeight={400}
+                    lineHeight="normal"
+                    letterSpacing="-0.048px"
+                  >
+                    좋은 생각입니다. 이 이름을 사용 할 수 있습니다!
+                  </Text>
+                </>
+              ) : inputText !== "" ? (
+                <>
+                  <SvgWarning />
+                  <Text
+                    color="var(--maincolorstextredf-12-e-24, #F12E24)"
+                    textAlign="center"
+                    fontFamily="Spoqa Han Sans Neo"
+                    fontSize="16px"
+                    fontStyle="normal"
+                    fontWeight={400}
+                    lineHeight="normal"
+                    letterSpacing="-0.048px"
+                  >
+                    상점 이름을 다시 입력해주세요!
+                  </Text>
+                </>
+              ) : (
+                <Box height={"24px"} />
+              )}
+            </HStack>
           </Flex>
-          <HStack>
-            {inputText !== "" && !hasSpecialCharsOrSpaces && isLengthValid ? (
-              <>
-                <SvgHeart />
-                <Text
-                  color="#000"
-                  textAlign="center"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="16px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.048px"
-                >
-                  좋은 생각입니다. 이 이름을 사용 할 수 있습니다!
-                </Text>
-              </>
-            ) : inputText !== "" ? (
-              <>
-                <SvgWarning />
-                <Text
-                  color="var(--maincolorstextredf-12-e-24, #F12E24)"
-                  textAlign="center"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="16px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.048px"
-                >
-                  상점 이름을 다시 입력해주세요!
-                </Text>
-              </>
-            ) : (
-              <Box height={"24px"} />
-            )}
-          </HStack>
+        </Flex>
+        <Flex
+          display={"flex"}
+          width={"1280px"}
+          justifyContent={"center"}
+          alignItems={"flex-start"}
+        >
+          <Button
+            padding={"10px 24px"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            gap={"2px"}
+            borderRadius={"5px"}
+            background={"var(--maincolorsbgblack-222222, #222);"}
+            color={"white"}
+            fontSize={"16px"}
+            // 이동 조건을 만족하지 않으면 버튼 비활성화
+            disabled={!isLengthValid || hasSpecialCharsOrSpaces}
+            onClick={handleButtonClick}
+          >
+            저장하고 계속
+          </Button>
         </Flex>
       </Flex>
-      <Flex
-        display={"flex"}
-        width={"1280px"}
-        justifyContent={"center"}
-        alignItems={"flex-start"}
-      >
-        <Button
-          padding={"10px 24px"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          gap={"2px"}
-          borderRadius={"5px"}
-          background={"var(--maincolorsbgblack-222222, #222);"}
-          color={"white"}
-          fontSize={"16px"}
-          // 이동 조건을 만족하지 않으면 버튼 비활성화
-          disabled={!isLengthValid || hasSpecialCharsOrSpaces}
-          onClick={handleButtonClick}
-        >
-          저장하고 계속
-        </Button>
-      </Flex>
+      <Footer />
     </Flex>
   );
 }
