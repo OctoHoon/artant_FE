@@ -22,6 +22,8 @@ import RegisterShop from "./routes/RegisterShop";
 import RegisterProduct from "./routes/RegisterProduct";
 import RegisterShopName from "./routes/RegisterShopName";
 import RegisterProductComplete from "./routes/RegisterProductComplete";
+import RegisterPayments from "./routes/RegisterPayments";
+import RegisterBilling from "./routes/RegisterBilling";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +93,14 @@ const router = createBrowserRouter([
       {
         path: "your/shops/:shopPk/onboarding/listings/:productPk",
         element: <RegisterProductComplete />,
+      },
+      {
+        path: "your/shops/:shopPk/onboarding/payments",
+        element: <RegisterPayments />,
+      },
+      {
+        path: "your/shops/:shopPk/onboarding/billing",
+        element: <RegisterBilling />,
       },
     ],
   },

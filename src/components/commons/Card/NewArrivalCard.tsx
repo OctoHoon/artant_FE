@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function NewArrivalCard({ pk, source, price, originalPrice }) {
   const gray = useColorModeValue("gray.600", "gray.300");
@@ -30,7 +31,7 @@ function NewArrivalCard({ pk, source, price, originalPrice }) {
       alignItems={"center"}
       position="relative"
     >
-      <a href={`listings/${pk}`}>
+      <Link to={`listings/${pk}`}>
         <Box
           position="relative"
           overflow={"hidden"}
@@ -99,7 +100,7 @@ function NewArrivalCard({ pk, source, price, originalPrice }) {
             <Text>원</Text>
           </Flex>
         </Box>
-      </a>
+      </Link>
     </VStack>
   );
 }

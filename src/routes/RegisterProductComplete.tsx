@@ -201,6 +201,9 @@ export default function RegisterShopName() {
                 backgroundColor="var(--maincolorsbgblack-222222, #222)"
                 borderRadius={"100px"}
                 border={"1px solid var(--maincolorstextblack-222222, #222)"}
+                onClick={() =>
+                  navigate(`/your/shops/${shopPk}/onboarding/payments`)
+                }
               >
                 <Text
                   color="var(--maincolorstext-white, #FFF);"
