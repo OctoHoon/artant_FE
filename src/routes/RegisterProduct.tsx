@@ -279,9 +279,9 @@ export default function UploadPhotos() {
         console.log("setprodut pk from result", result["id"], productPK);
 
         await onSubmitImages(); // product에 images 등록
-        setTimeout(() => {
-          navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
-        }, 1000);
+        setSelectedFiles([]);
+        setCloudflareStreamUrl("");
+        navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
       } catch (error) {
         alert(
           "작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!"
