@@ -60,14 +60,26 @@ export default function CategoryHeader() {
             >
               <Link to={`/items/${encodeURIComponent(category)}`}>
                 <Text
-                  _hover={{ textDecoration: "underline" }}
-                  textDecoration={
-                    (hoverOnSub || hoverOnCat) && hoveredCategory === category
-                      ? "underline"
-                      : "none"
-                  }
+                  style={{
+                    textDecoration: "none",
+                    position: "relative",
+                  }}
                 >
                   {category}
+                  <span
+                    style={{
+                      position: "absolute",
+                      bottom: "-5px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: hoveredCategory === category ? "120%" : "0", // 좌우로 퍼지는 효과
+                      height: hoveredCategory === category ? "2px" : "0",
+                      background: "black", // 색상
+                      opacity: hoveredCategory === category ? 1 : 0, // 투명도 조절
+                      transition:
+                        "width 0.3s ease-in-out, opacity 0.3s ease-in-out",
+                    }}
+                  ></span>
                 </Text>
               </Link>
             </Box>

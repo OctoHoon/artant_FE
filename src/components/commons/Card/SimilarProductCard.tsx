@@ -177,22 +177,24 @@ export default function SimilarProductCard({
               <Text fontWeight={"500"} fontSize={"20px"}>
                 {price.toLocaleString()}원
               </Text>
-              <Flex gap={"5px"}>
-                <Text
-                  fontSize={"13px"}
-                  color={"var(--maincolorstextgray-777777, #777)"}
-                  as={"s"}
-                >
-                  {originalPrice.toLocaleString()}
-                </Text>
-                <Text
-                  fontSize={"13px"}
-                  fontWeight={"300"}
-                  color={"var(--maincolorstextredf-12-e-24, #F12E24)"}
-                >
-                  {100 - Math.round((100 * price) / originalPrice)}% off
-                </Text>
-              </Flex>
+              {price != originalPrice ? (
+                <Flex gap={"5px"}>
+                  <Text
+                    fontSize={"13px"}
+                    color={"var(--maincolorstextgray-777777, #777)"}
+                    as={"s"}
+                  >
+                    {originalPrice.toLocaleString()}원
+                  </Text>
+                  <Text
+                    fontSize={"13px"}
+                    fontWeight={"300"}
+                    color={"var(--maincolorstextredf-12-e-24, #F12E24)"}
+                  >
+                    {100 - Math.round((100 * price) / originalPrice)}% off
+                  </Text>
+                </Flex>
+              ) : null}
             </Flex>
             <Flex
               alignItems={"flex-start"}

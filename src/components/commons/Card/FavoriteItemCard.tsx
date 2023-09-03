@@ -188,14 +188,16 @@ export default function FavoriteItemCard({
                 원
               </Text>
             </Flex>
-            <Flex fontSize={"13px"} fontWeight={"400"} gap={"8px"}>
-              <Text textDecoration="line-through">
-                {originalPrice.toLocaleString()}
-              </Text>
-              <Text fontSize={"13px"} color={"#BC0000"}>
-                {100 - Math.round((100 * price) / originalPrice)}% off
-              </Text>
-            </Flex>
+            {price != originalPrice ? (
+              <Flex fontSize={"13px"} fontWeight={"400"} gap={"8px"}>
+                <Text textDecoration="line-through">
+                  {originalPrice.toLocaleString()}원
+                </Text>
+                <Text fontSize={"13px"} color={"#BC0000"}>
+                  {100 - Math.round((100 * price) / originalPrice)}% off
+                </Text>
+              </Flex>
+            ) : null}
           </Flex>
           <Text
             fontSize={"13px"}

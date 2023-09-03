@@ -56,6 +56,13 @@ export const getShops = () =>
 export const getProducts = () =>
   instance.get("products/").then((response) => response.data);
 
+export const getFavoriteProducts = ({ queryKey }: QueryFunctionContext) => {
+  const [_, userPk] = queryKey;
+  return instance
+    .get(`favorites/items/${userPk}`)
+    .then((response) => response.data);
+};
+
 export const getProductsParameter = ({ queryKey }: QueryFunctionContext) => {
   const [category, location, selectedOption] = queryKey;
   console.log(
