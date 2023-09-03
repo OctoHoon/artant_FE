@@ -129,7 +129,8 @@ export default function UploadPhotos() {
       });
 
       await Promise.all(uploadPromises);
-      reset();
+      console.log("썸네일 업데이트 완료");
+      setCloudflareStreamUrl("");
     } catch (error) {
       console.error("Error uploading photos:", error);
     }
@@ -149,9 +150,8 @@ export default function UploadPhotos() {
       //       "/thumbnails/thumbnail.jpg?time=0s&height=270"
       //     )
       //   );
-      setTimeout(() => {
-        setCloudflareStreamUrl(cloudflareStreamUrl);
-      }, 1500);
+
+      setCloudflareStreamUrl(cloudflareStreamUrl);
 
       uploadVideoMutation.mutate({
         uploadURL: data.uploadURL,
@@ -280,7 +280,8 @@ export default function UploadPhotos() {
 
         await onSubmitImages(); // product에 images 등록
         setSelectedFiles([]);
-        setCloudflareStreamUrl("");
+
+        console.log("화면이동");
         navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
       } catch (error) {
         alert(
