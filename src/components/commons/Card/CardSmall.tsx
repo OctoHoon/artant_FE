@@ -61,7 +61,6 @@ export default function CardSmall({
     <Link to={`/listings/${pk}`}>
       <Flex
         width={"220px"}
-        height={"346px"}
         alignItems={"flex-start"}
         position="relative"
         flexDirection={"column"}

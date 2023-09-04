@@ -24,6 +24,7 @@ import RegisterShopName from "./routes/RegisterShopName";
 import RegisterProductComplete from "./routes/RegisterProductComplete";
 import RegisterPayments from "./routes/RegisterPayments";
 import RegisterBilling from "./routes/RegisterBilling";
+import ShopManagerListingEditing from "./routes/ShopManagerListingEditing";
 
 const router = createBrowserRouter([
   {
@@ -102,32 +103,36 @@ const router = createBrowserRouter([
         path: "your/shops/:shopPk/onboarding/billing",
         element: <RegisterBilling />,
       },
-    ],
-  },
-  {
-    path: "/your/shops/me/",
-    element: <ShopManagerRoot />,
-    errorElement: <NotFound />,
-    children: [
       {
-        path: "",
-        element: <ShopManagerSettings />,
-      },
-      {
-        path: "dashboard",
-        element: <ShopManagerDashboard />,
-      },
-      {
-        path: "listings",
-        element: <ShopManagerListings />,
-      },
-      {
-        path: "messages",
-        element: <ShopManagerMessages />,
-      },
-      {
-        path: "orders-shipping",
-        element: <ShopManagerOrders />,
+        path: "your/shops/me/",
+        element: <ShopManagerRoot />,
+        errorElement: <NotFound />,
+        children: [
+          {
+            path: "",
+            element: <ShopManagerDashboard />,
+          },
+          {
+            path: "dashboard",
+            element: <ShopManagerDashboard />,
+          },
+          {
+            path: "listings",
+            element: <ShopManagerListings />,
+          },
+          {
+            path: "listings/:pk",
+            element: <ShopManagerListingEditing />,
+          },
+          {
+            path: "messages",
+            element: <ShopManagerMessages />,
+          },
+          {
+            path: "orders-shipping",
+            element: <ShopManagerOrders />,
+          },
+        ],
       },
     ],
   },

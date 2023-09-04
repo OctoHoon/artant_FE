@@ -19,6 +19,7 @@ export default function CategoryHeader() {
   const [hoverOnSub, setHoverOnSub] = useState<boolean>(false);
 
   const handleCategoryMouseEnter = (categoryName: string) => {
+    setHoverOnSub(true);
     setHoveredCategory(categoryName);
   };
 
@@ -53,7 +54,6 @@ export default function CategoryHeader() {
         minW={"700px"}
         height="58px"
         alignItems={"center"}
-        onMouseEnter={() => setHoverOnSub(true)}
       >
         {subCategory.map((category) => (
           <Box

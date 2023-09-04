@@ -27,7 +27,6 @@ export default function Items() {
       >
         {" "}
         <RecentlyViewed title="최근 본 작품" />
-        <Footer />
       </Box>
     </Box>
   );

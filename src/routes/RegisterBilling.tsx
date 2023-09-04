@@ -292,7 +292,6 @@ export default function RegisterBilling() {
           </Flex>
         </Flex>
       </Flex>
-      <Footer />
     </Flex>
   );
 }

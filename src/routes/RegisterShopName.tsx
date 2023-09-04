@@ -208,7 +208,6 @@ export default function RegisterShopName() {
           </Button>
         </Flex>
       </Flex>
-      <Footer />
     </Flex>
   );
 }

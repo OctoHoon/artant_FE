@@ -16,8 +16,6 @@ export default function Cart() {
       >
         <CartHeader />
         <CartBody />
-
-        <Footer />
       </Box>
     </Box>
   );
