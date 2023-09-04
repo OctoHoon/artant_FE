@@ -86,7 +86,7 @@ export default function Footer() {
           <Box>
             <Flex>
               <Text color={"gray"} fontSize={"12pt"} letterSpacing={"-0.3px"}>
-                대표이사 홍길동
+                대표이사 서존
               </Text>
               <Divider
                 orientation="vertical"
@@ -95,7 +95,7 @@ export default function Footer() {
                 mx={2}
               />
               <Text color={"gray"} fontSize={"12pt"} letterSpacing={"-0.3px"}>
-                서울특별시 강남구 아무동 아트빌딩
+                서울특별시 강남구 영동대로 602, 6층 브이208호
               </Text>
               <Divider
                 orientation="vertical"
@@ -104,7 +104,7 @@ export default function Footer() {
                 mx={2}
               />
               <Text color={"gray"} fontSize={"12pt"} letterSpacing={"-0.3px"}>
-                호스팅서비스 사업자: 아트앤트
+                호스팅서비스 사업자: (주)데이터앤트
               </Text>
               <Divider
                 orientation="vertical"
@@ -113,12 +113,12 @@ export default function Footer() {
                 mx={2}
               />
               <Text color={"gray"} fontSize={"12pt"} letterSpacing={"-0.3px"}>
-                사업자등록번호: 000-000000
+                사업자등록번호: 835-86-02785
               </Text>
             </Flex>
             <HStack marginBottom={10}>
               <Text color={"gray"} fontSize={"12pt"} letterSpacing={"-0.3px"}>
-                통신판매업신고: 2023-서울송파-0000
+                통신판매업신고: 2023-서울삼성-0000
               </Text>
               <Divider
                 orientation="vertical"
@@ -128,7 +128,7 @@ export default function Footer() {
               />
 
               <Text color={"gray"} fontSize={"12pt"} letterSpacing={"-0.3px"}>
-                email: help@artant.com
+                email: help@artant.co.kr
               </Text>
             </HStack>
           </Box>

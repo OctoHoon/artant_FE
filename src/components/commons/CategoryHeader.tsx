@@ -37,64 +37,92 @@ export default function CategoryHeader() {
   };
 
   return (
-    <Flex>
-      <Flex flexDirection={"column"}>
-        <Flex
-          justifyContent="flex-start"
-          width="1280px"
-          minW={"700px"}
-          height="58px"
-          flex={1}
-          onMouseEnter={() => setHoverOnSub(true)}
-          onMouseLeave={() => setHoverOnSub(false)}
-        >
-          {subCategory.map((category) => (
-            <Box
-              key={category}
-              p={2}
-              mx={2}
-              cursor="pointer"
-              onMouseEnter={() => handleCategoryMouseEnter(category)}
-              onMouseLeave={handleCategoryMouseLeave}
-              position="relative"
-            >
-              <Link to={`/items/${encodeURIComponent(category)}`}>
-                <Text
+    <Flex
+      flexDirection={"column"}
+      width={"full"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      onMouseEnter={() => setHoverOnSub(true)}
+      onMouseLeave={() => {
+        setHoverOnSub(false);
+        setHoveredCategory(null);
+      }}
+    >
+      <Flex
+        justifyContent="flex-start"
+        width="1280px"
+        minW={"700px"}
+        height="58px"
+        alignItems={"center"}
+      >
+        {subCategory.map((category) => (
+          <Box
+            key={category}
+            p={2}
+            mx={2}
+            cursor="pointer"
+            onMouseEnter={() => handleCategoryMouseEnter(category)}
+            onMouseLeave={handleCategoryMouseLeave}
+            position="relative"
+          >
+            <Link to={`/items/${encodeURIComponent(category)}`}>
+              <Text
+                style={{
+                  textDecoration: "none",
+                  position: "relative",
+                }}
+              >
+                {category}
+                <span
                   style={{
-                    textDecoration: "none",
-                    position: "relative",
+                    position: "absolute",
+                    bottom: "-5px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: hoveredCategory === category ? "120%" : "0", // 좌우로 퍼지는 효과
+                    height: hoveredCategory === category ? "2px" : "0",
+                    background: "black", // 색상
+                    opacity: hoveredCategory === category ? 1 : 0, // 투명도 조절
+                    transition:
+                      "width 0.3s ease-in-out, opacity 0.3s ease-in-out",
                   }}
-                >
-                  {category}
-                  <span
-                    style={{
-                      position: "absolute",
-                      bottom: "-5px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: hoveredCategory === category ? "120%" : "0", // 좌우로 퍼지는 효과
-                      height: hoveredCategory === category ? "2px" : "0",
-                      background: "black", // 색상
-                      opacity: hoveredCategory === category ? 1 : 0, // 투명도 조절
-                      transition:
-                        "width 0.3s ease-in-out, opacity 0.3s ease-in-out",
-                    }}
-                  ></span>
-                </Text>
-              </Link>
-            </Box>
-          ))}
-        </Flex>
-        {hoverOnSub || hoverOnCat ? (
+                ></span>
+              </Text>
+            </Link>
+          </Box>
+        ))}
+      </Flex>
+      <Box width="full" height={"1px"} background="#F1F1F5" zIndex={2} />
+      {(hoverOnSub || hoverOnCat) && hoveredCategory != "모든작품" ? (
+        <Flex
+          position={"absolute"}
+          width={"full"}
+          top={"147px"}
+          left={"0px"}
+          background="white"
+          height={"60px"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          flexDirection={"column"}
+          onMouseEnter={() => setHoverOnCat(true)}
+          onMouseLeave={() => setHoverOnCat(false)}
+        >
+          <Box
+            position="absolute"
+            height="60px"
+            width={"full"}
+            background="white"
+            zIndex={1}
+          />
           <Flex
             justifyContent="flex-start"
             width={"1280px"}
             height={"60px"}
             direction="row"
+            background={"white"}
+            alignItems={"center"}
             zIndex={1}
             display={hoveredCategory ? "flex" : "none"}
-            onMouseEnter={() => setHoverOnCat(true)}
-            onMouseLeave={() => setHoverOnCat(false)}
           >
             {subCategory.map((category) =>
               hoveredCategory === category && category != "모든작품"
@@ -104,6 +132,9 @@ export default function CategoryHeader() {
                       to={`/items/${encodeURIComponent(subCategory)}`}
                     >
                       <Text
+                        fontSize={"16px"}
+                        fontWeight={"500"}
+                        lineHeight={"150%"}
                         p={2}
                         mx={2}
                         _hover={{ textDecoration: "underline" }}
@@ -124,10 +155,9 @@ export default function CategoryHeader() {
                 : null
             )}
           </Flex>
-        ) : (
-          <Box height={"60px"} />
-        )}
-      </Flex>
+          <Box width="full" height={"1px"} background="#F1F1F5" zIndex={2} />
+        </Flex>
+      ) : null}
     </Flex>
   );
 }

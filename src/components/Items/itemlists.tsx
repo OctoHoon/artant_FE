@@ -56,7 +56,7 @@ export default function Itemlists() {
         base: 10,
         lg: 40,
       }}
-      my={10}
+      marginTop={"60px"}
     >
       <Text
         color="#000"
