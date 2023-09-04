@@ -1,16 +1,21 @@
 import { Button } from "@chakra-ui/react";
 
-export default function BlackButton({ title, borderRadius, flex = "" }) {
+export default function BlackButton({
+  title,
+  borderRadius,
+  flex = "",
+  type = false,
+}) {
   return (
     <Button
       padding={"10px 24px"}
       justifyContent={"center"}
       alignItems={"center"}
       borderRadius={borderRadius}
-      background={"#222"}
+      background={type ? "white" : "#222"}
       fontSize={"16px"}
       fontWeight={"500"}
-      color={"white"}
+      color={type ? "black" : "white"}
       textAlign={"center"}
       alignSelf={"start"}
     >

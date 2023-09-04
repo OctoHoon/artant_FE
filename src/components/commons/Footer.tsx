@@ -29,7 +29,7 @@ export default function Footer() {
       alignItems="center" // Center horizontally
       justifyContent="center" // Center vertically
     >
-      <Box width="1280px">
+      <Box w="full">
         <HStack
           borderTopWidth={"1px"}
           borderTopColor={"#F1F1F5"}
@@ -81,7 +81,7 @@ export default function Footer() {
         <Text fontSize={"14pt"} fontWeight={"500"}>
           (주)아트앤트
         </Text>
-        <Box width="1200px" height="12px" />
+        <Box width="1280px" height="12px" />
         <Flex justifyContent={"space-between"}>
           <Box>
             <Flex>

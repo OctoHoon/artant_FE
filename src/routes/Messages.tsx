@@ -21,8 +21,6 @@ export default function Messages() {
       >
         <MessagesHeader />
         <MessagesBody />
-
-        <Footer />
       </Box>
     </Box>
   );

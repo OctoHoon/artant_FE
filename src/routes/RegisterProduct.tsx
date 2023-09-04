@@ -3644,7 +3644,6 @@ export default function UploadPhotos() {
             </Flex>
           </Flex>
         </Flex>
-        <Footer />
       </Flex>
       <Box pb={40} mt={10} px={{ base: 10, lg: 40 }}>
         <Container>

@@ -37,7 +37,6 @@ export default function ShopDetail() {
         <ShopReviews />
         <ShopIntro />
         <ShopPolicy />
-        <Footer />
       </Box>
     </Box>
   );

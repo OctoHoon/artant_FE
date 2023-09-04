@@ -14,8 +14,6 @@ export default function ShopDetail() {
         px={40}
       >
         <ProfileHeader />
-
-        <Footer />
       </Box>
     </Box>
   );

@@ -743,7 +743,6 @@ export default function RegisterPayments() {
           </Flex>
         </Flex>
       </Flex>
-      <Footer />
     </Flex>
   );
 }

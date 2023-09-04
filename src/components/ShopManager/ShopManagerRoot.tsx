@@ -2,10 +2,12 @@ import { Box, Flex } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 
 import ShopManagerSideBar from "./ShopManagerSideBar";
+import Header from "../commons/Header";
+import Footer from "../commons/Footer";
 
 export default function Root() {
   return (
-    <Flex>
+    <Flex w={"full"} gap={"60px"} alignItems={"flex-start"}>
       <ShopManagerSideBar />
 
       <Box flex="1" overflowY="auto">

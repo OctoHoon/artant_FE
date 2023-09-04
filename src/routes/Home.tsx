@@ -40,7 +40,6 @@ export default function Home() {
         </Box>
         <RegisterButton />
       </Flex>
-      <Footer />
     </Box>
   );
 }

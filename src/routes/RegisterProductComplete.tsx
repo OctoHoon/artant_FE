@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Image,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import Footer from "../components/commons/Footer";
 import ProfileHeader from "../components/People/ProfileHeader";
 import RegisterProcess from "../components/RegisterShop/RegisterProcess";
@@ -224,7 +216,6 @@ export default function RegisterShopName() {
           </Flex>
         </Flex>
       </Flex>
-      <Footer />
     </Flex>
   );
 }

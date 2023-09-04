@@ -1383,7 +1383,6 @@ export default function RegisterShop() {
           </Flex>
         </Flex>
       </Flex>
-      <Footer />
     </Box>
   );
 }

@@ -1,5 +1,17 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
+import MessagesHeader from "../components/Messages/MessagesHeader";
+import MessagesBody from "../components/Messages/MessagesBody";
 
 export default function ShopManagerMessages() {
-  return <Text align={"center"}>messages</Text>;
+  return (
+    <Flex
+      flexDirection="column"
+      alignItems="flex-start" // Center horizontally
+      gap={"20px"}
+    >
+      <Box height="20px" />
+      <MessagesHeader />
+      <MessagesBody />
+    </Flex>
+  );
 }

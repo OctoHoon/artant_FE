@@ -79,7 +79,6 @@ export default function Account() {
             <Outlet />
           </Flex>
         </Flex>
-        <Footer />
       </Box>
     </Box>
   );
