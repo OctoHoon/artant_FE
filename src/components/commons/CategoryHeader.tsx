@@ -42,7 +42,6 @@ export default function CategoryHeader() {
       width={"full"}
       justifyContent={"center"}
       alignItems={"center"}
-      onMouseEnter={() => setHoverOnSub(true)}
       onMouseLeave={() => {
         setHoverOnSub(false);
         setHoveredCategory(null);
@@ -54,6 +53,7 @@ export default function CategoryHeader() {
         minW={"700px"}
         height="58px"
         alignItems={"center"}
+        onMouseEnter={() => setHoverOnSub(true)}
       >
         {subCategory.map((category) => (
           <Box
