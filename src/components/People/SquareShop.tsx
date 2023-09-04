@@ -1,7 +1,10 @@
 import { Wrap, Flex, Box, Image, Text, Button } from "@chakra-ui/react";
 import StarRating from "../commons/StarRating";
 
-export default function SquareShop() {
+export default function SquareShop({ data }) {
+  const thumbnails = data.thumbnails
+    .concat([null, null, null, null])
+    .slice(0, 4);
   return (
     <Box
       borderRadius={"10px"}
@@ -14,16 +17,30 @@ export default function SquareShop() {
         alignContent={"flex-start"}
         gap="4px"
       >
-        <Wrap>
-          <Image src="/assets/images/card_image_custom-3.png" width="129px" />
-          <Image src="/assets/images/card_image_custom-3.png" width="129px" />
-          <Image src="/assets/images/card_image_custom-3.png" width="129px" />
-          <Image src="/assets/images/card_image_custom-3.png" width="129px" />
-        </Wrap>
+        <Box
+          display="grid"
+          gridTemplateColumns="repeat(2, 1fr)"
+          gridTemplateRows="repeat(2, 1fr)"
+          gridGap={"4px"}
+        >
+          {thumbnails.map((thumbnail, index) => (
+            <Image
+              border={"none"} // 이미지에 대한 border 속성을 제거합니다.
+              height={"106px"}
+              width={"131px"}
+              objectFit={"cover"}
+              key={index}
+              src={
+                thumbnail ||
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
+              } // 빈 문자열이면 기본 이미지 경로를 사용합니다.
+            />
+          ))}
+        </Box>
       </Flex>
       <Flex padding={"12px"} fontSize={"13px"} justifyContent={"space-between"}>
         <Flex gap="12px">
-          <Image src="/assets/images/card_image_custom-3.png" width="36px" />
+          <Image src={data.avatar} width="36px" />
           <Box>
             <Text>text</Text>
             <Flex gap="8px">

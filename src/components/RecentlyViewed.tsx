@@ -169,12 +169,12 @@ export default function RecentlyViewed({ title }) {
       width={"1280px"}
     >
       <Text fontSize={"30px"} fontWeight={"500"}>
-        최근 본 작품
+        {title}
       </Text>
 
       {isLoading || !data ? null : (
         <Wrap spacing={"45px"}>
-          {data.map((art: Product, index) => (
+          {data.slice(0, 5).map((art: Product, index) => (
             <CardSmall
               pk={art.pk}
               source={art.thumbnail}

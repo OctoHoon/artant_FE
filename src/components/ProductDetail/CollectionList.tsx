@@ -13,6 +13,8 @@ import {
 import ArtPiece from "../commons/Card/ArtPiece";
 import Collection from "../commons/Card/Collection";
 import MoreButton from "../commons/MoreButton";
+import { useQuery } from "@tanstack/react-query";
+import { getCollections } from "../../api";
 
 const images = [
   "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
@@ -22,6 +24,8 @@ const images = [
 ];
 
 export default function CollectionList({ title, option }) {
+  const { isLoading, data } = useQuery(["ProductCollections"], getCollections);
+
   const arts = [
     {
       pk: 1,
@@ -89,12 +93,17 @@ export default function CollectionList({ title, option }) {
         {option ? <MoreButton /> : null}
       </Flex>
       <Box height={"24px"} />
-
-      <Flex width="1280px" justifyContent="space-between">
-        {arts.map((art, index) => (
-          <Collection images={images} />
-        ))}
-      </Flex>
+      {isLoading || !data ? null : (
+        <Flex width="1280px" justifyContent="space-between">
+          {data.map((collection, index) => (
+            <Collection
+              title={collection.title}
+              total_count={collection.total_products}
+              images={collection.thumbnails}
+            />
+          ))}
+        </Flex>
+      )}
     </Box>
   );
 }
