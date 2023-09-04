@@ -5,7 +5,7 @@ import FavoriteItems from "./FavoriteItems";
 import FavoriteShops from "./FavoriteShops";
 import useUser from "../../lib/useUser";
 import { useQuery } from "@tanstack/react-query";
-import { getFavoriteProducts } from "../../api";
+import { getFavoriteProducts, getShops, getUser } from "../../api";
 
 export default function ProfileHeader() {
   const location = useLocation();
@@ -13,12 +13,20 @@ export default function ProfileHeader() {
   const tab = queryParams.get("tab");
   const [index, setIndex] = useState(tab === "shops" ? 1 : 0);
   const { pk } = useParams();
-  const { user, userLoading } = useUser();
+  const { data: user, isLoading: userLoading } = useQuery(
+    ["SpecificUser", pk],
+    getUser
+  );
   const { isLoading: FavoriteProductIsLoading, data: FavoriteProductsData } =
     useQuery(["FavoriteProducts", pk], getFavoriteProducts);
 
+  const { isLoading: ShopIsLoading, data: ShopData } = useQuery(
+    ["shops"],
+    getShops
+  );
+
   return (
-    <Box width="100%">
+    <Box width="1280px">
       <Flex justifyContent={"space-between"} width={"100%"}>
         <Flex alignItems={"center"}>
           <Avatar src={userLoading ? null : user?.avatar} />
@@ -60,8 +68,7 @@ export default function ProfileHeader() {
             borderRadius={"10px"}
             objectFit={"cover"}
             src={
-              !FavoriteProductIsLoading &&
-              FavoriteProductsData?.products[2]?.thumbnail
+              !FavoriteProductIsLoading && FavoriteProductsData[0]?.thumbnail
             }
             border={index == 0 ? "2px" : 0}
           />
@@ -73,7 +80,8 @@ export default function ProfileHeader() {
             width="140px"
             height="108px"
             borderRadius={"10px"}
-            src="https://i.etsystatic.com/11396539/r/il/3a4a3a/4474003937/il_794xN.4474003937_1bjd.jpg"
+            objectFit={"cover"}
+            src={!ShopIsLoading && ShopData[0]?.avatar}
             border={index != 0 ? "2px" : 0}
           />
           <Box height="10px" />
@@ -82,8 +90,10 @@ export default function ProfileHeader() {
       </Flex>
       <Box height={"60px"} />
       {index === 1 ? (
-        <FavoriteShops />
-      ) : !FavoriteProductIsLoading ? (
+        ShopData ? (
+          <FavoriteShops data={ShopData} />
+        ) : null
+      ) : FavoriteProductsData ? (
         <FavoriteItems data={FavoriteProductsData} />
       ) : null}
     </Box>
