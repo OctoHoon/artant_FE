@@ -16,6 +16,11 @@ const instance = axios.create({
 export const getMe = () =>
   instance.get(`users/me`).then((response) => response.data);
 
+export const getUser = ({ queryKey }: QueryFunctionContext) => {
+  const [_, userPk] = queryKey;
+  return instance.get(`users/${userPk}`).then((response) => response.data);
+};
+
 export const logOut = () =>
   instance
     .post(`users/log-out`, null, {
@@ -258,3 +263,6 @@ export const putProduct = (variables: IPutProductVariables) =>
       },
     })
     .then((response) => response.data);
+
+export const getCollections = () =>
+  instance.get(`collections/`).then((response) => response.data);

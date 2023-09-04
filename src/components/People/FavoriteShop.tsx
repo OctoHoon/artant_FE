@@ -1,7 +1,10 @@
 import { Flex, Box, Image, Button } from "@chakra-ui/react";
 import StarRating from "../commons/StarRating";
 
-export default function FavoriteShop() {
+export default function FavoriteShop({ data }) {
+  const thumbnails = data.thumbnails
+    .concat([null, null, null, null])
+    .slice(0, 4);
   return (
     <Box
       width="48%"
@@ -13,10 +16,16 @@ export default function FavoriteShop() {
       }}
     >
       <Flex justifyContent={"space-between"}>
-        <Image src="/assets/images/card_image_custom-3.png" width="24%" />
-        <Image src="/assets/images/card_image_custom-3.png" width="24%" />
-        <Image src="/assets/images/card_image_custom-3.png" width="24%" />
-        <Image src="/assets/images/card_image_custom-3.png" width="24%" />
+        {thumbnails.map((thumbnail, index) => (
+          <Image
+            maxWidth={"152px"}
+            objectFit={"cover"}
+            height={"152px"}
+            key={index}
+            src={thumbnail || null} // 빈 문자열이면 기본 이미지 경로를 사용합니다.
+            width="24%"
+          />
+        ))}
       </Flex>
       <Flex
         alignItems={"center"}
@@ -25,13 +34,13 @@ export default function FavoriteShop() {
       >
         <Flex gap={"12px"}>
           <Image
-            src="/assets/images/card_image_custom-3.png"
+            src={data.avatar}
             width="48px"
             height={"48px"}
             borderRadius={"5px"}
           />
           <Box>
-            와일드원더코
+            {data.shop_name}
             <StarRating star={5} reviews={"6358"} include_count={true} />
           </Box>
         </Flex>

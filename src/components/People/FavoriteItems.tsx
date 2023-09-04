@@ -66,7 +66,7 @@ export default function FavoriteItems({ data }) {
       </Flex>
       <Box height={"40px"} />
       <Wrap spacing="40px">
-        {data.products.map((item) => (
+        {data.map((item) => (
           <FavoriteItemCard
             key={item.pk}
             pk={item.pk}
@@ -83,11 +83,15 @@ export default function FavoriteItems({ data }) {
           />
         ))}
       </Wrap>
-      <PaginationController itemCount={20} pagination={40} />
+      <Flex justifyContent={"center"}>
+        {" "}
+        <PaginationController itemCount={20} pagination={40} />
+      </Flex>
+
       <Box height="40px" />
       <SimilarItemList title={"이 컬렉션과 유사한 작품"} />
 
-      <Box height="40px" />
+      <Box height="160px" />
       <CollectionList title={"당신이 좋아할 컬렉션"} option={false} />
       <Box height="40px" />
       <Box height="40px" />

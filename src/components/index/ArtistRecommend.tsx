@@ -30,7 +30,7 @@ export default function ArtistRecommend() {
       <Flex alignSelf={"stretch"} justifyContent={"space-between"}>
         {isLoading ? null : (
           <>
-            {data.map((artist: Shop, index) => (
+            {data.slice(0, 4).map((artist: Shop, index) => (
               <Artist
                 key={artist.pk}
                 pk={artist.pk}

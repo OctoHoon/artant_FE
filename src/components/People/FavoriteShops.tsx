@@ -12,7 +12,7 @@ import SearchBar from "../commons/SearchBar";
 import FavoriteShop from "./FavoriteShop";
 import SquareShop from "./SquareShop";
 
-export default function FavoriteItems() {
+export default function FavoriteItems({ data }) {
   return (
     <Box>
       <Flex justifyContent={"space-between"}>
@@ -156,30 +156,22 @@ export default function FavoriteItems() {
       </Flex>
       <Box height={"40px"} />
       <Wrap spacing={10} justify={"space-around"} gap="40px">
-        <FavoriteShop />
-        <FavoriteShop />
-        <FavoriteShop />
-        <FavoriteShop />
-        <FavoriteShop />
-        <FavoriteShop />
-        <FavoriteShop />
-        <FavoriteShop />
+        {data.map((shop, index) => (
+          <FavoriteShop key={index} data={shop} /* 여기에 다른 props 전달 */ />
+        ))}
       </Wrap>
-      <PaginationController itemCount={40} pagination={"8"} />
+      <Flex justifyContent={"center"}>
+        <PaginationController itemCount={40} pagination={"8"} />
+      </Flex>
 
       <Text fontSize={"24px"} fontWeight={"500"}>
         당신이 좋아할 것 같은 상점
       </Text>
       <Box height="40px" />
       <Wrap spacing={5} justify={"space-around"}>
-        <SquareShop />
-        <SquareShop />
-        <SquareShop />
-        <SquareShop />
-        <SquareShop />
-        <SquareShop />
-        <SquareShop />
-        <SquareShop />
+        {data.map((shop, index) => (
+          <SquareShop key={index} data={shop} /* 여기에 다른 props 전달 */ />
+        ))}
       </Wrap>
     </Box>
   );
