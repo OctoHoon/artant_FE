@@ -90,15 +90,17 @@ function NewArrivalCard({ pk, source, price, originalPrice }) {
             {price.toLocaleString()}
             <Text fontSize={"14px"}>원</Text>
           </Flex>
-          <Flex
-            mr={4}
-            textDecoration="line-through"
-            fontSize={"13px"}
-            color={"#BC0000"}
-          >
-            {originalPrice.toLocaleString()}
-            <Text>원</Text>
-          </Flex>
+          {price != originalPrice ? (
+            <Flex
+              mr={4}
+              textDecoration="line-through"
+              fontSize={"13px"}
+              color={"#BC0000"}
+            >
+              {originalPrice.toLocaleString()}
+              <Text>원</Text>
+            </Flex>
+          ) : null}
         </Box>
       </Link>
     </VStack>

@@ -6,8 +6,9 @@ import SearchBar from "../commons/SearchBar";
 import FavoriteItemCard from "../commons/Card/FavoriteItemCard";
 import ItemListFive from "../ProductDetail/ItemsListFive";
 import SimilarItemList from "./SimilarItemList";
+import CollectionKeyword from "../CollectionKeyword";
 
-export default function FavoriteItems() {
+export default function FavoriteItems({ data }) {
   return (
     <Box>
       <Flex justifyContent={"space-between"}>
@@ -65,214 +66,22 @@ export default function FavoriteItems() {
       </Flex>
       <Box height={"40px"} />
       <Wrap spacing="40px">
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
-        <FavoriteItemCard
-          pk={4}
-          source="/assets/images/card_image_custom-3.png"
-          title="우리의 꿈은"
-          description="애니메이션화, CG, 스타 서정배"
-          price={120000}
-          originalPrice={200000}
-          free_shipping={true}
-          is_best_seller={true}
-          is_liked={false}
-          artist={"가나다라아트"}
-          message={"재고부족, 1개만 남음, 카트 3개에 담겨있음"}
-        />
+        {data.products.map((item) => (
+          <FavoriteItemCard
+            key={item.pk}
+            pk={item.pk}
+            source={item.thumbnail}
+            title={item.name}
+            description={item.description}
+            price={item.price}
+            originalPrice={item.original_price}
+            free_shipping={item.free_shipping}
+            is_best_seller={item.is_best_seller}
+            is_liked={item.is_liked}
+            artist={item.artist}
+            message={item.message}
+          />
+        ))}
       </Wrap>
       <PaginationController itemCount={20} pagination={40} />
       <Box height="40px" />
@@ -283,11 +92,7 @@ export default function FavoriteItems() {
       <Box height="40px" />
       <Box height="40px" />
       <Wrap spacing={3} justify={"space-around"}>
-        <RelatedKeyword width={"120px"} height={"120px"} />
-        <RelatedKeyword width={"120px"} height={"120px"} />
-        <RelatedKeyword width={"120px"} height={"120px"} />
-        <RelatedKeyword width={"120px"} height={"120px"} />
-        <RelatedKeyword width={"120px"} height={"120px"} />
+        <CollectionKeyword width={"120px"} height={"120px"} />
       </Wrap>
     </Box>
   );
