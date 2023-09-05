@@ -158,6 +158,7 @@ export default function CategoryHeader() {
           <Box width="full" height={"1px"} background="#F1F1F5" zIndex={2} />
         </Flex>
       ) : null}
+      <Flex height={"32px"}></Flex>
     </Flex>
   );
 }

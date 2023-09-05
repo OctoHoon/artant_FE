@@ -137,6 +137,13 @@ export const getReviews = ({ queryKey }: QueryFunctionContext) => {
     .then((response) => response.data);
 };
 
+export const getReviewPhotos = ({ queryKey }: QueryFunctionContext) => {
+  const [pk] = queryKey;
+  return instance
+    .get(`products/${pk}/reviews/photos`)
+    .then((response) => response.data);
+};
+
 export const getRecentlyViewedProducts = () =>
   instance.get("products/recently-viewed").then((response) => response.data);
 
