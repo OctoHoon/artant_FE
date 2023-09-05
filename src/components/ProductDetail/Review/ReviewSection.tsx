@@ -19,6 +19,8 @@ import {
 import StarRating from "../../commons/StarRating";
 import ReviewList from "./ReviewList";
 import ReviewPhotos from "./ReviewPhotos";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ReveiwSection() {
   return (

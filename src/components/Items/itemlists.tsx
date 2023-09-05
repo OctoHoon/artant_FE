@@ -1,4 +1,12 @@
-import { Box, Button, ButtonGroup, Grid, HStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  Grid,
+  HStack,
+  Text,
+} from "@chakra-ui/react";
 import ArtPiece from "../commons/Card/ArtPiece";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
@@ -171,10 +179,13 @@ export default function Itemlists() {
               />
             ))}
           </Grid>
-          <PaginationController
-            itemCount={data["total_count"]}
-            pagination={40}
-          />
+          <Flex justifyContent={"center"}>
+            {" "}
+            <PaginationController
+              itemCount={data["total_count"]}
+              pagination={40}
+            />
+          </Flex>
         </>
       )}
     </Box>

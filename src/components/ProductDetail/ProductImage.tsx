@@ -54,11 +54,24 @@ export default function ProductImage() {
   const { pk } = useParams();
   const { isLoading, data } = useQuery(["products", pk], getProductDetails);
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      setImageLength(data.images.length);
+  let imageAndVideoUrls: any[] = [];
+  if (!isLoading && data) {
+    // 이미지 목록을 추가
+    if (data.images) {
+      imageAndVideoUrls = data.images.map((image) => image.image);
     }
-  }, [isLoading, data]);
+
+    // 비디오를 추가
+    if (data.video) {
+      imageAndVideoUrls.push(data.video.video);
+    }
+  }
+
+  useEffect(() => {
+    if (!isLoading && imageAndVideoUrls) {
+      setImageLength(imageAndVideoUrls.length);
+    }
+  }, [isLoading, imageAndVideoUrls]);
 
   console.log(data);
   return (
@@ -68,9 +81,9 @@ export default function ProductImage() {
       ) : (
         <Box>
           <Flex gap={"20px"}>
-            <Box maxH="550px" width="65px" overflowY="scroll">
+            <Box maxH="550px" width="65px">
               <Flex gap="8px" align={"start"} flexDirection="column">
-                {data["images"].map((image, index) => (
+                {imageAndVideoUrls.map((url, index) => (
                   <Box
                     key={index}
                     borderColor={
@@ -85,7 +98,14 @@ export default function ProductImage() {
                         maxW="60px"
                         maxH="60px"
                         key={index}
-                        src={image["image"]}
+                        src={
+                          url.includes(".mp4?")
+                            ? url.replace(
+                                /\.mp4(.*)$/,
+                                ".jpg?time=0s&height=270"
+                              )
+                            : url
+                        }
                         alt={`Thumbnail ${index + 1}`}
                         cursor="pointer"
                         borderColor={"black"}
@@ -94,7 +114,7 @@ export default function ProductImage() {
                         onClick={() => handleThumbnailClick(index)}
                       />
                     </AspectRatio>
-                    {image["image"].endsWith(".mp4") ? (
+                    {url.includes(".mp4?") ? (
                       <Box
                         position="absolute"
                         top="50%"
@@ -115,18 +135,21 @@ export default function ProductImage() {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                {data["images"][activeIndex]["image"].endsWith(".mp4") ? (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    width="100%"
-                    height="100%"
-                    src={data["images"][activeIndex]["image"]}
-                  />
+                {imageAndVideoUrls[activeIndex].includes(".mp4") ? (
+                  <Flex width={"740px"} height="620px">
+                    {" "}
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      width="100%"
+                      height="100%"
+                      src={imageAndVideoUrls[activeIndex]}
+                    />{" "}
+                  </Flex>
                 ) : (
                   <Image
-                    src={data["images"][activeIndex]["image"]}
+                    src={imageAndVideoUrls[activeIndex]}
                     alt={`Image ${activeIndex}`}
                     width={"740px"}
                     height="620px"

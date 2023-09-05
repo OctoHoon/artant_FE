@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  Flex,
   Menu,
   MenuButton,
   MenuItem,
@@ -112,10 +113,12 @@ export default function ReviewList() {
           {data["reviews"].map((review: IReview, index) => (
             <ReviewItem review={review} key={index} />
           ))}
-          <PaginationController
-            itemCount={data["total_count"]}
-            pagination={3}
-          />
+          <Flex justifyContent={"center"}>
+            <PaginationController
+              itemCount={data["total_count"]}
+              pagination={3}
+            />
+          </Flex>
         </>
       )}
     </div>

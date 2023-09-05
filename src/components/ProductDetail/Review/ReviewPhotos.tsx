@@ -7,6 +7,10 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getReviewPhotos } from "../../../api";
+import React from "react";
 
 const images = [
   "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
@@ -22,6 +26,10 @@ const images = [
 ];
 
 export default function ReviewPhotos() {
+  const { pk } = useParams();
+
+  const { isLoading, data } = useQuery([pk], getReviewPhotos);
+
   return (
     <Box>
       <Text
@@ -35,23 +43,15 @@ export default function ReviewPhotos() {
       <Box height={"20px"} />
       <Box position="relative" width={"100%"}>
         <Flex>
-          <AspectRatio width={"24%"} ratio={1 / 1}>
-            <Image src={images[0]} />
-          </AspectRatio>
-          <Box width="16px" />
-          <AspectRatio width={"24%"} ratio={1 / 1}>
-            <Image src={images[0]} />
-          </AspectRatio>
-          <Box width="16px" />
-
-          <AspectRatio width={"24%"} ratio={1 / 1}>
-            <Image src={images[0]} />
-          </AspectRatio>
-          <Box width="16px" />
-
-          <AspectRatio width={"24%"} ratio={1 / 1}>
-            <Image src={images[0]} />
-          </AspectRatio>
+          {data &&
+            data.slice(0, 4).map((image, index) => (
+              <React.Fragment key={index}>
+                <AspectRatio width={"24%"} ratio={1 / 1}>
+                  <Image src={image.image} alt={`Review Image ${index + 1}`} />
+                </AspectRatio>
+                {index < data.length - 1 && <Box width="16px" />}
+              </React.Fragment>
+            ))}
         </Flex>
         {/* Button */}
         <Box
