@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 import ReviewPhotos from "./ReviewPhotos";
 import PaginationController from "../../commons/PaginationController";
 import { useQuery } from "@tanstack/react-query";
-import { getReviews } from "../../../api";
+import { getProductDetails, getReviews, getShopReviews } from "../../../api";
 
 interface IReview {
   user: {
@@ -45,7 +45,7 @@ const options = {
   created_at: "최신순",
 };
 
-export default function ReviewList() {
+export default function ShopReviewList({ shop_pk }) {
   const [selectedOption, setSelectedOption] = useState("relevance");
   const [page, setPage] = useState(1);
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
@@ -56,7 +56,10 @@ export default function ReviewList() {
   console.log(reviews);
   console.log(totalCount);
 
-  const { isLoading, data } = useQuery([pk, page, selectedOption], getReviews);
+  const { isLoading, data } = useQuery(
+    [shop_pk, page, selectedOption],
+    getShopReviews
+  );
 
   return (
     <div>

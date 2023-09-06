@@ -21,8 +21,19 @@ import ReviewList from "./ReviewList";
 import ReviewPhotos from "./ReviewPhotos";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { getProductDetails, getReviews, getShopReviews } from "../../../api";
+import ShopReviewList from "./ShopReviewList";
 
-export default function ReveiwSection() {
+export default function ReveiwSection({ shop_pk }) {
+  const [page, setPage] = useState(1);
+  const { pk } = useParams();
+  const { isLoading, data } = useQuery([pk, page, ""], getReviews);
+
+  const { isLoading: shopReviewisLoading, data: shopReviewData } = useQuery(
+    [shop_pk, page, ""],
+    getShopReviews
+  );
   return (
     <Box>
       <Flex alignItems="center" marginBottom={"8px"}>
@@ -60,7 +71,7 @@ export default function ReveiwSection() {
             <Text>이 작품 리뷰</Text>
             <Box width="10px" />
             <Box padding="2px 8px" borderRadius={"100px"} bg={"#EAEAEA"}>
-              36
+              {data && data["total_count"]}
             </Box>
           </Tab>
 
@@ -68,7 +79,7 @@ export default function ReveiwSection() {
             <Text>판매자 샵 리뷰</Text>
             <Box width="10px" />
             <Box padding="2px 8px" borderRadius={"100px"} bg={"#EAEAEA"}>
-              36
+              {shopReviewData && shopReviewData["total_count"]}
             </Box>
           </Tab>
         </TabList>
@@ -78,7 +89,7 @@ export default function ReveiwSection() {
             <ReviewList />
           </TabPanel>
           <TabPanel padding={"0px"}>
-            <ReviewList />
+            <ShopReviewList shop_pk={shop_pk} />
           </TabPanel>
         </TabPanels>
       </Tabs>

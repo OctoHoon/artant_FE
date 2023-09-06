@@ -114,7 +114,7 @@ export default function ProductPanel() {
           ></Text>
 
           <Flex marginBottom="16px" alignContent={"center"}>
-            <Link to={`/shop/${pk}`}>
+            <Link to={data && `/shop/${data["shop_pk"]}`}>
               <Text
                 fontSize="14px"
                 fontWeight="500"
