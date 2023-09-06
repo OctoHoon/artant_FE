@@ -2,7 +2,7 @@ import { Box, Button, ButtonGroup, Text } from "@chakra-ui/react";
 
 export default function PaginationController({ itemCount, pagination }) {
   return (
-    <Box display="flex" justifyContent="flex-start" alignItems="center" my={10}>
+    <Box display="flex" justifyContent="flex-start" alignItems="center" my={20}>
       <ButtonGroup>
         <Button backgroundColor={"transparent"} variant={"none"}>
           <svg

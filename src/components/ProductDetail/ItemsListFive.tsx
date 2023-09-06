@@ -13,135 +13,14 @@ import PdpCard from "../commons/Card/PdpCard";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProductDetails, getShopProducts } from "../../api";
+import { useState } from "react";
 
 export default function ItemListFive({ title, shop_pk }) {
+  const [page, setPage] = useState(1);
   const { isLoading, data } = useQuery(
-    ["shopProduct", shop_pk],
+    ["shopProduct", shop_pk, page],
     getShopProducts
   );
-
-  const arts = [
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 2,
-      source: "/assets/images/card_image_custom-1.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 3,
-      source: "/assets/images/card_image_custom-2.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: false,
-      is_best_seller: true,
-      is_liked: true,
-    },
-    {
-      pk: 4,
-      source: "/assets/images/card_image_custom-3.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 2,
-      reviews: 2532,
-      price: 120000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: true,
-      is_liked: false,
-    },
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 2,
-      source: "assets/images/card_image_custom-1.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 3,
-      source: "/assets/images/card_image_custom-2.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: false,
-      is_best_seller: true,
-      is_liked: true,
-    },
-    {
-      pk: 4,
-      source: "/assets/images/card_image_custom-3.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 2,
-      reviews: 2532,
-      price: 120000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: true,
-      is_liked: false,
-    },
-  ];
 
   // Use shopProductData here
   return (
@@ -156,21 +35,23 @@ export default function ItemListFive({ title, shop_pk }) {
       </Text>
       <Flex gap={"20px"} flexWrap={"wrap"}>
         {!isLoading && data
-          ? data.map((product, index) => (
-              <PdpCard
-                pk={product.pk}
-                source={product.thumbnail}
-                title={product.name}
-                description={""}
-                artist={product.shop_name}
-                price={product.price}
-                originalPrice={product.original_price}
-                free_shipping={product.free_shipping}
-                is_best_seller={product.is_best_seller}
-                is_liked={product.is_liked}
-                key={index}
-              />
-            ))
+          ? data.products
+              .slice(0, 5)
+              .map((product, index) => (
+                <PdpCard
+                  pk={product.pk}
+                  source={product.thumbnail}
+                  title={product.name}
+                  description={""}
+                  artist={product.shop_name}
+                  price={product.price}
+                  originalPrice={product.original_price}
+                  free_shipping={product.free_shipping}
+                  is_best_seller={product.is_best_seller}
+                  is_liked={product.is_liked}
+                  key={index}
+                />
+              ))
           : null}
       </Flex>
     </Flex>

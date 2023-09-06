@@ -185,9 +185,11 @@ export default function ProductImage() {
                 zIndex="1" // Ensure the button appears on top of the image
               >
                 <IconButton
-                  icon={<FaChevronLeft />}
+                  icon={<SvgChevronLeft />}
                   onClick={() => handlePrevIndex()}
                   aria-label="Previous"
+                  variant={"none"}
+                  mr={"40px"}
                 />
               </Box>
               <Box
@@ -198,9 +200,11 @@ export default function ProductImage() {
                 zIndex="1" // Ensure the button appears on top of the image
               >
                 <IconButton
-                  icon={<FaChevronRight />}
+                  icon={<SvgChevronRight />}
                   onClick={() => handleNextIndex()}
                   aria-label="Next"
+                  variant={"none"}
+                  ml={"-40px"}
                 />
               </Box>
             </Box>
@@ -210,3 +214,29 @@ export default function ProductImage() {
     </>
   );
 }
+
+const SvgChevronLeft = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" fill="none">
+      <path
+        fill="#000"
+        fill-rule="evenodd"
+        d="M19.365 0 20 .728 1.418 18 20 35.272l-.635.728L0 18 19.365 0Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  );
+};
+
+const SvgChevronRight = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" fill="none">
+      <path
+        fill="#000"
+        fill-rule="evenodd"
+        d="M.635 36 0 35.272 18.582 18 0 .728.635 0 20 18 .635 36Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  );
+};

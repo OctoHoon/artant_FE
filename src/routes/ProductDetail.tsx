@@ -24,7 +24,7 @@ export default function ProductDetail() {
       gap={"96px"}
       px={40}
     >
-      <ItemDetail />
+      <ItemDetail shop_pk={shopPk ? shopPk : null} />
       <ItemListFive
         title="판매자의 다른 작품"
         shop_pk={shopPk ? shopPk : null}

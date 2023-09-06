@@ -104,9 +104,9 @@ export const getShopDetails = ({ queryKey }: QueryFunctionContext) => {
 };
 
 export const getShopProducts = ({ queryKey }: QueryFunctionContext) => {
-  const [_, pk] = queryKey;
+  const [_, pk, page] = queryKey;
   return instance
-    .get(`users/shops/${pk}/products`)
+    .get(`users/shops/${pk}/products?page=${page}`)
     .then((response) => response.data);
 };
 
@@ -137,10 +137,17 @@ export const getReviews = ({ queryKey }: QueryFunctionContext) => {
     .then((response) => response.data);
 };
 
-export const getReviewPhotos = ({ queryKey }: QueryFunctionContext) => {
-  const [pk] = queryKey;
+export const getShopReviews = ({ queryKey }: QueryFunctionContext) => {
+  const [pk, page, selectedOption] = queryKey;
   return instance
-    .get(`products/${pk}/reviews/photos`)
+    .get(`users/shops/${pk}/reviews?page=${page}&sort=${selectedOption}`)
+    .then((response) => response.data);
+};
+
+export const getReviewPhotos = ({ queryKey }: QueryFunctionContext) => {
+  const [pk, page] = queryKey;
+  return instance
+    .get(`products/${pk}/reviews/photos?page=${page}`)
     .then((response) => response.data);
 };
 
