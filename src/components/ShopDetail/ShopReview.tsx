@@ -1,7 +1,7 @@
 import { Flex, Avatar, Box, Text, Image } from "@chakra-ui/react";
 import StarRating from "../commons/StarRating";
 
-export default function ShopReview() {
+export default function ShopReview({ review }) {
   return (
     <Box>
       <Box bg="#D9D9D9" width="100%" height={"1px"} />
@@ -10,11 +10,9 @@ export default function ShopReview() {
         <Avatar
           width="48px"
           height="48px"
-          name="Catherine Kuzyk"
+          name={review.user.name}
           marginRight={"12px"}
-          src={
-            "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg"
-          }
+          src={review.user.avatar}
         />
         <Text
           color="#595959"
@@ -28,7 +26,7 @@ export default function ShopReview() {
           textDecor="underline"
           marginEnd={"10px"}
         >
-          Catherine Kuzyk
+          {review.user.name}
         </Text>
         <Text
           color="#595959"
@@ -39,29 +37,18 @@ export default function ShopReview() {
           lineHeight="28px"
           letterSpacing="-0.042px"
         >
-          2023.08.27
+          {review.created_at}
         </Text>
       </Flex>
       <Box px={"60px"}>
-        <StarRating star={5} reviews={0} include_count={false} />
+        <StarRating star={review.rating} reviews={0} include_count={false} />
         <Box height={"2px"} />
-        <Text color="#595959">
-          이 미술품 구매에 대한 전체 경험은 처음부터 끝까지 인상적이었습니다.
-          프로세스를 통한 탁월한 의사 소통. 기쁘게 하려는 진정한 열의와 의지.
-          그는 나를 위해 맞춤형 크기를 만들었습니다. 그의 의사 소통에 항상
-          응답하고 철저했습니다. 그리고 예쁜 작품이 생각보다 일찍 도착했습니다 .
-          정말 멋져요!! 침실 디자인을 다시 할 때 확실히 다시 사용할 것입니다.
-          완벽한 경험!
-        </Text>
+        <Text color="#595959">{review.content}</Text>
         <Box height="16px" />
         <Flex alignItems={"center"}>
-          <Image
-            width="128px"
-            height="100px"
-            src="https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg"
-          />
+          <Image width="128px" height="100px" src={review.product_thumbnail} />
           <Box width="12px" />
-          <Text>마리 헐(1890~2980) 유화</Text>
+          <Text noOfLines={2}>{review.product_name}</Text>
         </Flex>
         <Box height="32px" />
         <Flex padding="4px 8px" alignItems={"center"}>

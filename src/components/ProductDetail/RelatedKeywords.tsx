@@ -88,7 +88,7 @@ export default function RelatedKeywords() {
             관련 검색어
           </Text>
           <Flex width="1280px" gap={"32px"}>
-            {arts.map((art, index) => (
+            {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((art, index) => (
               <RelatedKeyword width={"60px"} height={"60px"} />
             ))}
           </Flex>
