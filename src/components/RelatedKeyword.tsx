@@ -4,6 +4,7 @@ export default function RelatedKeyword({ width, height }) {
   return (
     <Box textAlign={"center"}>
       <Image
+        cursor={"pointer"}
         width={width}
         height={height}
         borderRadius={width}

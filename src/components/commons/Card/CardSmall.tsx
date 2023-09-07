@@ -165,7 +165,7 @@ export default function CardSmall({
               display={"block"}
               fontSize="14px"
               noOfLines={2}
-              height={"36px"}
+              height={"40px"}
             >
               {title} - {description} {artist} 작가
             </Text>

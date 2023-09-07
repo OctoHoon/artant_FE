@@ -4,6 +4,9 @@ import CustomSelect from "../Items/CustomSelect";
 import { useState } from "react";
 import ShopReview from "./ShopReview";
 import PaginationController from "../commons/PaginationController";
+import { useParams } from "react-router-dom";
+import { getShopReviews } from "../../api";
+import { useQuery } from "@tanstack/react-query";
 
 const ReveiwKeyword = [
   {
@@ -31,6 +34,18 @@ export default function ShopReviews() {
     ? selectedKeywordObject.count
     : 0;
 
+  const [selectedOption, setSelectedOption] = useState("relevance");
+  const [page, setPage] = useState(1);
+
+  const { pk } = useParams();
+
+  const [reviews, setReviews] = useState([]);
+
+  const { isLoading, data } = useQuery(
+    [pk, page, selectedOption],
+    getShopReviews
+  );
+
   return (
     <Box>
       <Box bg="#D9D9D9" width="100%" height={"1px"} />
@@ -43,7 +58,11 @@ export default function ShopReviews() {
           <Flex justifyContent={"space-between"}>
             <Flex alignItems={"center"}>
               작품 리뷰 평점
-              <StarRating star={5} reviews={447} include_count={true} />
+              <StarRating
+                star={5}
+                reviews={data && data["total_count"]}
+                include_count={true}
+              />
             </Flex>
             <CustomSelect onSelectionChange={() => {}} />
           </Flex>
@@ -77,11 +96,7 @@ export default function ShopReviews() {
             </Text>
           </Flex>
           <Box height={"40px"} />
-          <ShopReview />
-          <ShopReview />
-          <ShopReview />
-          <ShopReview />
-          <ShopReview />
+          {data && data.reviews.map((review) => <ShopReview review={review} />)}
           <PaginationController itemCount={20} pagination={5} />
 
           <Box />

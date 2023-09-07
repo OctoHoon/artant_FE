@@ -57,7 +57,11 @@ export default function ReveiwSection({ shop_pk }) {
           marginRight="12px"
         />
 
-        <StarRating star={5} reviews={3500} include_count={true} />
+        <StarRating
+          star={5}
+          reviews={data && data["total_count"]}
+          include_count={true}
+        />
       </Flex>
 
       <Tabs

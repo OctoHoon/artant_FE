@@ -97,7 +97,7 @@ export default function ShopIntro() {
           </Flex>
         </Box>
         <Box maxW="958px">
-          <Box position="relative" maxW="700px" maxH="635.19px">
+          <Box position="relative" width="760px" height="468px">
             {/* Image */}
             <Box
               onMouseEnter={handleMouseEnter}
@@ -114,30 +114,13 @@ export default function ShopIntro() {
                 />
               ) : (
                 <Image
+                  objectFit={"cover"}
                   src={images[activeIndex]}
-                  width="100%"
-                  height="100%"
+                  width="760px"
+                  height="468px"
                   alt={`Image ${activeIndex}`}
                 />
               )}
-              <Fade in={isHovered}>
-                <Box
-                  position="absolute"
-                  top={2}
-                  right={2}
-                  w="36px"
-                  h="36px"
-                  rounded="full"
-                  bg="white"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Box cursor={"pointer"} color="black">
-                    <FaRegHeart size="20px" />
-                  </Box>
-                </Box>
-              </Fade>
             </Box>
 
             {/* Button */}
@@ -149,9 +132,10 @@ export default function ShopIntro() {
               zIndex="1" // Ensure the button appears on top of the image
             >
               <IconButton
-                icon={<FaChevronLeft />}
+                icon={<SvgChevronLeft />}
                 onClick={() => handlePrevIndex()}
                 aria-label="Previous"
+                variant={"none"}
               />
             </Box>
             <Box
@@ -162,9 +146,10 @@ export default function ShopIntro() {
               zIndex="1" // Ensure the button appears on top of the image
             >
               <IconButton
-                icon={<FaChevronRight />}
+                icon={<SvgChevronRight />}
                 onClick={() => handleNextIndex()}
                 aria-label="Next"
+                variant={"none"}
               />
             </Box>
           </Box>
@@ -334,3 +319,29 @@ function ShopMember() {
     </Flex>
   );
 }
+
+const SvgChevronLeft = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" fill="none">
+      <path
+        fill="#000"
+        fill-rule="evenodd"
+        d="M19.365 0 20 .728 1.418 18 20 35.272l-.635.728L0 18 19.365 0Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  );
+};
+
+const SvgChevronRight = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" fill="none">
+      <path
+        fill="#000"
+        fill-rule="evenodd"
+        d="M.635 36 0 35.272 18.582 18 0 .728.635 0 20 18 .635 36Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  );
+};
