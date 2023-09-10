@@ -38,17 +38,14 @@ export default function SimilarItemFive({ title }) {
         {title}
       </Text>
       {isLoading || !data ? null : (
-        <Wrap spacing={"45px"} spacingY={"120px"}>
+        <Wrap spacing={"20px"} spacingY={"120px"}>
           {data.slice(0, 5).map((art: Product, index) => (
-            <CardSmall
+            <PdpCard
               pk={art.pk}
               source={art.thumbnail}
-              category={art.category}
               title={art.name}
               description=""
               artist={art.shop_name}
-              star={art.rating}
-              reviews={art.rating_count}
               price={art.price}
               originalPrice={art.original_price}
               free_shipping={art.free_shipping}

@@ -25,6 +25,10 @@ import RegisterProductComplete from "./routes/RegisterProductComplete";
 import RegisterPayments from "./routes/RegisterPayments";
 import RegisterBilling from "./routes/RegisterBilling";
 import ShopManagerListingEditing from "./routes/ShopManagerListingEditing";
+import ShopManagerArtantSeller from "./routes/ShopMangerArtantSeller";
+import ShopManagerStats from "./routes/ShopManagerStats";
+import ShopManagerFinance from "./routes/ShopManagerFinance";
+import ShopManagerEditShop from "./routes/ShopManagerEditShop";
 
 const router = createBrowserRouter([
   {
@@ -131,6 +135,26 @@ const router = createBrowserRouter([
           {
             path: "orders-shipping",
             element: <ShopManagerOrders />,
+          },
+          {
+            path: "star-seller",
+            element: <ShopManagerArtantSeller />,
+          },
+          {
+            path: "stats",
+            element: <ShopManagerStats />,
+          },
+          {
+            path: "finances",
+            element: <ShopManagerFinance />,
+          },
+          {
+            path: "setting",
+            element: <ShopManagerSettings />,
+          },
+          {
+            path: "editShop",
+            element: <ShopManagerEditShop />,
           },
         ],
       },

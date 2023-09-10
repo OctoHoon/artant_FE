@@ -66,7 +66,7 @@ export default function ShopManagerSideBar() {
             </svg>
           )}
           is_selected={false}
-          handleSelect={() => navigate(`/your/shops/me/`)}
+          handleSelect={() => navigate(`/your/shops/me/editShop`)}
         />
       </Flex>
     </Flex>
