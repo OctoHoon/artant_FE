@@ -29,137 +29,143 @@ import ShopManagerArtantSeller from "./routes/ShopMangerArtantSeller";
 import ShopManagerStats from "./routes/ShopManagerStats";
 import ShopManagerFinance from "./routes/ShopManagerFinance";
 import ShopManagerEditShop from "./routes/ShopManagerEditShop";
+import { basename } from "path";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Root />,
+      errorElement: <NotFound />,
+      children: [
+        {
+          path: "",
+          element: <Home />,
+        },
+        {
+          path: "items/:category",
+          element: <Items />,
+        },
+        {
+          path: "listings/:pk",
+          element: <ProductDetail />,
+        },
+        {
+          path: "shop/:pk",
+          element: <ShopDetail />,
+        },
+        {
+          path: "people/:pk",
+          element: <People />,
+        },
+        {
+          path: "cart",
+          element: <Cart />,
+        },
+        {
+          path: "payment",
+          element: <Payment />,
+        },
+        {
+          path: "messages",
+          element: <Messages />,
+        },
+        {
+          path: "your/account",
+          element: <Account />,
+          children: [
+            {
+              index: true,
+              element: <AccountBody />,
+            },
+            {
+              path: "security",
+              element: <SecurityBody />,
+            },
+          ],
+        },
+
+        {
+          path: "your/shops/register",
+          element: <RegisterShop />,
+        },
+        {
+          path: "your/shops/onboarding/name",
+          element: <RegisterShopName />,
+        },
+        {
+          path: "your/shops/:shopPk/onboarding/listings/create",
+          element: <RegisterProduct />,
+        },
+        {
+          path: "your/shops/:shopPk/onboarding/listings/:productPk",
+          element: <RegisterProductComplete />,
+        },
+        {
+          path: "your/shops/:shopPk/onboarding/payments",
+          element: <RegisterPayments />,
+        },
+        {
+          path: "your/shops/:shopPk/onboarding/billing",
+          element: <RegisterBilling />,
+        },
+        {
+          path: "your/shops/me/",
+          element: <ShopManagerRoot />,
+          errorElement: <NotFound />,
+          children: [
+            {
+              path: "",
+              element: <ShopManagerDashboard />,
+            },
+            {
+              path: "dashboard",
+              element: <ShopManagerDashboard />,
+            },
+            {
+              path: "listings",
+              element: <ShopManagerListings />,
+            },
+            {
+              path: "listings/:pk",
+              element: <ShopManagerListingEditing />,
+            },
+            {
+              path: "messages",
+              element: <ShopManagerMessages />,
+            },
+            {
+              path: "orders-shipping",
+              element: <ShopManagerOrders />,
+            },
+            {
+              path: "star-seller",
+              element: <ShopManagerArtantSeller />,
+            },
+            {
+              path: "stats",
+              element: <ShopManagerStats />,
+            },
+            {
+              path: "finances",
+              element: <ShopManagerFinance />,
+            },
+            {
+              path: "setting",
+              element: <ShopManagerSettings />,
+            },
+            {
+              path: "editShop",
+              element: <ShopManagerEditShop />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <Root />,
-    errorElement: <NotFound />,
-    children: [
-      {
-        path: "",
-        element: <Home />,
-      },
-      {
-        path: "items/:category",
-        element: <Items />,
-      },
-      {
-        path: "listings/:pk",
-        element: <ProductDetail />,
-      },
-      {
-        path: "shop/:pk",
-        element: <ShopDetail />,
-      },
-      {
-        path: "people/:pk",
-        element: <People />,
-      },
-      {
-        path: "cart",
-        element: <Cart />,
-      },
-      {
-        path: "payment",
-        element: <Payment />,
-      },
-      {
-        path: "messages",
-        element: <Messages />,
-      },
-      {
-        path: "your/account",
-        element: <Account />,
-        children: [
-          {
-            index: true,
-            element: <AccountBody />,
-          },
-          {
-            path: "security",
-            element: <SecurityBody />,
-          },
-        ],
-      },
-
-      {
-        path: "your/shops/register",
-        element: <RegisterShop />,
-      },
-      {
-        path: "your/shops/onboarding/name",
-        element: <RegisterShopName />,
-      },
-      {
-        path: "your/shops/:shopPk/onboarding/listings/create",
-        element: <RegisterProduct />,
-      },
-      {
-        path: "your/shops/:shopPk/onboarding/listings/:productPk",
-        element: <RegisterProductComplete />,
-      },
-      {
-        path: "your/shops/:shopPk/onboarding/payments",
-        element: <RegisterPayments />,
-      },
-      {
-        path: "your/shops/:shopPk/onboarding/billing",
-        element: <RegisterBilling />,
-      },
-      {
-        path: "your/shops/me/",
-        element: <ShopManagerRoot />,
-        errorElement: <NotFound />,
-        children: [
-          {
-            path: "",
-            element: <ShopManagerDashboard />,
-          },
-          {
-            path: "dashboard",
-            element: <ShopManagerDashboard />,
-          },
-          {
-            path: "listings",
-            element: <ShopManagerListings />,
-          },
-          {
-            path: "listings/:pk",
-            element: <ShopManagerListingEditing />,
-          },
-          {
-            path: "messages",
-            element: <ShopManagerMessages />,
-          },
-          {
-            path: "orders-shipping",
-            element: <ShopManagerOrders />,
-          },
-          {
-            path: "star-seller",
-            element: <ShopManagerArtantSeller />,
-          },
-          {
-            path: "stats",
-            element: <ShopManagerStats />,
-          },
-          {
-            path: "finances",
-            element: <ShopManagerFinance />,
-          },
-          {
-            path: "setting",
-            element: <ShopManagerSettings />,
-          },
-          {
-            path: "editShop",
-            element: <ShopManagerEditShop />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+    basename: process.env.PUBLIC_URL,
+  }
+);
 
 export default router;
