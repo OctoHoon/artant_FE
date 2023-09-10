@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import Root from "./routes/Root";
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
@@ -29,9 +29,8 @@ import ShopManagerArtantSeller from "./routes/ShopMangerArtantSeller";
 import ShopManagerStats from "./routes/ShopManagerStats";
 import ShopManagerFinance from "./routes/ShopManagerFinance";
 import ShopManagerEditShop from "./routes/ShopManagerEditShop";
-import { basename } from "path";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     {
       path: "/",
