@@ -73,7 +73,8 @@ export default function ProductImage() {
     }
   }, [isLoading, imageAndVideoUrls]);
 
-  console.log(data);
+  //console.log(data);
+  console.log(imageAndVideoUrls);
   return (
     <>
       {isLoading ? (
@@ -101,12 +102,12 @@ export default function ProductImage() {
                             maxH="60px"
                             key={index}
                             src={
-                              url.includes(".mp4?")
-                                ? url.replace(
-                                    /\.mp4(.*)$/,
-                                    ".jpg?time=0s&height=270"
-                                  )
-                                : url
+                              url.includes(".mp4")
+                                ? "https://static.vecteezy.com/system/resources/previews/001/505/014/original/video-player-icon-free-vector.jpg"
+                                : // /\.mp4(.*)$/,
+                                  // ".jpg?time=0s&height=270"
+
+                                  url
                             }
                             alt={`Thumbnail ${index + 1}`}
                             cursor="pointer"
@@ -116,7 +117,7 @@ export default function ProductImage() {
                             onClick={() => handleThumbnailClick(index)}
                           />
                         </AspectRatio>
-                        {url.includes(".mp4?") ? (
+                        {/* {url.includes(".mp4?") ? (
                           <Box
                             position="absolute"
                             top="50%"
@@ -126,7 +127,7 @@ export default function ProductImage() {
                           >
                             <FaPlayCircle size={24} color="white" />
                           </Box>
-                        ) : null}
+                        ) : null} */}
                       </Box>
                     ))}
               </Flex>
