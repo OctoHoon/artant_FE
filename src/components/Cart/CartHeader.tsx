@@ -1,11 +1,13 @@
 import { Flex, Box, Text } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
+import { getCart } from "../../api";
 
-export default function CartHeader() {
+export default function CartHeader({ data }) {
   return (
     <Flex gap="20px">
       <Box width="828px">
         <Box fontSize={"30px"}>
-          장바구니에 2개의 상품이 있습니다
+          장바구니에 {data && data.cartline.length}개의 상품이 있습니다
           <Flex gap="8px" fontSize="14px" maxW="772px">
             <svg
               xmlns="http://www.w3.org/2000/svg"

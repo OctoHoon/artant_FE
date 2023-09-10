@@ -16,8 +16,20 @@ import BlackButton from "../components/commons/Button/BlackButton";
 import { FaChevronCircleDown } from "react-icons/fa";
 import PaginationController from "../components/commons/PaginationController";
 import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getShopProducts } from "../api";
+import useUser from "../lib/useUser";
 
 export default function ShopManagerListings() {
+  const { userLoading, isLoggedIn, user } = useUser();
+  const firstShopPK = user?.shop_pks[0] || null;
+  const [page, setPage] = useState(1);
+  const { isLoading, data } = useQuery(
+    ["shopProduct", firstShopPK, page],
+    getShopProducts
+  );
+
   return (
     <Flex flexDirection={"column"} gap={"32px"}>
       <Flex
@@ -188,23 +200,17 @@ export default function ShopManagerListings() {
             </Flex>
           </Flex>
           <Flex flexDirection={"column"} gap={"40px"}>
-            <Flex gap={"40px"}>
-              <ShopManagerListingsCard />
-              <ShopManagerListingsCard />
-              <ShopManagerListingsCard />
-            </Flex>
-            <Flex gap={"40px"}>
-              <ShopManagerListingsCard />
-              <ShopManagerListingsCard />
-              <ShopManagerListingsCard />
-            </Flex>
-            <Flex gap={"40px"}>
-              <ShopManagerListingsCard />
-              <ShopManagerListingsCard />
-              <ShopManagerListingsCard />
+            <Flex gap={"40px"} flexWrap={"wrap"}>
+              {data &&
+                data.products.map((item, index) => (
+                  <ShopManagerListingsCard key={index} item={item} />
+                ))}
             </Flex>
           </Flex>
-          <PaginationController itemCount={10} pagination={9} />
+          <PaginationController
+            itemCount={data && data.products.length}
+            pagination={9}
+          />
         </Flex>
         <Tab />
       </Flex>
@@ -369,7 +375,7 @@ function RadioItem({ title }) {
   );
 }
 
-function ShopManagerListingsCard() {
+function ShopManagerListingsCard({ item }) {
   const navigate = useNavigate();
 
   return (
@@ -387,11 +393,7 @@ function ShopManagerListingsCard() {
         background={"white"}
         zIndex={1}
       />
-      <Image
-        src="https://i.etsystatic.com/24140866/r/il/dcbee0/4663857120/il_794xN.4663857120_svix.jpg"
-        width={"280px"}
-        height={"220px"}
-      ></Image>
+      <Image src={item.thumbnail} width={"280px"} height={"220px"}></Image>
 
       <Flex
         flexDirection={"column"}
@@ -399,9 +401,11 @@ function ShopManagerListingsCard() {
         gap={"8px"}
         fontSize={"13px"}
       >
-        <Text fontSize={"14px"}>바다거북이</Text>
+        <Text fontSize={"14px"} noOfLines={2}>
+          {item.name}
+        </Text>
         <Text>재고 : 1개</Text>
-        <Text>가격: 10,000원</Text>
+        <Text>가격: {item.price}원</Text>
         <Text color={"#9E76BE"}>ARTANT에서 활성화됨</Text>
         <Text fontSize={"12px"}>2023년 12월 18일 갱신</Text>
       </Flex>

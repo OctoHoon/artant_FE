@@ -18,13 +18,22 @@ import {
   IoMdCheckmarkCircle,
   IoMdCheckmarkCircleOutline,
 } from "react-icons/io"; // Import the check icon
+import { getRecentlyViewedProducts } from "../../api";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
 
 interface AddCartDrawerProps {
   isOpen: boolean;
   toggleOpen: () => void;
 }
 
-export default function AddCartDrawer({ isOpen, toggleOpen }) {
+export default function AddCartDrawer({ thumbnail, isOpen, toggleOpen }) {
+  const { isLoading, data } = useQuery(
+    ["RecentlyViewedProducts"],
+    getRecentlyViewedProducts
+  );
+  const navigate = useNavigate();
+
   return (
     <Drawer isOpen={isOpen} onClose={toggleOpen} size={"sm"} placement="right">
       <DrawerOverlay>
@@ -34,9 +43,11 @@ export default function AddCartDrawer({ isOpen, toggleOpen }) {
             <Flex alignItems={"center"}>
               <Flex>
                 <Image
+                  objectFit={"cover"}
                   marginRight={"16px"}
                   width="80px"
-                  src="/assets/images/card_image_custom-1.png"
+                  height={"60px"}
+                  src={thumbnail}
                 />
                 <Box ml="auto" position="relative" top="-14px" right={"26px"}>
                   <IoMdCheckmarkCircle size={24} color="#5365AE" />
@@ -66,6 +77,9 @@ export default function AddCartDrawer({ isOpen, toggleOpen }) {
                 bg="black"
                 color="white"
                 borderRadius={"5px"}
+                onClick={() => {
+                  navigate("/cart");
+                }}
               >
                 장바구니 가기
               </Button>
@@ -78,12 +92,11 @@ export default function AddCartDrawer({ isOpen, toggleOpen }) {
             </Text>
             <Box height={"24px"} />
             <Wrap spacing={3} justifyContent="center">
-              <ProductSmall />
-              <ProductSmall />
-              <ProductSmall />
-              <ProductSmall />
-              <ProductSmall />
-              <ProductSmall />
+              {!isLoading && data
+                ? data
+                    .slice(0, 5)
+                    .map((product, index) => <ProductSmall data={product} />)
+                : null}
             </Wrap>
           </DrawerBody>
         </DrawerContent>

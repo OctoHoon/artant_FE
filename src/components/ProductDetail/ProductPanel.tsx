@@ -27,19 +27,27 @@ import AddCartDrawer from "./AddCartDrawer";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProductDetails } from "../../api";
+import { IUploadCartVariables, addToCart, getProductDetails } from "../../api";
 
 export default function ProductPanel() {
-  const [isOpen, setIsOpen] = useState(false);
-  const onClose = () => setIsOpen(false);
-  const onOpen = () => setIsOpen(true);
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen);
-  };
-
   const { pk } = useParams();
   const { isLoading, data } = useQuery(["products", pk], getProductDetails);
 
+  const cartData: IUploadCartVariables = {
+    product_pk: pk!,
+    quantity: 1,
+    variant_pks: [],
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => setIsOpen(false);
+  const onOpen = () => {
+    addToCart(cartData);
+    setIsOpen(true);
+  };
+  const toggleDrawer = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       {isLoading ? (
@@ -270,7 +278,11 @@ export default function ProductPanel() {
           >
             장바구니
           </Button>
-          <AddCartDrawer isOpen={isOpen} toggleOpen={toggleDrawer} />
+          <AddCartDrawer
+            thumbnail={data && data.thumbnail}
+            isOpen={isOpen}
+            toggleOpen={toggleDrawer}
+          />
           <Box height="12px" />
           <Button
             width="100%"
