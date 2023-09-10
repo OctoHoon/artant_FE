@@ -17,7 +17,7 @@ import {
   ToastId,
   Flex,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import SearchBar from "./SearchBar"; // Import the SearchBar component
 import { Text } from "@chakra-ui/react";
@@ -41,11 +41,13 @@ export default function Header() {
   } = useDisclosure();
 
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const mutation = useMutation(logOut, {
     onMutate: () => {},
     onSuccess: () => {
       queryClient.refetchQueries(["me"]);
+      navigate("/");
     },
   });
   const onLogOut = async () => {
@@ -221,7 +223,7 @@ export default function Header() {
                   </MenuList>
                 </Menu>
                 <Box color={"#1C1B1F"} height={"24px"}>
-                  <Link to={"/"}>
+                  <Link to={"/your/shops/me/"}>
                     <SvgShop />
                   </Link>
                 </Box>

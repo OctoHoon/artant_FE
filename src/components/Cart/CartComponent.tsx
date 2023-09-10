@@ -9,7 +9,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-export default function CartComponent({ suggest, isSoldOut }) {
+export default function CartComponent({ suggest, isSoldOut, data }) {
   return (
     <Flex width="828px" alignItems={"flex-start"}>
       <Flex
@@ -68,11 +68,7 @@ export default function CartComponent({ suggest, isSoldOut }) {
             alignItems={"flex-start"}
             alignSelf={"stretch"}
           >
-            <Image
-              width="120px"
-              height="120px"
-              src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-            />
+            <Image width="120px" height="120px" src={data.product.thumbnail} />
             <Checkbox position={"absolute"} />
           </Flex>
           <Flex
@@ -91,9 +87,9 @@ export default function CartComponent({ suggest, isSoldOut }) {
                 <Image
                   width="32px"
                   height="32px"
-                  src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
+                  src={data.product.shop_avatar}
                 />
-                JustKeepPaintingProj
+                {data.product.shop_name}
               </Flex>
               <Flex gap="8px">
                 <svg
@@ -124,7 +120,9 @@ export default function CartComponent({ suggest, isSoldOut }) {
               </Flex>
             </Flex>
             <Flex flexDirection={"column"} alignItems={"flex-start"} gap="4px">
-              <Text fontWeight={"700"}>짙은 어둠의 환희</Text>
+              <Text fontWeight={"700"} noOfLines={1}>
+                {data.product.name}
+              </Text>
               <Flex alignItems={"flex-start"} gap="40px">
                 <Flex>
                   <Text>옵션:</Text>
@@ -300,7 +298,7 @@ export default function CartComponent({ suggest, isSoldOut }) {
             gap={"2px"}
             fontSize={"22px"}
           >
-            45,000
+            {data.product.price}
             <Text
               fontSize={"13px"}
               color="var(--maincolorstextblack-222222, #222)"
@@ -309,8 +307,12 @@ export default function CartComponent({ suggest, isSoldOut }) {
             </Text>
           </Flex>
           <Flex>
-            <Text as="s">70000 </Text>
-            <Text>원</Text>
+            {data.product.original_price != data.product.price ? (
+              <>
+                <Text as="s">{data.product.original_price}</Text>
+                <Text>원</Text>
+              </>
+            ) : null}
           </Flex>
         </Flex>
         <Flex alignItems={"flex-start"}>

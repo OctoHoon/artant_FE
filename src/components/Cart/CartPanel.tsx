@@ -1,6 +1,17 @@
 import { Box, Flex, Image, Button, Text } from "@chakra-ui/react";
 
-export default function CartPanel() {
+export default function CartPanel({ data }) {
+  let totalPrice = 0;
+  let totalOriginalPrice = 0;
+
+  // data.cartline의 각 요소를 순회하며 price와 original_price를 합산합니다.
+  data &&
+    data.cartline.forEach((cartItem) => {
+      // 각 요소의 price와 original_price를 더합니다.
+      totalPrice += cartItem.product.price;
+      totalOriginalPrice += cartItem.product.original_price;
+    });
+
   return (
     <Box
       maxW="412px"
@@ -92,43 +103,28 @@ export default function CartPanel() {
             />
           </g>
         </svg>
-        전체 상품 : 1개
+        전체 상품 : {data && data.cartline.length}개
       </Box>
       <Box
         display="flex"
         padding="0px 20px"
-        justifyContent="space-between"
         alignItems="flex-start"
         alignContent="flex-start"
         rowGap="10px"
         alignSelf="stretch"
         flexWrap="wrap"
       >
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
-        <Image
-          width="64px"
-          height="64px"
-          src="https://i.etsystatic.com/28281562/r/il/8e3c09/3746470366/il_170x135.3746470366_cxyx.jpg"
-        />
+        {data &&
+          data.cartline
+            .slice(0, 5)
+            .map((item, index) => (
+              <Image
+                marginRight={"10px"}
+                width="64px"
+                height="64px"
+                src={item.product.thumbnail}
+              />
+            ))}
       </Box>
       <Box
         display={"flex"}
@@ -146,7 +142,7 @@ export default function CartPanel() {
           >
             <div>주문금액</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
-              418,000 {<Text fontSize={"16px"}>원</Text>}
+              {totalOriginalPrice} {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
           <Flex
@@ -156,7 +152,8 @@ export default function CartPanel() {
           >
             <div>상품할인</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
-              -50,760 {<Text fontSize={"16px"}>원</Text>}
+              -{totalOriginalPrice - totalPrice}{" "}
+              {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
           <Flex
@@ -185,7 +182,7 @@ export default function CartPanel() {
             결정예정금액
           </Text>
           <Flex fontSize={"22px"} alignItems={"baseline"}>
-            418,000 {<Text fontSize={"13px"}>원</Text>}
+            {totalPrice} {<Text fontSize={"13px"}>원</Text>}
           </Flex>
         </Flex>
         <Button

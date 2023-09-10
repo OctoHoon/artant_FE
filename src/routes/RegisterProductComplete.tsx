@@ -138,6 +138,7 @@ export default function RegisterShopName() {
                       lineHeight="130%" /* 이렇게 설정하면 18.2px로 계산됩니다. */
                       letterSpacing="0.035px"
                       textTransform="capitalize"
+                      noOfLines={2}
                     >
                       {data["name"]} - {data["shop_name"]} 작가
                     </Text>

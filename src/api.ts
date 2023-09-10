@@ -280,3 +280,29 @@ export const putProduct = (variables: IPutProductVariables) =>
 
 export const getCollections = () =>
   instance.get(`collections/`).then((response) => response.data);
+
+export interface IUploadCartVariables {
+  product_pk: string;
+  quantity: number;
+  variant_pks: number[];
+}
+
+export const addToCart = ({
+  product_pk,
+  quantity,
+  variant_pks,
+}: IUploadCartVariables) =>
+  instance
+    .post(
+      `cart/`,
+      { product_pk, quantity, variant_pks },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+
+export const getCart = () =>
+  instance.get(`cart/`).then((response) => response.data);

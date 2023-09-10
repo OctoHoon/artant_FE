@@ -10,8 +10,9 @@ import {
 } from "@chakra-ui/react";
 import CartPanel from "./CartPanel";
 import CartComponent from "./CartComponent";
+import React from "react";
 
-export default function CartBody() {
+export default function CartBody({ data }) {
   return (
     <Flex gap="40px" marginBottom={"40px"}>
       <Box width="828px">
@@ -42,35 +43,30 @@ export default function CartBody() {
           gap={"40px"}
         >
           <Flex flexDirection={"column"} alignItems={"flex-start"}>
-            <CartComponent suggest={true} isSoldOut={false} />
-            <Box
-              width="828px"
-              height={"2px"}
-              background="var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9)"
-            />
-            <CartComponent suggest={false} isSoldOut={false} />
-            <Box
-              width="828px"
-              height={"2px"}
-              background="var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9)"
-            />
-            <Flex
-              width={"828px"}
-              padding="15px 8px"
-              justifyContent={"center"}
-              alignItems={"center"}
-              gap={"8px"}
-              fontWeight={"500"}
-              backgroundColor={" var(--maincolorsbggrayf-9-f-9-f-9, #F9F9F9);"}
-            >
-              45,000원 + 배송비 0원 = 45,000원
-            </Flex>
-            <Box
-              width="828px"
-              height={"2px"}
-              background="var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9)"
-            />
-            <CartComponent suggest={false} isSoldOut={true} />
+            {data &&
+              data.cartline.map((item, index) => (
+                <React.Fragment key={index}>
+                  <CartComponent suggest={true} isSoldOut={false} data={item} />
+                  <Box
+                    width="828px"
+                    height={"2px"}
+                    background="var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9)"
+                  />
+                  <Flex
+                    width={"828px"}
+                    padding="15px 8px"
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    gap={"8px"}
+                    fontWeight={"500"}
+                    backgroundColor={
+                      " var(--maincolorsbggrayf-9-f-9-f-9, #F9F9F9);"
+                    }
+                  >
+                    {item.product.price}원 + 배송비 0원 = {item.product.price}원
+                  </Flex>
+                </React.Fragment>
+              ))}
           </Flex>
           <Flex flexDirection={"column"} gap={"20px"}>
             <Text>더 많은 작품을 찾고 계십니까?</Text>
@@ -89,7 +85,7 @@ export default function CartBody() {
           </Flex>
         </Box>
       </Box>
-      <CartPanel />
+      <CartPanel data={data && data} />
     </Flex>
   );
 }
