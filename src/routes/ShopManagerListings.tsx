@@ -393,7 +393,12 @@ function ShopManagerListingsCard({ item }) {
         background={"white"}
         zIndex={1}
       />
-      <Image src={item.thumbnail} width={"280px"} height={"220px"}></Image>
+      <Image
+        objectFit={"cover"}
+        src={item.thumbnail}
+        width={"280px"}
+        height={"220px"}
+      ></Image>
 
       <Flex
         flexDirection={"column"}
