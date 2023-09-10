@@ -68,7 +68,7 @@ export default function ProductPanel() {
           </Text>
           <Flex alignItems={"center"} marginBottom={"16px"}>
             <Text fontSize="38px" fontWeight="500" color="black">
-              {data["price"]}
+              {data["price"].toLocaleString()}
             </Text>
             <Text
               fontSize="24px"
@@ -85,7 +85,7 @@ export default function ProductPanel() {
               marginRight={"8px"}
               as="s"
             >
-              {data["original_price"]}
+              {data["original_price"].toLocaleString()}
             </Text>
             <Text
               fontSize="18px"

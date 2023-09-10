@@ -1,4 +1,4 @@
-import { Fade, Flex, Image, Text } from "@chakra-ui/react";
+import { AspectRatio, Fade, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
@@ -72,10 +72,13 @@ export default function PdpCard({
       >
         <Image
           height={"180px"}
+          width={"220px"}
           alignSelf={"stretch"}
           borderRadius={"5px"}
           src={source}
+          objectFit="cover"
         />
+
         <Link to={""}>
           <Fade in={isHovered || isHoveredHeart || isLiked}>
             <Flex
