@@ -94,7 +94,7 @@ export default function AddCartDrawer({ thumbnail, isOpen, toggleOpen }) {
             <Wrap spacing={3} justifyContent="center">
               {!isLoading && data
                 ? data
-                    .slice(0, 5)
+                    .slice(0, 6)
                     .map((product, index) => <ProductSmall data={product} />)
                 : null}
             </Wrap>

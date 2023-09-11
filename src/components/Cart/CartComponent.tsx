@@ -298,7 +298,7 @@ export default function CartComponent({ suggest, isSoldOut, data }) {
             gap={"2px"}
             fontSize={"22px"}
           >
-            {data.product.price}
+            {data.product.price.toLocaleString()}
             <Text
               fontSize={"13px"}
               color="var(--maincolorstextblack-222222, #222)"
@@ -309,7 +309,9 @@ export default function CartComponent({ suggest, isSoldOut, data }) {
           <Flex>
             {data.product.original_price != data.product.price ? (
               <>
-                <Text as="s">{data.product.original_price}</Text>
+                <Text as="s">
+                  {data.product.original_price.toLocaleString()}
+                </Text>
                 <Text>원</Text>
               </>
             ) : null}

@@ -46,7 +46,12 @@ export default function ShopReview({ review }) {
         <Text color="#595959">{review.content}</Text>
         <Box height="16px" />
         <Flex alignItems={"center"}>
-          <Image width="128px" height="100px" src={review.product_thumbnail} />
+          <Image
+            width="128px"
+            height="100px"
+            src={review.product_thumbnail}
+            objectFit={"cover"}
+          />
           <Box width="12px" />
           <Text noOfLines={2}>{review.product_name}</Text>
         </Flex>

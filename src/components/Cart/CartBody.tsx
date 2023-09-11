@@ -63,7 +63,8 @@ export default function CartBody({ data }) {
                       " var(--maincolorsbggrayf-9-f-9-f-9, #F9F9F9);"
                     }
                   >
-                    {item.product.price}원 + 배송비 0원 = {item.product.price}원
+                    {item.product.price.toLocaleString()}원 + 배송비 0원 ={" "}
+                    {item.product.price.toLocaleString()}원
                   </Flex>
                 </React.Fragment>
               ))}

@@ -489,7 +489,9 @@ export default function ProductPanel() {
                 lineHeight={"180%"}
                 letterSpacing={"-0.3px"}
               >
-                {`너비: ${data["item_width"]} 센티미터 \n높이: ${data["item_height"]} 센티미터`}
+                {`너비: ${data["item_width"] || 200}cm\n높이: ${
+                  data["item_height"] || 300
+                }cm`}
               </AccordionPanel>
             </AccordionItem>
 

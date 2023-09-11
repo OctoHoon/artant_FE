@@ -103,6 +103,7 @@ export default function ReviewItem({ review }) {
               {review.images.map((image) => (
                 <Box>
                   <Image
+                    objectFit={"cover"}
                     key={image.pk}
                     src={image.image}
                     width="60px"
@@ -117,7 +118,11 @@ export default function ReviewItem({ review }) {
                       <ModalBody>
                         <Flex>
                           <Box width="50%">
-                            <Image key={image.pk} src={image.image} />
+                            <Image
+                              objectFit={"cover"}
+                              key={image.pk}
+                              src={image.image}
+                            />
                           </Box>
                           <Box width="8px"></Box>
                           <Box width="50%">

@@ -58,7 +58,7 @@ export default function PdpCard({
   return (
     <Link to={`/listings/${pk}`}>
       <Flex
-        width="240px"
+        width="233px"
         padding="10px"
         flexDirection={"column"}
         alignItems={"flex-start"}

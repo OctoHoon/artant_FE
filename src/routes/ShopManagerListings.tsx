@@ -15,7 +15,7 @@ import ArtantButton from "../components/commons/ArtantButton";
 import BlackButton from "../components/commons/Button/BlackButton";
 import { FaChevronCircleDown } from "react-icons/fa";
 import PaginationController from "../components/commons/PaginationController";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getShopProducts } from "../api";
@@ -393,12 +393,15 @@ function ShopManagerListingsCard({ item }) {
         background={"white"}
         zIndex={1}
       />
-      <Image
-        objectFit={"cover"}
-        src={item.thumbnail}
-        width={"280px"}
-        height={"220px"}
-      ></Image>
+      <Link to={`/listings/${item.pk}`}>
+        {" "}
+        <Image
+          objectFit={"cover"}
+          src={item.thumbnail}
+          width={"280px"}
+          height={"220px"}
+        ></Image>
+      </Link>
 
       <Flex
         flexDirection={"column"}

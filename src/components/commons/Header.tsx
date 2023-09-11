@@ -29,6 +29,7 @@ import { logOut } from "../../api";
 
 export default function Header() {
   const { userLoading, isLoggedIn, user } = useUser();
+  const firstShopPK = user?.shop_pks[0] || null;
   const {
     isOpen: isLoginOpen,
     onClose: onLoginClose,
@@ -60,7 +61,7 @@ export default function Header() {
       const newUrl = `/items/${encodeURIComponent(
         "모든작품"
       )}?&search=${keyword}`;
-      window.location.href = newUrl;
+      navigate(newUrl);
     }
   };
   return (
@@ -211,7 +212,9 @@ export default function Header() {
                       </MenuItem>
                     </Link>
                     <MenuItem>구매내역 및 리뷰</MenuItem>
-                    <MenuItem>메시지</MenuItem>
+                    <Link to="/messages">
+                      <MenuItem>메시지</MenuItem>
+                    </Link>
                     <MenuItem>특별 제공</MenuItem>
                     <Link to="/your/account">
                       <MenuItem>계정 설정</MenuItem>
@@ -219,11 +222,14 @@ export default function Header() {
                     <Link to="/your/shops/register">
                       <MenuItem>상점 개설</MenuItem>
                     </Link>
+                    <Link to="/your/shops/me">
+                      <MenuItem>상점 관리</MenuItem>
+                    </Link>
                     <MenuItem onClick={onLogOut}>로그아웃</MenuItem>
                   </MenuList>
                 </Menu>
                 <Box color={"#1C1B1F"} height={"24px"}>
-                  <Link to={"/your/shops/me/"}>
+                  <Link to={`/shop/${firstShopPK}`}>
                     <SvgShop />
                   </Link>
                 </Box>

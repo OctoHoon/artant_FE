@@ -142,7 +142,8 @@ export default function CartPanel({ data }) {
           >
             <div>주문금액</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
-              {totalOriginalPrice} {<Text fontSize={"16px"}>원</Text>}
+              {totalOriginalPrice.toLocaleString()}{" "}
+              {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
           <Flex
@@ -152,7 +153,7 @@ export default function CartPanel({ data }) {
           >
             <div>상품할인</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
-              -{totalOriginalPrice - totalPrice}{" "}
+              -{(totalOriginalPrice - totalPrice).toLocaleString()}
               {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
@@ -182,7 +183,7 @@ export default function CartPanel({ data }) {
             결정예정금액
           </Text>
           <Flex fontSize={"22px"} alignItems={"baseline"}>
-            {totalPrice} {<Text fontSize={"13px"}>원</Text>}
+            {totalPrice.toLocaleString()} {<Text fontSize={"13px"}>원</Text>}
           </Flex>
         </Flex>
         <Button
