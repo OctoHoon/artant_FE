@@ -170,14 +170,8 @@ export default function FavoriteItemCard({
         </Link>
         <Flex flexDirection={"column"} gap={"6px"}>
           <Flex flexDirection={"column"} gap={"4px"}>
-            <Text fontSize="14px">
-              {title} - {description}
-            </Text>
-            <Text
-              fontSize="14px"
-              color={"var(--maincolorstextgray-595959, #666);"}
-            >
-              {artist}
+            <Text fontSize="14px" noOfLines={2}>
+              {title} - {artist}
             </Text>
           </Flex>
 

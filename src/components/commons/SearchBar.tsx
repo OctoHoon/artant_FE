@@ -14,6 +14,7 @@ const SearchBar = ({ placeholder, width, height, type, onSearch }) => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       onSearch(keyword);
+      setKeyword("");
     }
   };
 

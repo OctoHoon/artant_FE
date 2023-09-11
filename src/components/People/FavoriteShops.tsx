@@ -11,6 +11,7 @@ import PaginationController from "../commons/PaginationController";
 import SearchBar from "../commons/SearchBar";
 import FavoriteShop from "./FavoriteShop";
 import SquareShop from "./SquareShop";
+import { Link } from "react-router-dom";
 
 export default function FavoriteItems({ data }) {
   return (
@@ -157,11 +158,11 @@ export default function FavoriteItems({ data }) {
       <Box height={"40px"} />
       <Wrap spacing={10} justify={"space-around"} gap="40px">
         {data.map((shop, index) => (
-          <FavoriteShop key={index} data={shop} /* 여기에 다른 props 전달 */ />
+          <FavoriteShop key={index} data={shop} />
         ))}
       </Wrap>
       <Flex justifyContent={"center"}>
-        <PaginationController itemCount={40} pagination={"8"} />
+        <PaginationController itemCount={8} pagination={"8"} />
       </Flex>
 
       <Text fontSize={"24px"} fontWeight={"500"}>

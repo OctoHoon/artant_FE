@@ -78,7 +78,7 @@ export default function FavoriteItems({ data }) {
             free_shipping={item.free_shipping}
             is_best_seller={item.is_best_seller}
             is_liked={item.is_liked}
-            artist={item.artist}
+            artist={item.shop_name}
             message={item.message}
           />
         ))}
