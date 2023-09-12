@@ -5,6 +5,8 @@ import { BrowserRouter, RouterProvider } from "react-router-dom";
 import router from "./router";
 import theme from "./theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "./fonts.css";
+
 const client = new QueryClient();
 
 const root = ReactDOM.createRoot(

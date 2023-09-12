@@ -1,4 +1,14 @@
 export const subCategory = [
+  "회화",
+  "프린트",
+  "사진",
+  "일러스트레이션",
+  "조각",
+  "K-아트",
+  "혼합미디어",
+];
+
+export const subCategoryFilter = [
   "모든작품",
   "회화",
   "프린트",

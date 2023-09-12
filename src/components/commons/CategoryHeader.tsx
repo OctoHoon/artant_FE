@@ -55,6 +55,39 @@ export default function CategoryHeader() {
         height="58px"
         alignItems={"center"}
       >
+        <Box
+          p={2}
+          mx={2}
+          cursor="pointer"
+          onMouseEnter={() => handleCategoryMouseEnter("모든작품")}
+          onMouseLeave={handleCategoryMouseLeave}
+          position="relative"
+        >
+          <Link to={`/items/모든작품`}>
+            <Text
+              style={{
+                textDecoration: "none",
+                position: "relative",
+              }}
+            >
+              {"모든 작품"}
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: "-5px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: hoveredCategory === "모든작품" ? "120%" : "0", // 좌우로 퍼지는 효과
+                  height: hoveredCategory === "모든작품" ? "2px" : "0",
+                  background: "black", // 색상
+                  opacity: hoveredCategory === "모든작품" ? 1 : 0, // 투명도 조절
+                  transition:
+                    "width 0.3s ease-in-out, opacity 0.3s ease-in-out",
+                }}
+              ></span>
+            </Text>
+          </Link>
+        </Box>
         {subCategory.map((category) => (
           <Box
             key={category}

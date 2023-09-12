@@ -6,6 +6,10 @@ const config: ThemeConfig = {
 };
 
 const theme = extendTheme({
+  fonts: {
+    body: "Spoqa Han Sans Neo",
+    // You can specify other font styles as needed
+  },
   components: {
     Drawer: {
       parts: ["dialog", "header", "body"],
