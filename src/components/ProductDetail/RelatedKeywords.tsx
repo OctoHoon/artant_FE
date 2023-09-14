@@ -13,6 +13,7 @@ import {
 import ArtPiece from "../commons/Card/ArtPiece";
 import Collection from "../commons/Card/Collection";
 import RelatedKeyword from "../RelatedKeyword";
+import { Link } from "react-router-dom";
 
 const images = [
   "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
@@ -21,65 +22,19 @@ const images = [
   "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
 ];
 
-export default function RelatedKeywords() {
+export default function RelatedKeywords({ category, subCategory }) {
   const arts = [
     {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
+      name: "모란 수채화",
     },
     {
-      pk: 2,
-      source: "assets/images/card_image_custom-1.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
+      name: "수채화 꽃 그림",
     },
     {
-      pk: 3,
-      source: "/assets/images/card_image_custom-2.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: false,
-      is_best_seller: true,
-    },
-    {
-      pk: 4,
-      source: "/assets/images/card_image_custom-3.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 2,
-      reviews: 2532,
-      price: 120000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: true,
+      name: "꽃",
     },
   ];
+
   return (
     <Box maxW="1280px">
       <Flex flexDirection={"column"} gap={"80px"}>
@@ -102,14 +57,12 @@ export default function RelatedKeywords() {
             {arts.map((art, index) => (
               <Box
                 marginRight={"8px"}
-                border="1px solid #5365AE"
+                border="1px solid #D9D9D9"
                 padding={"12px 24px"}
-                color={"#5365AE"}
                 borderRadius={"5px"}
-                width={"127px"}
                 textAlign={"center"}
               >
-                {art.artist}
+                {art.name}
               </Box>
             ))}
           </Flex>
@@ -125,9 +78,13 @@ export default function RelatedKeywords() {
             </Box>
             <Text>아트앤트에 이 항목 신고</Text>
           </Flex>
+
           <Text>
-            아트앤트/프린트/{""}
-            <Text as="u">수채화</Text>
+            <Link to={"/items"}>아트앤트</Link>/{""}
+            <Link to={`/items/${category}`}>{category}</Link>/{""}
+            <Link to={`/items/${subCategory}`}>
+              <Text as="u">{subCategory}</Text>
+            </Link>
           </Text>
         </Flex>
       </Flex>

@@ -187,7 +187,7 @@ export const AvatarMenuList = [
       </svg>
     ),
     title: "구매내역 및 리뷰",
-    link: "/",
+    link: "/reviews",
   },
   {
     svg: (

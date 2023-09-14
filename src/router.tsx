@@ -30,6 +30,7 @@ import ShopManagerStats from "./routes/ShopManagerStats";
 import ShopManagerFinance from "./routes/ShopManagerFinance";
 import ShopManagerEditShop from "./routes/ShopManagerEditShop";
 import ShopManagerAddProduct from "./components/ShopManager/ShopManagerAddProduct";
+import Review from "./routes/Review";
 
 const router = createHashRouter(
   [
@@ -69,6 +70,10 @@ const router = createHashRouter(
         {
           path: "messages",
           element: <Messages />,
+        },
+        {
+          path: "reviews",
+          element: <Review />,
         },
         {
           path: "your/account",
