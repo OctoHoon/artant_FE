@@ -34,7 +34,7 @@ export default function ProductDetail() {
         title="아트앤아트 쇼핑객이 직접 선택한 컬렉션"
         option={true}
       />
-      <RelatedKeywords />
+      <RelatedKeywords category={"회화"} subCategory={"유화"} />
     </Box>
   );
 }

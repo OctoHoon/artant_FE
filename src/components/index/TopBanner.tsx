@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Image, Box } from "@chakra-ui/react";
+import { Image, Box, Button } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -36,7 +36,7 @@ export default function TopBanner() {
   console.log(data);
 
   return (
-    <Box width={"1600px"}>
+    <Box maxW={"1920px"} minW="1280px">
       {isLoading ? null : (
         <>
           <Slider {...settings}>
@@ -44,8 +44,8 @@ export default function TopBanner() {
               <Link to={`shop/${shop.pk}`}>
                 <Image
                   key={shop.pk}
-                  width="1000px"
-                  height="300px"
+                  width="1280px"
+                  height="320px"
                   objectFit="cover"
                   src={shop.background_pic}
                 />

@@ -8,13 +8,6 @@ export default function Collection({ title, total_count, images }) {
       borderRadius={"4px"}
       cursor={"pointer"}
     >
-      <Flex justifyContent={"space-between"} padding={"8px 16px"}>
-        <HStack gap={"4px"}>
-          <Text>{title}</Text>
-          <SvgArrowRight />
-        </HStack>{" "}
-        <Text>{total_count}개 항목</Text>
-      </Flex>
       <Box
         display="grid"
         gridTemplateColumns="repeat(2, 1fr)"
@@ -26,6 +19,13 @@ export default function Collection({ title, total_count, images }) {
           </AspectRatio>
         ))}
       </Box>
+      <Flex justifyContent={"space-between"} padding={"8px 16px"}>
+        <HStack gap={"4px"}>
+          <Text>{title}</Text>
+          <SvgArrowRight />
+        </HStack>{" "}
+        <Text>{total_count}개 항목</Text>
+      </Flex>
     </Box>
   );
 }

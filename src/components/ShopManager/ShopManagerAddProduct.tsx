@@ -5,36 +5,25 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Heading,
   HStack,
-  IconButton,
   Image,
   Input,
   InputGroup,
   InputRightAddon,
   InputRightElement,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Radio,
   RadioGroup,
   Select,
-  Stack,
   Switch,
   Text,
   Textarea,
-  useToast,
   VStack,
 } from "@chakra-ui/react";
-import { FaCheck, FaChevronDown, FaChevronRight } from "react-icons/fa";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { useEffect, useRef, useState } from "react";
-import ReactPlayer from "react-player";
-import { type } from "os";
+import { useRef, useState } from "react";
 import {
   createPhoto,
   uploadImage,
