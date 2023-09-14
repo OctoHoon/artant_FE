@@ -29,6 +29,7 @@ import ShopManagerArtantSeller from "./routes/ShopMangerArtantSeller";
 import ShopManagerStats from "./routes/ShopManagerStats";
 import ShopManagerFinance from "./routes/ShopManagerFinance";
 import ShopManagerEditShop from "./routes/ShopManagerEditShop";
+import ShopManagerAddProduct from "./components/ShopManager/ShopManagerAddProduct";
 
 const router = createHashRouter(
   [
@@ -128,6 +129,10 @@ const router = createHashRouter(
             {
               path: "listings/:pk",
               element: <ShopManagerListingEditing />,
+            },
+            {
+              path: "listings/create",
+              element: <ShopManagerAddProduct />,
             },
             {
               path: "messages",

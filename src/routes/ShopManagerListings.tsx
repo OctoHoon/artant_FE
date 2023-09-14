@@ -46,39 +46,41 @@ export default function ShopManagerListings() {
         상품목록
         <Flex gap={"24px"}>
           <Input placeholder="제목, 태그 검색" width={"400px"} />
-          <Button
-            background="white"
-            borderRadius={"5px"}
-            border={
-              "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9);"
-            }
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
+          <Link to={"/your/shops/me/listings/create"}>
+            <Button
+              background="white"
+              borderRadius={"5px"}
+              border={
+                "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9);"
+              }
             >
-              <mask
-                id="mask0_1086_8650"
-                maskUnits="userSpaceOnUse"
-                x="0"
-                y="0"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
+                viewBox="0 0 24 24"
+                fill="none"
               >
-                <rect width="24" height="24" fill="#D9D9D9" />
-              </mask>
-              <g mask="url(#mask0_1086_8650)">
-                <path
-                  d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                  fill="#1C1B1F"
-                />
-              </g>
-            </svg>
-            목록 추가
-          </Button>
+                <mask
+                  id="mask0_1086_8650"
+                  maskUnits="userSpaceOnUse"
+                  x="0"
+                  y="0"
+                  width="24"
+                  height="24"
+                >
+                  <rect width="24" height="24" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_1086_8650)">
+                  <path
+                    d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
+                    fill="#1C1B1F"
+                  />
+                </g>
+              </svg>
+              목록 추가
+            </Button>
+          </Link>
         </Flex>
       </Flex>
       <Flex padding={"0px 0px 120px 60px"} gap={"60px"}>
