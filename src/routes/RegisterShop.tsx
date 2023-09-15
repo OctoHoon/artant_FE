@@ -22,22 +22,14 @@ export default function RegisterShop() {
           gap={"40px"}
           position={"absolute"}
           left={"50%"}
-          top={"5%"}
-          transform="translate(-50%, -5%)"
+          top={"400px"}
+          transform="translate(-50%, 0%)"
         >
-          <Flex flexDirection={"column"} alignItems={"flex-start"} zIndex="1">
-            <Flex
-              alignSelf={"stretch"}
-              textAlign={"center"}
-              fontSize={"32px"}
-              fontWeight={"700"}
-              lineHeight={"150%"}
-              flexDirection="column"
-            >
-              <Text>수백만 명의 쇼핑객이 매장에</Text>
-              <Text>무엇이 있는지 보고 싶어합니다.</Text>
-            </Flex>
-          </Flex>
+          <Flex
+            flexDirection={"column"}
+            alignItems={"flex-start"}
+            zIndex="1"
+          ></Flex>
           <Link to="/your/shops/onboarding/name">
             <Button
               height={"47px"}
@@ -78,9 +70,7 @@ export default function RegisterShop() {
           >
             <MenuTextsub title={"수수료"} />
             <MenuTextsub title={"도구"} />
-            <MenuTextsub title={"지원"} />
             <MenuTextsub title={"스토리"} />
-            <MenuTextsub title={"판매"} />
             <MenuTextsub title={"자주하는 질문"} />
           </Flex>
           <Box
@@ -89,197 +79,29 @@ export default function RegisterShop() {
             background={"var(--maincolorslineblack-222222, #222)"}
           />
         </Flex>
-        <Text
-          width={"711px"}
-          textAlign={"center"}
-          fontSize={"24px"}
-          lineHeight={"160%"}
-        >
-          수백만 명의 쇼핑객이 매년 수 십억 달러를 소비하여 귀하와 같은 창의적인
-          기업가로부터 직접 구매하는 창의적인 마켓플레이스에 참여하세요.
-        </Text>
-        <Flex
-          width={"1280px"}
-          padding={"0px 110px"}
-          alignItems={"flex-start"}
-          gap={"110px"}
-        >
-          <Flex
-            width={"280px"}
-            flexDirection={"column"}
-            alignItems={"center"}
-            gap={"40px"}
+        <Box>
+          <Text
+            width={"1099px"}
+            textAlign={"center"}
+            fontSize={"24px"}
+            lineHeight={"160%"}
+            letterSpacing={"-0.5px"}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="150"
-              height="150"
-              viewBox="0 0 150 150"
-              fill="none"
-            >
-              <circle cx="75" cy="75" r="75" fill="#FFDD55" />
-            </svg>
-            <Flex
-              flexDirection={"column"}
-              alignItems={"center"}
-              gap="12px"
-              alignSelf={"stretch"}
-            >
-              <Flex
-                flexDirection={"column"}
-                alignItems={"center"}
-                gap="16px"
-                alignSelf={"stretch"}
-              >
-                <Text fontSize={"20px"} fontWeight={"500"}>
-                  훌륭한 가치
-                </Text>
-                <Text
-                  fontSize={"14px"}
-                  fontWeight={"400"}
-                  lineHeight={"150%"}
-                  color={"var(--maincolorstextgray-595959, #666);"}
-                  textAlign={"center"}
-                >
-                  단 $0.20의 비용으로 첫 번째 품목을 등록하세요. 판매 시 거래,
-                  결제 처리 및 외부 광고 비용만 지불하면 됩니다.
-                </Text>
-              </Flex>
-              <Button
-                width={"86px"}
-                padding={"6px 10px"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                borderRadius={"100px"}
-                border={
-                  "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9);"
-                }
-                background={"white"}
-                fontSize={"12px"}
-                fontWeight={"500"}
-              >
-                더 알아보기
-              </Button>
-            </Flex>
-          </Flex>
-          <Flex
-            width={"280px"}
-            flexDirection={"column"}
-            alignItems={"center"}
-            gap={"40px"}
+            구매자에게는 수없이 많은 작품을, 창작자에게는 수없이 많은 구매자를
+            연결합니다.
+          </Text>
+          <Text
+            width={"1099px"}
+            textAlign={"center"}
+            fontSize={"24px"}
+            lineHeight={"160%"}
+            letterSpacing={"-0.5px"}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="150"
-              height="150"
-              viewBox="0 0 150 150"
-              fill="none"
-            >
-              <circle cx="75" cy="75" r="75" fill="#FFDD55" />
-            </svg>
-            <Flex
-              flexDirection={"column"}
-              alignItems={"center"}
-              gap="12px"
-              alignSelf={"stretch"}
-            >
-              <Flex
-                flexDirection={"column"}
-                alignItems={"center"}
-                gap="16px"
-                alignSelf={"stretch"}
-              >
-                <Text fontSize={"20px"} fontWeight={"500"}>
-                  강력한 도구
-                </Text>
-                <Text
-                  fontSize={"14px"}
-                  fontWeight={"400"}
-                  lineHeight={"150%"}
-                  color={"var(--maincolorstextgray-595959, #666);"}
-                  textAlign={"center"}
-                  height={"63px"}
-                >
-                  당사의 도구와 서비스를 사용하면 귀하의 비즈니스를 쉽게 관리,
-                  홍보 및 성장시킬 수 있습니다.
-                </Text>
-              </Flex>
-              <Button
-                width={"86px"}
-                padding={"6px 10px"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                borderRadius={"100px"}
-                border={
-                  "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9);"
-                }
-                background={"white"}
-                fontSize={"12px"}
-                fontWeight={"500"}
-              >
-                더 알아보기
-              </Button>
-            </Flex>
-          </Flex>
-          <Flex
-            width={"280px"}
-            flexDirection={"column"}
-            alignItems={"center"}
-            gap={"40px"}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="150"
-              height="150"
-              viewBox="0 0 150 150"
-              fill="none"
-            >
-              <circle cx="75" cy="75" r="75" fill="#FFDD55" />
-            </svg>
-            <Flex
-              flexDirection={"column"}
-              alignItems={"center"}
-              gap="12px"
-              alignSelf={"stretch"}
-            >
-              <Flex
-                flexDirection={"column"}
-                alignItems={"center"}
-                gap="16px"
-                alignSelf={"stretch"}
-              >
-                <Text fontSize={"20px"} fontWeight={"500"}>
-                  지원과 교육
-                </Text>
-                <Text
-                  fontSize={"14px"}
-                  fontWeight={"400"}
-                  lineHeight={"150%"}
-                  color={"var(--maincolorstextgray-595959, #666);"}
-                  textAlign={"center"}
-                >
-                  도움이 필요할 때마다 ARTANT 지원 전문가에게 연락하고 판매자
-                  핸드북에서 성공적인 매장 운영에 대한 팁을 얻으세요.
-                </Text>
-              </Flex>
-              <Button
-                width={"86px"}
-                padding={"6px 10px"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                borderRadius={"100px"}
-                border={
-                  "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9);"
-                }
-                background={"white"}
-                fontSize={"12px"}
-                fontWeight={"500"}
-              >
-                더 알아보기
-              </Button>
-            </Flex>
-          </Flex>
-        </Flex>
+            수많은 사람들이 당신의 창의적인 작품을 보고 즐기며, 직접 구매하기를
+            원하고 있습니다.
+          </Text>
+        </Box>
+
         <Flex
           padding={"20px 40px"}
           flexDirection={"column"}
@@ -326,7 +148,7 @@ export default function RegisterShop() {
           </Flex>
         </Flex>
         <Flex flexDirection={"column"} alignItems={"center"} gap={"8px"}>
-          <Box
+          <Image
             alignSelf={"stretch"}
             width={"1920px"}
             height={"1010px"}
@@ -625,7 +447,11 @@ export default function RegisterShop() {
                   경우에 도움이 되는 도구가 있습니다.
                 </Text>
               </Flex>
-              <Box width={"540px"} height={"480px"} background={"#D9D9D9"} />
+              <Image
+                width={"540px"}
+                height={"400px"}
+                src="/assets/images/shop_register_1.png"
+              />
             </Flex>
             <Flex
               flexDirection={"column"}
@@ -806,7 +632,7 @@ export default function RegisterShop() {
                 </Flex>
               </Flex>
             </Flex>
-            <Flex
+            {/* <Flex
               flexDirection={"column"}
               alignItems={"center"}
               gap={"8px"}
@@ -948,7 +774,7 @@ export default function RegisterShop() {
                   </Flex>
                 </Flex>
               </Flex>
-            </Flex>
+            </Flex> */}
             <Flex flexDirection={"column"} alignItems={"flex-start"}>
               <Flex
                 padding={"120px 0px"}
@@ -991,11 +817,11 @@ export default function RegisterShop() {
                   alignItems={"center"}
                   gap={"40px"}
                 >
-                  <Box
+                  <Image
                     width={"510px"}
                     height={"400px"}
                     opacity={"0.96"}
-                    background="#D9D9D9"
+                    src="/assets/images/shop_register_2.jpeg"
                   />
                   <Flex
                     flexDirection={"column"}
@@ -1039,11 +865,11 @@ export default function RegisterShop() {
                       듭니다."
                     </Text>
                   </Flex>
-                  <Box
+                  <Image
                     width={"510px"}
                     height={"400px"}
                     opacity={"0.96"}
-                    background="#D9D9D9"
+                    src="/assets/images/shop_register_3.jpeg"
                   />
                 </Flex>
                 <Flex
@@ -1052,11 +878,11 @@ export default function RegisterShop() {
                   alignItems={"center"}
                   gap={"40px"}
                 >
-                  <Box
+                  <Image
                     width={"510px"}
                     height={"400px"}
                     opacity={"0.96"}
-                    background="#D9D9D9"
+                    src="/assets/images/shop_register_4.jpeg"
                   />
                   <Flex
                     flexDirection={"column"}
@@ -1083,7 +909,7 @@ export default function RegisterShop() {
                 background={" var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9);"}
               />
             </Flex>
-            <Flex flexDirection={"column"} alignItems={"flex-start"}>
+            {/* <Flex flexDirection={"column"} alignItems={"flex-start"}>
               <Flex
                 padding={"120px 0px"}
                 flexDirection={"column"}
@@ -1213,13 +1039,9 @@ export default function RegisterShop() {
                 height={"1px"}
                 background={" var(--maincolorslinegrayd-9-d-9-d-9, #D9D9D9);"}
               />
-            </Flex>
+            </Flex> */}
           </Flex>
-          <Flex
-            padding={"120px 0px"}
-            flexDirection={"column"}
-            alignItems={"center"}
-          >
+          <Flex flexDirection={"column"} alignItems={"center"}>
             <Flex
               width={"1060px"}
               padding={"0px 20px 40px 20px"}
