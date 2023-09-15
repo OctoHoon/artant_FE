@@ -63,7 +63,7 @@ export default function ProductImage() {
 
     // 비디오를 추가
     if (data.video) {
-      imageAndVideoUrls.push(data.video.video);
+      imageAndVideoUrls.splice(1, 0, data.video.video);
     }
   }
 
@@ -83,50 +83,52 @@ export default function ProductImage() {
           <Flex gap={"20px"}>
             <Box maxH="550px" width="65px">
               <Flex gap="8px" align={"start"} flexDirection="column">
-                {imageAndVideoUrls.map((url, index) => (
-                  <Box
-                    key={index}
-                    borderColor={
-                      index === activeIndex ? "black" : "transparent"
-                    }
-                    borderWidth={"1px"}
-                    borderRadius="4"
-                    position="relative"
-                  >
-                    <AspectRatio w="60px" ratio={1 / 1}>
-                      <Image
-                        maxW="60px"
-                        maxH="60px"
-                        key={index}
-                        src={
-                          url.includes(".mp4?")
-                            ? url.replace(
-                                /\.mp4(.*)$/,
-                                ".jpg?time=0s&height=270"
-                              )
-                            : url
-                        }
-                        alt={`Thumbnail ${index + 1}`}
-                        cursor="pointer"
-                        borderColor={"black"}
-                        borderRadius="4"
-                        objectFit="fill"
-                        onClick={() => handleThumbnailClick(index)}
-                      />
-                    </AspectRatio>
-                    {url.includes(".mp4?") ? (
+                {imageAndVideoUrls.length == 0
+                  ? null
+                  : imageAndVideoUrls.map((url, index) => (
                       <Box
-                        position="absolute"
-                        top="50%"
-                        left="50%"
-                        transform="translate(-50%, -50%)"
-                        zIndex="1"
+                        key={index}
+                        borderColor={
+                          index === activeIndex ? "black" : "transparent"
+                        }
+                        borderWidth={"1px"}
+                        borderRadius="4"
+                        position="relative"
                       >
-                        <FaPlayCircle size={24} color="white" />
+                        <AspectRatio w="60px" ratio={1 / 1}>
+                          <Image
+                            maxW="60px"
+                            maxH="60px"
+                            key={index}
+                            src={
+                              url.includes(".mp4?")
+                                ? url.replace(
+                                    /\.mp4(.*)$/,
+                                    ".jpg?time=0s&height=270"
+                                  )
+                                : url
+                            }
+                            alt={`Thumbnail ${index + 1}`}
+                            cursor="pointer"
+                            borderColor={"black"}
+                            borderRadius="4"
+                            objectFit="fill"
+                            onClick={() => handleThumbnailClick(index)}
+                          />
+                        </AspectRatio>
+                        {url.includes(".mp4?") ? (
+                          <Box
+                            position="absolute"
+                            top="50%"
+                            left="50%"
+                            transform="translate(-50%, -50%)"
+                            zIndex="1"
+                          >
+                            <FaPlayCircle size={24} color="white" />
+                          </Box>
+                        ) : null}
                       </Box>
-                    ) : null}
-                  </Box>
-                ))}
+                    ))}
               </Flex>
             </Box>
             <Box position="relative" maxW="740px" maxH="620px">
@@ -135,7 +137,11 @@ export default function ProductImage() {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                {imageAndVideoUrls[activeIndex].includes(".mp4") ? (
+                {imageAndVideoUrls.length == 0 ? (
+                  <Box width={"760px"} height={"620px"}>
+                    사진이 없습니다
+                  </Box>
+                ) : imageAndVideoUrls[activeIndex].includes(".mp4") ? (
                   <Flex width={"740px"} height="620px">
                     {" "}
                     <video
