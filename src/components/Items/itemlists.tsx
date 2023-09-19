@@ -9,13 +9,14 @@ import {
 } from "@chakra-ui/react";
 import ArtPiece from "../commons/Card/ArtPiece";
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import CustomSelect from "./CustomSelect";
 import DrawerFilter from "./Drawer/DrawerFilter";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { getProductsParameter } from "../../api";
 import PaginationController from "../commons/PaginationController";
+import { subCategory, subsubCategory } from "../data/options";
 
 interface IProduct {
   pk: number;
@@ -58,14 +59,48 @@ export default function Itemlists() {
     getProductsParameter
   );
 
+  const url: string[] = [];
+  const cat = stringParam["category"];
+
+  if (subCategory.includes(cat!)) {
+    // It's a sub-category
+    url.push(cat!);
+  } else {
+    // Check if it's a sub-subcategory within any sub-category
+    for (const subCat in subsubCategory) {
+      if (subsubCategory[subCat].includes(cat!)) {
+        url.push(subCat);
+        url.push(cat!);
+
+        break; // Stop searching once a match is found
+      }
+    }
+  }
+
   return (
     <Box
       px={{
         base: 10,
         lg: 40,
       }}
-      marginTop={"60px"}
+      marginTop={"20px"}
     >
+      <Flex marginBottom={"30px"} fontSize={"13px"} color="#666">
+        <Link to={"items/모든작품"}>
+          <Text>아트앤트 </Text>
+        </Link>
+        <>
+          {url.map((cat, index) => (
+            <Text key={index} marginLeft={"2px"}>
+              {" / "}
+              <Link to={`/items/${cat}`}>
+                {index === url.length - 1 ? <u>{cat}</u> : cat}
+              </Link>
+            </Text>
+          ))}
+        </>
+      </Flex>
+
       <Text
         color="#000"
         fontFamily="Spoqa Han Sans Neo"

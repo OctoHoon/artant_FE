@@ -27,7 +27,11 @@ const SearchBar = ({ placeholder, width, height, type, onSearch }) => {
         h={height}
         bg={type ? "#F1F1F5" : "white"}
         focusBorderColor="gray.400"
-        border={type ? "" : "1px solid #222"}
+        border={
+          type
+            ? "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
+            : "1px solid #222"
+        }
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         onKeyDown={handleKeyDown}

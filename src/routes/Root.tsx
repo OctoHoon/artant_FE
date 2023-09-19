@@ -13,6 +13,7 @@ export default function Root() {
       <Box alignSelf={"stretch"} height={"1px"} background="#F1F1F5"></Box>
       <CategoryHeader />
       <Outlet />
+      <Box height={"120px"} />
       <Footer />
     </Flex>
   );

@@ -49,12 +49,7 @@ export default function ReviewList() {
   const [selectedOption, setSelectedOption] = useState("relevance");
   const [page, setPage] = useState(1);
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
-  const [totalCount, setTotalCount] = useState(0);
   const { pk } = useParams();
-
-  const [reviews, setReviews] = useState([]);
-  console.log(reviews);
-  console.log(totalCount);
 
   const { isLoading, data } = useQuery([pk, page, selectedOption], getReviews);
 
@@ -110,14 +105,22 @@ export default function ReviewList() {
       </Box>
       {isLoading ? null : (
         <>
-          {data["reviews"].map((review: IReview, index) => (
-            <ReviewItem review={review} key={index} />
-          ))}
+          {data ? (
+            <Box padding={"40px"} textAlign={"center"}>
+              <Text>리뷰 없음</Text>
+            </Box>
+          ) : (
+            <>
+              {data["reviews"].map((review: IReview, index) => (
+                <ReviewItem review={review} key={index} />
+              ))}
 
-          <PaginationController
-            itemCount={data["total_count"]}
-            pagination={3}
-          />
+              <PaginationController
+                itemCount={data["total_count"]}
+                pagination={3}
+              />
+            </>
+          )}
         </>
       )}
     </div>

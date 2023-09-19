@@ -30,46 +30,55 @@ export default function ReviewPhotos() {
   const [page, setPage] = useState(1);
 
   const { isLoading, data } = useQuery([pk, page], getReviewPhotos);
+  console.log("리뷰사진");
+  console.log(data);
 
   return (
     <Box>
-      <Text
-        color="#000"
-        fontSize="24px"
-        fontWeight="500"
-        letterSpacing="-0.048px"
-      >
-        리뷰사진
-      </Text>
-      <Box height={"20px"} />
-      <Box position="relative" width={"100%"}>
-        <Flex alignItems={"center"} width={"100%"} gap={"16px"}>
-          <IconButton
-            icon={<SvgChevronLeft />}
-            onClick={() => {}}
-            aria-label="Previous"
-            variant={"none"}
-          />
-          {data &&
-            data.slice(0, 4).map((image, index) => (
-              <React.Fragment key={index}>
-                <AspectRatio width={"20%"} ratio={1 / 1}>
-                  <Image src={image.image} alt={`Review Image ${index + 1}`} />
-                </AspectRatio>
-                {index < data.length - 1 && <Box width="16px" />}
-              </React.Fragment>
-            ))}
-          <Box marginLeft="auto">
-            <IconButton
-              icon={<SvgChevronRight />}
-              onClick={() => {}}
-              aria-label="Next"
-              variant="none"
-            />
+      {!isLoading && data.length != 0 ? (
+        <>
+          <Text
+            color="#000"
+            fontSize="24px"
+            fontWeight="500"
+            letterSpacing="-0.048px"
+          >
+            리뷰사진
+          </Text>
+          <Box height={"20px"} />
+          <Box position="relative" width={"100%"}>
+            <Flex alignItems={"center"} width={"100%"} gap={"16px"}>
+              <IconButton
+                icon={<SvgChevronLeft />}
+                onClick={() => {}}
+                aria-label="Previous"
+                variant={"none"}
+              />
+              {data &&
+                data.slice(0, 4).map((image, index) => (
+                  <React.Fragment key={index}>
+                    <AspectRatio width={"20%"} ratio={1 / 1}>
+                      <Image
+                        src={image.image}
+                        alt={`Review Image ${index + 1}`}
+                      />
+                    </AspectRatio>
+                    {index < data.length - 1 && <Box width="16px" />}
+                  </React.Fragment>
+                ))}
+              <Box marginLeft="auto">
+                <IconButton
+                  icon={<SvgChevronRight />}
+                  onClick={() => {}}
+                  aria-label="Next"
+                  variant="none"
+                />
+              </Box>
+            </Flex>
+            {/* Button */}
           </Box>
-        </Flex>
-        {/* Button */}
-      </Box>
+        </>
+      ) : null}
     </Box>
   );
 }

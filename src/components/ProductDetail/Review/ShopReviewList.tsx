@@ -113,14 +113,22 @@ export default function ShopReviewList({ shop_pk }) {
       </Box>
       {isLoading ? null : (
         <>
-          {data["reviews"].map((review: IReview, index) => (
-            <ReviewItem review={review} key={index} />
-          ))}
+          {data ? (
+            <Box padding={"40px"} textAlign={"center"}>
+              <Text>리뷰 없음</Text>
+            </Box>
+          ) : (
+            <>
+              {data["reviews"].map((review: IReview, index) => (
+                <ReviewItem review={review} key={index} />
+              ))}
 
-          <PaginationController
-            itemCount={data["total_count"]}
-            pagination={3}
-          />
+              <PaginationController
+                itemCount={data["total_count"]}
+                pagination={3}
+              />
+            </>
+          )}
         </>
       )}
     </div>

@@ -69,19 +69,14 @@ export default function Header() {
     <Box width={"1280px"} height={"90px"}>
       <Stack
         alignSelf={"stretch"}
-        justifyContent={"space-between"}
         alignItems="center"
         direction={{
           // sm: "column",
           md: "row",
         }}
-        spacing={{
-          sm: 4,
-          md: 0,
-        }}
         height={90}
       >
-        <Box mr={0} ml={"0px"} color={"black"}>
+        <Box color={"black"} marginRight={"24px"}>
           <Link to={"/"}>
             {" "}
             <SvgArtantLogo />
@@ -96,7 +91,7 @@ export default function Header() {
           onSearch={handleSearchClick}
         />
 
-        <HStack spacing={2} alignItems={"center"}>
+        <HStack spacing={2} alignItems={"center"} marginLeft={"180px"}>
           {!userLoading ? (
             !isLoggedIn ? (
               <>

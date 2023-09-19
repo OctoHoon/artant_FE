@@ -1,8 +1,11 @@
 import { Box, Flex, Image, Button, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPanel({ data }) {
   let totalPrice = 0;
   let totalOriginalPrice = 0;
+
+  const navigate = useNavigate();
 
   // data.cartline의 각 요소를 순회하며 price와 original_price를 합산합니다.
   data &&
@@ -195,6 +198,9 @@ export default function CartPanel({ data }) {
           borderRadius={"0px"}
           color={"white"}
           background={" var(--maincolorsbgredf-12-e-24, #F12E24)"}
+          onClick={() => {
+            navigate("/payment");
+          }}
         >
           주문하기
         </Button>

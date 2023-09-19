@@ -25,13 +25,17 @@ import { FaCheck, FaChevronDown, FaChevronRight } from "react-icons/fa";
 import StarRating from "../commons/StarRating";
 import AddCartDrawer from "./AddCartDrawer";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { IUploadCartVariables, addToCart, getProductDetails } from "../../api";
+import useUser from "../../lib/useUser";
 
 export default function ProductPanel() {
   const { pk } = useParams();
   const { isLoading, data } = useQuery(["products", pk], getProductDetails);
+
+  const navigate = useNavigate();
+  const { userLoading, isLoggedIn, user } = useUser();
 
   const cartData: IUploadCartVariables = {
     product_pk: pk!,
@@ -93,7 +97,7 @@ export default function ProductPanel() {
               marginRight={"8px"}
               as="s"
             >
-              {data["original_price"].toLocaleString()}
+              {data["original_price"].toLocaleString()}원
             </Text>
             <Text
               fontSize="18px"
@@ -203,10 +207,19 @@ export default function ProductPanel() {
               </MenuButton>
               <MenuList width="150%">
                 <MenuItem>
-                  <span>29.7 * 21cm 10,000원</span>
+                  <span>29.7x21cm </span>
                 </MenuItem>
                 <MenuItem>
-                  <span>30 * 25cm 10,000원</span>
+                  <span>35x25cm </span>
+                </MenuItem>
+                <MenuItem>
+                  <span>40x50cm </span>
+                </MenuItem>
+                <MenuItem>
+                  <span>100x200cm </span>
+                </MenuItem>
+                <MenuItem>
+                  <span>150x200cm </span>
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -247,15 +260,19 @@ export default function ProductPanel() {
               </MenuButton>
               <MenuList width="150%">
                 <MenuItem>
-                  <span>29.7 * 21cm 10,000원</span>
+                  <span>흰색 캔버스</span>
                 </MenuItem>
                 <MenuItem>
-                  <span>30 * 25cm 10,000원</span>
+                  <span>미색 캔버스</span>
+                </MenuItem>
+                <MenuItem>
+                  <span>수채화 용지</span>
                 </MenuItem>
               </MenuList>
             </Menu>
           </Box>
-          <Box height="10px" />
+          <Box height="24px" />
+
           <Button
             width="100%"
             bg={"#F12E24"}
@@ -263,6 +280,10 @@ export default function ProductPanel() {
             fontSize="18px"
             fontWeight="500"
             letterSpacing={"-0.3px"}
+            onClick={() => {
+              addToCart(cartData);
+              navigate("/cart");
+            }}
           >
             바로 구매
           </Button>
@@ -290,6 +311,10 @@ export default function ProductPanel() {
             fontSize="18px"
             fontWeight="400"
             letterSpacing={"-0.3px"}
+            onClick={() => {
+              addToCart(cartData);
+              navigate("/cart");
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -324,6 +349,9 @@ export default function ProductPanel() {
             fontSize="18px"
             fontWeight="400"
             letterSpacing={"-0.3px"}
+            onClick={() => {
+              navigate(`/people/${user.pk}`);
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

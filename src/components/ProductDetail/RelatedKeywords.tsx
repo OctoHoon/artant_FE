@@ -80,8 +80,8 @@ export default function RelatedKeywords({ category, subCategory }) {
           </Flex>
 
           <Text>
-            <Link to={"/items"}>아트앤트</Link>/{""}
-            <Link to={`/items/${category}`}>{category}</Link>/{""}
+            <Link to={"/items"}>아트앤트</Link> /{" "}
+            <Link to={`/items/${category}`}>{category}</Link> /{" "}
             <Link to={`/items/${subCategory}`}>
               <Text as="u">{subCategory}</Text>
             </Link>

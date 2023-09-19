@@ -1,6 +1,25 @@
-import { Box, Button, Flex, Text, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  Image,
+  useDisclosure,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import BlackButton from "../commons/Button/BlackButton";
 
 export default function PaymentPanel() {
+  const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box
       maxW="412px"
@@ -178,6 +197,7 @@ export default function PaymentPanel() {
             borderRadius={"0px"}
             color={"white"}
             background={" var(--maincolorsbgredf-12-e-24, #F12E24)"}
+            onClick={onOpen}
           >
             <Flex alignItems={"baseline"}>
               <Text fontSize={"24px"} fontWeight={"500"}>
@@ -186,6 +206,25 @@ export default function PaymentPanel() {
               <Text fontSize={"16px"}>원 결제하기</Text>
             </Flex>
           </Button>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>결제가 완료되었습니다.</ModalHeader>
+              <ModalCloseButton />
+
+              <ModalFooter>
+                <Button
+                  color={"black"}
+                  onClick={() => {
+                    navigate(`/reviews`);
+                    onClose();
+                  }}
+                >
+                  확인
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </Flex>
       </Box>
     </Box>
