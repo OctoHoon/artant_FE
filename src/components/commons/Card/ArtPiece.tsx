@@ -166,7 +166,6 @@ function ArtPiece({
             <Text
               fontSize="14px"
               noOfLines={2} // 보여줄 줄 수
-              height={"40px"}
             >
               {title} - {description} {artist} 작가
             </Text>

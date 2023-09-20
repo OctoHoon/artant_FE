@@ -47,6 +47,7 @@ export default function CategoryHeader() {
         setHoverOnSub(false);
         setHoveredCategory(null);
       }}
+      fontSize={"14px"}
     >
       <Flex
         justifyContent="flex-start"
@@ -165,7 +166,7 @@ export default function CategoryHeader() {
                       to={`/items/${encodeURIComponent(subCategory)}`}
                     >
                       <Text
-                        fontSize={"16px"}
+                        fontSize={"14px"}
                         fontWeight={"500"}
                         lineHeight={"150%"}
                         p={2}

@@ -28,6 +28,7 @@ export default function Items() {
         {" "}
         <RecentlyViewed title="최근 본 작품" />
       </Box>
+      <Box height={"120px"} />
     </Box>
   );
 }

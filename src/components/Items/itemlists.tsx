@@ -86,7 +86,7 @@ export default function Itemlists() {
       marginTop={"20px"}
     >
       <Flex marginBottom={"30px"} fontSize={"13px"} color="#666">
-        <Link to={"items/모든작품"}>
+        <Link to={"/items/모든작품"}>
           <Text>아트앤트 </Text>
         </Link>
         <>

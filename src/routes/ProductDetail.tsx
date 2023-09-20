@@ -21,25 +21,33 @@ export default function ProductDetail() {
       flexDirection="column"
       alignItems="center" // Center horizontally
       justifyContent="center" // Center vertically
-      gap={"96px"}
-      px={40}
     >
+      <Box height={"32px"} />
       <ItemDetail shop_pk={shopPk ? shopPk : null} />
+      <Box height={"96px"} />
+
       <ItemListFive
         title="판매자의 다른 작품"
         shop_pk={shopPk ? shopPk : null}
       />
+      <Box height={"96px"} />
+
       <SimilarItemFive title="당신이 좋아할 만한 작품" />
+      <Box height={"96px"} />
+
       <CollectionList
         title="아트앤아트 쇼핑객이 직접 선택한 컬렉션"
         option={true}
       />
+      <Box height={"96px"} />
+
       {isLoading ? null : (
         <RelatedKeywords
           category={data.category}
           subCategory={data.subCategory}
         />
       )}
+      <Box height={"120px"} />
     </Box>
   );
 }

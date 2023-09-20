@@ -31,12 +31,15 @@ export default function Footer() {
       fontSize={"14px"}
       width={"full"}
     >
-      <Box
+      <Flex
+        width={"full"}
         padding={"18px 0px"}
         borderTopWidth={"1px"}
         borderTopColor={"#F1F1F5"}
         borderBottomWidth={"1px"}
         borderBottomColor={"#F1F1F5"}
+        justifyContent={"center"}
+        alignItems={"center"}
       >
         <Flex width={"1280px"}>
           <Link to={"/"}>
@@ -79,7 +82,7 @@ export default function Footer() {
             <Text fontSize={"14px"}>광고문의</Text>
           </Link>
         </Flex>
-      </Box>
+      </Flex>
       <Box height={"40px"} />
 
       <Box>

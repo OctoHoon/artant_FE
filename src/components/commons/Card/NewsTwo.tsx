@@ -30,7 +30,7 @@ function NewsTwo({ source, title }) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         _hover={{
-          boxShadow: "4px 4px 48px 0px rgba(0, 0, 0, 0.25)",
+          boxShadow: "0px 4px 8px 0px rgba(34, 34, 34, 0.15)",
           transitionDuration: "0.2s",
         }}
       >

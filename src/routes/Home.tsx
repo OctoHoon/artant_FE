@@ -40,6 +40,7 @@ export default function Home() {
         </Box>
         <RegisterButton />
       </Flex>
+      <Box height={"12px"} />
     </Box>
   );
 }
