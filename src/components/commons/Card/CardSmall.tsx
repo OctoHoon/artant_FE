@@ -156,17 +156,13 @@ export default function CardSmall({
             </Box>
           </Fade>
         </Link>
+        <Box height={"10px"} />
         <Flex flexDirection={"column"} gap={"12px"}>
           <Box gap={"5px"}>
             <Text display={"block"} fontSize="16px">
               [{category}]
             </Text>
-            <Text
-              display={"block"}
-              fontSize="14px"
-              noOfLines={2}
-              height={"40px"}
-            >
+            <Text display={"block"} fontSize="14px" noOfLines={2}>
               {title} - {description} {artist} 작가
             </Text>
           </Box>
@@ -228,6 +224,7 @@ export default function CardSmall({
           </Flex>
         </Flex>
       </Flex>
+      <Box height={"8px"} />
     </Link>
   );
 }

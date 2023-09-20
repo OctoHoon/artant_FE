@@ -34,12 +34,14 @@ export default function RegisterShopName() {
       flexDirection={"column"}
       alignItems={"center"}
       gap={"120px"}
+      paddingBottom={"120px"}
     >
       <Flex
         display={"inline-flex"}
         flexDirection={"column"}
         alignItems={"center"}
         gap={"60px"}
+        paddingTop={"32px"}
       >
         <RegisterProcess currentPage={1}></RegisterProcess>
         <Flex

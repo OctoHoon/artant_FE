@@ -6,15 +6,19 @@ import { Link } from "react-router-dom";
 
 export default function RegisterShop() {
   return (
-    <Box>
-      <ScrollToTop />
+    <Flex flexDirection={"column"} width={"full"} alignItems={"center"}>
       <Flex
         display={"inline-flex"}
         flexDirection={"column"}
-        alignItems={"flex-start"}
+        alignItems={"center"}
         gap={"8px"}
+        width={"1920px"}
+        justifyContent={"center"}
       >
-        <Image src="/assets/images/shop_register_background.png" />
+        <Image
+          src="/assets/images/shop_register_background.png"
+          width={"1920px"}
+        />
         <Flex
           width={"586px"}
           flexDirection={"column"}
@@ -22,7 +26,7 @@ export default function RegisterShop() {
           gap={"40px"}
           position={"absolute"}
           left={"50%"}
-          top={"400px"}
+          top={"440px"}
           transform="translate(-50%, 0%)"
         >
           <Flex
@@ -49,6 +53,7 @@ export default function RegisterShop() {
         </Flex>
       </Flex>
       <Flex
+        width={"full"}
         padding={"60px 0px 120px 0px"}
         flexDirection={"column"}
         alignItems={"center"}
@@ -147,10 +152,15 @@ export default function RegisterShop() {
             </Button>
           </Flex>
         </Flex>
-        <Flex flexDirection={"column"} alignItems={"center"} gap={"8px"}>
-          <Image
+        <Flex
+          flexDirection={"column"}
+          alignItems={"center"}
+          gap={"8px"}
+          width={"full"}
+        >
+          <Box
             alignSelf={"stretch"}
-            width={"1920px"}
+            width={"full"}
             height={"1010px"}
             background="var(--maincolorsbggrayf-9-f-9-ff, #F9F9FF);"
           />
@@ -1205,7 +1215,7 @@ export default function RegisterShop() {
           </Flex>
         </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
 

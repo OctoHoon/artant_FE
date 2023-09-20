@@ -12,6 +12,7 @@ import Itemlists from "../components/Items/itemlists";
 import RecentlyViewed from "../components/RecentlyViewed";
 import Footer from "../components/commons/Footer";
 import ItemListFive from "../components/ProductDetail/ItemsListFive";
+import RegisterButton from "../components/index/RegisterButton";
 
 export default function Items() {
   return (
@@ -29,6 +30,10 @@ export default function Items() {
         <RecentlyViewed title="최근 본 작품" />
       </Box>
       <Box height={"120px"} />
+      <Box px={40}>
+        <RegisterButton />
+      </Box>
+      <Box height={"12px"} />
     </Box>
   );
 }

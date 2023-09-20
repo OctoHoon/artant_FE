@@ -87,7 +87,9 @@ function SelectionButton({ name, icon: Icon, is_selected, handleSelect }) {
     >
       <Flex alignItems={"center"} gap={"8px"}>
         <Icon />
-        <Text>{name}</Text>
+        <Text fontSize={"14px"} fontWeight={400}>
+          {name}
+        </Text>
       </Flex>
       <FontAwesomeIcon icon={faChevronRight} width={"24px"} height={"24px"} />
     </Button>
