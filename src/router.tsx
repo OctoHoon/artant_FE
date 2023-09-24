@@ -31,6 +31,7 @@ import ShopManagerFinance from "./routes/ShopManagerFinance";
 import ShopManagerEditShop from "./routes/ShopManagerEditShop";
 import ShopManagerAddProduct from "./components/ShopManager/ShopManagerAddProduct";
 import Review from "./routes/Review";
+import EventDetail from "./routes/EventDetail";
 
 const router = createHashRouter(
   [
@@ -74,6 +75,10 @@ const router = createHashRouter(
         {
           path: "reviews",
           element: <Review />,
+        },
+        {
+          path: "events/:pk",
+          element: <EventDetail />,
         },
         {
           path: "your/account",

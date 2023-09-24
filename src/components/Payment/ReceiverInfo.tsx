@@ -12,8 +12,10 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
+import useUser from "../../lib/useUser";
 
 export default function ReceiverInfo() {
+  const { userLoading, isLoggedIn, user } = useUser();
   return (
     <Flex flexDirection={"column"} alignSelf={"stretch"}>
       <Box
@@ -168,7 +170,7 @@ export default function ReceiverInfo() {
           <Box width={"200px"} fontWeight={"700"}>
             주문자명/이메일
           </Box>
-          <Box>홍길동 / artant@gmail.com</Box>
+          <Box>{user && user.name} / artant@gmail.com</Box>
           <Box width={"12px"} />
           <Flex
             gap={"8px"}

@@ -12,6 +12,8 @@ export default function ShopDetail() {
         justifyContent="center" // Center vertically
         gap={10}
         px={40}
+        mt={"32px"}
+        mb={"120px"}
       >
         <ProfileHeader />
       </Box>

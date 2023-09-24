@@ -3617,6 +3617,9 @@ export default function UploadPhotos() {
                   uploadVideoURLMutation.isLoading ||
                   uploadImageAndThumbnailMutation.isLoading
                 }
+                _hover={{
+                  background: "var(--maincolorsbggray-555555, #555)",
+                }}
               >
                 <Text
                   color="var(--maincolorstext-white, #FFF);"
@@ -3701,10 +3704,19 @@ const GrayBoxImage = ({ src, width, height, index }) => {
           flexDirection={"column"}
           justifyContent={"center"}
           alignItems={"center"}
-          gap={"8px"}
+          gap={"4px"}
           border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
         >
-          {svgComponents[index]}
+          <Flex
+            width={"80px"}
+            height={"80px"}
+            alignItems={"center"}
+            justifyItems={"center"}
+            alignContent={"center"}
+            justifyContent={"center"}
+          >
+            {svgComponents[index]}
+          </Flex>
           <Text
             color="var(--maincolorstextgray-969696, #969696)"
             textAlign="center"

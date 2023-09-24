@@ -14,7 +14,7 @@ import BlackButton from "../components/commons/Button/BlackButton";
 
 export default function ShopManagerOrders() {
   return (
-    <Flex flexDirection={"column"}>
+    <Flex flexDirection={"column"} width={"1340px"}>
       <Flex
         padding={"32px 18px 24px 60px"}
         justifyContent={"space-between"}

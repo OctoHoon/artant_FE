@@ -80,6 +80,9 @@ export default function AddCartDrawer({ thumbnail, isOpen, toggleOpen }) {
                 onClick={() => {
                   navigate("/cart");
                 }}
+                _hover={{
+                  background: "var(--maincolorsbggray-555555, #555)",
+                }}
               >
                 장바구니 가기
               </Button>

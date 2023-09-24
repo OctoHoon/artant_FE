@@ -44,8 +44,15 @@ function NewArrivalCard({ pk, source, price, originalPrice }) {
             boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
             transitionDuration: "0.2s",
           }}
+          borderRadius={"10px"}
         >
-          <Image height="500px" width={"400px"} src={source} fit={"contain"} />
+          <Image
+            height="500px"
+            width={"400px"}
+            src={source}
+            fit={"contain"}
+            borderRadius={"10px"}
+          />
 
           {/* 흰 동그라미와 하트 아이콘 */}
           <Link to={""}>

@@ -21,19 +21,20 @@ import DiscountInfo from "./DiscountInfo";
 import PointInfo from "./PointInfo";
 import PayInfo from "./PayInfo";
 
-export default function PaymentBody() {
+export default function PaymentBody({ data }) {
   return (
     <Flex gap="40px" marginBottom={"40px"}>
       <Box width="828px">
         <Flex flexDirection={"column"} gap="40px" alignSelf={"stretch"}>
           <ReceiverInfo />
-          <ProductInfo />
-          <DiscountInfo />
+          <ProductInfo data={data && data} />
+
+          <DiscountInfo data={data && data} />
           <PointInfo />
-          <PayInfo />
+          <PayInfo data={data && data} />
         </Flex>
       </Box>
-      <PaymentPanel />
+      <PaymentPanel data={data && data} />
     </Flex>
   );
 }

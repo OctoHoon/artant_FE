@@ -1,6 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Footer from "../components/commons/Footer";
-import CartHeader from "../components/Cart/CartHeader";
 import CartBody from "../components/Cart/CartBody";
 import { useQuery } from "@tanstack/react-query";
 import { getCart } from "../api";
@@ -16,9 +15,11 @@ export default function Cart() {
         justifyContent="center" // Center vertically
         gap={10}
         px={40}
+        mt={"32px"}
+        mb={"120px"}
       >
-        <CartHeader data={!isLoading ? data : null} />
-        <CartBody data={!isLoading ? data : null} />
+        {/* <CartHeader data={!isLoading ? data : null} /> */}
+        <CartBody data={data && data} />
       </Box>
     </Box>
   );

@@ -20,7 +20,7 @@ export default function ShopManagerSettings() {
     <Flex flexDirection={"column"}>
       <SettingHeader />
       <Flex
-        width={"1280px"}
+        width={"1340px"}
         padding={"32px 0px 120px 60px"}
         gap={"60px"}
         alignSelf={"stretch"}

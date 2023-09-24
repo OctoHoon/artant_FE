@@ -12,13 +12,47 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  ModalProps,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import BlackButton from "../commons/Button/BlackButton";
+import { addToPurchase } from "../../api";
 
-export default function PaymentPanel() {
+export default function PaymentPanel({ data }) {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  let totalPrice = 0;
+  let totalOriginalPrice = 0;
+
+  // data.cartline의 각 요소를 순회하며 price와 original_price를 합산합니다.
+  data &&
+    data.forEach((cartItem) => {
+      // 각 요소의 price와 original_price를 더합니다.
+      totalPrice += cartItem.product.price * cartItem.quantity;
+      totalOriginalPrice += cartItem.product.original_price * cartItem.quantity;
+    });
+
+  const handlePurchase = () => {
+    // data에 있는 상품들을 서버로 보내서 구매합니다.
+    try {
+      const productData = data.map((item) => ({
+        product_pk: item.product.pk, // 상품의 고유 식별자
+        quantity: item.quantity, // 상품 수량
+        variant_pks: [], // 상품 옵션
+      }));
+
+      // 각 상품을 구매합니다.
+      for (const product of productData) {
+        addToPurchase(product);
+      }
+
+      // 구매가 완료되면 추가적인 동작을 수행할 수 있습니다.
+      // 예를 들어, 화면을 리디렉션하거나 모달을 닫을 수 있습니다.
+    } catch (error) {
+      // 에러 처리를 수행합니다. 구매 실패 시 사용자에게 알려줄 수 있습니다.
+      console.error("구매 중 에러 발생:", error);
+    }
+  };
 
   return (
     <Box
@@ -87,7 +121,8 @@ export default function PaymentPanel() {
           >
             <div>주문금액</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
-              418,000 {<Text fontSize={"16px"}>원</Text>}
+              {totalOriginalPrice.toLocaleString()}{" "}
+              {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
 
@@ -108,7 +143,8 @@ export default function PaymentPanel() {
           >
             <div>상품할인</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
-              -50,760 {<Text fontSize={"16px"}>원</Text>}
+              -{(totalOriginalPrice - totalPrice).toLocaleString()}{" "}
+              {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
           <Flex
@@ -145,7 +181,8 @@ export default function PaymentPanel() {
               상품할인
             </Flex>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
-              -50,760 {<Text fontSize={"16px"}>원</Text>}
+              -{(totalOriginalPrice - totalPrice).toLocaleString()}{" "}
+              {<Text fontSize={"16px"}>원</Text>}
             </Flex>
           </Flex>
           <Flex
@@ -174,7 +211,7 @@ export default function PaymentPanel() {
             결정예정금액
           </Text>
           <Flex fontSize={"22px"} alignItems={"baseline"}>
-            418,000 {<Text fontSize={"13px"}>원</Text>}
+            {totalPrice.toLocaleString()} {<Text fontSize={"13px"}>원</Text>}
           </Flex>
         </Flex>
         <Flex flexDirection={"column"} gap={"10px"} alignSelf={"stretch"}>
@@ -197,16 +234,22 @@ export default function PaymentPanel() {
             borderRadius={"0px"}
             color={"white"}
             background={" var(--maincolorsbgredf-12-e-24, #F12E24)"}
-            onClick={onOpen}
+            onClick={() => {
+              handlePurchase(); // 구매 처리
+              onOpen(); // 모달 열기
+            }}
+            _hover={{
+              background: "var(--maincolorsbggray-222222, #222)",
+            }}
           >
             <Flex alignItems={"baseline"}>
               <Text fontSize={"24px"} fontWeight={"500"}>
-                418,000
+                {totalPrice.toLocaleString()}{" "}
               </Text>
               <Text fontSize={"16px"}>원 결제하기</Text>
             </Flex>
           </Button>
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isOpen} onClose={onClose} isCentered>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>결제가 완료되었습니다.</ModalHeader>
@@ -218,6 +261,9 @@ export default function PaymentPanel() {
                   onClick={() => {
                     navigate(`/reviews`);
                     onClose();
+                  }}
+                  _hover={{
+                    background: "var(--maincolorsbggray-555555, #555)",
                   }}
                 >
                   확인

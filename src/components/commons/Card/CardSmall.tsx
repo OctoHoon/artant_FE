@@ -66,6 +66,7 @@ export default function CardSmall({
         flexDirection={"column"}
       >
         <Image
+          borderRadius={"10px"}
           height="180px"
           width="220px"
           objectFit="cover"

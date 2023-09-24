@@ -13,7 +13,18 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-export default function DiscountInfo() {
+export default function DiscountInfo({ data }) {
+  let totalPrice = 0;
+  let totalOriginalPrice = 0;
+
+  // data.cartline의 각 요소를 순회하며 price와 original_price를 합산합니다.
+  data &&
+    data.forEach((cartItem) => {
+      // 각 요소의 price와 original_price를 더합니다.
+      totalPrice += cartItem.product.price * cartItem.quantity;
+      totalOriginalPrice += cartItem.product.original_price * cartItem.quantity;
+    });
+
   return (
     <Flex flexDirection={"column"} alignSelf={"stretch"}>
       <Box
@@ -40,7 +51,7 @@ export default function DiscountInfo() {
           주문금액
         </Box>
         <Flex alignItems={"baseline"}>
-          <Text fontSize={"22px"}>70,000</Text>원
+          <Text fontSize={"22px"}>{totalOriginalPrice.toLocaleString()}</Text>원
         </Flex>
       </Flex>
       <Box
@@ -58,7 +69,10 @@ export default function DiscountInfo() {
           <Box width={"200px"} fontWeight={"700"} alignItems={"center"}>
             상품할인
           </Box>
-          <Flex alignItems={"baseline"}>-30,000원</Flex>
+          <Flex alignItems={"baseline"}>
+            {" "}
+            -{(totalOriginalPrice - totalPrice).toLocaleString()}원
+          </Flex>
         </Flex>
         <Flex
           alignSelf={"stretch"}
@@ -93,10 +107,13 @@ export default function DiscountInfo() {
                   />
                 </g>
               </svg>
-              상품직시할인
+              상품즉시할인
             </Flex>
           </Box>
-          <Flex alignItems={"baseline"}>-30,000원</Flex>
+          <Flex alignItems={"baseline"}>
+            {" "}
+            -{(totalOriginalPrice - totalPrice).toLocaleString()}원
+          </Flex>
         </Flex>
       </Flex>
       <Flex
@@ -137,7 +154,11 @@ export default function DiscountInfo() {
           할인금액
         </Box>
         <Flex alignItems={"baseline"}>
-          <Text fontSize={"22px"}>-30,000</Text>원
+          <Text fontSize={"22px"}>
+            {" "}
+            -{(totalOriginalPrice - totalPrice).toLocaleString()}
+          </Text>
+          원
         </Flex>
       </Flex>
     </Flex>

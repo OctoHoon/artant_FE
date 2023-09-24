@@ -35,13 +35,14 @@ export default function RegisterShopName() {
       alignItems={"center"}
       gap={"120px"}
       paddingBottom={"120px"}
+      mt={"32px"}
+      mb={"120px"}
     >
       <Flex
         display={"inline-flex"}
         flexDirection={"column"}
         alignItems={"center"}
         gap={"60px"}
-        paddingTop={"32px"}
       >
         <RegisterProcess currentPage={1}></RegisterProcess>
         <Flex
@@ -205,6 +206,9 @@ export default function RegisterShopName() {
             // 이동 조건을 만족하지 않으면 버튼 비활성화
             disabled={!isLengthValid || hasSpecialCharsOrSpaces}
             onClick={handleButtonClick}
+            _hover={{
+              background: "var(--maincolorsbggray-555555, #555)",
+            }}
           >
             저장하고 계속
           </Button>

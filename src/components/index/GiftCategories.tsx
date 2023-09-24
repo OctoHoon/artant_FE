@@ -29,7 +29,7 @@ export default function GiftCategories() {
       width={"1280px"}
     >
       <Text fontSize={"30px"} fontWeight={"500"}>
-        News Event
+        Gift Categories
       </Text>
       <Grid
         gap={"40px"}

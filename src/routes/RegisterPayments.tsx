@@ -19,7 +19,13 @@ import ScrollToTop from "../components/commons/ScrollToTop";
 
 export default function RegisterPayments() {
   return (
-    <Flex flexDirection={"column"} alignItems={"flex-start"} gap={"60px"}>
+    <Flex
+      mt={"32px"}
+      mb={"120px"}
+      flexDirection={"column"}
+      alignItems={"flex-start"}
+      gap={"60px"}
+    >
       <ScrollToTop />
       <RegisterProcess currentPage={3} />
       <Flex flexDirection={"column"} alignItems={"flex-start"} gap={"40px"}>

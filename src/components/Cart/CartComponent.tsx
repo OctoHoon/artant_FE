@@ -8,8 +8,9 @@ import {
   Textarea,
   Input,
 } from "@chakra-ui/react";
+import { deleteCartLine } from "../../api";
 
-export default function CartComponent({ suggest, isSoldOut, data }) {
+export default function CartComponent({ suggest, isSoldOut, data, onDelete }) {
   return (
     <Flex width="828px" alignItems={"flex-start"}>
       <Flex
@@ -68,7 +69,12 @@ export default function CartComponent({ suggest, isSoldOut, data }) {
             alignItems={"flex-start"}
             alignSelf={"stretch"}
           >
-            <Image width="120px" height="120px" src={data.product.thumbnail} />
+            <Image
+              width="120px"
+              height="120px"
+              src={data.product.thumbnail}
+              objectFit={"cover"}
+            />
             <Checkbox position={"absolute"} />
           </Flex>
           <Flex
@@ -88,6 +94,7 @@ export default function CartComponent({ suggest, isSoldOut, data }) {
                   width="32px"
                   height="32px"
                   src={data.product.shop_avatar}
+                  objectFit={"cover"}
                 />
                 {data.product.shop_name}
               </Flex>
@@ -493,6 +500,9 @@ export default function CartComponent({ suggest, isSoldOut, data }) {
                 borderRadius={"0"}
                 background="var(--maincolorsbgredf-12-e-24, #F12E24)"
                 color={"white"}
+                _hover={{
+                  background: "var(--maincolorsbggray-222222, #222)",
+                }}
               >
                 주문하기
               </Button>
@@ -504,6 +514,10 @@ export default function CartComponent({ suggest, isSoldOut, data }) {
               borderRadius={"0"}
               background="white"
               color={"white"}
+              onClick={() => {
+                deleteCartLine(data.pk);
+                onDelete();
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
