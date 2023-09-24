@@ -55,6 +55,11 @@ const theme = extendTheme({
       fontSize: "14px",
       fontWeight: 700,
     },
+    HeadingsH7M: {
+      fontSize: "16px",
+      fontWeight: 500,
+      letterSpaceing: "-0.3px",
+    },
     bodyLarge: {
       fontSize: "22px",
       fontWeight: 400,
