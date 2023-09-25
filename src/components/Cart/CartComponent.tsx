@@ -9,8 +9,29 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { deleteCartLine } from "../../api";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function CartComponent({ suggest, isSoldOut, data, onDelete }) {
+export default function CartComponent({
+  suggest,
+  isSoldOut,
+  data,
+  onDelete,
+  onProductSelect,
+  isSelectAll,
+}) {
+  const [isSelected, setIsSelected] = useState(isSelectAll);
+
+  useEffect(() => {
+    setIsSelected(isSelectAll);
+  }, [isSelectAll]);
+
+  // Checkbox가 클릭될 때 호출되는 함수
+  const handleCheckboxClick = () => {
+    setIsSelected(!isSelected); // Checkbox의 선택 상태를 토글
+    onProductSelect(data.pk, !isSelected); // 선택한 상품의 ID와 선택 상태를 부모 컴포넌트로 전달
+  };
+
   return (
     <Flex width="828px" alignItems={"flex-start"}>
       <Flex
@@ -69,13 +90,19 @@ export default function CartComponent({ suggest, isSoldOut, data, onDelete }) {
             alignItems={"flex-start"}
             alignSelf={"stretch"}
           >
-            <Image
-              width="120px"
-              height="120px"
-              src={data.product.thumbnail}
-              objectFit={"cover"}
+            <Link to={`/listings/${data.product.pk}`}>
+              <Image
+                width="120px"
+                height="120px"
+                src={data.product.thumbnail}
+                objectFit={"cover"}
+              />
+            </Link>
+            <Checkbox
+              position={"absolute"}
+              isChecked={isSelected}
+              onChange={handleCheckboxClick}
             />
-            <Checkbox position={"absolute"} />
           </Flex>
           <Flex
             width={"410px"}
@@ -90,13 +117,17 @@ export default function CartComponent({ suggest, isSoldOut, data, onDelete }) {
               alignSelf={"stretch"}
             >
               <Flex gap="8px" fontWeight={"500"} alignItems={"center"}>
-                <Image
-                  width="32px"
-                  height="32px"
-                  src={data.product.shop_avatar}
-                  objectFit={"cover"}
-                />
-                {data.product.shop_name}
+                <Link to={`/shop/${data.product.shop_pk}`}>
+                  <Image
+                    width="32px"
+                    height="32px"
+                    src={data.product.shop_avatar}
+                    objectFit={"cover"}
+                  />
+                </Link>
+                <Link to={`/shop/${data.product.shop_pk}`}>
+                  {data.product.shop_name}
+                </Link>
               </Flex>
               <Flex gap="8px">
                 <svg
@@ -127,9 +158,11 @@ export default function CartComponent({ suggest, isSoldOut, data, onDelete }) {
               </Flex>
             </Flex>
             <Flex flexDirection={"column"} alignItems={"flex-start"} gap="4px">
-              <Text fontWeight={"700"} noOfLines={1}>
-                {data.product.name}
-              </Text>
+              <Link to={`/listings/${data.product.pk}`}>
+                <Text fontWeight={"700"} noOfLines={1}>
+                  {data.product.name}
+                </Text>
+              </Link>
               <Flex alignItems={"flex-start"} gap="40px">
                 <Flex>
                   <Text>옵션:</Text>
@@ -361,7 +394,7 @@ export default function CartComponent({ suggest, isSoldOut, data, onDelete }) {
             height={"33px"}
             textAlign={"center"}
           >
-            1
+            {data.quantity}
           </Box>
           <Box
             border="1px solid var(--maincolorsstrokegrayb-2-b-2-b-2, #B2B2B2)"
@@ -515,7 +548,11 @@ export default function CartComponent({ suggest, isSoldOut, data, onDelete }) {
               background="white"
               color={"white"}
               onClick={() => {
+                if (isSelected) {
+                  handleCheckboxClick();
+                }
                 deleteCartLine(data.pk);
+
                 onDelete();
               }}
             >

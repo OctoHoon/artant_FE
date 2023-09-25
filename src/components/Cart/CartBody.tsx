@@ -11,11 +11,27 @@ import {
 import CartPanel from "./CartPanel";
 import CartComponent from "./CartComponent";
 import React, { useEffect, useState } from "react";
+import useUser from "../../lib/useUser";
+import { Link } from "react-router-dom";
 
 export default function CartBody({ data }) {
+  const { userLoading, isLoggedIn, user } = useUser();
   const [cartData, setCartData] = useState(
     data?.cartline.slice().reverse() || []
   );
+  const [selectedItems, setSelectedItems] = useState<any[]>([]); // 선택된 아이템을 담을 객체
+  const [selectAll, setSelectAll] = useState(false);
+
+  const handleSelectAll = () => {
+    setSelectAll(!selectAll); // 전체 선택하기 체크박스 상태를 토글
+
+    // 만약 전체 선택하기 체크박스가 체크된 상태라면 모든 상품을 선택
+    // 그렇지 않다면 모든 상품을 선택 해제
+    const updatedSelectedItems = selectAll
+      ? [] // 전체 선택 해제
+      : cartData; // 모든 상품 선택
+    setSelectedItems(updatedSelectedItems);
+  };
 
   // data가 로드되면 cartData 업데이트
   useEffect(() => {
@@ -31,6 +47,23 @@ export default function CartBody({ data }) {
 
     // 데이터를 삭제한 후 상태 변수 업데이트
     setCartData(updatedData);
+  };
+
+  // 선택된 아이템을 토글하는 함수
+  const toggleCartItem = (pk, isSelected) => {
+    if (!isSelected) {
+      // 이미 선택된 아이템인 경우 선택 목록에서 제거
+      const updatedSelectedItems = selectedItems.filter(
+        (item) => item.pk !== pk
+      );
+      setSelectedItems(updatedSelectedItems);
+    } else {
+      // 선택되지 않은 아이템인 경우 cartData에서 해당 pk에 해당하는 아이템을 찾아 선택 목록에 추가
+      const selectedItem = cartData.find((item) => item.pk === pk);
+      if (selectedItem) {
+        setSelectedItems([...selectedItems, selectedItem]);
+      }
+    }
   };
 
   return (
@@ -74,7 +107,11 @@ export default function CartBody({ data }) {
         <Box width="828px">
           <Flex justifyContent={"space-between"}>
             <Flex gap="2px">
-              <Checkbox /> 전체선택
+              <Checkbox
+                isChecked={selectAll}
+                onChange={() => handleSelectAll()}
+              />{" "}
+              전체선택
             </Flex>
             <Flex gap="16px" alignItems={"center"}>
               품절상품삭제
@@ -107,8 +144,12 @@ export default function CartBody({ data }) {
                     <CartComponent
                       suggest={true}
                       isSoldOut={false}
+                      isSelectAll={selectAll}
                       data={item}
                       onDelete={() => deleteCartItem(index)}
+                      onProductSelect={(pk, isSelected) =>
+                        toggleCartItem(pk, isSelected)
+                      }
                     />
                     <Box
                       width="828px"
@@ -143,13 +184,12 @@ export default function CartBody({ data }) {
                 background={"white"}
                 fontWeight={"400"}
               >
-                {" "}
-                즐겨 찾기 바로가기
+                <Link to={`/people/${user && user.pk}`}>즐겨찾기 바로가기</Link>
               </Button>
             </Flex>
           </Box>
         </Box>
-        <CartPanel data={cartData && cartData} />
+        <CartPanel data={selectedItems && selectedItems} />
       </Flex>
     </Flex>
   );

@@ -13,10 +13,42 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalFooter,
+  useDisclosure,
 } from "@chakra-ui/react";
 import ArtantButton from "../commons/ArtantButton";
+import { addToPurchase } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 export default function PayInfo({ data }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+  const handlePurchase = () => {
+    // data에 있는 상품들을 서버로 보내서 구매합니다.
+    try {
+      const productData = data.map((item) => ({
+        product_pk: item.product.pk, // 상품의 고유 식별자
+        quantity: item.quantity, // 상품 수량
+        variant_pks: [], // 상품 옵션
+      }));
+
+      // 각 상품을 구매합니다.
+      for (const product of productData) {
+        addToPurchase(product);
+      }
+
+      // 구매가 완료되면 추가적인 동작을 수행할 수 있습니다.
+      // 예를 들어, 화면을 리디렉션하거나 모달을 닫을 수 있습니다.
+    } catch (error) {
+      // 에러 처리를 수행합니다. 구매 실패 시 사용자에게 알려줄 수 있습니다.
+      console.error("구매 중 에러 발생:", error);
+    }
+  };
   let totalPrice = 0;
 
   // data.cartline의 각 요소를 순회하며 price와 original_price를 합산합니다.
@@ -646,6 +678,10 @@ export default function PayInfo({ data }) {
           alignItems={"center"}
           alignSelf={"stretch"}
           background={"var(--maincolorsbgredf-12-e-24, #F12E24)"}
+          onClick={() => {
+            handlePurchase(); // 구매 처리
+            onOpen(); // 모달 열기
+          }}
           _hover={{
             background: "var(--maincolorsbggray-222222, #222)",
           }}
@@ -657,6 +693,28 @@ export default function PayInfo({ data }) {
             <Text fontSize={"16px"}>원 결제하기</Text>
           </Flex>
         </Button>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>결제가 완료되었습니다.</ModalHeader>
+            <ModalCloseButton />
+
+            <ModalFooter>
+              <Button
+                color={"black"}
+                onClick={() => {
+                  navigate(`/reviews`);
+                  onClose();
+                }}
+                _hover={{
+                  background: "var(--maincolorsbggray-555555, #555)",
+                }}
+              >
+                확인
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Flex>
     </Flex>
   );
