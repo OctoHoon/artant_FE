@@ -8,6 +8,7 @@ export default function ShopManagerMessages() {
       flexDirection="column"
       alignItems="flex-start" // Center horizontally
       gap={"20px"}
+      width={"1340px"}
     >
       <Box height="20px" />
       <MessagesHeader />

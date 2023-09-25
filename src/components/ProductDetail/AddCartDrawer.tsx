@@ -93,8 +93,8 @@ export default function AddCartDrawer({ thumbnail, isOpen, toggleOpen }) {
             <Text fontSize={"16px"} fontWeight={"500"}>
               당신이 좋아할만한 작품
             </Text>
-            <Box height={"24px"} />
-            <Wrap spacing={3} justifyContent="center">
+            <Box height={"20px"} />
+            <Wrap flex={"flex-grow"}>
               {!isLoading && data
                 ? data
                     .slice(0, 6)

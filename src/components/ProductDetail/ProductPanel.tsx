@@ -26,13 +26,21 @@ import StarRating from "../commons/StarRating";
 import AddCartDrawer from "./AddCartDrawer";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { IUploadCartVariables, addToCart, getProductDetails } from "../../api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  IUploadCartVariables,
+  addToCart,
+  getProductDetails,
+  toggleLikeProduct,
+} from "../../api";
 import useUser from "../../lib/useUser";
 
 export default function ProductPanel() {
   const { pk } = useParams();
   const { isLoading, data } = useQuery(["products", pk], getProductDetails);
+
+  const [option1, setOption1] = useState("크기 선택");
+  const [option2, setOption2] = useState("재료 선택");
 
   const navigate = useNavigate();
   const { userLoading, isLoggedIn, user } = useUser();
@@ -52,6 +60,24 @@ export default function ProductPanel() {
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
+
+  const mutation = useMutation(toggleLikeProduct, {
+    onMutate: () => {
+      console.log("mutation starting");
+    },
+    onSuccess: (data) => {
+      console.log("success!");
+    },
+    onError: (error) => {
+      console.log("mutation has an error");
+    },
+  });
+
+  const onTapLike = (pk) => {
+    mutation.mutate(pk);
+    navigate(`/people/${user.pk}`);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -90,23 +116,27 @@ export default function ProductPanel() {
             >
               원
             </Text>
-            <Text
-              fontSize="18px"
-              fontWeight="400"
-              color="#777"
-              marginRight={"8px"}
-              as="s"
-            >
-              {data["original_price"].toLocaleString()}원
-            </Text>
-            <Text
-              fontSize="18px"
-              fontWeight="400"
-              color="#BC0000"
-              marginRight={"8px"}
-            >
-              {data["discount_rate"]}%
-            </Text>
+            {data.original_price !== data.price ? (
+              <Flex>
+                <Text
+                  fontSize="18px"
+                  fontWeight="400"
+                  color="#777"
+                  marginRight={"8px"}
+                  as="s"
+                >
+                  {data["original_price"].toLocaleString()}원
+                </Text>
+                <Text
+                  fontSize="18px"
+                  fontWeight="400"
+                  color="#BC0000"
+                  marginRight={"8px"}
+                >
+                  {data["discount_rate"]}%
+                </Text>
+              </Flex>
+            ) : null}
           </Flex>
           <Text
             fontSize="24px"
@@ -203,24 +233,29 @@ export default function ProductPanel() {
                 fontWeight="400"
                 letterSpacing={"-0.3px"}
               >
-                크기 선택
+                {option1}
               </MenuButton>
               <MenuList width="150%">
-                <MenuItem>
-                  <span>29.7x21cm </span>
-                </MenuItem>
-                <MenuItem>
-                  <span>35x25cm </span>
-                </MenuItem>
-                <MenuItem>
-                  <span>40x50cm </span>
-                </MenuItem>
-                <MenuItem>
-                  <span>100x200cm </span>
-                </MenuItem>
-                <MenuItem>
-                  <span>150x200cm </span>
-                </MenuItem>
+                <MenuItemTab
+                  title={"29.7x21cm"}
+                  set={() => setOption1("29.7x21cm")}
+                />
+                <MenuItemTab
+                  title={"35x25cm"}
+                  set={() => setOption1("35x25cm")}
+                />
+                <MenuItemTab
+                  title={"40x50cm"}
+                  set={() => setOption1("40x50cm")}
+                />
+                <MenuItemTab
+                  title={"100x200cm"}
+                  set={() => setOption1("100x200cm")}
+                />
+                <MenuItemTab
+                  title={"150x200cm"}
+                  set={() => setOption1("150x200cm")}
+                />
               </MenuList>
             </Menu>
           </Box>
@@ -256,18 +291,21 @@ export default function ProductPanel() {
                 fontWeight="400"
                 letterSpacing={"-0.3px"}
               >
-                재료 선택
+                {option2}
               </MenuButton>
               <MenuList width="150%">
-                <MenuItem>
-                  <span>흰색 캔버스</span>
-                </MenuItem>
-                <MenuItem>
-                  <span>미색 캔버스</span>
-                </MenuItem>
-                <MenuItem>
-                  <span>수채화 용지</span>
-                </MenuItem>
+                <MenuItemTab
+                  title={"흰색 캔버스"}
+                  set={() => setOption2("흰색 캔버스")}
+                />
+                <MenuItemTab
+                  title={"미색 캔버스"}
+                  set={() => setOption2("미색 캔버스")}
+                />
+                <MenuItemTab
+                  title={"수채화 용지"}
+                  set={() => setOption2("수채화 용지")}
+                />
               </MenuList>
             </Menu>
           </Box>
@@ -357,9 +395,7 @@ export default function ProductPanel() {
             fontSize="18px"
             fontWeight="400"
             letterSpacing={"-0.3px"}
-            onClick={() => {
-              navigate(`/people/${user.pk}`);
-            }}
+            onClick={() => onTapLike(pk)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -929,5 +965,13 @@ export default function ProductPanel() {
         </Box>
       )}
     </>
+  );
+}
+
+function MenuItemTab({ title, set }) {
+  return (
+    <MenuItem onClick={() => set(title)}>
+      <span>{title}</span>
+    </MenuItem>
   );
 }

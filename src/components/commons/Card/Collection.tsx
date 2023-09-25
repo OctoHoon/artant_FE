@@ -7,6 +7,10 @@ export default function Collection({ title, total_count, images }) {
       border="1px solid #D9D9D9"
       borderRadius={"4px"}
       cursor={"pointer"}
+      _hover={{
+        boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
+        transitionDuration: "0.2s",
+      }}
     >
       <Box
         display="grid"

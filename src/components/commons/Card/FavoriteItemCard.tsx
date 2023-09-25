@@ -87,9 +87,6 @@ export default function FavoriteItemCard({
             boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
             transitionDuration: "0.2s",
           }}
-          onClick={() => {
-            onTapLike(pk);
-          }}
         />
 
         {/* 흰 동그라미와 하트 아이콘 */}
@@ -112,7 +109,9 @@ export default function FavoriteItemCard({
                 boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
                 transitionDuration: "0.2s",
               }}
-              onClick={() => setIsLiked(!isLiked)}
+              onClick={() => {
+                onTapLike(pk);
+              }}
             >
               {isLiked ? (
                 <svg

@@ -229,7 +229,7 @@ export const tabList = [
   },
   {
     name: "커뮤니티&도움",
-    path: "Comunity & Help",
+    path: "community",
     icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"

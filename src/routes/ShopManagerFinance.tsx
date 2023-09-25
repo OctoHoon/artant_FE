@@ -270,7 +270,7 @@ export function MenuTextBox({ selected, text }) {
       padding={"8px 16px 8px 16px"}
       alignItems={"center"}
     >
-      {text}
+      <Text textStyle={"HeadingsH7M"}>{text}</Text>
     </Flex>
   );
 }

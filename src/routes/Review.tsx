@@ -349,7 +349,11 @@ export default function Review() {
 
       <Box height={"60px"} />
       <Flex alignSelf={"flex-start"}>
-        <PaginationController itemCount={1} pagination={10} />
+        <PaginationController
+          itemCount={1}
+          pagination={10}
+          handleChange={() => {}}
+        />
       </Flex>
       <Box height={"120px"} />
     </Flex>

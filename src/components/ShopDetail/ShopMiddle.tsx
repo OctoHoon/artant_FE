@@ -91,6 +91,7 @@ export default function ShopMiddle() {
           <PaginationController
             itemCount={data ? data.total_count : 0}
             pagination={16}
+            handleChange={setPage}
           />
         </Box>
       </Flex>

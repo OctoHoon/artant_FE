@@ -18,6 +18,7 @@ export default function Messages() {
         justifyContent="center" // Center vertically
         gap={"20px"}
         px={40}
+        paddingTop={"32px"}
       >
         <MessagesHeader />
         <MessagesBody />

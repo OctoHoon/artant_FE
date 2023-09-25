@@ -13,6 +13,10 @@ function Artist({ pk, source, name, description }) {
           borderRadius="100px"
           border="1px solid #FFF"
           src={source}
+          _hover={{
+            border: "1px solid #222", // Add a border on hover
+            boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+          }}
         />
         <Flex flexDirection={"column"} gap={"5ps"}>
           <Text fontSize={"20px"}>{name} 작가</Text>

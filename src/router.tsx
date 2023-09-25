@@ -32,6 +32,7 @@ import ShopManagerEditShop from "./routes/ShopManagerEditShop";
 import ShopManagerAddProduct from "./components/ShopManager/ShopManagerAddProduct";
 import Review from "./routes/Review";
 import EventDetail from "./routes/EventDetail";
+import ShopManagerCommunity from "./routes/ShopManagerCommunity";
 
 const router = createHashRouter(
   [
@@ -167,6 +168,10 @@ const router = createHashRouter(
             {
               path: "setting",
               element: <ShopManagerSettings />,
+            },
+            {
+              path: "community",
+              element: <ShopManagerCommunity />,
             },
             {
               path: "editShop",

@@ -212,6 +212,7 @@ export default function ShopManagerListings() {
           <PaginationController
             itemCount={data && data.products.length}
             pagination={9}
+            handleChange={setPage}
           />
         </Flex>
         <Tab />

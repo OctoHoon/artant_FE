@@ -27,7 +27,7 @@ function StarRating({ star, reviews, include_count }) {
       {/* Display the number of reviews */}
       <Box width="3px" />
       {include_count ? (
-        <Text fontSize={"12px"} fontWeight={300} marginTop={"2.5px"}>
+        <Text fontSize={"12px"} fontWeight={300} marginTop={"2.5wpx"}>
           ({reviews})
         </Text>
       ) : null}

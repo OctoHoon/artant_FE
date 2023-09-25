@@ -85,7 +85,11 @@ export default function FavoriteItems({ data }) {
       </Wrap>
       <Flex justifyContent={"center"}>
         {" "}
-        <PaginationController itemCount={20} pagination={40} />
+        <PaginationController
+          itemCount={20}
+          pagination={40}
+          handleChange={() => {}}
+        />
       </Flex>
 
       <Box height="40px" />

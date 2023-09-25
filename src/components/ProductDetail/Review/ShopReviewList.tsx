@@ -113,7 +113,7 @@ export default function ShopReviewList({ shop_pk }) {
       </Box>
       {isLoading ? null : (
         <>
-          {data ? (
+          {data.reviews.length === 0 ? (
             <Box padding={"40px"} textAlign={"center"}>
               <Text>리뷰 없음</Text>
             </Box>
@@ -126,6 +126,7 @@ export default function ShopReviewList({ shop_pk }) {
               <PaginationController
                 itemCount={data["total_count"]}
                 pagination={3}
+                handleChange={setPage}
               />
             </>
           )}

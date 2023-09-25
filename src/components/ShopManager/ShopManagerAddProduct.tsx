@@ -292,6 +292,7 @@ export default function UploadPhotos() {
         flexDirection={"column"}
         alignItems={"center"}
         gap={"120px"}
+        paddingTop={"32px"}
       >
         <Flex
           display={"flex"}
