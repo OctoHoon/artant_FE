@@ -1,5 +1,6 @@
 import { Flex, Box, Image, Button } from "@chakra-ui/react";
 import StarRating from "../commons/StarRating";
+import { Link } from "react-router-dom";
 
 export default function FavoriteShop({ data }) {
   const thumbnails = data.thumbnails
@@ -15,76 +16,78 @@ export default function FavoriteShop({ data }) {
         overflow: "hidden", // Hide content that overflows the box
       }}
     >
-      <Flex justifyContent={"space-between"}>
-        {thumbnails.map((thumbnail, index) => (
-          <Image
-            maxWidth={"152px"}
-            objectFit={"cover"}
-            height={"152px"}
-            key={index}
-            src={thumbnail || null} // 빈 문자열이면 기본 이미지 경로를 사용합니다.
-            width="24%"
-          />
-        ))}
-      </Flex>
-      <Flex
-        alignItems={"center"}
-        justifyContent={"space-between"}
-        margin={"12px"}
-      >
-        <Flex gap={"12px"}>
-          <Image
-            src={data.avatar}
-            width="48px"
-            height={"48px"}
-            borderRadius={"5px"}
-          />
-          <Box>
-            {data.shop_name}
-            <StarRating star={5} reviews={"6358"} include_count={true} />
-          </Box>
+      <Link to={`/shop/${data.pk}`}>
+        <Flex justifyContent={"space-between"}>
+          {thumbnails.map((thumbnail, index) => (
+            <Image
+              maxWidth={"152px"}
+              objectFit={"cover"}
+              height={"152px"}
+              key={index}
+              src={thumbnail || null} // 빈 문자열이면 기본 이미지 경로를 사용합니다.
+              width="24%"
+            />
+          ))}
         </Flex>
-        <Button
-          backgroundColor={"transparent"}
-          variant={"unstyled"}
-          style={{
-            display: "inline-flex",
-            height: "36px",
-            width: "36px",
-            padding: "6px 6px",
-            alignItems: "center",
-            gap: "5px",
-            flexShrink: 0,
-            borderRadius: "100px",
-            border: "1px solid #D9D9D9",
-          }}
+        <Flex
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          margin={"12px"}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
+          <Flex gap={"12px"}>
+            <Image
+              src={data.avatar}
+              width="48px"
+              height={"48px"}
+              borderRadius={"5px"}
+            />
+            <Box>
+              {data.shop_name}
+              <StarRating star={5} reviews={"6358"} include_count={true} />
+            </Box>
+          </Flex>
+          <Button
+            backgroundColor={"transparent"}
+            variant={"unstyled"}
+            style={{
+              display: "inline-flex",
+              height: "36px",
+              width: "36px",
+              padding: "6px 6px",
+              alignItems: "center",
+              gap: "5px",
+              flexShrink: 0,
+              borderRadius: "100px",
+              border: "1px solid #D9D9D9",
+            }}
           >
-            <mask
-              id="mask0_762_9104"
-              maskUnits="userSpaceOnUse"
-              x="0"
-              y="0"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
               width="18"
               height="18"
+              viewBox="0 0 18 18"
+              fill="none"
             >
-              <rect width="18" height="18" fill="#D9D9D9" />
-            </mask>
-            <g mask="url(#mask0_762_9104)">
-              <path
-                d="M8.99998 15.9952L8.17211 15.251C6.92885 14.1231 5.90072 13.1539 5.08774 12.3433C4.27476 11.5327 3.63054 10.8113 3.15506 10.1791C2.67957 9.54689 2.34736 8.97021 2.15842 8.44906C1.96947 7.92791 1.875 7.39907 1.875 6.86253C1.875 5.79812 2.23389 4.90702 2.95168 4.18923C3.66947 3.47144 4.56057 3.11255 5.62498 3.11255C6.27979 3.11255 6.89854 3.26568 7.48123 3.57194C8.06392 3.87819 8.57017 4.31737 8.99998 4.88949C9.42979 4.31737 9.93604 3.87819 10.5187 3.57194C11.1014 3.26568 11.7202 3.11255 12.375 3.11255C13.4394 3.11255 14.3305 3.47144 15.0483 4.18923C15.7661 4.90702 16.125 5.79812 16.125 6.86253C16.125 7.39907 16.0305 7.92791 15.8415 8.44906C15.6526 8.97021 15.3204 9.54689 14.8449 10.1791C14.3694 10.8113 13.7264 11.5327 12.9158 12.3433C12.1053 13.1539 11.0759 14.1231 9.82785 15.251L8.99998 15.9952ZM8.99998 14.475C10.2 13.3952 11.1875 12.4697 11.9625 11.6986C12.7375 10.9274 13.35 10.2575 13.8 9.68874C14.25 9.11999 14.5625 8.61494 14.7375 8.17359C14.9125 7.73224 15 7.29522 15 6.86253C15 6.11253 14.75 5.48753 14.25 4.98753C13.75 4.48753 13.125 4.23753 12.375 4.23753C11.7827 4.23753 11.2353 4.40556 10.7329 4.74162C10.2305 5.07767 9.83268 5.54522 9.5394 6.14427H8.46056C8.16249 5.54042 7.76345 5.07167 7.26345 4.73801C6.76345 4.40436 6.21729 4.23753 5.62498 4.23753C4.87979 4.23753 4.25599 4.48753 3.75358 4.98753C3.25118 5.48753 2.99998 6.11253 2.99998 6.86253C2.99998 7.29522 3.08748 7.73224 3.26248 8.17359C3.43748 8.61494 3.74998 9.11999 4.19998 9.68874C4.64998 10.2575 5.26248 10.9262 6.03748 11.695C6.81248 12.4637 7.79998 13.3904 8.99998 14.475Z"
-                fill="#1C1B1F"
-              />
-            </g>
-          </svg>
-        </Button>
-      </Flex>
+              <mask
+                id="mask0_823_10517"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="18"
+                height="18"
+              >
+                <rect width="18" height="18" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_823_10517)">
+                <path
+                  d="M8.99998 15.9952L8.17211 15.2509C6.92885 14.1231 5.90072 13.1538 5.08774 12.3433C4.27476 11.5327 3.63054 10.8113 3.15506 10.1791C2.67957 9.54686 2.34736 8.97018 2.15842 8.44903C1.96947 7.92788 1.875 7.39904 1.875 6.8625C1.875 5.79809 2.23389 4.90699 2.95168 4.1892C3.66947 3.47141 4.56057 3.11252 5.62498 3.11252C6.27979 3.11252 6.89854 3.26565 7.48123 3.57191C8.06392 3.87816 8.57017 4.31734 8.99998 4.88946C9.42979 4.31734 9.93604 3.87816 10.5187 3.57191C11.1014 3.26565 11.7202 3.11252 12.375 3.11252C13.4394 3.11252 14.3305 3.47141 15.0483 4.1892C15.7661 4.90699 16.125 5.79809 16.125 6.8625C16.125 7.39904 16.0305 7.92788 15.8415 8.44903C15.6526 8.97018 15.3204 9.54686 14.8449 10.1791C14.3694 10.8113 13.7264 11.5327 12.9158 12.3433C12.1053 13.1538 11.0759 14.1231 9.82785 15.2509L8.99998 15.9952Z"
+                  fill="#BC0000"
+                />
+              </g>
+            </svg>
+          </Button>
+        </Flex>
+      </Link>
     </Box>
   );
 }

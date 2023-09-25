@@ -11,8 +11,8 @@ export default function CartPanel({ data }) {
   data &&
     data.forEach((cartItem) => {
       // 각 요소의 price와 original_price를 더합니다.
-      totalPrice += cartItem.product.price;
-      totalOriginalPrice += cartItem.product.original_price;
+      totalPrice += cartItem.product.price * cartItem.quantity;
+      totalOriginalPrice += cartItem.product.original_price * cartItem.quantity;
     });
 
   return (

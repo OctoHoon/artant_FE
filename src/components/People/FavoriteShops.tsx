@@ -175,7 +175,9 @@ export default function FavoriteItems({ data }) {
       <Box height="40px" />
       <Wrap spacing={5} justify={"space-around"}>
         {data.map((shop, index) => (
-          <SquareShop key={index} data={shop} /* 여기에 다른 props 전달 */ />
+          <Link to={`/shop/${shop.pk}`}>
+            <SquareShop key={index} data={shop} /* 여기에 다른 props 전달 */ />
+          </Link>
         ))}
       </Wrap>
     </Box>
