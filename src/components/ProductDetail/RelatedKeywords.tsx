@@ -61,6 +61,11 @@ export default function RelatedKeywords({ category, subCategory }) {
                 padding={"12px 24px"}
                 borderRadius={"5px"}
                 textAlign={"center"}
+                _hover={{
+                  border: "1px solid #222", // Add a border on hover
+                  boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+                  transitionDuration: "0.2s",
+                }}
               >
                 {art.name}
               </Box>

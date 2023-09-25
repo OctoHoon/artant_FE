@@ -6,6 +6,7 @@ import useUser from "../lib/useUser";
 import { useState } from "react";
 import { getShopProducts } from "../api";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 export default function ShopManager() {
   const { userLoading, isLoggedIn, user } = useUser();
@@ -64,9 +65,11 @@ export default function ShopManager() {
             <Text fontSize={"20px"}>
               어서오세요, {user && user.shop_names[0]}샵!
             </Text>
-            <Text color="#666" as="u">
-              새 목록 만들기
-            </Text>
+            <Link to={"/your/shops/me/listings/create"}>
+              <Text color="#666" as="u">
+                새 목록 만들기
+              </Text>
+            </Link>
           </Flex>
         </Flex>
         <Flex justifyContent={"flex-end"} gap={"12px"}>

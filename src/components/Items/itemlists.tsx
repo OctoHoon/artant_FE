@@ -219,6 +219,7 @@ export default function Itemlists() {
             <PaginationController
               itemCount={data["total_count"]}
               pagination={40}
+              handleChange={() => {}}
             />
           </Flex>
         </>

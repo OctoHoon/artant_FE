@@ -53,6 +53,9 @@ export default function ReviewList() {
 
   const { isLoading, data } = useQuery([pk, page, selectedOption], getReviews);
 
+  console.log(data);
+  console.log(data?.length);
+
   return (
     <div>
       <Box display="flex" justifyContent="flex-end">
@@ -105,7 +108,7 @@ export default function ReviewList() {
       </Box>
       {isLoading ? null : (
         <>
-          {data ? (
+          {data.reviews.length == 0 ? (
             <Box padding={"40px"} textAlign={"center"}>
               <Text>리뷰 없음</Text>
             </Box>
@@ -118,6 +121,7 @@ export default function ReviewList() {
               <PaginationController
                 itemCount={data["total_count"]}
                 pagination={3}
+                handleChange={setPage}
               />
             </>
           )}

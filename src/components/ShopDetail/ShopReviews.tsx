@@ -97,7 +97,11 @@ export default function ShopReviews() {
           </Flex>
           <Box height={"40px"} />
           {data && data.reviews.map((review) => <ShopReview review={review} />)}
-          <PaginationController itemCount={20} pagination={5} />
+          <PaginationController
+            itemCount={20}
+            pagination={5}
+            handleChange={setPage}
+          />
 
           <Box />
         </Box>

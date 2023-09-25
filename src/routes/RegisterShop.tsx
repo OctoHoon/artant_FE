@@ -138,18 +138,20 @@ export default function RegisterShop() {
             color="var(--maincolorstextgray-595959, #666);"
           >
             오늘부터 판매를 시작하세요.
-            <Button
-              padding={"12px 20px"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              gap={"2px"}
-              borderRadius={"5px"}
-              background={"var(--maincolorsiconblack-1-c-1-b-1-f, #1C1B1F);"}
-              color={"white"}
-              fontSize={"16px"}
-            >
-              ARTANT 매장을 오픈하세요!
-            </Button>
+            <Link to="/your/shops/onboarding/name">
+              <Button
+                padding={"12px 20px"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                gap={"2px"}
+                borderRadius={"5px"}
+                background={"var(--maincolorsiconblack-1-c-1-b-1-f, #1C1B1F);"}
+                color={"white"}
+                fontSize={"16px"}
+              >
+                ARTANT 매장을 오픈하세요!
+              </Button>
+            </Link>
           </Flex>
         </Flex>
         <Flex

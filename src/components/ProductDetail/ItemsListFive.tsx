@@ -26,7 +26,7 @@ export default function ItemListFive({ title, shop_pk }) {
   return (
     <Flex
       flexDirection={"column"}
-      gap={"24px"}
+      gap={"20px"}
       alignItems={"flex-start"}
       width={"1280px"}
     >

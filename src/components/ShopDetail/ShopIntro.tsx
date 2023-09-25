@@ -277,15 +277,6 @@ export default function ShopIntro() {
             <ShopMember />
           </Box>
           <Box height="60px" />
-          <Text fontSize="18px" fontWeight={"500"}>
-            협력사
-          </Text>
-          <Box height="26px" />
-          <Flex>
-            <Text>(주)한마음인쇄</Text>
-            <Box width="12px" />
-            <Text>(주)한마음인쇄</Text>
-          </Flex>
         </Box>
       </Flex>
     </Box>

@@ -30,7 +30,7 @@ export default function SimilarItemFive({ title }) {
   return (
     <Flex
       flexDirection={"column"}
-      gap={"48px"}
+      gap={"20px"}
       alignItems={"flex-start"}
       width={"1280px"}
     >
