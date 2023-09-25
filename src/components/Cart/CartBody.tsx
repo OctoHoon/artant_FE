@@ -11,8 +11,11 @@ import {
 import CartPanel from "./CartPanel";
 import CartComponent from "./CartComponent";
 import React, { useEffect, useState } from "react";
+import useUser from "../../lib/useUser";
+import { Link } from "react-router-dom";
 
 export default function CartBody({ data }) {
+  const { userLoading, isLoggedIn, user } = useUser();
   const [cartData, setCartData] = useState(
     data?.cartline.slice().reverse() || []
   );
@@ -181,8 +184,7 @@ export default function CartBody({ data }) {
                 background={"white"}
                 fontWeight={"400"}
               >
-                {" "}
-                즐겨 찾기 바로가기
+                <Link to={`/people/${user && user.pk}`}>즐겨찾기 바로가기</Link>
               </Button>
             </Flex>
           </Box>
