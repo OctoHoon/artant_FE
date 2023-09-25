@@ -18,6 +18,11 @@ export default function BlackButton({
       color={type ? "black" : "white"}
       textAlign={"center"}
       alignSelf={"start"}
+      _hover={{
+        background: type
+          ? "var(--maincolorsbggrayeaeaea, #EAEAEA)"
+          : "var(--maincolorsbggray-555555, #555)",
+      }}
     >
       {title}
     </Button>

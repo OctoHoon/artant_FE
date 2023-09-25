@@ -201,7 +201,7 @@ export default function ShopHeader() {
                     height="60px"
                     src={data["users"][0]["avatar"]}
                   />
-                  <Text>샤랄라</Text>
+                  <Text>{data.shop_name}</Text>
                   <Flex
                     gap="6px"
                     padding="0px 10px"

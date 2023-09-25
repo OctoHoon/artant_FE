@@ -17,7 +17,7 @@ export default function RegisterBilling() {
   const toast = useToast();
 
   return (
-    <Flex flexDirection={"column"} gap={"60px"}>
+    <Flex flexDirection={"column"} gap={"60px"} mt={"32px"} mb={"120px"}>
       <ScrollToTop />
       <RegisterProcess currentPage={4} />
       <Flex flexDirection={"column"} gap={"40px"}>

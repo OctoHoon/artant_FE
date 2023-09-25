@@ -1,68 +1,29 @@
-import { Flex, Text, Box, Select, Wrap } from "@chakra-ui/react";
+import { Flex, Text, Box, Select, Wrap, Image } from "@chakra-ui/react";
 import ArtPiece from "../components/commons/Card/ArtPiece";
 import RecentlyViewed from "../components/RecentlyViewed";
 import PdpCard from "../components/commons/Card/PdpCard";
+import useUser from "../lib/useUser";
+import { useState } from "react";
+import { getShopProducts } from "../api";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ShopManager() {
-  const arts = [
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은 - 애니메이션화, CG, 스타 서정배 - By 김성은 작가",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-    },
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은 - 애니메이션화, CG, 스타 서정배 - By 김성은 작가",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-    },
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은 - 애니메이션화, CG, 스타 서정배 - By 김성은 작가",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-    },
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은 - 애니메이션화, CG, 스타 서정배 - By 김성은 작가",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-    },
-  ];
+  const { userLoading, isLoggedIn, user } = useUser();
+  const firstShopPK = user?.shop_pks[0] || null;
+  const [page, setPage] = useState(1);
+  const { isLoading, data } = useQuery(
+    ["shopProduct", firstShopPK, page],
+    getShopProducts
+  );
 
   return (
-    <Flex padding={"32px 10px 120px 0px"} flexDirection={"column"} gap={"40px"}>
+    <Flex
+      padding={"32px 10px 120px 0px"}
+      flexDirection={"column"}
+      gap={"40px"}
+      width={"1340px"}
+    >
       <Flex
-        maxW={"1280px"}
         minW={"989px"}
         justifyContent={"space-between"}
         alignItems={"center"}
@@ -80,8 +41,12 @@ export default function ShopManager() {
             }
             display={"flex"}
           >
-            <Box width={"40px"} height={"40px"}>
-              <svg
+            <Image
+              width={"58px"}
+              height={"58px"}
+              src={user && user.shop_avatars[0]}
+            >
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
                 height="40"
@@ -92,11 +57,13 @@ export default function ShopManager() {
                   d="M29.9994 3.33333C30.2892 3.33333 30.568 3.43394 30.7899 3.61503L30.9157 3.73318L36.3695 9.61373L36.4205 9.67856C36.5902 9.90468 36.6667 10.1611 36.6667 10.4129L36.6642 13.6112C36.6642 15.2682 36.0332 16.7778 34.9985 17.913L34.9972 35.4167C34.9972 36.0495 34.527 36.5725 33.9169 36.6553L33.7472 36.6667H6.25139C5.61858 36.6667 5.09558 36.1963 5.01281 35.5863L5.00139 35.4167L5.00009 17.913C4.04499 16.8652 3.43394 15.4982 3.34559 13.9909L3.33449 13.6112L3.33418 10.4849C3.32073 10.2561 3.37014 10.0206 3.49406 9.80521L3.60283 9.64611L3.66813 9.56988L9.08294 3.73318C9.28006 3.52071 9.54351 3.38468 9.82711 3.34524L9.99933 3.33333H29.9994ZM25.1359 17.4035L25.116 17.433C23.9512 18.9907 22.092 19.9988 19.9974 19.9988C17.891 19.9988 16.0227 18.9793 14.8592 17.4068C13.6968 18.9793 11.8285 19.9988 9.72213 19.9988C8.94028 19.9988 8.19124 19.8583 7.49888 19.6013L7.50099 34.165H9.99869L9.99933 22.9183C9.99933 22.2855 10.4696 21.7625 11.0797 21.6798L11.2493 21.6683H18.7425C19.3754 21.6683 19.8984 22.1387 19.9812 22.7487L19.9925 22.9183L19.992 34.165H32.496L32.4964 19.6025C31.805 19.8588 31.057 19.9988 30.2765 19.9988C28.1687 19.9988 26.2994 18.9778 25.1359 17.4035ZM17.491 24.1683H12.4993V34.165H17.491V24.1683ZM28.7572 21.6683C29.39 21.6683 29.913 22.1387 29.9957 22.7487L30.0072 22.9183V28.755C30.0072 29.3878 29.5369 29.9108 28.9269 29.9937L28.7572 30.005H22.9215C22.2887 30.005 21.7657 29.5348 21.6829 28.9247L21.6715 28.755V22.9183C21.6715 22.2855 22.1417 21.7625 22.7519 21.6798L22.9215 21.6683H28.7572ZM27.506 24.1683H24.171V27.505H27.506V24.1683ZM13.6093 11.67H5.83433L5.83449 13.6112L5.84479 13.8963L5.89209 14.2817L5.94666 14.5421L6.02896 14.8288L6.11956 15.0752L6.18736 15.2318C6.23931 15.3449 6.29653 15.4551 6.35869 15.5621L6.53026 15.8312L6.62074 15.9557L6.83536 16.2151L7.07164 16.4553L7.23206 16.5968L7.30221 16.654C7.82643 17.0715 8.46094 17.3563 9.15499 17.4578L9.45594 17.4898L9.72213 17.4988C11.7797 17.4988 13.464 15.9003 13.6008 13.8774L13.6097 13.6112L13.6093 11.67ZM23.8844 11.67H16.1093L16.1097 13.6112C16.1097 15.5794 17.5724 17.206 19.4699 17.4633L19.7312 17.4898L19.9974 17.4988C22.055 17.4988 23.7392 15.9003 23.876 13.8774L23.885 13.6112L23.8844 11.67ZM34.1627 11.67H26.3877L26.3889 13.6112C26.3889 15.5794 27.8515 17.206 29.749 17.4633L30.0104 17.4898L30.2765 17.4988C31.217 17.4988 32.0795 17.1648 32.7519 16.609L32.9015 16.4788L33.0945 16.2893L33.3382 16.0073C33.4282 15.8924 33.512 15.7723 33.5889 15.6475L33.7614 15.3363L33.8662 15.1064L33.9634 14.8479L34.0129 14.6886L34.0767 14.4351L34.1239 14.1725L34.154 13.8946L34.1642 13.6112L34.1627 11.67ZM15.102 5.83166H10.5443L7.44766 9.16999H14.0754L15.102 5.83166ZM22.2804 5.83166H17.717L16.6904 9.16999H23.307L22.2804 5.83166ZM29.4527 5.83166H24.8954L25.922 9.16999H32.5494L29.4527 5.83166Z"
                   fill="#D9D9D9"
                 />
-              </svg>
-            </Box>
+              </svg> */}
+            </Image>
           </Box>
           <Flex flexDirection={"column"} gap={"6px"}>
-            <Text fontSize={"20px"}>어서오세요, ARTANT샵!</Text>
+            <Text fontSize={"20px"}>
+              어서오세요, {user && user.shop_names[0]}샵!
+            </Text>
             <Text color="#666" as="u">
               새 목록 만들기
             </Text>
@@ -147,9 +114,8 @@ export default function ShopManager() {
           <Flex
             padding={"24px"}
             gap={"24px"}
-            minW={"989px"}
-            width={"1280px"}
-            maxW={"1280px"}
+            minW={"1340px"}
+            maxW={"1340px"}
             flexDirection={"column"}
             border={
               "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9);"
@@ -206,7 +172,7 @@ export default function ShopManager() {
           </Flex>
         </Flex>
       </Flex>
-      <Flex flexDirection={"column"} gap={"16px"}>
+      <Flex flexDirection={"column"} gap={"16px"} width={"1340px"}>
         <Flex
           alignSelf={"stretch"}
           alignItems={"center"}
@@ -255,7 +221,7 @@ export default function ShopManager() {
           />
         </Flex>
       </Flex>
-      <Flex flexDirection={"column"} gap={"16px"}>
+      <Flex flexDirection={"column"} gap={"16px"} width={"1340px"}>
         <Text fontSize={"22px"} fontWeight={"500"}>
           상점 체크 리스트
         </Text>
@@ -304,22 +270,70 @@ export default function ShopManager() {
           최근 활동
         </Text>
         <Wrap gap={"40px"}>
-          <Wrap spacing={"45px"}>
-            {arts.map((art, index) => (
-              <PdpCard
-                pk={art.pk}
-                source={art.source}
-                title={art.title}
-                description=""
-                artist={art.artist}
-                price={art.price}
-                originalPrice={art.originalPrice}
-                free_shipping={art.free_shipping}
-                is_best_seller={art.is_best_seller}
-                is_liked={false}
-                key={index}
-              />
-            ))}
+          <Wrap spacing={"56.5px"}>
+            {data &&
+              data.products.slice(0, 4).map((art, index) => (
+                <Flex flexDirection={"column"} alignItems={"flex-start"}>
+                  <Image
+                    objectFit={"cover"}
+                    width={"290px"}
+                    height={"247px"}
+                    src={art["thumbnail"]}
+                  />
+                  <Flex
+                    width={"290px"}
+                    padding={"10px 0px 8px 8px"}
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    gap={"12px"}
+                  >
+                    {" "}
+                    <Flex
+                      alignSelf={"stretch"}
+                      flexDirection={"column"}
+                      alignItems={"flex-start"}
+                      gap={"5px"}
+                    >
+                      {" "}
+                      <Text
+                        color="var(--maincolorstextblack-222222, #222)"
+                        fontFamily="Spoqa Han Sans Neo"
+                        fontSize="16px"
+                        fontStyle="normal"
+                        fontWeight="400"
+                        lineHeight="normal"
+                        textTransform="capitalize"
+                      >
+                        [{art["category"]}]
+                      </Text>
+                      <Text
+                        color="var(--maincolorstextblack-222222, #222)"
+                        fontFamily="Spoqa Han Sans Neo"
+                        fontSize="14px"
+                        fontStyle="normal"
+                        fontWeight="400"
+                        lineHeight="130%" /* 이렇게 설정하면 18.2px로 계산됩니다. */
+                        letterSpacing="0.035px"
+                        textTransform="capitalize"
+                        noOfLines={2}
+                      >
+                        {art["name"]} - {art["shop_name"]} 작가
+                      </Text>
+                    </Flex>
+                    <Text
+                      color="var(--maincolorstextblack-222222, #222)"
+                      fontFamily="Spoqa Han Sans Neo"
+                      fontSize="18px"
+                      fontStyle="normal"
+                      fontWeight="500"
+                      lineHeight="normal"
+                      letterSpacing="-0.3px"
+                    >
+                      {art["price"].toLocaleString()}원
+                    </Text>
+                  </Flex>
+                </Flex>
+              ))}
           </Wrap>
         </Wrap>
       </Flex>

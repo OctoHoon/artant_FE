@@ -284,6 +284,9 @@ export default function ProductPanel() {
               addToCart(cartData);
               navigate("/cart");
             }}
+            _hover={{
+              background: "var(--maincolorsbggray-222222, #222)",
+            }}
           >
             바로 구매
           </Button>
@@ -296,6 +299,9 @@ export default function ProductPanel() {
             fontWeight="500"
             letterSpacing={"-0.3px"}
             onClick={onOpen}
+            _hover={{
+              background: "var(--maincolorsbggray-555555, #555)",
+            }}
           >
             장바구니
           </Button>
@@ -308,6 +314,7 @@ export default function ProductPanel() {
           <Button
             width="100%"
             color="#222"
+            background={"#E9E9E9"}
             fontSize="18px"
             fontWeight="400"
             letterSpacing={"-0.3px"}
@@ -346,6 +353,7 @@ export default function ProductPanel() {
           <Button
             width="100%"
             color="#222"
+            background={"#FFF"}
             fontSize="18px"
             fontWeight="400"
             letterSpacing={"-0.3px"}

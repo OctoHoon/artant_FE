@@ -16,7 +16,15 @@ import {
 } from "@chakra-ui/react";
 import ArtantButton from "../commons/ArtantButton";
 
-export default function PayInfo() {
+export default function PayInfo({ data }) {
+  let totalPrice = 0;
+
+  // data.cartline의 각 요소를 순회하며 price와 original_price를 합산합니다.
+  data &&
+    data.forEach((cartItem) => {
+      // 각 요소의 price와 original_price를 더합니다.
+      totalPrice += cartItem.product.price * cartItem.quantity;
+    });
   return (
     <Flex flexDirection={"column"} alignSelf={"stretch"}>
       <Box
@@ -638,10 +646,13 @@ export default function PayInfo() {
           alignItems={"center"}
           alignSelf={"stretch"}
           background={"var(--maincolorsbgredf-12-e-24, #F12E24)"}
+          _hover={{
+            background: "var(--maincolorsbggray-222222, #222)",
+          }}
         >
           <Flex alignItems={"baseline"} color={"white"}>
             <Text fontSize={"24px"} fontWeight={"500"}>
-              418,000
+              {totalPrice.toLocaleString()}
             </Text>
             <Text fontSize={"16px"}>원 결제하기</Text>
           </Flex>

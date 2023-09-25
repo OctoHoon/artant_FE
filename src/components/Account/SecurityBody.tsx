@@ -30,6 +30,9 @@ export default function SecurityBody() {
               borderRadius={"100px"}
               background={"#222"}
               color={"white"}
+              _hover={{
+                background: "var(--maincolorsbggray-555555, #555)",
+              }}
             >
               2차 인증 켜기
             </Button>

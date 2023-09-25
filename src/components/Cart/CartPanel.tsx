@@ -9,7 +9,7 @@ export default function CartPanel({ data }) {
 
   // data.cartline의 각 요소를 순회하며 price와 original_price를 합산합니다.
   data &&
-    data.cartline.forEach((cartItem) => {
+    data.forEach((cartItem) => {
       // 각 요소의 price와 original_price를 더합니다.
       totalPrice += cartItem.product.price;
       totalOriginalPrice += cartItem.product.original_price;
@@ -106,7 +106,7 @@ export default function CartPanel({ data }) {
             />
           </g>
         </svg>
-        전체 상품 : {data && data.cartline.length}개
+        전체 상품 : {data && data.length}개
       </Box>
       <Box
         display="flex"
@@ -118,7 +118,7 @@ export default function CartPanel({ data }) {
         flexWrap="wrap"
       >
         {data &&
-          data.cartline
+          data
             .slice(0, 5)
             .map((item, index) => (
               <Image
@@ -126,6 +126,7 @@ export default function CartPanel({ data }) {
                 width="64px"
                 height="64px"
                 src={item.product.thumbnail}
+                objectFit={"cover"}
               />
             ))}
       </Box>
@@ -199,7 +200,14 @@ export default function CartPanel({ data }) {
           color={"white"}
           background={" var(--maincolorsbgredf-12-e-24, #F12E24)"}
           onClick={() => {
-            navigate("/payment");
+            navigate("/payment", {
+              state: {
+                data: data && data,
+              },
+            });
+          }}
+          _hover={{
+            background: "var(--maincolorsbggray-222222, #222)",
           }}
         >
           주문하기

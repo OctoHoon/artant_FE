@@ -7,7 +7,8 @@ import NewsTwo from "../commons/Card/NewsTwo";
 export default function NewsEvent() {
   const arts = [
     {
-      source: "assets/images/Rectangle_90.png",
+      source:
+        "https://s3-alpha-sig.figma.com/img/afb5/df1b/2178445e4545bf72f8d8b74f53a4df07?Expires=1696204800&Signature=FHCmBvadWxSRlcEbS3aBYFRT79Sa5Ynvg9cCbmEvZ~SLquKFsJo8bqcFoY3iEq~UMEcte2DpcoAOAtr9U7W7FNfl6bEBqo-E~OVaqPOqYtYGFxN3tw8vRiM0AnmmjyWu0jnGgQRjgHILpE4weKYkUp8e-Hx65-VrONkEXUkTFcasROmYRVbFo-cCpLPUW63A6c~Qsvf~g1b4qfMgXsYWYuJsxbd0wYida~JpM6AadUFtVpQrKY5f~hxVnUL5P8B1EWVImTr1nX-G07NAQiWnDuK9lnjCKAIsPM5MiII7QPC-nBrSWHrJTkIohoAtq6pP2Oa2xZk1cW7avMAlx1SYBg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
       title: "내셔널갤러리 명화전 (국립중앙박물관)",
     },
     {
@@ -39,7 +40,7 @@ export default function NewsEvent() {
       width={"1280px"}
     >
       <Text fontSize={"30px"} fontWeight={"500"}>
-        Gift Categories
+        News Event
       </Text>
       <Flex alignItems={"flex-start"} gap={"10px"}>
         <Flex alignItems={"flex-start"} gap={"10px"}>

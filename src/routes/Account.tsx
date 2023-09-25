@@ -33,6 +33,8 @@ export default function Account() {
         justifyContent="center" // Center vertically
         gap={"20px"}
         px={40}
+        mt={"32px"}
+        mb={"120px"}
       >
         <AccountHeader />
         <Box width={"1280px"} height={"2px"} background="black" />

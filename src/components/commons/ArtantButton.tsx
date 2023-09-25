@@ -8,7 +8,9 @@ export default function ArtantButton({ title, width, onClick }) {
       color={"black"}
       border={"1px solid #000"}
       borderRadius={"5px"}
-      _hover={{ bg: "gray" }}
+      _hover={{
+        background: "var(--maincolorsbggray-555555, #555)",
+      }}
       onClick={onClick}
     >
       {title}

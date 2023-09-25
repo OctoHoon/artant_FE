@@ -81,8 +81,29 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <Text>아이디/비밀번호</Text>
             </HStack>
           </VStack>
-          <Button py={6} mt={8} color={"black"} w="100%" onClick={handleLogin}>
-            로그인
+          <Button
+            py={6}
+            mt={8}
+            color={"black"}
+            w="100%"
+            onClick={handleLogin}
+            backgroundColor="var(--maincolorsbgblack-222222, #222)"
+            _hover={{
+              background: "var(--maincolorsbggray-555555, #555)",
+            }}
+          >
+            <Text
+              color="#DBDBDB"
+              textAlign="center"
+              fontFamily="Spoqa Han Sans Neo"
+              fontSize="16px"
+              fontStyle="normal"
+              fontWeight={400}
+              lineHeight="normal"
+              letterSpacing="-0.3px"
+            >
+              로그인
+            </Text>
           </Button>
           <SocialLogin />
           <Button

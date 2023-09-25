@@ -22,7 +22,7 @@ import ScrollToTop from "../components/commons/ScrollToTop";
 
 export default function ShopDetail() {
   return (
-    <Box>
+    <Box mb={"120px"}>
       <ScrollToTop />
       <ShopHeader />
       <Box

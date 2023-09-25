@@ -34,7 +34,13 @@ function NewsTwo({ source, title }) {
           transitionDuration: "0.2s",
         }}
       >
-        <Image width="275px" height="158px" objectFit="cover" src={source} />
+        <Image
+          width="275px"
+          height="158px"
+          objectFit="cover"
+          src={source}
+          borderRadius={"10px"}
+        />
       </Box>
       <HStack alignItems={"center"}>
         <Text fontSize={"15px"} align={"center"}>

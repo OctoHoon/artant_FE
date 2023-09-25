@@ -17,8 +17,10 @@ import {
 import MessageTab from "../Messages/MessageTab";
 import MessagesPreview from "../Messages/MessagesPreview";
 import SnsTab from "./SnsTab";
+import useUser from "../../lib/useUser";
 
 export default function AccountBody() {
+  const { userLoading, isLoggedIn, user } = useUser();
   return (
     <Flex
       padding={"24px 0px 120px 40px"}
@@ -39,7 +41,7 @@ export default function AccountBody() {
           <Flex flexDirection={"column"} alignItems={"flex-start"} gap={"16px"}>
             <Flex gap={"20px"}>
               <Text>이 름 :</Text>
-              <Text>홍길동</Text>
+              <Text>{user && user.name}</Text>
             </Flex>
             <Flex gap={"20px"}>
               <Text>주 소 :</Text>
@@ -137,6 +139,9 @@ export default function AccountBody() {
           alignItems={"center"}
           background="black"
           color={"white"}
+          _hover={{
+            background: "var(--maincolorsbggray-555555, #555)",
+          }}
         >
           비밀번호 변경
         </Button>
@@ -183,6 +188,9 @@ export default function AccountBody() {
             alignItems={"center"}
             background="black"
             color={"white"}
+            _hover={{
+              background: "var(--maincolorsbggray-555555, #555)",
+            }}
           >
             이메일 변경
           </Button>
@@ -339,6 +347,9 @@ export default function AccountBody() {
           alignItems={"center"}
           background="black"
           color={"white"}
+          _hover={{
+            background: "var(--maincolorsbggray-555555, #555)",
+          }}
         >
           계정 폐쇄
         </Button>

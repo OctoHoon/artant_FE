@@ -306,3 +306,32 @@ export const addToCart = ({
 
 export const getCart = () =>
   instance.get(`cart/`).then((response) => response.data);
+
+export const addToPurchase = ({
+  product_pk,
+  quantity,
+  variant_pks,
+}: IUploadCartVariables) =>
+  instance
+    .post(
+      `purchase/`,
+      { product_pk, quantity, variant_pks },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+
+export const getPurchase = () =>
+  instance.get(`purchase/`).then((response) => response.data);
+
+export const deleteCartLine = (cartline_pk) =>
+  instance
+    .delete(`cart/${cartline_pk}`, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);

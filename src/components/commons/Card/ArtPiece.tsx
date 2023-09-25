@@ -70,6 +70,7 @@ function ArtPiece({
         <Image
           height="247px"
           width="290px"
+          borderRadius={"10px"}
           objectFit="cover"
           src={source}
           onMouseEnter={handleMouseEnter}

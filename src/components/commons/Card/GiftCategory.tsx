@@ -37,7 +37,7 @@ function GiftCategory({ source, category }) {
             transitionDuration: "0.2s",
           }}
         >
-          <Image maxH="290" src={source} />
+          <Image maxH="290" src={source} borderRadius={"10px"} />
         </Box>
         <Text fontSize={"20px"} fontWeight={"500"}>
           <Link>{category}</Link>

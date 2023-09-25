@@ -81,7 +81,7 @@ export default function UploadPhotos() {
       console.log(result);
 
       if (productPK) {
-        createPhotoMutation.mutate({
+        const responsephoto = createPhotoMutation.mutate({
           image: `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${result.id}/public`,
           productPK,
         });
@@ -94,7 +94,7 @@ export default function UploadPhotos() {
 
       if (productPK) {
         console.log("upload image ahs pk ", productPK);
-        putProduct({
+        const thumbnailResponse = putProduct({
           thumbnail: `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${result.id}/public`,
           productPK: productPK, // 제품 PK 값 설정
         });
@@ -302,7 +302,8 @@ export default function UploadPhotos() {
         flexDirection={"column"}
         alignItems={"center"}
         gap={"120px"}
-        paddingTop={"32px"}
+        mt={"32px"}
+        mb={"120px"}
       >
         <Flex
           display={"flex"}
@@ -3629,6 +3630,9 @@ export default function UploadPhotos() {
                   uploadVideoURLMutation.isLoading ||
                   uploadImageAndThumbnailMutation.isLoading
                 }
+                _hover={{
+                  background: "var(--maincolorsbggray-555555, #555)",
+                }}
               >
                 <Text
                   color="var(--maincolorstext-white, #FFF);"
@@ -3713,10 +3717,19 @@ const GrayBoxImage = ({ src, width, height, index }) => {
           flexDirection={"column"}
           justifyContent={"center"}
           alignItems={"center"}
-          gap={"8px"}
+          gap={"4px"}
           border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
         >
-          {svgComponents[index]}
+          <Flex
+            width={"80px"}
+            height={"80px"}
+            alignItems={"center"}
+            justifyItems={"center"}
+            alignContent={"center"}
+            justifyContent={"center"}
+          >
+            {svgComponents[index]}
+          </Flex>
           <Text
             color="var(--maincolorstextgray-969696, #969696)"
             textAlign="center"

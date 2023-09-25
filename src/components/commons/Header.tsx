@@ -95,57 +95,64 @@ export default function Header() {
           {!userLoading ? (
             !isLoggedIn ? (
               <>
-                <Box
-                  as="button"
-                  onClick={onLoginOpen}
-                  bg="transparent"
-                  border="none"
-                  _hover={{ bg: "transparent" }}
-                  _active={{ bg: "transparent" }}
-                  _focus={{ outline: "none" }}
-                  height={"16px"}
-                >
-                  <Text fontSize="13px">로그인</Text>
-                </Box>
-                <Text>•</Text>
-                <Box
-                  as="button"
-                  onClick={onLoginOpen}
-                  bg="transparent"
-                  border="none"
-                  _hover={{ bg: "transparent" }}
-                  _active={{ bg: "transparent" }}
-                  _focus={{ outline: "none" }}
-                  height={"16px"}
-                >
-                  <Text fontSize="13px">회원가입</Text>
-                </Box>
-                <Text>•</Text>
-                <Box color={"black"} height={"16px"}>
-                  <Link to={"/"}>
-                    <Text fontSize="13px">고객센터</Text>
-                  </Link>
-                </Box>
-                <Divider
-                  orientation="vertical"
-                  height="16px"
-                  borderColor="#D9D9D9"
-                  mx={2}
-                />{" "}
-                <Box color={"#1C1B1F"} height={"24px"}>
-                  <Link to={"/"}>
-                    <SvgHeart />
-                  </Link>
-                </Box>
-                <Box color={"#1C1B1F"} height={"24px"}>
-                  <Link to={"/"}>
-                    <SvgBasket />
-                  </Link>
-                </Box>
+                <Flex alignItems={"center"} gap={"10px"} color={"#777"}>
+                  <Box
+                    as="button"
+                    onClick={onLoginOpen}
+                    bg="transparent"
+                    border="none"
+                    _hover={{ bg: "transparent" }}
+                    _active={{ bg: "transparent" }}
+                    _focus={{ outline: "none" }}
+                    height={"16px"}
+                  >
+                    <Text fontSize="13px">로그인</Text>
+                  </Box>
+                  <Text>•</Text>
+                  <Box
+                    as="button"
+                    onClick={onLoginOpen}
+                    bg="transparent"
+                    border="none"
+                    _hover={{ bg: "transparent" }}
+                    _active={{ bg: "transparent" }}
+                    _focus={{ outline: "none" }}
+                    height={"16px"}
+                  >
+                    <Text fontSize="13px">회원가입</Text>
+                  </Box>
+                  <Text>•</Text>
+                  <Box height={"16px"}>
+                    <Link to={"/"}>
+                      <Text fontSize="13px">고객센터</Text>
+                    </Link>
+                  </Box>
+                  <Divider
+                    orientation="vertical"
+                    height="16px"
+                    borderColor="#D9D9D9"
+                    mx={2}
+                  />{" "}
+                  <Box color={"#1C1B1F"} height={"24px"}>
+                    <Link to={"/"}>
+                      <SvgHeart />
+                    </Link>
+                  </Box>
+                  <Box color={"#1C1B1F"} height={"24px"}>
+                    <Link to={"/"}>
+                      <SvgBasket />
+                    </Link>
+                  </Box>
+                </Flex>
               </>
             ) : (
-              <Flex alignItems={"center"} gap={"5px"} color={"#777"}>
-                <Text as={"button"} onClick={onLogOut} fontSize="13px">
+              <Flex alignItems={"center"} gap={"10px"} color={"#777"}>
+                <Text
+                  as={"button"}
+                  onClick={onLogOut}
+                  fontSize="13px"
+                  style={{ whiteSpace: "nowrap" }}
+                >
                   로그아웃
                 </Text>
                 <svg
@@ -158,7 +165,9 @@ export default function Header() {
                   <circle cx="1" cy="1" r="1" fill="#AAAAAA" />
                 </svg>
                 <Link to={"/"}>
-                  <Text fontSize="13px">고객센터</Text>
+                  <Text fontSize="13px" style={{ whiteSpace: "nowrap" }}>
+                    고객센터
+                  </Text>
                 </Link>
                 <Divider
                   orientation="vertical"

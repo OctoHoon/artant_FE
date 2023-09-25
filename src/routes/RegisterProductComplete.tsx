@@ -37,6 +37,8 @@ export default function RegisterShopName() {
       flexDirection={"column"}
       alignItems={"center"}
       gap={"120px"}
+      mt={"32px"}
+      mb={"120px"}
     >
       <Flex
         display={"inline-flex"}
@@ -197,6 +199,9 @@ export default function RegisterShopName() {
                 onClick={() =>
                   navigate(`/your/shops/${shopPk}/onboarding/payments`)
                 }
+                _hover={{
+                  background: "var(--maincolorsbggray-555555, #555)",
+                }}
               >
                 <Text
                   color="var(--maincolorstext-white, #FFF);"
