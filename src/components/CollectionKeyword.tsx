@@ -4,7 +4,7 @@ export default function CollectionKeyword({ width, height }) {
   return (
     <Flex flexDirection={"column"} gap={"40px"}>
       <Text fontSize={"24px"} fontWeight={"500"}>
-        당신이 좋아할 컬렉션
+        추천 검색어
       </Text>
       <Flex
         width="1280px"
@@ -17,12 +17,19 @@ export default function CollectionKeyword({ width, height }) {
           alignItems={"center"}
           cursor={"pointer"}
           gap={"12px"}
+          _hover={{
+            textDecoration: "underline", // 마우스 오버 시 텍스트에 밑줄 추가
+          }}
         >
           <Image
             width={width}
             height={height}
             borderRadius={width}
             src="/assets/images/Ellipse_1.png"
+            _hover={{
+              border: "1px solid #222", // Add a border on hover
+              boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+            }}
           />
           <Text
             color="var(--maincolorstextblack-222222, #222)"
@@ -43,12 +50,19 @@ export default function CollectionKeyword({ width, height }) {
           alignItems={"center"}
           cursor={"pointer"}
           gap={"12px"}
+          _hover={{
+            textDecoration: "underline", // 마우스 오버 시 텍스트에 밑줄 추가
+          }}
         >
           <Image
             width={width}
             height={height}
             borderRadius={width}
             src="/assets/images/Ellipse_2.png"
+            _hover={{
+              border: "1px solid #222", // Add a border on hover
+              boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+            }}
           />
           <Text
             color="var(--maincolorstextblack-222222, #222)"
@@ -69,12 +83,19 @@ export default function CollectionKeyword({ width, height }) {
           alignItems={"center"}
           cursor={"pointer"}
           gap={"12px"}
+          _hover={{
+            textDecoration: "underline", // 마우스 오버 시 텍스트에 밑줄 추가
+          }}
         >
           <Image
             width={width}
             height={height}
             borderRadius={width}
             src="/assets/images/Ellipse_3.png"
+            _hover={{
+              border: "1px solid #222", // Add a border on hover
+              boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+            }}
           />
           <Text
             color="var(--maincolorstextblack-222222, #222)"
@@ -95,12 +116,19 @@ export default function CollectionKeyword({ width, height }) {
           alignItems={"center"}
           cursor={"pointer"}
           gap={"12px"}
+          _hover={{
+            textDecoration: "underline", // 마우스 오버 시 텍스트에 밑줄 추가
+          }}
         >
           <Image
             width={width}
             height={height}
             borderRadius={width}
             src="/assets/images/Ellipse_4.png"
+            _hover={{
+              border: "1px solid #222", // Add a border on hover
+              boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+            }}
           />
           <Text
             color="var(--maincolorstextblack-222222, #222)"
@@ -121,12 +149,19 @@ export default function CollectionKeyword({ width, height }) {
           alignItems={"center"}
           cursor={"pointer"}
           gap={"12px"}
+          _hover={{
+            textDecoration: "underline", // 마우스 오버 시 텍스트에 밑줄 추가
+          }}
         >
           <Image
             width={width}
             height={height}
             borderRadius={width}
             src="/assets/images/Ellipse_5.png"
+            _hover={{
+              border: "1px solid #222", // Add a border on hover
+              boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+            }}
           />
           <Text
             color="var(--maincolorstextblack-222222, #222)"
@@ -147,12 +182,19 @@ export default function CollectionKeyword({ width, height }) {
           alignItems={"center"}
           cursor={"pointer"}
           gap={"12px"}
+          _hover={{
+            textDecoration: "underline", // 마우스 오버 시 텍스트에 밑줄 추가
+          }}
         >
           <Image
             width={width}
             height={height}
             borderRadius={width}
             src="/assets/images/Ellipse_6.png"
+            _hover={{
+              border: "1px solid #222", // Add a border on hover
+              boxShadow: "0px 2px 8px 0px rgba(34, 34, 34, 0.15)",
+            }}
           />
           <Text
             color="var(--maincolorstextblack-222222, #222)"
