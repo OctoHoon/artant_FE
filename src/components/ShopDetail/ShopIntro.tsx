@@ -76,20 +76,20 @@ export default function ShopIntro() {
     <Box>
       <Flex gap={10}>
         <Box maxW="258px">
-          <Text fontSize="18px" fontWeight={"500"} width={"252px"}>
+          <Text textStyle={"H6M"} width={"252px"}>
             에바아트프린트 소개
           </Text>
           <Box height="45px" />
           <Flex>
             <Box>
-              <Text fontSize={"13px"}>판매량</Text>
+              <Text textStyle={"B13R"}>판매량</Text>
               <Text fontSize="22px" fontWeight={"500"}>
                 21,967
               </Text>
             </Box>
             <Box width="36px" />
             <Box>
-              <Text fontSize={"13px"}>On ArtAnt Since</Text>
+              <Text textStyle={"B13R"}>On ArtAnt Since</Text>
               <Text fontSize="22px" fontWeight={"500"}>
                 2023
               </Text>

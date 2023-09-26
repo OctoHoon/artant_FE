@@ -7,10 +7,10 @@ import Footer from "../commons/Footer";
 
 export default function Root() {
   return (
-    <Flex w={"full"} gap={"60px"} justifyContent={"center"}>
+    <Flex w={"full"} minW={"1320px"} gap={"60px"}>
       <ShopManagerSideBar />
 
-      <Flex alignSelf={"center"}>
+      <Flex w={"full"} alignSelf={"center"} justifyContent={"center"}>
         {/* Outlet 내용이 이곳에 위치할 것입니다 */}
         <Outlet />
       </Flex>

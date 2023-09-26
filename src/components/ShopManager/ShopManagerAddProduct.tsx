@@ -293,6 +293,7 @@ export default function UploadPhotos() {
         alignItems={"center"}
         gap={"120px"}
         paddingTop={"32px"}
+        paddingLeft={"180px"}
       >
         <Flex
           display={"flex"}

@@ -5,9 +5,11 @@ export default function BlackButton({
   borderRadius,
   flex = "",
   type = false,
+  width = "full",
 }) {
   return (
     <Button
+      width={width}
       padding={"10px 24px"}
       justifyContent={"center"}
       alignItems={"center"}

@@ -35,7 +35,7 @@ export default function ShopReviews() {
     : 0;
 
   const [selectedOption, setSelectedOption] = useState("relevance");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
 
   const { pk } = useParams();
 
@@ -56,7 +56,7 @@ export default function ShopReviews() {
         </Box>
         <Box maxW="958px">
           <Flex justifyContent={"space-between"}>
-            <Flex alignItems={"center"}>
+            <Flex alignItems={"center"} gap={"8px"}>
               작품 리뷰 평점
               <StarRating
                 star={5}
@@ -98,6 +98,7 @@ export default function ShopReviews() {
           <Box height={"40px"} />
           {data && data.reviews.map((review) => <ShopReview review={review} />)}
           <PaginationController
+            page={page}
             itemCount={20}
             pagination={5}
             handleChange={setPage}
