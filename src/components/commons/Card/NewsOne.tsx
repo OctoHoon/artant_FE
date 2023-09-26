@@ -26,19 +26,16 @@ function NewsOne({ source, title }) {
   return (
     <Link to="events/1">
       <VStack alignItems={"flex-end"} position="relative" gap={"4px"}>
-        <Box
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          _hover={{
-            boxShadow: "0px 4px 8px 0px rgba(34, 34, 34, 0.15)",
-            transitionDuration: "0.2s",
-          }}
-        >
+        <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <Image
             width={"350px"}
             height={"350px"}
             src={source}
             borderRadius={"10px"}
+            _hover={{
+              boxShadow: "0px 4px 8px 0px rgba(34, 34, 34, 0.15)",
+              transitionDuration: "0.2s",
+            }}
           />
         </Box>
         <HStack alignItems={"center"}>

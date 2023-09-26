@@ -72,8 +72,8 @@ export default function ShopManager() {
             </Link>
           </Flex>
         </Flex>
-        <Flex justifyContent={"flex-end"} gap={"12px"}>
-          <Text>artantshop.artant.com</Text>
+        <Flex alignItems={"center"} justifyContent={"flex-end"} gap={"12px"}>
+          <Text>상점 공유하기</Text>
           <Flex
             width={"36px"}
             height={"36px"}
@@ -128,7 +128,12 @@ export default function ShopManager() {
               ARTANT의 판매자 교육 전문가가 제공합니다.
             </Text>
             <Flex gap={"24px"} alignItems={"flex-end"} alignSelf={"stretch"}>
-              <Flex flexDirection={"column"} gap={"12px"}>
+              <Flex
+                flexDirection={"column"}
+                gap={"12px"}
+                textStyle={"B14R"}
+                color={"#666"}
+              >
                 <Text>
                   • 이 페이지를 북마크에 추가하면 진행 상황을 쉽게 추적할 수
                   있습니다.
@@ -143,7 +148,7 @@ export default function ShopManager() {
                 </Text>
                 <Text>
                   • 여러분의 노력을 자랑하세요! 소셜 미디어나 친구들과 상점을
-                  공유하세요: ArtAntShop.etsy.com
+                  공유하세요.
                 </Text>
               </Flex>
               <Flex
@@ -151,6 +156,7 @@ export default function ShopManager() {
                 gap={"12px"}
                 height={"min"}
                 flex={"1 0 0"}
+                textStyle={"B13R"}
               >
                 <Flex
                   padding={"8px 12px"}
@@ -181,17 +187,17 @@ export default function ShopManager() {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <Flex gap={"16px"} alignSelf={"stretch"}>
-            <Text fontSize={"22px"} fontWeight={"500"}>
-              다음에 대한 통계 개요
-            </Text>
+          <Flex gap={"16px"} alignSelf={"stretch"} alignItems={"center"}>
+            <Text textStyle={"H4M"}>다음에 대한 통계 개요</Text>
             <Select placeholder="오늘" width={"140px"} height={"40px"}>
               <option value="option1">1월</option>
               <option value="option2">2월</option>
               <option value="option3">3월</option>
             </Select>
           </Flex>
-          <Text as="u">자세한 통계 보기</Text>
+          <Text textStyle="B13R" as="u">
+            자세한 통계 보기
+          </Text>
         </Flex>
         <Flex alignSelf={"stretch"}>
           <StatBox
@@ -234,6 +240,7 @@ export default function ShopManager() {
           alignItems={"center"}
           gap={"12px"}
           as="u"
+          textStyle={"B14R"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -418,7 +425,13 @@ function CheckButton({ title, text, type = false }) {
         border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
       >
         <Text>{title}</Text>
-        {type ? <Text as="u">{text}</Text> : <Text as="u">{text}</Text>}
+        {type ? (
+          <Text as="u" textStyle={"B14R"} color={"#666"}>
+            {text}
+          </Text>
+        ) : (
+          <Text>{text}</Text>
+        )}
       </Flex>
     </Flex>
   );

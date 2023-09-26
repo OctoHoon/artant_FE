@@ -29,15 +29,16 @@ function GiftCategory({ source, category }) {
         position="relative"
         gap={"16px"}
       >
-        <Box
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          _hover={{
-            boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
-            transitionDuration: "0.2s",
-          }}
-        >
-          <Image maxH="290" src={source} borderRadius={"10px"} />
+        <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <Image
+            maxH="290"
+            src={source}
+            borderRadius={"10px"}
+            _hover={{
+              boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
+              transitionDuration: "0.2s",
+            }}
+          />
         </Box>
         <Text fontSize={"20px"} fontWeight={"500"}>
           <Link>{category}</Link>

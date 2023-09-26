@@ -45,7 +45,7 @@ export default function TopBanner() {
                 <Image
                   key={shop.pk}
                   width="1280px"
-                  height="320px"
+                  height="480px"
                   objectFit="cover"
                   src={shop.background_pic}
                 />

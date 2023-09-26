@@ -10,7 +10,7 @@ export default function ShopManagerSideBar() {
   const navigate = useNavigate(); // Initialize useNavigate
 
   return (
-    <Flex flexDirection="column" gap={"40px"}>
+    <Flex flexDirection="column" gap={"40px"} borderRight={"1px solid #F1F1F5"}>
       <Flex flexDirection={"column"}>
         <Flex
           width={"259px"}
@@ -29,7 +29,10 @@ export default function ShopManagerSideBar() {
               name={selection.name}
               icon={selection.icon}
               is_selected={selection.name === select}
-              handleSelect={() => navigate(`/your/shops/me/${selection.path}`)} // Use navigate to change the path
+              handleSelect={() => {
+                navigate(`/your/shops/me/${selection.path}`);
+                setSelect(selection.name);
+              }} // Use navigate to change the path
             />
           ))}
         </Flex>
@@ -65,8 +68,11 @@ export default function ShopManagerSideBar() {
               </g>
             </svg>
           )}
-          is_selected={false}
-          handleSelect={() => navigate(`/your/shops/me/editShop`)}
+          is_selected={select === "스토어 편집 바로가기"}
+          handleSelect={() => {
+            navigate(`/your/shops/me/editShop`);
+            setSelect("스토어 편집 바로가기");
+          }}
         />
       </Flex>
     </Flex>
@@ -81,7 +87,7 @@ function SelectionButton({ name, icon: Icon, is_selected, handleSelect }) {
       gap={"8px"}
       justifyContent={"space-between"}
       borderRadius={"0px"}
-      bg={is_selected ? "blackAlpha.200" : "white"}
+      bg={"white"}
       onClick={handleSelect} // Use the provided handleSelect function
       _hover={{ bg: "blackAlpha.200" }}
     >
@@ -91,7 +97,9 @@ function SelectionButton({ name, icon: Icon, is_selected, handleSelect }) {
           {name}
         </Text>
       </Flex>
-      <FontAwesomeIcon icon={faChevronRight} width={"24px"} height={"24px"} />
+      {is_selected ? (
+        <FontAwesomeIcon icon={faChevronRight} width={"24px"} height={"24px"} />
+      ) : null}
     </Button>
   );
 }

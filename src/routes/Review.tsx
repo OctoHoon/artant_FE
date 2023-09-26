@@ -355,7 +355,6 @@ export default function Review() {
           handleChange={() => {}}
         />
       </Flex>
-      <Box height={"120px"} />
     </Flex>
   );
 }

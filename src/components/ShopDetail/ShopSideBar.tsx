@@ -2,6 +2,7 @@ import { Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
 import SearchBar from "../commons/SearchBar";
 import { useState } from "react";
 import ArtantButton from "../commons/ArtantButton";
+import BlackButton from "../commons/Button/BlackButton";
 
 const Selections = [
   { name: "모든 작품", count: 794 },
@@ -38,17 +39,24 @@ export default function ShopSideBar() {
         />
       ))}
       <Box height="32px" />
-
-      <ArtantButton title={"맞춤 주문 요청"} width="100%" onClick={() => {}} />
+      <BlackButton
+        title={"맞춤 주문 요청"}
+        borderRadius={"5px"}
+        width="252px"
+      />
       <Box height="12px" />
 
       <ArtantButton title={"판매자 연락하기"} width="100%" onClick={() => {}} />
       <Box height="60px" />
-      <Text>1637 판매</Text>
+      <Text textStyle={"B13R"}>1637 판매</Text>
       <Box height="15px" />
-      <Text as="u">4030 팬</Text>
+      <Text textStyle={"B13R"} as="u">
+        4030 팬
+      </Text>
       <Box height="40px" />
-      <Text as="u">이 판매자 샵을 아트앤트에 신고하세요!</Text>
+      <Text textStyle={"B13R"} as="u">
+        이 판매자 샵을 아트앤트에 신고하세요!
+      </Text>
     </Box>
   );
 }
@@ -64,8 +72,8 @@ function SelecitonButton({ name, count, is_selected, handleSelect }) {
       p={2}
       onClick={() => handleSelect(name)}
     >
-      <Box>{name}</Box>
-      <Box>{count}</Box>
+      <Text textStyle={"B14R"}>{name}</Text>
+      <Text textStyle={"B13R"}>{count}</Text>
     </Button>
   );
 }

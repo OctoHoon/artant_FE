@@ -17,7 +17,7 @@ export default function RegisterButton() {
           padding={"11px 30px 11px 40px"}
           height={"40px"}
         >
-          판매자 등록
+          <Text textStyle={"B14M"}>판매자 등록</Text>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="8"
