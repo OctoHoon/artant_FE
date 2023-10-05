@@ -11,7 +11,7 @@ export default function PaginationController({
     <Box display="flex" justifyContent="flex-start" alignItems="center" my={20}>
       <Pagination
         page={page}
-        count={Math.floor(itemCount / pagination) + 1}
+        count={Math.ceil(itemCount / pagination)}
         onChange={handleChange}
         showFirstButton
         showLastButton
