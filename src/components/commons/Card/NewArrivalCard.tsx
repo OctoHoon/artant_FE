@@ -11,11 +11,14 @@ import {
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { toggleLikeProduct } from "../../../api";
+import { useMutation } from "@tanstack/react-query";
 
-function NewArrivalCard({ pk, source, price, originalPrice }) {
+function NewArrivalCard({ pk, source, price, originalPrice, is_liked }) {
   const gray = useColorModeValue("gray.600", "gray.300");
   const [isHovered, setIsHovered] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isHoveredHeart, setIsHoveredHeart] = useState(false);
+  const [isLiked, setIsLiked] = useState(is_liked);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -23,6 +26,31 @@ function NewArrivalCard({ pk, source, price, originalPrice }) {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const handleMouseEnterHeart = () => {
+    setIsHoveredHeart(true);
+  };
+
+  const handleMouseLeaveHeart = () => {
+    setIsHoveredHeart(false);
+  };
+
+  const mutation = useMutation(toggleLikeProduct, {
+    onMutate: () => {
+      console.log("mutation starting");
+    },
+    onSuccess: (data) => {
+      console.log("success!");
+    },
+    onError: (error) => {
+      console.log("mutation has an error");
+    },
+  });
+
+  const onTapLike = (pk) => {
+    setIsLiked(!isLiked);
+    mutation.mutate(pk);
   };
 
   return (
@@ -56,7 +84,7 @@ function NewArrivalCard({ pk, source, price, originalPrice }) {
 
           {/* 흰 동그라미와 하트 아이콘 */}
           <Link to={""}>
-            <Fade in={isHovered || isLiked}>
+            <Fade in={isHovered || isHoveredHeart || isLiked}>
               <Box
                 position="absolute"
                 top={"16px"}
@@ -68,12 +96,14 @@ function NewArrivalCard({ pk, source, price, originalPrice }) {
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
+                onMouseEnter={handleMouseEnterHeart}
+                onMouseLeave={handleMouseLeaveHeart}
                 _hover={{
                   boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
                   transitionDuration: "0.2s",
                 }}
                 onClick={() => {
-                  setIsLiked(!isLiked);
+                  onTapLike(pk);
                 }}
               >
                 {isLiked ? (

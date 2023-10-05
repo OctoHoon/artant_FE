@@ -36,13 +36,14 @@ export default function NewArrival() {
             lg: "repeat(3, 1fr)",
           }}
         >
-          {data.map((art: Product, index) => (
+          {data.map((art, index) => (
             <NewArrivalCard
               key={art.pk}
               pk={art.pk}
               source={art.thumbnail}
               price={art.price}
               originalPrice={art.original_price}
+              is_liked={art.is_liked}
             />
           ))}
         </Grid>

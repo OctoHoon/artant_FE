@@ -30,6 +30,7 @@ function NewsOne({ source, title }) {
           <Image
             width={"350px"}
             height={"350px"}
+            objectFit={"cover"}
             src={source}
             borderRadius={"10px"}
             _hover={{

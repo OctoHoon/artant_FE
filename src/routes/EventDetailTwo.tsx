@@ -55,10 +55,10 @@ export default function EventDetail() {
           lineHeight="normal"
           letterSpacing="-0.3px"
         >
-          젊음과 반항의 예술전
+          공감
         </Text>
         <Flex flexDirection={"column"} alignItems={"center"} gap={"40px"}>
-          <Image src="assets/images/Rectangle_284.png"></Image>
+          <Image src="assets/images/Rectangle_285.png"></Image>
           <Button
             height={"42px"}
             padding={"4px 60px"}

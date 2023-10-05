@@ -17,7 +17,7 @@ export default function FavoriteItems({ data }) {
             <Text fontSize={"22px"}>즐겨찾은 상품</Text>
             <Box width="6px" />
             <Text color={"#595959"} fontSize={"8px"}>
-              8개의 작품
+              {data.length}개의 작품
             </Text>
           </Flex>
           <Flex alignItems={"center"}>
