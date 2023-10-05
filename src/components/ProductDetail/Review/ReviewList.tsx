@@ -125,7 +125,7 @@ export default function ReviewList() {
               <PaginationController
                 page={page}
                 itemCount={data["total_count"]}
-                pagination={3}
+                pagination={5}
                 handleChange={handlePageChange}
               />
             </>
