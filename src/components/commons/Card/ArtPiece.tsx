@@ -86,8 +86,8 @@ function ArtPiece({
           <Fade in={isHovered || isHoveredHeart || isLiked}>
             <Box
               position="absolute"
-              top={"16px"}
-              right={"16px"}
+              top={"8px"}
+              right={"8px"}
               w="40px"
               h="40px"
               rounded="full"
