@@ -272,66 +272,68 @@ export default function ShopManager() {
           <Wrap spacing={"56.5px"}>
             {data &&
               data.products.slice(0, 4).map((art, index) => (
-                <Flex flexDirection={"column"} alignItems={"flex-start"}>
-                  <Image
-                    objectFit={"cover"}
-                    width={"290px"}
-                    height={"247px"}
-                    src={art["thumbnail"]}
-                  />
-                  <Flex
-                    width={"290px"}
-                    padding={"10px 0px 8px 8px"}
-                    flexDirection={"column"}
-                    alignItems={"flex-start"}
-                    gap={"12px"}
-                  >
-                    {" "}
+                <Link to={`/listings/${art.pk}`}>
+                  <Flex flexDirection={"column"} alignItems={"flex-start"}>
+                    <Image
+                      objectFit={"cover"}
+                      width={"290px"}
+                      height={"247px"}
+                      src={art["thumbnail"]}
+                    />
                     <Flex
-                      alignSelf={"stretch"}
+                      width={"290px"}
+                      padding={"10px 0px 8px 8px"}
                       flexDirection={"column"}
                       alignItems={"flex-start"}
-                      gap={"5px"}
+                      gap={"12px"}
                     >
                       {" "}
+                      <Flex
+                        alignSelf={"stretch"}
+                        flexDirection={"column"}
+                        alignItems={"flex-start"}
+                        gap={"5px"}
+                      >
+                        {" "}
+                        <Text
+                          color="var(--maincolorstextblack-222222, #222)"
+                          fontFamily="Spoqa Han Sans Neo"
+                          fontSize="16px"
+                          fontStyle="normal"
+                          fontWeight="400"
+                          lineHeight="normal"
+                          textTransform="capitalize"
+                        >
+                          [{art["category"]}]
+                        </Text>
+                        <Text
+                          color="var(--maincolorstextblack-222222, #222)"
+                          fontFamily="Spoqa Han Sans Neo"
+                          fontSize="14px"
+                          fontStyle="normal"
+                          fontWeight="400"
+                          lineHeight="130%" /* 이렇게 설정하면 18.2px로 계산됩니다. */
+                          letterSpacing="0.035px"
+                          textTransform="capitalize"
+                          noOfLines={2}
+                        >
+                          {art["name"]} - {art["shop_name"]} 작가
+                        </Text>
+                      </Flex>
                       <Text
                         color="var(--maincolorstextblack-222222, #222)"
                         fontFamily="Spoqa Han Sans Neo"
-                        fontSize="16px"
+                        fontSize="18px"
                         fontStyle="normal"
-                        fontWeight="400"
+                        fontWeight="500"
                         lineHeight="normal"
-                        textTransform="capitalize"
+                        letterSpacing="-0.3px"
                       >
-                        [{art["category"]}]
-                      </Text>
-                      <Text
-                        color="var(--maincolorstextblack-222222, #222)"
-                        fontFamily="Spoqa Han Sans Neo"
-                        fontSize="14px"
-                        fontStyle="normal"
-                        fontWeight="400"
-                        lineHeight="130%" /* 이렇게 설정하면 18.2px로 계산됩니다. */
-                        letterSpacing="0.035px"
-                        textTransform="capitalize"
-                        noOfLines={2}
-                      >
-                        {art["name"]} - {art["shop_name"]} 작가
+                        {art["price"].toLocaleString()}원
                       </Text>
                     </Flex>
-                    <Text
-                      color="var(--maincolorstextblack-222222, #222)"
-                      fontFamily="Spoqa Han Sans Neo"
-                      fontSize="18px"
-                      fontStyle="normal"
-                      fontWeight="500"
-                      lineHeight="normal"
-                      letterSpacing="-0.3px"
-                    >
-                      {art["price"].toLocaleString()}원
-                    </Text>
                   </Flex>
-                </Flex>
+                </Link>
               ))}
           </Wrap>
         </Wrap>
