@@ -1,21 +1,40 @@
-import { FaStar, FaRegHeart } from "react-icons/fa";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import Itemlists from "../components/Items/itemlists";
-import RecentlyViewed from "../components/RecentlyViewed";
-import Footer from "../components/commons/Footer";
-import ItemListFive from "../components/ProductDetail/ItemsListFive";
-import RegisterButton from "../components/index/RegisterButton";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
 export default function EventDetail() {
+  const { id } = useParams();
+
+  const contents = [
+    {
+      title: "젊음과 반항의 예술전",
+      assets: "assets/images/Rectangle_284.png",
+    },
+    {
+      title: "젊음과 반항의 예술전",
+      assets: "assets/images/Rectangle_284.png",
+    },
+    {
+      title: "공감",
+      assets: "assets/images/Rectangle_285.png",
+    },
+    {
+      title: "앉음과 일어섬의 상에 대하여",
+      assets: "assets/images/Rectangle_286.png",
+    },
+    {
+      title: "쿨라 링: 이야기 군도",
+      assets: "assets/images/Rectangle_287.png",
+    },
+    {
+      title: "Close-up",
+      assets: "assets/images/Rectangle_288.png",
+    },
+    {
+      title: "정연두 백년 여행기",
+      assets: "assets/images/Rectangle_289.png",
+    },
+  ];
+
   return (
     <Flex
       mt={"60px"}
@@ -55,10 +74,10 @@ export default function EventDetail() {
           lineHeight="normal"
           letterSpacing="-0.3px"
         >
-          젊음과 반항의 예술전
+          {contents[id!].title}
         </Text>
         <Flex flexDirection={"column"} alignItems={"center"} gap={"40px"}>
-          <Image src="assets/images/Rectangle_284.png"></Image>
+          <Image src={contents[id!].assets}></Image>
           <Button
             height={"42px"}
             padding={"4px 60px"}

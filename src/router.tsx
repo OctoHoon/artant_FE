@@ -79,12 +79,8 @@ const router = createHashRouter(
           element: <Review />,
         },
         {
-          path: "events/1",
+          path: "events/:id",
           element: <EventDetail />,
-        },
-        {
-          path: "events/2",
-          element: <EventDetailTwo />,
         },
         {
           path: "your/account",

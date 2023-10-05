@@ -250,8 +250,17 @@ export default function ShopManagerOrders() {
               }
             />
             <Flex justifyContent={"flex-end"} gap={"8px"} alignSelf={"stretch"}>
-              <BlackButton title={"해제"} borderRadius={"100px"} type={true} />
-              <BlackButton title={"시작하기"} borderRadius={"100px"} />
+              <BlackButton
+                title={"더 많은 팁 보기"}
+                borderRadius={"100px"}
+                width="min"
+              />
+              <BlackButton
+                title={"나중에"}
+                borderRadius={"100px"}
+                type={true}
+                width="min"
+              />
             </Flex>
           </Flex>
           <Flex
@@ -345,7 +354,11 @@ export default function ShopManagerOrders() {
                   될지 알 수 있습니다.
                 </Text>
               </Flex>
-              <BlackButton title={"처리 시간 검토"} borderRadius={"100px"} />
+              <BlackButton
+                title={"처리 시간 검토"}
+                borderRadius={"100px"}
+                width="min"
+              />
             </Flex>
           </Flex>
         </Flex>

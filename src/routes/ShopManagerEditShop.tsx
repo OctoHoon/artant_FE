@@ -198,11 +198,16 @@ export default function ShopManagerEditShop() {
                         <Input placeholder="입력하세요" width={"944px"} />
                         <Box height={"8px"} />
                         <Flex gap={"4px"} justifyContent={"flex-end"}>
-                          <BlackButton title={"저장"} borderRadius={"100px"} />
+                          <BlackButton
+                            title={"저장"}
+                            borderRadius={"100px"}
+                            width="min"
+                          />
                           <BlackButton
                             title={"취소"}
                             borderRadius={"100px"}
                             type={true}
+                            width="min"
                           />
                         </Flex>
                       </Flex>
@@ -245,11 +250,16 @@ export default function ShopManagerEditShop() {
                         <Input placeholder="입력하세요" width={"944px"} />
                         <Box height={"8px"} />
                         <Flex gap={"4px"} justifyContent={"flex-end"}>
-                          <BlackButton title={"저장"} borderRadius={"100px"} />
+                          <BlackButton
+                            title={"저장"}
+                            borderRadius={"100px"}
+                            width="min"
+                          />
                           <BlackButton
                             title={"취소"}
                             borderRadius={"100px"}
                             type={true}
+                            width="min"
                           />
                         </Flex>
                       </Flex>
@@ -314,11 +324,16 @@ export default function ShopManagerEditShop() {
                         <Input placeholder="역할" />
                         <Textarea placeholder="내용" />
                         <Flex gap={"4px"} justifyContent={"flex-end"}>
-                          <BlackButton title={"저장"} borderRadius={"100px"} />
+                          <BlackButton
+                            title={"저장"}
+                            borderRadius={"100px"}
+                            width="min"
+                          />
                           <BlackButton
                             title={"취소"}
                             borderRadius={"100px"}
                             type={true}
+                            width="min"
                           />
                         </Flex>
                       </Flex>
@@ -361,6 +376,7 @@ export default function ShopManagerEditShop() {
                       <BlackButton
                         title={"지금 사용해보세요"}
                         borderRadius={"100px"}
+                        width="min"
                       />
                     </Flex>
                   </Flex>
@@ -534,8 +550,13 @@ function EditAnnouncement() {
           height={"60px"}
         />
         <Flex gap={"4px"} justifyContent={"flex-end"}>
-          <BlackButton title={"저장"} borderRadius={"100px"} />
-          <BlackButton title={"취소"} borderRadius={"100px"} type={true} />
+          <BlackButton title={"저장"} borderRadius={"100px"} width="min" />
+          <BlackButton
+            title={"취소"}
+            borderRadius={"100px"}
+            type={true}
+            width="min"
+          />
         </Flex>
       </Flex>
     </Flex>
@@ -647,8 +668,13 @@ function EditArt() {
             <Input placeholder="입력하세요" width={"944px"} />
             <Box height={"8px"} />
             <Flex gap={"4px"} justifyContent={"flex-end"}>
-              <BlackButton title={"저장"} borderRadius={"100px"} />
-              <BlackButton title={"취소"} borderRadius={"100px"} type={true} />
+              <BlackButton title={"저장"} borderRadius={"100px"} width="min" />
+              <BlackButton
+                title={"취소"}
+                borderRadius={"100px"}
+                type={true}
+                width="min"
+              />
             </Flex>
           </Flex>
         </Flex>
@@ -732,11 +758,16 @@ function EditAvatar() {
             <Input placeholder="입력하세요" width={"934px"} />
             <Flex justifyContent={"space-between"} fontSize={"13px"}>
               <Flex gap={"4px"}>
-                <BlackButton title={"저장"} borderRadius={"100px"} />
+                <BlackButton
+                  title={"저장"}
+                  borderRadius={"100px"}
+                  width="min"
+                />
                 <BlackButton
                   title={"취소"}
                   borderRadius={"100px"}
                   type={true}
+                  width="min"
                 />
               </Flex>
               0/55

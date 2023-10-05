@@ -117,8 +117,17 @@ export default function ShopManagerListings() {
               </Flex>
             </Flex>
             <Flex justifyContent={"flex-end"} gap={"8px"} alignSelf={"stretch"}>
-              <BlackButton title={"해제"} borderRadius={"100px"} type={true} />
-              <BlackButton title={"시작하기"} borderRadius={"100px"} />
+              <BlackButton
+                title={"해제"}
+                borderRadius={"100px"}
+                type={true}
+                width="min"
+              />
+              <BlackButton
+                title={"시작하기"}
+                borderRadius={"100px"}
+                width="min"
+              />
             </Flex>
           </Flex>
           <Flex flexDirection={"column"} gap={"20px"}>
@@ -212,7 +221,7 @@ export default function ShopManagerListings() {
           <PaginationController
             itemCount={data && data.products.length}
             pagination={9}
-            handleChange={setPage}
+            handleChange={() => {}}
           />
         </Flex>
         <Tab />

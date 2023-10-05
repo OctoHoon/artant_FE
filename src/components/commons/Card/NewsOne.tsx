@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import { FaRegHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
-function NewsOne({ source, title }) {
+function NewsOne({ source, title, id }) {
   const gray = useColorModeValue("gray.600", "gray.300");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -24,7 +24,7 @@ function NewsOne({ source, title }) {
   };
 
   return (
-    <Link to="events/1">
+    <Link to={`events/${id}`}>
       <VStack alignItems={"flex-end"} position="relative" gap={"4px"}>
         <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <Image

@@ -35,7 +35,7 @@ export default function ShopReviews() {
     : 0;
 
   const [selectedOption, setSelectedOption] = useState("relevance");
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
 
   const { pk } = useParams();
 
@@ -101,9 +101,8 @@ export default function ShopReviews() {
             page={page}
             itemCount={20}
             pagination={5}
-            handleChange={setPage}
+            handleChange={() => {}}
           />
-
           <Box />
         </Box>
       </Flex>

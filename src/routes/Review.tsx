@@ -153,7 +153,7 @@ export default function Review() {
                           placeholder="다른 고객님에게 도움이 되도록 삼품에 대한 솔직한 평가를 남겨 주세요."
                           fontSize={"14px"}
                           value={value}
-                          onChange={handleChange}
+                          onChange={() => {}}
                         />
                         <Text fontSize={"12px"} alignSelf={"flex-end"}>
                           {value.length}
