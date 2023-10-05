@@ -45,6 +45,9 @@ export default function ShopReviews() {
     [pk, page, selectedOption],
     getShopReviews
   );
+  const handlePageChange = (event, value) => {
+    setPage(value); // Update the page when the user changes it
+  };
 
   return (
     <Box>
@@ -99,9 +102,9 @@ export default function ShopReviews() {
           {data && data.reviews.map((review) => <ShopReview review={review} />)}
           <PaginationController
             page={page}
-            itemCount={20}
+            itemCount={data["total_count"]}
             pagination={5}
-            handleChange={() => {}}
+            handleChange={handlePageChange}
           />
           <Box />
         </Box>

@@ -18,6 +18,10 @@ export default function ShopMiddle() {
     getShopProducts
   );
   console.log(data);
+
+  const handlePageChange = (event, value) => {
+    setPage(value); // Update the page when the user changes it
+  };
   return (
     <Box>
       <Text fontSize="24px" fontWeight="500">
@@ -89,9 +93,10 @@ export default function ShopMiddle() {
           </Flex>
 
           <PaginationController
+            page={page}
             itemCount={data ? data.total_count : 0}
             pagination={16}
-            handleChange={setPage}
+            handleChange={handlePageChange}
           />
         </Box>
       </Flex>

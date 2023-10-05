@@ -61,6 +61,10 @@ export default function ShopReviewList({ shop_pk }) {
     getShopReviews
   );
 
+  const handlePageChange = (event, value) => {
+    setPage(value); // Update the page when the user changes it
+  };
+
   return (
     <div>
       <Box display="flex" justifyContent="flex-end">
@@ -124,9 +128,10 @@ export default function ShopReviewList({ shop_pk }) {
               ))}
 
               <PaginationController
+                page={page}
                 itemCount={data["total_count"]}
                 pagination={3}
-                handleChange={() => {}}
+                handleChange={handlePageChange}
               />
             </>
           )}

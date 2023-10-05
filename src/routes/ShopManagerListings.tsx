@@ -30,6 +30,10 @@ export default function ShopManagerListings() {
     getShopProducts
   );
 
+  const handlePageChange = (event, value) => {
+    setPage(value); // Update the page when the user changes it
+  };
+
   return (
     <Flex flexDirection={"column"} gap={"32px"}>
       <Flex
@@ -219,9 +223,10 @@ export default function ShopManagerListings() {
             </Flex>
           </Flex>
           <PaginationController
+            page={page}
             itemCount={data && data.products.length}
             pagination={9}
-            handleChange={() => {}}
+            handleChange={handlePageChange}
           />
         </Flex>
         <Tab />

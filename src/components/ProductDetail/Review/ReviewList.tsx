@@ -53,8 +53,12 @@ export default function ReviewList() {
 
   const { isLoading, data } = useQuery([pk, page, selectedOption], getReviews);
 
-  console.log(data);
-  console.log(data?.length);
+  const handlePageChange = (event, value) => {
+    setPage(value); // Update the page when the user changes it
+  };
+
+  // console.log(data);
+  // console.log(data?.length);
 
   return (
     <div>
@@ -119,9 +123,10 @@ export default function ReviewList() {
               ))}
 
               <PaginationController
+                page={page}
                 itemCount={data["total_count"]}
                 pagination={3}
-                handleChange={() => {}}
+                handleChange={handlePageChange}
               />
             </>
           )}
