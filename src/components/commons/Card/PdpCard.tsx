@@ -174,12 +174,7 @@ export default function PdpCard({
               gap={"2px"}
               alignSelf={"stretch"}
             >
-              <Text>
-                {title.length > titleMaxLength
-                  ? title.substring(0, titleMaxLength) + "..."
-                  : title}
-                {description}
-              </Text>
+              <Text noOfLines={2}>{title}</Text>
               <Text color={"var(--maincolorstextgray-595959, #666)"}>
                 {artist}
               </Text>
