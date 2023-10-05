@@ -1,6 +1,7 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 
 import GiftCategory from "../commons/Card/GiftCategory";
+import { Link } from "react-router-dom";
 
 export default function GiftCategories() {
   const arts = [
@@ -40,11 +41,13 @@ export default function GiftCategories() {
         }}
       >
         {arts.map((art, index) => (
-          <GiftCategory
-            source={art.source}
-            category={art.category}
-            key={art.category}
-          />
+          <Link to={`/items/${art.category}`}>
+            <GiftCategory
+              source={art.source}
+              category={art.category}
+              key={art.category}
+            />
+          </Link>
         ))}
       </Grid>
     </Flex>
