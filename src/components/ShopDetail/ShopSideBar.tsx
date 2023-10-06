@@ -17,7 +17,7 @@ const Selections = [
   { name: "다채로운 그림", count: 230 },
 ];
 
-export default function ShopSideBar() {
+export default function ShopSideBar({ total_count }) {
   const [select, setSelect] = useState("모든 작품");
   return (
     <Box>
@@ -33,7 +33,7 @@ export default function ShopSideBar() {
       {Selections.map((selection, index) => (
         <SelecitonButton
           name={selection.name}
-          count={selection.count}
+          count={total_count}
           is_selected={selection.name === select}
           handleSelect={setSelect}
         />

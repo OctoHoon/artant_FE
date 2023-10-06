@@ -30,7 +30,7 @@ export default function ShopMiddle() {
       <Box height="30px" />
       <Flex gap="40px">
         <Box width="252px">
-          <ShopSideBar />
+          <ShopSideBar total_count={data ? data.total_count : 0} />
         </Box>
         <Box width="998px">
           <Box

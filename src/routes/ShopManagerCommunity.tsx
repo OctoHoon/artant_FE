@@ -115,8 +115,12 @@ export default function ShopManagerCommunity() {
             <Flex justifyContent={"space-between"}>
               <Text textStyle={"h4"}>토론 참여</Text>
               <Flex gap={"12px"}>
-                <Select placeholder="최근 활동" />
-                <BlackButton title={"토론 시작"} borderRadius={"5px"} />
+                <Select placeholder="최근 활동" width={"120px"} />
+                <BlackButton
+                  title={"토론 시작"}
+                  borderRadius={"5px"}
+                  width="min"
+                />
               </Flex>
             </Flex>
             <Flex flexDirection={"column"} gap={"20px"} alignItems={"center"}>

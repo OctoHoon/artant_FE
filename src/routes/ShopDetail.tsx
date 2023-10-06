@@ -1,5 +1,5 @@
 import { FaStar, FaRegHeart } from "react-icons/fa";
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Divider, Image } from "@chakra-ui/react";
 import Itemlists from "../components/Items/itemlists";
 import RecentlyViewed from "../components/RecentlyViewed";
 import Footer from "../components/commons/Footer";
@@ -35,6 +35,7 @@ export default function ShopDetail() {
       >
         <ShopMiddle />
         <ShopReviews />
+        <Box width={"1280px"} background={"#D9D9D9"} height={"1px"} />
         <ShopIntro />
         <ShopPolicy />
       </Box>

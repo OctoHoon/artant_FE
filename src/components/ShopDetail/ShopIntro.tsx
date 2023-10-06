@@ -6,6 +6,7 @@ import {
   Fade,
   IconButton,
   Avatar,
+  Divider,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaRegHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
