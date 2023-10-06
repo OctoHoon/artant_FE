@@ -7,7 +7,12 @@ import ScrollToTop from "../components/commons/ScrollToTop";
 
 export default function Root() {
   return (
-    <Flex flexDirection="column" justifyContent={"center"} alignItems="center">
+    <Flex
+      flexDirection="column"
+      justifyContent={"center"}
+      alignItems="center"
+      minW={"1320px"}
+    >
       <ScrollToTop />
       <Header />
       <Box alignSelf={"stretch"} height={"1px"} background="#F1F1F5"></Box>

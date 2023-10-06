@@ -79,7 +79,7 @@ export default function ReviewItem({ review }) {
               fontWeight="500"
               lineHeight="28px"
               letterSpacing="-0.042px"
-              width="80px"
+              width="85px"
             >
               구매한 상품:
             </Text>

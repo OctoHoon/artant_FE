@@ -84,7 +84,7 @@ export default function Header() {
         </Box>
 
         <SearchBar
-          placeholder={"search for anything"}
+          placeholder={"당신이 원하는 작품은? 예)비 여름 소년 환희"}
           width="700px"
           height={"48px"}
           type={true}

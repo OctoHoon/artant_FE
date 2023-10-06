@@ -263,8 +263,8 @@ export default function ShopIntro() {
             <Box width="4px" />
             인스타그램
           </Flex>
-          <Box height="60px" />
-          <Box
+          {/* <Box height="60px" /> */}
+          {/* <Box
             display={"flex"}
             alignItems={"flex-start"}
             alignContent={"flex-start"}
@@ -275,7 +275,7 @@ export default function ShopIntro() {
             <ShopMember />
             <ShopMember />
             <ShopMember />
-          </Box>
+          </Box> */}
           <Box height="60px" />
         </Box>
       </Flex>

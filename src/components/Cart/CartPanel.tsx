@@ -22,6 +22,7 @@ export default function CartPanel({ data }) {
       height={"100%"}
       border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9);"
     >
+      {/* <Flex position={"fixed"} flexDirection={"column"}> */}
       <Box
         padding={"20px"}
         background="var(--maincolorsbggrayf-9-f-9-f-9, #F9F9F9)"
@@ -213,6 +214,7 @@ export default function CartPanel({ data }) {
           주문하기
         </Button>
       </Box>
+      {/* </Flex> */}
     </Box>
   );
 }

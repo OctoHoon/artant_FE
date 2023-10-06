@@ -54,10 +54,10 @@ export default function ShopReviews() {
       <Box bg="#D9D9D9" width="100%" height={"1px"} />
       <Box height="30px" />
       <Flex gap={10}>
-        <Box maxW="258px">
+        <Box width="258px">
           <Box width={"252px"}>리뷰</Box>
         </Box>
-        <Box maxW="958px">
+        <Box width="987px">
           <Flex justifyContent={"space-between"}>
             <Flex alignItems={"center"} gap={"8px"}>
               작품 리뷰 평점
