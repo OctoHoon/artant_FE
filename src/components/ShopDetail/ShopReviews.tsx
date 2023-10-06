@@ -102,7 +102,7 @@ export default function ShopReviews() {
           {data && data.reviews.map((review) => <ShopReview review={review} />)}
           <PaginationController
             page={page}
-            itemCount={data["total_count"]}
+            itemCount={reviews["total_count"]}
             pagination={5}
             handleChange={handlePageChange}
           />
