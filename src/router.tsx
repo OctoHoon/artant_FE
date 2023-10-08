@@ -34,6 +34,7 @@ import Review from "./routes/Review";
 import EventDetail from "./routes/EventDetail";
 import EventDetailTwo from "./routes/EventDetailTwo";
 import ShopManagerCommunity from "./routes/ShopManagerCommunity";
+import ItemsTag from "./routes/itemsTag";
 
 const router = createHashRouter(
   [
@@ -49,6 +50,10 @@ const router = createHashRouter(
         {
           path: "items/:category",
           element: <Items />,
+        },
+        {
+          path: "items/tag/:tag",
+          element: <ItemsTag />,
         },
         {
           path: "listings/:pk",

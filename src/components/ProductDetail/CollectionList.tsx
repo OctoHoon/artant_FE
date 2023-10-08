@@ -15,6 +15,7 @@ import Collection from "../commons/Card/Collection";
 import MoreButton from "../commons/MoreButton";
 import { useQuery } from "@tanstack/react-query";
 import { getCollections } from "../../api";
+import { Link } from "react-router-dom";
 
 const images = [
   "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",

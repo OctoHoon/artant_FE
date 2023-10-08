@@ -41,7 +41,7 @@ export default function GiftCategories() {
         }}
       >
         {arts.map((art, index) => (
-          <Link to={`/items/${art.category}`}>
+          <Link to={`/items/tag/${art.category}`}>
             <GiftCategory
               source={art.source}
               category={art.category}

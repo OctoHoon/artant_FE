@@ -78,6 +78,14 @@ export const getProductsParameter = ({ queryKey }: QueryFunctionContext) => {
     .then((response) => response.data);
 };
 
+export const getProductsParameterTag = ({ queryKey }: QueryFunctionContext) => {
+  const [tag, location, selectedOption] = queryKey;
+  console.log(`products/?category=${tag}&sort=${selectedOption}${location}`);
+  return instance
+    .get(`products/?tag=${tag}&sort=${selectedOption}${location}`)
+    .then((response) => response.data);
+};
+
 export const getProductsRecommended = () =>
   instance
     .get("products/?sort=order&limit=8")

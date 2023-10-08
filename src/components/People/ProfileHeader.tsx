@@ -1,6 +1,11 @@
 import { Flex, Box, Avatar, Text, Image, Wrap } from "@chakra-ui/react";
 import { useState } from "react";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import FavoriteItems from "./FavoriteItems";
 import FavoriteShops from "./FavoriteShops";
 import useUser from "../../lib/useUser";
@@ -48,15 +53,17 @@ export default function ProfileHeader() {
           </Box>
         </Flex>
         {!userLoading && user?.shop_names.length > 0 && (
-          <Flex>
-            <Box marginRight="12px" textAlign={"end"}>
-              <Text color={"#595959"}>{user?.shop_names[0]}</Text>
-              <Text color={"#595959"}>0 판매</Text>
-            </Box>
-            <Box width="40px">
-              <Image src={user?.shop_avatars[0]} />
-            </Box>
-          </Flex>
+          <Link to={`/shop/${user.shop_pks[0]}`}>
+            <Flex>
+              <Box marginRight="12px" textAlign={"end"}>
+                <Text color={"#595959"}>{user?.shop_names[0]}</Text>
+                <Text color={"#595959"}>0 판매</Text>
+              </Box>
+              <Box width="40px">
+                <Image src={user?.shop_avatars[0]} />
+              </Box>
+            </Flex>
+          </Link>
         )}
       </Flex>
       <Box height={"40px"} />
