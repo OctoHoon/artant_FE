@@ -14,6 +14,7 @@ import ArtPiece from "../commons/Card/ArtPiece";
 import Collection from "../commons/Card/Collection";
 import RelatedKeyword from "../RelatedKeyword";
 import { Link } from "react-router-dom";
+import CollectionKeyword from "../CollectionKeyword";
 
 const images = [
   "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
@@ -38,7 +39,7 @@ export default function RelatedKeywords({ category, subCategory }) {
   return (
     <Box maxW="1280px">
       <Flex flexDirection={"column"} gap={"80px"}>
-        <Flex flexDirection={"column"} gap={"24px"}>
+        {/* <Flex flexDirection={"column"} gap={"24px"}>
           <Text fontSize={"24px"} fontWeight={"500"}>
             관련 검색어
           </Text>
@@ -47,7 +48,8 @@ export default function RelatedKeywords({ category, subCategory }) {
               <RelatedKeyword width={"60px"} height={"60px"} />
             ))}
           </Flex>
-        </Flex>
+        </Flex> */}
+        <CollectionKeyword width={"120px"} height={"120px"}></CollectionKeyword>
 
         <Flex flexDirection={"column"} gap={"24px"}>
           <Text fontSize={"24px"} fontWeight={"500"}>
