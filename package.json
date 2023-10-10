@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
+    "react-image-crop": "^10.1.8",
     "react-player": "^2.12.0",
     "react-ratio": "^0.1.5",
     "react-redux": "^8.1.2",

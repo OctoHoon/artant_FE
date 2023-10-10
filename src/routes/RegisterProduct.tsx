@@ -336,7 +336,7 @@ export default function UploadPhotos() {
                 lineHeight="normal"
                 letterSpacing="0.5px"
               >
-                목록 만들기
+                작품 만들기
               </Text>
               <Text
                 color="var(--maincolorstextblack-222222, #222)"
@@ -471,17 +471,7 @@ export default function UploadPhotos() {
                       >
                         •자연광을 사용하고 플래시를 사용하지 마세요.
                       </Text>
-                      <Text
-                        color="var(--maincolorstextgray-595959, #666)"
-                        fontFamily="Spoqa Han Sans Neo"
-                        fontSize="13px"
-                        fontStyle="normal"
-                        fontWeight={400}
-                        lineHeight="140%"
-                        letterSpacing="-0.3px"
-                      >
-                        • 크기 조정을 위한 공통 개체를 포함합니다.
-                      </Text>
+
                       <Text
                         color="var(--maincolorstextgray-595959, #666)"
                         fontFamily="Spoqa Han Sans Neo"
@@ -598,7 +588,7 @@ export default function UploadPhotos() {
                       lineHeight="normal"
                       letterSpacing="-0.3px"
                     >
-                      사진은 너비가 2000px 이상인 사진이 가장 잘 보입니다.
+                      사진은 너비가 2000픽셀 이상인 사진이 가장 잘 보입니다.
                     </Text>
                   </HStack>
                 </Flex>
@@ -636,7 +626,7 @@ export default function UploadPhotos() {
                     lineHeight="140%"
                     letterSpacing="-0.3px"
                   >
-                    목록의 미리보기 이미지를 미세 조정하세요. <br />
+                    작품의 미리보기 이미지를 미세 조정하세요. <br />
                     쇼핑객이 검색에서 가장 먼저 보게 되는 내용입니다.
                   </Text>
                 </Flex>
@@ -906,7 +896,7 @@ export default function UploadPhotos() {
                 lineHeight="normal"
                 letterSpacing="-0.5px"
               >
-                목록 세부정보
+                작품 세부정보
               </Text>
               <Text
                 color="var(--maincolorstextblack-222222, #222)"
@@ -917,7 +907,7 @@ export default function UploadPhotos() {
                 lineHeight="normal"
                 letterSpacing="-0.042px"
               >
-                당신의 아이템에 대한 모든 것을 전 세계에 알리고 그들이 그것을
+                당신의 작품에 대한 모든 것을 전 세계에 알리고 그들이 그것을
                 좋아할 이유를 알려주세요.
               </Text>
             </Flex>
@@ -1002,7 +992,7 @@ export default function UploadPhotos() {
                     lineHeight="normal"
                     letterSpacing="-0.042px"
                   >
-                    이 목록 정보*
+                    이 작품 정보*
                   </Text>
                   <Text
                     color="var(--maincolorstextblack-222222, #222)"
@@ -1015,7 +1005,7 @@ export default function UploadPhotos() {
                     textDecorationLine="underline"
                     cursor="pointer"
                   >
-                    Etsy에서 허용되는 품목 유형에 대해 자세히 알아보세요.
+                    아트앤트에서 허용되는 품목 유형에 대해 자세히 알아보세요.
                   </Text>
                 </Flex>
                 <Select
@@ -1270,7 +1260,7 @@ export default function UploadPhotos() {
                               letter-spacing: -0.3px;
                             `}
                           >
-                            이 목록은 매번 USD 0.20 USD로 만료되므로
+                            이 목록은 매번 500원으로 만료되므로
                             갱신됩니다(권장).
                           </Text>
                         </Flex>
@@ -1774,18 +1764,6 @@ export default function UploadPhotos() {
                         children="추가하기"
                       />
                     </InputGroup>
-                    <Text
-                      color="var(--maincolorstextgray-595959, #666)"
-                      textAlign="right"
-                      fontFamily="Spoqa Han Sans Neo"
-                      fontSize="12px"
-                      fontStyle="normal"
-                      fontWeight={400}
-                      lineHeight="normal"
-                      letterSpacing="-0.036px"
-                    >
-                      13개 남음
-                    </Text>
                   </Flex>
                   <Flex gap={"12px"} alignItems={"flex-start"}>
                     <Flex
@@ -1928,18 +1906,6 @@ export default function UploadPhotos() {
                         children="추가하기"
                       />
                     </InputGroup>
-                    <Text
-                      color="var(--maincolorstextgray-595959, #666)"
-                      textAlign="right"
-                      fontFamily="Spoqa Han Sans Neo"
-                      fontSize="12px"
-                      fontStyle="normal"
-                      fontWeight={400}
-                      lineHeight="normal"
-                      letterSpacing="-0.036px"
-                    >
-                      13개 남음
-                    </Text>
                   </Flex>
                   <Flex gap={"12px"} alignItems={"flex-start"}>
                     <Flex
@@ -2082,7 +2048,7 @@ export default function UploadPhotos() {
                     letterSpacing="-0.3px"
                   >
                     재료비, 인건비, 기타 사업 비용을 고려해야 합니다. 무료
-                    배송을 제공하는 경우 배송 비용을 포함하여 수익이 저하되지
+                    배송을 제공하는 경우 배송 비용을 포함하여 수익이 줄어들지
                     않도록 하세요.
                   </Text>
                 </Flex>
@@ -2115,7 +2081,7 @@ export default function UploadPhotos() {
                     />
                     <InputRightElement width="40px">원</InputRightElement>
                   </InputGroup>
-                  {2000 > productPrice || productPrice > 5000000 ? (
+                  {1000 > productPrice ? (
                     <Text
                       color="var(--maincolorstextredbc-0000, #BC0000)"
                       css={`
@@ -2129,7 +2095,7 @@ export default function UploadPhotos() {
                         letter-spacing: -0.042px;
                       `}
                     >
-                      가격은 2,000원~5,000,000원 사이여야 합니다.
+                      가격은 1,000원원 이상이여야 합니다.
                     </Text>
                   ) : null}
                 </Flex>
@@ -2168,8 +2134,8 @@ export default function UploadPhotos() {
                     lineHeight="140%"
                     letterSpacing="-0.3px"
                   >
-                    수량이 1보다 많은 경우 이 목록은 매진될 때까지 자동으로
-                    갱신됩니다. 매번 USD 0.20 USD의 상장 수수료가 청구됩니다.
+                    이 목록은 매진될 때까지 자동으로 갱신됩니다. 매번 500원의
+                    상장 수수료가 청구됩니다.
                   </Text>
                 </Flex>
                 <Input
@@ -2216,7 +2182,7 @@ export default function UploadPhotos() {
                     lineHeight="normal"
                     letterSpacing="-0.042px"
                   >
-                    SKU*
+                    재고관리단위{"("}SKU{")"}*
                   </Text>
                   <Text
                     color="var(--maincolorstextgray-595959, #666)"
@@ -2412,7 +2378,7 @@ export default function UploadPhotos() {
               >
                 배송 프로필, 주문 처리 일정 등 배송 정보가 정확한지 확인하여
                 쇼핑객에게 배송 시간과 비용에 대한 명확한 기대치를 제공하세요.
-                배송 설정 에서 언제든지 업데이트할 수 있습니다 .
+                배송 설정에서 언제든지 업데이트할 수 있습니다 .
               </Text>
             </Flex>
             <Flex
@@ -2511,17 +2477,6 @@ export default function UploadPhotos() {
                         >
                           출발지 우편번호*
                         </Text>
-                        <Text
-                          color="var(--maincolorstextgray-595959, #666)"
-                          fontFamily="Spoqa Han Sans Neo"
-                          fontSize="13px"
-                          fontStyle="normal"
-                          fontWeight={400}
-                          lineHeight="140%"
-                          letterSpacing="-0.3px"
-                        >
-                          패키지는 어디서 ?
-                        </Text>
                       </Flex>
                       <Input
                         display="flex"
@@ -2560,7 +2515,7 @@ export default function UploadPhotos() {
                           lineHeight="normal"
                           letterSpacing="-0.042px"
                         >
-                          처리시간*
+                          시간*
                         </Text>
                         <Text
                           color="var(--maincolorstextgray-595959, #666)"
@@ -2689,7 +2644,7 @@ export default function UploadPhotos() {
                             fontSize="14px"
                             fontWeight="400"
                             letterSpacing={"-0.042px"}
-                            placeholder="배송서비스를 입력하세요"
+                            placeholder="배송서비스를 선택하세요"
                           >
                             <option value="option1">국내배송</option>
                             <option value="option2">해외배송</option>
@@ -2727,7 +2682,7 @@ export default function UploadPhotos() {
                             fontSize="14px"
                             fontWeight="400"
                             letterSpacing={"-0.042px"}
-                            placeholder="배송비를 입력하세요"
+                            placeholder="배송비를 선택하세요"
                           >
                             <option value="option1">무료배송</option>
                             <option value="option2">고정가격</option>
@@ -2831,243 +2786,6 @@ export default function UploadPhotos() {
                         `}
                       >
                         다른 위치 추가
-                      </Text>
-                    </Button>
-                    <Flex
-                      height={"1px"}
-                      alignSelf={"stretch"}
-                      background={"var(--maincolorslinegrayeeeeee, #EEE)"}
-                    ></Flex>
-                    <Flex // 배송 업그레이드
-                      display={"flex"}
-                      alignSelf={"stretch"}
-                      alignItems={"flex-start"}
-                      gap={"40px"}
-                    >
-                      <Flex
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"flex-start"}
-                        width={"234px"}
-                        gap={"6px"}
-                        alignSelf={"stretch"}
-                      >
-                        <Flex
-                          display={"flex"}
-                          alignItems={"center"}
-                          width={"234px"}
-                          gap={"2px"}
-                        >
-                          <Text
-                            color="var(--maincolorstextblack-222222, #222)"
-                            fontFamily="Spoqa Han Sans Neo"
-                            fontSize="14px"
-                            fontStyle="normal"
-                            fontWeight={500}
-                            lineHeight="normal"
-                            letterSpacing="-0.042px"
-                          >
-                            배송 업그레이드*
-                          </Text>
-                          <Text
-                            color="var(--maincolorstextgray-595959, #666)"
-                            fontFamily="Spoqa Han Sans Neo"
-                            fontSize="13px"
-                            fontStyle="normal"
-                            fontWeight={400}
-                            lineHeight="140%"
-                            letterSpacing="-0.3px"
-                          >
-                            (선택사항)
-                          </Text>
-                        </Flex>
-                        <Text
-                          color="var(--maincolorstextgray-595959, #666)"
-                          fontFamily="Spoqa Han Sans Neo"
-                          fontSize="13px"
-                          fontStyle="normal"
-                          fontWeight={400}
-                          lineHeight="140%"
-                          letterSpacing="-0.3px"
-                        >
-                          구매자에게 더 빠른 배송을 선택할 수 있는 옵션을
-                          제공합니다. 이러한 비용은 표준 가격에 추가됩니다.
-                        </Text>
-                      </Flex>
-                      <Flex
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"flex-start"}
-                        gap={"16px"}
-                      >
-                        <Flex
-                          display={"flex"}
-                          flexDirection={"column"}
-                          alignItems={"flex-start"}
-                          gap={"6px"}
-                        >
-                          <Text
-                            color="var(--maincolorstextblack-222222, #222)"
-                            css={{
-                              fontFeatureSettings: "clig off, liga off",
-                              /* BODY/XS_14/R */
-                              fontFamily: "Spoqa Han Sans Neo",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "normal",
-                              letterSpacing: "-0.042px",
-                            }}
-                          >
-                            업그레이드
-                          </Text>
-                          <Select
-                            height={"40px"}
-                            gap={"10px"}
-                            flexDirection={"column"}
-                            justifyContent={"center"}
-                            alignItems={"flex-start"}
-                            colorScheme="white"
-                            color="#595959"
-                            fontSize="14px"
-                            fontWeight="400"
-                            letterSpacing={"-0.042px"}
-                            placeholder="업그레이드 서비스 선택"
-                          ></Select>
-                        </Flex>
-                        <Flex
-                          display={"flex"}
-                          flexDirection={"column"}
-                          alignItems={"flex-start"}
-                          gap={"6px"}
-                        >
-                          <Text
-                            color="var(--maincolorstextblack-222222, #222)"
-                            css={{
-                              fontFeatureSettings: "clig off, liga off",
-                              /* BODY/XS_14/R */
-                              fontFamily: "Spoqa Han Sans Neo",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "normal",
-                              letterSpacing: "-0.042px",
-                            }}
-                          >
-                            배송서비스
-                          </Text>
-                          <Select
-                            height={"40px"}
-                            gap={"10px"}
-                            flexDirection={"column"}
-                            justifyContent={"center"}
-                            alignItems={"flex-start"}
-                            colorScheme="white"
-                            color="#595959"
-                            fontSize="14px"
-                            fontWeight="400"
-                            letterSpacing={"-0.042px"}
-                            placeholder="배송 서비스 선택"
-                          ></Select>
-                        </Flex>
-                        <Flex
-                          alignItems={"flex-start"}
-                          alignSelf={"stretch"}
-                          gap={"12px"}
-                        >
-                          {" "}
-                          <Flex
-                            display={"flex"}
-                            flexDirection={"column"}
-                            alignItems={"flex-start"}
-                            gap={"6px"}
-                          >
-                            <Text
-                              color="var(--maincolorstextblack-222222, #222)"
-                              css={{
-                                fontFeatureSettings: "clig off, liga off",
-                                /* BODY/XS_14/R */
-                                fontFamily: "Spoqa Han Sans Neo",
-                                fontSize: "14px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "normal",
-                                letterSpacing: "-0.042px",
-                              }}
-                            >
-                              하나의 항목
-                            </Text>
-                            <Input
-                              height={"40px"}
-                              gap={"10px"}
-                              flexDirection={"column"}
-                              justifyContent={"center"}
-                              alignItems={"flex-start"}
-                              colorScheme="white"
-                              color="#595959"
-                              fontSize="14px"
-                              fontWeight="400"
-                              letterSpacing={"-0.042px"}
-                              placeholder="0원"
-                            ></Input>
-                          </Flex>{" "}
-                          <Flex
-                            display={"flex"}
-                            flexDirection={"column"}
-                            alignItems={"flex-start"}
-                            gap={"6px"}
-                          >
-                            <Text
-                              color="var(--maincolorstextblack-222222, #222)"
-                              css={{
-                                fontFeatureSettings: "clig off, liga off",
-                                /* BODY/XS_14/R */
-                                fontFamily: "Spoqa Han Sans Neo",
-                                fontSize: "14px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "normal",
-                                letterSpacing: "-0.042px",
-                              }}
-                            >
-                              추가 항목
-                            </Text>
-                            <Input
-                              height={"40px"}
-                              gap={"10px"}
-                              flexDirection={"column"}
-                              justifyContent={"center"}
-                              alignItems={"flex-start"}
-                              colorScheme="white"
-                              color="#595959"
-                              fontSize="14px"
-                              fontWeight="400"
-                              letterSpacing={"-0.042px"}
-                              placeholder="0원"
-                            ></Input>
-                          </Flex>
-                        </Flex>
-                      </Flex>
-                    </Flex>
-                    <Button
-                      alignItems={"center"}
-                      padding={"8px 16px 8px 8px"}
-                      backgroundColor={"transparent"}
-                    >
-                      <SvgPlus />
-                      <Text
-                        color="var(--maincolorstextblack-222222, #222)"
-                        css={`
-                          /* BODY/S_16/M */
-                          font-family: "Spoqa Han Sans Neo";
-                          font-size: 16px;
-                          font-style: normal;
-                          font-weight: 500;
-                          line-height: normal;
-                          letter-spacing: 0.048px;
-                        `}
-                      >
-                        배송 업그레이드 추가
                       </Text>
                     </Button>
                     <Flex
@@ -3686,8 +3404,8 @@ export default function UploadPhotos() {
 
 const GrayBoxImage = ({ src, width, height, index }) => {
   const textArray = [
-    "모든 각도",
-    "모든 각도",
+    "정면",
+    "측면",
     "모든 각도",
     "세부",
     "사용",

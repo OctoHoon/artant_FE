@@ -19,8 +19,13 @@ import ShopReviews from "../components/ShopDetail/ShopReviews";
 import ShopIntro from "../components/ShopDetail/ShopIntro";
 import ShopPolicy from "../components/ShopDetail/ShopPolicy";
 import ScrollToTop from "../components/commons/ScrollToTop";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getShopDetails } from "../api";
 
 export default function ShopDetail() {
+  const { pk } = useParams();
+  const { isLoading, data } = useQuery(["shop", pk], getShopDetails);
   return (
     <Box mb={"120px"}>
       <ScrollToTop />
@@ -37,7 +42,7 @@ export default function ShopDetail() {
         <ShopReviews />
         <Box width={"1280px"} background={"#D9D9D9"} height={"1px"} />
         <ShopIntro />
-        <ShopPolicy />
+        <ShopPolicy shop_name={data.shop_name} />
       </Box>
     </Box>
   );

@@ -240,10 +240,10 @@ export default function RegisterBilling() {
               >
                 <Box>
                   <Flex gap={"4px"}>
-                    <Text>귀하의 상점 목록에 대한 청구서에 </Text>
+                    <Text>귀하의 상점 작품에 대한 청구서에 </Text>
                     <Text color={"#F12E24"} fontWeight={"500"}>
                       {" "}
-                      USD 0.20{" "}
+                      500원{" "}
                     </Text>
                     이 추가되며,
                   </Flex>

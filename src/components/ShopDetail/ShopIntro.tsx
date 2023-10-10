@@ -95,7 +95,7 @@ export default function ShopIntro() {
       <Flex gap={10}>
         <Box maxW="258px">
           <Text textStyle={"H6M"} width={"252px"}>
-            에바아트프린트 소개
+            {data && data!["shop_name"]} 소개
           </Text>
           <Box height="45px" />
           <Flex>

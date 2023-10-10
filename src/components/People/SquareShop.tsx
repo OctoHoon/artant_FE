@@ -42,7 +42,7 @@ export default function SquareShop({ data }) {
         <Flex gap="12px">
           <Image src={data.avatar} width="36px" />
           <Box>
-            <Text>text</Text>
+            <Text>{data.shop_name}</Text>
             <Flex gap="8px">
               <StarRating star={5} reviews={0} include_count={false} />
               <Text>1086 작품</Text>

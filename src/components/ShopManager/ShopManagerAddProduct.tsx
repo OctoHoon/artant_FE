@@ -11,6 +11,13 @@ import {
   InputGroup,
   InputRightAddon,
   InputRightElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Radio,
   RadioGroup,
   Select,
@@ -18,6 +25,7 @@ import {
   Text,
   Textarea,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -37,6 +45,7 @@ import {
 } from "../../api";
 import { subsubCategory } from "../data/options";
 import useUser from "../../lib/useUser";
+import ThumbnailCrop from "./Thumbnail";
 
 interface IForm {
   file: FileList;
@@ -56,6 +65,7 @@ export default function UploadPhotos() {
   const [productCount, setProductCount] = useState(0); // 제품 수량
   const [refreshOptionValue, setRefreshOptionValue] = useState("0"); // 갱신 옵션
   const [shippingOptionValue, setShippingOptionValue] = useState("0"); // 갱신 옵션
+  const [showSeo, setShowSeo] = useState(false);
 
   // image, video files
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
@@ -66,6 +76,8 @@ export default function UploadPhotos() {
   const shopPk = user?.shop_pks[0] || null;
   const [cloudflareStreamUrl, setCloudflareStreamUrl] = useState<string>("");
   const createPhotoMutation = useMutation(createPhoto, {});
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const uploadImageMutation = useMutation(uploadImage, {
     onSuccess: ({ result }: any) => {
       console.log(result);
@@ -325,7 +337,7 @@ export default function UploadPhotos() {
                 lineHeight="normal"
                 letterSpacing="0.5px"
               >
-                목록 만들기
+                작품 만들기
               </Text>
               <Text
                 color="var(--maincolorstextblack-222222, #222)"
@@ -420,7 +432,7 @@ export default function UploadPhotos() {
                       lineHeight="140%"
                       letterSpacing="-0.3px"
                     >
-                      최대 10개의 사진을 사용하여 항목의 <br />
+                      최대 8개의 사진을 사용하여 항목의 <br />
                       가장 중요한 특성을 보여주세요.
                     </Text>
                   </Flex>
@@ -460,17 +472,7 @@ export default function UploadPhotos() {
                       >
                         •자연광을 사용하고 플래시를 사용하지 마세요.
                       </Text>
-                      <Text
-                        color="var(--maincolorstextgray-595959, #666)"
-                        fontFamily="Spoqa Han Sans Neo"
-                        fontSize="13px"
-                        fontStyle="normal"
-                        fontWeight={400}
-                        lineHeight="140%"
-                        letterSpacing="-0.3px"
-                      >
-                        • 크기 조정을 위한 공통 개체를 포함합니다.
-                      </Text>
+
                       <Text
                         color="var(--maincolorstextgray-595959, #666)"
                         fontFamily="Spoqa Han Sans Neo"
@@ -587,7 +589,7 @@ export default function UploadPhotos() {
                       lineHeight="normal"
                       letterSpacing="-0.3px"
                     >
-                      사진은 너비가 2000px 이상인 사진이 가장 잘 보입니다.
+                      사진은 너비가 2000 픽셀 이상인 사진이 가장 잘 보입니다.
                     </Text>
                   </HStack>
                 </Flex>
@@ -641,6 +643,7 @@ export default function UploadPhotos() {
                     }
                   />
                   <Button
+                    onClick={onOpen}
                     display="flex"
                     height="38px"
                     padding="8px 16px"
@@ -651,6 +654,32 @@ export default function UploadPhotos() {
                   >
                     썸네일 조정
                   </Button>
+                  <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>썸네일 조정</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <ThumbnailCrop
+                          imgSrc={
+                            selectedFiles.length > 0
+                              ? URL.createObjectURL(selectedFiles[0])
+                              : ""
+                          }
+                        />
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                          완료
+                        </Button>
+                        <Button variant="ghost" onClick={onClose}>
+                          {" "}
+                          취소
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
                 </Flex>
               </Flex>
             </Flex>
@@ -692,7 +721,7 @@ export default function UploadPhotos() {
               >
                 5~15초 길이의 동영상으로 제품에 생기를 불어넣으세요. 판매를
                 늘리는 데 도움이 될 수 있습니다. 동영상에는 소리가 포함되어 있지
-                않으므로 제품이 말하도록 하세요!
+                않으므로 주의하세요.
               </Text>
             </Flex>
             <Flex
@@ -742,8 +771,8 @@ export default function UploadPhotos() {
                       lineHeight="140%"
                       letterSpacing="-0.3px"
                     >
-                      • 모델이 입는 착용 가능한 아이템을 촬영하거나 기능성
-                      아이템이 사용되는 모습을 보여줍니다.
+                      • 모델이 입은 작품을 촬영하거나 기능성 아이템이 사용되는
+                      모습을 보여주세요.
                     </Text>
                     <Text
                       color="var(--maincolorstextgray-595959, #666)"
@@ -895,7 +924,7 @@ export default function UploadPhotos() {
                 lineHeight="normal"
                 letterSpacing="-0.5px"
               >
-                목록 세부정보
+                작품 세부정보
               </Text>
               <Text
                 color="var(--maincolorstextblack-222222, #222)"
@@ -906,7 +935,7 @@ export default function UploadPhotos() {
                 lineHeight="normal"
                 letterSpacing="-0.042px"
               >
-                당신의 아이템에 대한 모든 것을 전 세계에 알리고 그들이 그것을
+                당신의 작품에 대한 모든 것을 전 세계에 알리고 그들이 그것을
                 좋아할 이유를 알려주세요.
               </Text>
             </Flex>
@@ -951,7 +980,7 @@ export default function UploadPhotos() {
                     lineHeight="140%"
                     letterSpacing="-0.3px"
                   >
-                    구매자가 귀하의 상품을 검색하는 데 사용할 <br />
+                    구매자가 귀하의 작품을 검색하는 데 사용할 <br />
                     키워드를 포함하십시오
                   </Text>
                 </Flex>
@@ -991,7 +1020,7 @@ export default function UploadPhotos() {
                     lineHeight="normal"
                     letterSpacing="-0.042px"
                   >
-                    이 목록 정보*
+                    이 작품 정보*
                   </Text>
                   <Text
                     color="var(--maincolorstextblack-222222, #222)"
@@ -1004,7 +1033,7 @@ export default function UploadPhotos() {
                     textDecorationLine="underline"
                     cursor="pointer"
                   >
-                    Etsy에서 허용되는 품목 유형에 대해 자세히 알아보세요.
+                    아트앤트에서 허용되는 품목 유형에 대해 자세히 알아보세요.
                   </Text>
                 </Flex>
                 <Select
@@ -1186,7 +1215,7 @@ export default function UploadPhotos() {
                     lineHeight="normal"
                     letterSpacing="-0.042px"
                   >
-                    갱신 옵션*
+                    작품 등록 갱신 옵션*
                   </Text>
                   <Text
                     color="var(--maincolorstextgray-595959, #666)"
@@ -1197,7 +1226,8 @@ export default function UploadPhotos() {
                     lineHeight="140%"
                     letterSpacing="-0.3px"
                   >
-                    각 갱신은 4개월 동안 또는 목록이 매진될 때까지 지속됩니다.
+                    각 작품 등록은 4개월 동안 또는 목록이 매진될 때까지
+                    지속됩니다.
                   </Text>
                   <Text
                     color="var(--maincolorstextblack-222222, #222)"
@@ -1259,7 +1289,7 @@ export default function UploadPhotos() {
                               letter-spacing: -0.3px;
                             `}
                           >
-                            이 목록은 매번 USD 0.20 USD로 만료되므로
+                            이 목록은 매번 500원으로 만료되므로
                             갱신됩니다(권장).
                           </Text>
                         </Flex>
@@ -1526,7 +1556,7 @@ export default function UploadPhotos() {
                           letter-spacing: -0.042px;
                         `}
                       >
-                        Google 검색 결과로 목록 미리 보기
+                        Google 검색 결과로 작품 미리 보기
                       </Text>
                       <Text
                         color="var(--maincolorstextblack-222222, #222)"
@@ -1541,33 +1571,38 @@ export default function UploadPhotos() {
                           text-decoration-line: underline;
                         `}
                         cursor={"pointer"}
+                        onClick={() => {
+                          setShowSeo(!showSeo);
+                        }}
                       >
-                        미리보기 표시
+                        {showSeo ? "가리기" : "보기"}
                       </Text>
                     </Flex>
-                    <Text
-                      display="flex"
-                      padding="11px 16px"
-                      alignItems="flex-start"
-                      h={"120px"}
-                      gap={"8px"}
-                      alignSelf="stretch"
-                      borderRadius="5px"
-                      border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-                      background="var(--maincolorsbg-white, #FFF)"
-                      color="var(--maincolorstextblack-222222, #222)"
-                      css={`
-                        font-feature-settings: "clig" off, "liga" off;
-                        font-family: "Spoqa Han Sans Neo";
-                        font-size: 14px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: normal;
-                        letter-spacing: -0.042px;
-                      `}
-                    >
-                      작성자: 아트앤트 <br /> 00000
-                    </Text>
+                    {showSeo && (
+                      <Text
+                        display="flex"
+                        padding="11px 16px"
+                        alignItems="flex-start"
+                        h={"120px"}
+                        gap={"8px"}
+                        alignSelf="stretch"
+                        borderRadius="5px"
+                        border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
+                        background="var(--maincolorsbg-white, #FFF)"
+                        color="var(--maincolorstextblack-222222, #222)"
+                        css={`
+                          font-feature-settings: "clig" off, "liga" off;
+                          font-family: "Spoqa Han Sans Neo";
+                          font-size: 14px;
+                          font-style: normal;
+                          font-weight: 400;
+                          line-height: normal;
+                          letter-spacing: -0.042px;
+                        `}
+                      >
+                        작성자: 아트앤트 <br /> 00000
+                      </Text>
+                    )}
                   </Flex>
                 </Flex>
               </Flex>
@@ -1719,8 +1754,8 @@ export default function UploadPhotos() {
                     lineHeight="140%"
                     letterSpacing="-0.3px"
                   >
-                    누군가가 귀하의 목록을 검색하기 위해 어떤 단어를 사용할 수
-                    있습니까? 검색하려면 13개의 태그를 모두 사용하세요.
+                    누군가가 귀하의 목록을 검색하기 위해 사용할 태그를
+                    추가하세요.
                   </Text>
                   <Text
                     color="var(--maincolorstextblack-222222, #222)"
@@ -1763,18 +1798,6 @@ export default function UploadPhotos() {
                         children="추가하기"
                       />
                     </InputGroup>
-                    <Text
-                      color="var(--maincolorstextgray-595959, #666)"
-                      textAlign="right"
-                      fontFamily="Spoqa Han Sans Neo"
-                      fontSize="12px"
-                      fontStyle="normal"
-                      fontWeight={400}
-                      lineHeight="normal"
-                      letterSpacing="-0.036px"
-                    >
-                      13개 남음
-                    </Text>
                   </Flex>
                   <Flex gap={"12px"} alignItems={"flex-start"}>
                     <Flex
@@ -1917,18 +1940,6 @@ export default function UploadPhotos() {
                         children="추가하기"
                       />
                     </InputGroup>
-                    <Text
-                      color="var(--maincolorstextgray-595959, #666)"
-                      textAlign="right"
-                      fontFamily="Spoqa Han Sans Neo"
-                      fontSize="12px"
-                      fontStyle="normal"
-                      fontWeight={400}
-                      lineHeight="normal"
-                      letterSpacing="-0.036px"
-                    >
-                      13개 남음
-                    </Text>
                   </Flex>
                   <Flex gap={"12px"} alignItems={"flex-start"}>
                     <Flex
@@ -2071,7 +2082,7 @@ export default function UploadPhotos() {
                     letterSpacing="-0.3px"
                   >
                     재료비, 인건비, 기타 사업 비용을 고려해야 합니다. 무료
-                    배송을 제공하는 경우 배송 비용을 포함하여 수익이 저하되지
+                    배송을 제공하는 경우 배송 비용을 포함하여 수익이 줄어들지
                     않도록 하세요.
                   </Text>
                 </Flex>
@@ -2104,7 +2115,7 @@ export default function UploadPhotos() {
                     />
                     <InputRightElement width="40px">원</InputRightElement>
                   </InputGroup>
-                  {2000 > productPrice || productPrice > 5000000 ? (
+                  {1000 > productPrice ? (
                     <Text
                       color="var(--maincolorstextredbc-0000, #BC0000)"
                       css={`
@@ -2118,7 +2129,7 @@ export default function UploadPhotos() {
                         letter-spacing: -0.042px;
                       `}
                     >
-                      가격은 2,000원~5,000,000원 사이여야 합니다.
+                      가격은 1,000원원 이상이여야 합니다.
                     </Text>
                   ) : null}
                 </Flex>
@@ -2157,8 +2168,8 @@ export default function UploadPhotos() {
                     lineHeight="140%"
                     letterSpacing="-0.3px"
                   >
-                    수량이 1보다 많은 경우 이 목록은 매진될 때까지 자동으로
-                    갱신됩니다. 매번 USD 0.20 USD의 상장 수수료가 청구됩니다.
+                    이 목록은 매진될 때까지 자동으로 갱신됩니다. 매번 500원의
+                    상장 수수료가 청구됩니다.
                   </Text>
                 </Flex>
                 <Input
@@ -2205,7 +2216,7 @@ export default function UploadPhotos() {
                     lineHeight="normal"
                     letterSpacing="-0.042px"
                   >
-                    SKU*
+                    재고관리단위{"("}SKU{")"}*
                   </Text>
                   <Text
                     color="var(--maincolorstextgray-595959, #666)"
@@ -2273,7 +2284,7 @@ export default function UploadPhotos() {
                 lineHeight="normal"
                 letterSpacing="-0.5px"
               >
-                변형
+                작품 옵션
               </Text>
               <Text
                 color="var(--maincolorstextblack-222222, #222)"
@@ -2307,7 +2318,7 @@ export default function UploadPhotos() {
               lineHeight="140%"
               letterSpacing="-0.3px"
             >
-              변형 추가
+              옵션 추가
             </Button>
           </Flex>
           <Flex // 개인화
@@ -2321,7 +2332,6 @@ export default function UploadPhotos() {
           >
             <Flex
               display={"flex"}
-              justifyContent={"space-between"}
               alignItems={"flex-start"}
               alignSelf={"stretch"}
             >
@@ -2343,6 +2353,7 @@ export default function UploadPhotos() {
                   개인화
                 </Text>
                 <Text
+                  width={"330px"}
                   color="var(--maincolorstextblack-222222, #222)"
                   fontFamily="Spoqa Han Sans Neo"
                   fontSize="14px"
@@ -2351,7 +2362,8 @@ export default function UploadPhotos() {
                   lineHeight="normal"
                   letterSpacing="-0.042px"
                 >
-                  이 목록에 대한 개인 정보를 수집하세요.
+                  이름을 세기거나 이니셜을 넣는 등 개인 맞춤 작품을 위해 이
+                  작품에 대한 개인 정보를 수집하세요.
                 </Text>
               </Flex>
               <FormControl
@@ -2401,7 +2413,7 @@ export default function UploadPhotos() {
               >
                 배송 프로필, 주문 처리 일정 등 배송 정보가 정확한지 확인하여
                 쇼핑객에게 배송 시간과 비용에 대한 명확한 기대치를 제공하세요.
-                배송 설정 에서 언제든지 업데이트할 수 있습니다 .
+                배송 설정에서 언제든지 업데이트할 수 있습니다 .
               </Text>
             </Flex>
             <Flex
@@ -2500,17 +2512,6 @@ export default function UploadPhotos() {
                         >
                           출발지 우편번호*
                         </Text>
-                        <Text
-                          color="var(--maincolorstextgray-595959, #666)"
-                          fontFamily="Spoqa Han Sans Neo"
-                          fontSize="13px"
-                          fontStyle="normal"
-                          fontWeight={400}
-                          lineHeight="140%"
-                          letterSpacing="-0.3px"
-                        >
-                          패키지는 어디서 ?
-                        </Text>
                       </Flex>
                       <Input
                         display="flex"
@@ -2549,7 +2550,7 @@ export default function UploadPhotos() {
                           lineHeight="normal"
                           letterSpacing="-0.042px"
                         >
-                          처리시간*
+                          상품준비시간*
                         </Text>
                         <Text
                           color="var(--maincolorstextgray-595959, #666)"
@@ -2678,7 +2679,7 @@ export default function UploadPhotos() {
                             fontSize="14px"
                             fontWeight="400"
                             letterSpacing={"-0.042px"}
-                            placeholder="배송서비스를 입력하세요"
+                            placeholder="배송서비스를 선택하세요"
                           >
                             <option value="option1">국내배송</option>
                             <option value="option2">해외배송</option>
@@ -2716,7 +2717,7 @@ export default function UploadPhotos() {
                             fontSize="14px"
                             fontWeight="400"
                             letterSpacing={"-0.042px"}
-                            placeholder="배송비를 입력하세요"
+                            placeholder="배송비를 선택하세요"
                           >
                             <option value="option1">무료배송</option>
                             <option value="option2">고정가격</option>
@@ -3641,6 +3642,7 @@ export default function UploadPhotos() {
             </Flex>
           </Flex>
         </Flex>
+        <Box height={"120px"} />
       </Flex>
       <Box pb={40} mt={10} px={{ base: 10, lg: 40 }}>
         <Container>
@@ -3675,8 +3677,8 @@ export default function UploadPhotos() {
 
 const GrayBoxImage = ({ src, width, height, index }) => {
   const textArray = [
-    "모든 각도",
-    "모든 각도",
+    "정면",
+    "측면",
     "모든 각도",
     "세부",
     "사용",
@@ -3740,6 +3742,7 @@ const GrayBoxImage = ({ src, width, height, index }) => {
     <Image
       src={src}
       style={{
+        objectFit: "cover",
         width: width,
         height: height,
         backgroundColor: "#D9D9D9", // 회색 배경

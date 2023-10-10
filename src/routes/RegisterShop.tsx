@@ -291,7 +291,7 @@ export default function RegisterShop() {
                     flex={"1 0 0"}
                   >
                     <Text fontSize={"16px"} fontWeight={"500"}>
-                      USD 0.20 리스팅 수수료
+                      500원 리스팅 수수료
                     </Text>
                     <Text
                       color={"var(--maincolorstextgray-595959, #666)"}
@@ -427,8 +427,8 @@ export default function RegisterShop() {
                 alignItems={"center"}
               >
                 * 외부 광고는 대부분의 판매자에게 선택 사항이지만, 12개월 동안
-                Etsy에서 벌어들인 매출에 따라 필요할 수도 있습니다. 외부 광고
-                수수료에 대한 자세한 내용을 보려면 도움말 센터를 방문하세요
+                아트앤트에서 벌어들인 매출에 따라 필요할 수도 있습니다. 외부
+                광고 수수료에 대한 자세한 내용을 보려면 도움말 센터를 방문하세요
               </Flex>
             </Flex>
           </Flex>
@@ -1101,7 +1101,7 @@ export default function RegisterShop() {
                   alignSelf={"stretch"}
                 >
                   <Text fontSize={"24px"}>
-                    Etsy의 수수료는 어떻게 책정되나요?
+                    아트앤트의 수수료는 어떻게 책정되나요?
                   </Text>
                   <Text
                     alignSelf={"stretch"}
@@ -1115,7 +1115,7 @@ export default function RegisterShop() {
                     지속됩니다. 상품이 판매되면 판매 가격(설정한 배송비 포함)에
                     6.5%의 거래 수수료가 부과됩니다. PayPal로 결제를 수락하는
                     경우 수수료 구조에 따라 결제 처리 수수료도 부과됩니다. 등록
-                    수수료는 $0.20 USD로 청구되므로 은행 통화가 USD가 아닌 경우
+                    수수료는 500원으로 청구되므로 은행 통화가 USD가 아닌 경우
                     환율 변동에 따라 금액이 달라질 수 있습니다. 귀하는
                     오프사이트 광고를 통해 발생한 모든 판매에 대해 광고 수수료를
                     지불합니다. ARTANT 매장을 열 때 ARTANT의 광고 서비스에
@@ -1139,7 +1139,7 @@ export default function RegisterShop() {
                   >
                     ARTANT에서 상점을 개설하는 것은 쉽습니다. ARTANT 계정
                     만들기(아직 계정이 없는 경우), 상점 위치 및 통화 설정, 상점
-                    이름 선택, 목록 생성, 결제 방법(지급 받고 싶은 방법) 설정,
+                    이름 선택, 작품 생성, 결제 방법(지급 받고 싶은 방법) 설정,
                     마지막으로 청구 방법 설정 (ARTANT 수수료 지불 방법).{" "}
                     <Text as="u">더 알아보기</Text>
                   </Text>

@@ -1,6 +1,6 @@
 import { Flex, Box, Text } from "@chakra-ui/react";
 
-export default function ShopPolicy() {
+export default function ShopPolicy({ shop_name }) {
   return (
     <Box>
       <Box width="1280px" height={"1px"} bg="#D9D9D9" />
@@ -366,7 +366,7 @@ export default function ShopPolicy() {
         </Box>
         <Box maxW="958px">
           <Box whiteSpace={"pre-line"} as="u">
-            오주디자인 개인정보취급방침 보기
+            {shop_name} 개인정보취급방침 보기
           </Box>
           <Box height="24px" />
           <Box w="958px" height={"1px"} bg="#D9D9D9" />

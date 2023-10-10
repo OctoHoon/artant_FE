@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import StarRating from "../commons/StarRating";
 import ArtantButton from "../commons/ArtantButton";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getShopDetails } from "../../api";
 
 export default function ShopHeader() {
@@ -35,7 +35,7 @@ export default function ShopHeader() {
                   <Box width="32px" />
                   <Box>
                     <Text fontSize={"16px"} fontWeight={"500"}>
-                      {data!["ship_name"]}
+                      {data!["shop_name"]}
                     </Text>
                     <Box height={"2px"} />
                     <Text fontSize={"14px"}>
@@ -90,7 +90,7 @@ export default function ShopHeader() {
                   </Box>
                   <Box width="100px" />
                   <Box>
-                    <Text>에바아트프린트는 아트앤트 스타 셀러입니다.</Text>
+                    <Text>아트앤트 스타 셀러입니다.</Text>
                     <Box height="20px" />
                     <Flex>
                       <Box width="160px">
@@ -196,12 +196,15 @@ export default function ShopHeader() {
                   gap="4px"
                   alignItems={"center"}
                 >
-                  <Avatar
-                    width="60px"
-                    height="60px"
-                    src={data["users"][0]["avatar"]}
-                  />
-                  <Text>{data.shop_name}</Text>
+                  <Link to={`/people/${data["users"][0]["pk"]}`}>
+                    <Avatar
+                      width="60px"
+                      height="60px"
+                      src={data["users"][0]["avatar"]}
+                    />
+                  </Link>
+                  <Text>{data["users"][0]["username"]}</Text>
+
                   <Flex
                     gap="6px"
                     padding="0px 10px"
@@ -248,8 +251,8 @@ export default function ShopHeader() {
             <Box width="150px" />
             <Text lineHeight={"150%"}>
               멋지고 현대적인 스타일로 아프리카의 영감을 주는 디자인을 사랑하는
-              사람들을 위한 멋진 민족 추상 미술과 다채로운 프린트를 찾을 수 있는
-              BabaAfrican 상점에 오신 것을 환영합니다!
+              사람들을 위한 멋진 민족 추상 미술과 다채로운 프린트를 찾을 수 있는{" "}
+              {data && data.shop_name} 상점에 오신 것을 환영합니다!
             </Text>
           </Flex>
         </>
