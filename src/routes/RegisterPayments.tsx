@@ -63,7 +63,7 @@ export default function RegisterPayments() {
             <Flex gap={"12px"}>
               <Text>
                 ARTANT Payments는 구매자에게 가장 많은 결제 옵션을 제공하고
-                Etsy의 판매자 보호 기능을 제공합니다.
+                아트앤트의 판매자 보호 기능을 제공합니다.
               </Text>
               <Text> 더 알아보기</Text>
             </Flex>
@@ -477,7 +477,7 @@ export default function RegisterPayments() {
                       <Text fontWeight={"500"}>개인</Text>
                     </Radio>
                     <Text paddingLeft={"30px"}>
-                      Etsy의 대부분의 셀러가 이 범주에 속합니다.
+                      아트앤트의 대부분의 셀러가 이 범주에 속합니다.
                     </Text>
                   </Flex>
                   <Radio size="lg" value="2" marginRight={"8px"}>
@@ -510,7 +510,7 @@ export default function RegisterPayments() {
                     신원을 확인할 수 있습니다.
                   </Text>
                   <Text>
-                    이 정보는 Etsy에 공개적으로 표시되지 않습니다.{" "}
+                    이 정보는 아트앤트에 공개적으로 표시되지 않습니다.{" "}
                     <Text as="u">더 알아보기</Text>
                   </Text>
                 </Flex>

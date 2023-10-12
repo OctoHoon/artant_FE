@@ -387,8 +387,8 @@ export default function ShopManagerEditShop() {
                     <Flex gap={"20px"} width={"928px"} padding={"24px"}>
                       <Flex alignSelf={"stretch"} flexDirection={"column"}>
                         <Text>
-                          FAQ의 정보는 아트앤트의 정책이나 귀하의 매장 정책과
-                          모순되지 않을 수 있습니다.
+                          FAQ의 정보는 아트앤트의 정책이나 귀하의 매장 정책
+                          이해에 도움이 됩니다.
                         </Text>
                         <Button background={"white"} width={"104px"}>
                           <Flex gap={"2px"} fontWeight={"500"}>
@@ -502,7 +502,7 @@ const SvgCamera = () => {
 
 function EditAnnouncement() {
   return (
-    <Flex gap={"173px"} alignSelf={"stretch"}>
+    <Flex gap={"160px"} alignSelf={"stretch"}>
       <Flex flexDirection={"column"}>
         <Text fontSize={"16px"}>공지사항</Text>
         <Text color={"#666"} fontSize={"13px"}>
@@ -545,7 +545,7 @@ function EditAnnouncement() {
           공지 추가
         </Flex>
         <Input
-          placeholder="이 공간을 사용하여 중요한 최신 정보를 구매자와 공유하세요. 새로운 제품과 특별 프로모션을 언급 할수 있습니다. 쇼핑을 시작할 수 있도록 짧게 유지 하세요"
+          placeholder="이 공간을 사용하여 중요한 최신 정보를 구매자와 공유하세요. 새로운 제품과 특별 프로모션을 언급 할수 있습니다."
           width={"944px"}
           height={"60px"}
         />

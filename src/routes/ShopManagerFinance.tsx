@@ -114,7 +114,7 @@ export default function ShopManagerFinance() {
                     <Td>
                       <Flex flexDirection={"column"}>
                         <Text>목표 수수료</Text>
-                        <Text>목록 #153432542</Text>
+                        <Text>작품 #153432542</Text>
                       </Flex>
                     </Td>
                     <Td>--</Td>
@@ -165,6 +165,7 @@ function FinanceTop() {
 }
 
 function FinanceSummary() {
+  const today = new Date();
   return (
     <Flex gap={"24px"} alignSelf={"stretch"}>
       <Flex
@@ -181,7 +182,11 @@ function FinanceSummary() {
           alignItems={"center"}
           alignSelf={"stretch"}
         >
-          <Select placeholder="오늘 9월 4일" color={"#666"} width={"412px"} />
+          <Select
+            placeholder={`오늘 ${today.getMonth() + 1}월 ${today.getDate()}일`}
+            color={"#666"}
+            width={"412px"}
+          />
           <Flex
             width={"150px"}
             justifyContent={"space-between"}

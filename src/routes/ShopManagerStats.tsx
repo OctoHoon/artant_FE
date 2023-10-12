@@ -275,10 +275,14 @@ const data = [
 ];
 
 export default function ShopManagerStats() {
+  const today = new Date();
   return (
     <Flex width={"1340px"} padding={"32px 0px 120px 60px"}>
       <Flex flexDirection={"column"} gap={"60px"}>
-        <Select placeholder="오늘 9월 4일" width={"412px"} />
+        <Select
+          placeholder={`오늘 ${today.getMonth() + 1}월 ${today.getDate()}일`}
+          width={"412px"}
+        />
         <Flex gap="40px" flexDirection={"column"}>
           <Flex flexDirection={"column"}>
             <Flex
@@ -393,7 +397,7 @@ export default function ShopManagerStats() {
                 스토어 실적 현황
               </Text>
               <Select
-                placeholder="전체목록"
+                placeholder="전체작품"
                 width={"110px"}
                 fontSize={"16px"}
               />
@@ -410,7 +414,7 @@ export default function ShopManagerStats() {
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >
-                <Text width={"540px"}>목록</Text>
+                <Text width={"540px"}>작품</Text>
 
                 <Select
                   placeholder="조회수"

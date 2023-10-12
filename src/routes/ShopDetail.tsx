@@ -42,7 +42,7 @@ export default function ShopDetail() {
         <ShopReviews />
         <Box width={"1280px"} background={"#D9D9D9"} height={"1px"} />
         <ShopIntro />
-        <ShopPolicy shop_name={data.shop_name} />
+        <ShopPolicy shop_name={data && data.shop_name} />
       </Box>
     </Box>
   );

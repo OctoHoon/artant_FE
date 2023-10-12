@@ -77,7 +77,7 @@ export default function RegisterShopName() {
                   lineHeight="normal"
                   letterSpacing="0.5px"
                 >
-                  첫번째 목록을 성공적으로 작성했습니다!
+                  첫번째 작품을 성공적으로 작성했습니다!
                 </Text>
                 <Text
                   color="var(--maincolorstextblack-222222, #222)"

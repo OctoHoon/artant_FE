@@ -17,6 +17,13 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Radio,
   RadioGroup,
   Select,
@@ -24,6 +31,7 @@ import {
   Switch,
   Text,
   Textarea,
+  useDisclosure,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -48,6 +56,8 @@ import ReactPlayer from "react-player";
 import { subsubCategory } from "../components/data/options";
 import { type } from "os";
 import Footer from "../components/commons/Footer";
+import { PixelCrop } from "react-image-crop";
+import ThumbnailCrop from "../components/ShopManager/Thumbnail";
 
 interface IForm {
   file: FileList;
@@ -294,6 +304,55 @@ export default function UploadPhotos() {
     }
   };
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
+  const [adjustedCrop, setAdjustedCrop] = useState(false);
+
+  function drawCroppedImage() {
+    if (completedCrop && previewCanvasRef.current) {
+      const canvas = previewCanvasRef.current;
+      const ctx = canvas.getContext("2d");
+
+      const image = new window.Image() as HTMLImageElement;
+      image.src = URL.createObjectURL(selectedFiles[0]);
+
+      image.onload = () => {
+        const { width, height, x, y } = completedCrop;
+        const scale = image.height / 400;
+
+        const offscreen = new OffscreenCanvas(width * scale, height * scale);
+        const offscreenCtx = offscreen.getContext(
+          "2d"
+        ) as OffscreenCanvasRenderingContext2D;
+
+        console.log(
+          scale,
+          x,
+          y,
+          width,
+          height,
+          offscreen.width,
+          offscreen.height
+        );
+        canvas.width = 120;
+        canvas.height = 120;
+
+        ctx!.drawImage(
+          image,
+          x * scale,
+          y * scale,
+          width * scale,
+          height * scale,
+          0,
+          0,
+          120,
+          120
+        );
+      };
+    }
+  }
+
   return (
     <>
       {" "}
@@ -431,7 +490,7 @@ export default function UploadPhotos() {
                       lineHeight="140%"
                       letterSpacing="-0.3px"
                     >
-                      최대 10개의 사진을 사용하여 항목의 <br />
+                      최대 8개의 사진을 사용하여 항목의 <br />
                       가장 중요한 특성을 보여주세요.
                     </Text>
                   </Flex>
@@ -631,17 +690,34 @@ export default function UploadPhotos() {
                   </Text>
                 </Flex>
                 <Flex display={"flex"} alignItems={"center"} gap={"16px"}>
-                  <GrayBoxImage
-                    index={-1}
-                    width={"145px"}
-                    height={"120px"}
-                    src={
-                      selectedFiles.length > 0
-                        ? URL.createObjectURL(selectedFiles[0])
-                        : ""
-                    }
-                  />
+                  {adjustedCrop ? (
+                    <canvas
+                      width={"120px"}
+                      height={"120px"}
+                      ref={previewCanvasRef}
+                      style={{
+                        border:
+                          "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)",
+                        objectFit: "contain",
+                      }}
+                    />
+                  ) : (
+                    <GrayBoxImage
+                      index={-1}
+                      width={"145px"}
+                      height={"120px"}
+                      src={
+                        selectedFiles.length > 0
+                          ? URL.createObjectURL(selectedFiles[0])
+                          : ""
+                      }
+                    />
+                  )}
                   <Button
+                    onClick={() => {
+                      onOpen();
+                      setAdjustedCrop(true);
+                    }}
                     display="flex"
                     height="38px"
                     padding="8px 16px"
@@ -652,6 +728,40 @@ export default function UploadPhotos() {
                   >
                     썸네일 조정
                   </Button>
+                  <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>썸네일 조정</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <ThumbnailCrop
+                          imgSrc={
+                            selectedFiles.length > 0
+                              ? URL.createObjectURL(selectedFiles[0])
+                              : ""
+                          }
+                          setCompletedCropParent={(c) => setCompletedCrop(c)}
+                        />
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button
+                          colorScheme="blue"
+                          mr={3}
+                          onClick={() => {
+                            onClose();
+                            drawCroppedImage();
+                          }}
+                        >
+                          완료
+                        </Button>
+                        <Button variant="ghost" onClick={onClose}>
+                          {" "}
+                          취소
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
                 </Flex>
               </Flex>
             </Flex>
@@ -2943,43 +3053,6 @@ export default function UploadPhotos() {
                           placeholder="배송 서비스 선택"
                         ></Select>
                       </Flex>
-                      <Flex
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"flex-start"}
-                        gap={"6px"}
-                      >
-                        <Text
-                          color="var(--maincolorstextblack-222222, #222)"
-                          css={{
-                            fontFeatureSettings: "clig off, liga off",
-                            /* BODY/XS_14/R */
-                            fontFamily: "Spoqa Han Sans Neo",
-                            fontSize: "16px",
-
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "150%",
-                            letterSpacing: "-0.042px",
-                          }}
-                        >
-                          업그레이드
-                        </Text>
-                        <Select
-                          height={"40px"}
-                          width={"600px"}
-                          gap={"10px"}
-                          flexDirection={"column"}
-                          justifyContent={"center"}
-                          alignItems={"flex-start"}
-                          colorScheme="white"
-                          color="#595959"
-                          fontSize="14px"
-                          fontWeight="400"
-                          letterSpacing={"-0.042px"}
-                          placeholder="배송 서비스 선택"
-                        ></Select>
-                      </Flex>
                     </Flex>
                   </Flex>
                   <Flex
@@ -3371,33 +3444,31 @@ export default function UploadPhotos() {
           </Flex>
         </Flex>
       </Flex>
-      <Box pb={40} mt={10} px={{ base: 10, lg: 40 }}>
-        <Container>
-          <VStack as="form" spacing={5} mt={10}>
-            <FormControl>
-              <Input
-                type="file"
-                accept="image/*"
-                onChange={handleFileSelect}
-                multiple
-                display="none" // 숨길 input 엘리먼트
-                ref={fileInputRef}
-              />
-            </FormControl>
+      <Container>
+        <VStack as="form" spacing={5} mt={10}>
+          <FormControl>
+            <Input
+              type="file"
+              accept="image/*"
+              onChange={handleFileSelect}
+              multiple
+              display="none" // 숨길 input 엘리먼트
+              ref={fileInputRef}
+            />
+          </FormControl>
 
-            <FormControl>
-              <Input
-                {...register("file")}
-                type="file"
-                accept="video/*"
-                onChange={handleVideoFileSelect}
-                style={{ display: "none" }} // 파일 선택 버튼을 숨깁니다.
-                ref={videoFileInputRef}
-              />
-            </FormControl>
-          </VStack>
-        </Container>
-      </Box>
+          <FormControl>
+            <Input
+              {...register("file")}
+              type="file"
+              accept="video/*"
+              onChange={handleVideoFileSelect}
+              style={{ display: "none" }} // 파일 선택 버튼을 숨깁니다.
+              ref={videoFileInputRef}
+            />
+          </FormControl>
+        </VStack>
+      </Container>
     </>
   );
 }

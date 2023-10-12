@@ -56,7 +56,7 @@ export default function ShopManager() {
             </Text>
             <Link to={"/your/shops/me/listings/create"}>
               <Text color="#666" as="u">
-                새 목록 만들기
+                새 작품 만들기
               </Text>
             </Link>
           </Flex>
@@ -184,9 +184,11 @@ export default function ShopManager() {
               <option value="option3">3월</option>
             </Select>
           </Flex>
-          <Text textStyle="B13R" as="u">
-            자세한 통계 보기
-          </Text>
+          <Link to={"/your/shops/me/stats"}>
+            <Text textStyle="B13R" as="u">
+              자세한 통계 보기
+            </Text>
+          </Link>
         </Flex>
         <Flex alignSelf={"stretch"}>
           <StatBox
@@ -258,8 +260,8 @@ export default function ShopManager() {
           지금 당장 해야 할 일은 없습니다.
         </Flex>
         <Flex flexDirection={"column"} gap={"-1px"} alignSelf={"stretch"}>
-          <CheckButton title={"목록"} text={"모든 목록 보기"} type={true} />
-          <CheckButton title={"활성 목록"} text={2} />
+          <CheckButton title={"작품"} text={"모든 작품 보기"} type={true} />
+          <CheckButton title={"활성 작품"} text={2} />
           <CheckButton title={"만료"} text={1} />
           <CheckButton title={"품절"} text={1} />
         </Flex>
@@ -273,7 +275,14 @@ export default function ShopManager() {
             {data &&
               data.products.slice(0, 4).map((art, index) => (
                 <Link to={`/listings/${art.pk}`}>
-                  <Flex flexDirection={"column"} alignItems={"flex-start"}>
+                  <Flex
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    _hover={{
+                      boxShadow: "4px 4px 8px 0px rgba(0, 0, 0, 0.25)",
+                      transitionDuration: "0.2s",
+                    }}
+                  >
                     <Image
                       objectFit={"cover"}
                       width={"290px"}

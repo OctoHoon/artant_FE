@@ -31,7 +31,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   createPhoto,
   uploadImage,
@@ -46,6 +46,8 @@ import {
 import { subsubCategory } from "../data/options";
 import useUser from "../../lib/useUser";
 import ThumbnailCrop from "./Thumbnail";
+import { PixelCrop } from "react-image-crop";
+import PersonalizeTab from "./PersonalizeTab";
 
 interface IForm {
   file: FileList;
@@ -77,6 +79,57 @@ export default function UploadPhotos() {
   const [cloudflareStreamUrl, setCloudflareStreamUrl] = useState<string>("");
   const createPhotoMutation = useMutation(createPhoto, {});
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
+  const [adjustedCrop, setAdjustedCrop] = useState(false);
+
+  function drawCroppedImage() {
+    if (completedCrop && previewCanvasRef.current) {
+      const canvas = previewCanvasRef.current;
+      const ctx = canvas.getContext("2d");
+
+      const image = new window.Image() as HTMLImageElement;
+      image.src = URL.createObjectURL(selectedFiles[0]);
+
+      image.onload = () => {
+        const { width, height, x, y } = completedCrop;
+        const scale = image.height / 400;
+
+        const offscreen = new OffscreenCanvas(width * scale, height * scale);
+        const offscreenCtx = offscreen.getContext(
+          "2d"
+        ) as OffscreenCanvasRenderingContext2D;
+
+        console.log(
+          scale,
+          x,
+          y,
+          width,
+          height,
+          offscreen.width,
+          offscreen.height
+        );
+        canvas.width = 120;
+        canvas.height = 120;
+
+        ctx!.drawImage(
+          image,
+          x * scale,
+          y * scale,
+          width * scale,
+          height * scale,
+          0,
+          0,
+          120,
+          120
+        );
+      };
+    }
+  }
+
+  console.log(completedCrop);
+
+  // Call drawCroppedImage when completedCrop changes
 
   const uploadImageMutation = useMutation(uploadImage, {
     onSuccess: ({ result }: any) => {
@@ -632,18 +685,34 @@ export default function UploadPhotos() {
                   </Text>
                 </Flex>
                 <Flex display={"flex"} alignItems={"center"} gap={"16px"}>
-                  <GrayBoxImage
-                    index={-1}
-                    width={"145px"}
-                    height={"120px"}
-                    src={
-                      selectedFiles.length > 0
-                        ? URL.createObjectURL(selectedFiles[0])
-                        : ""
-                    }
-                  />
+                  {adjustedCrop ? (
+                    <canvas
+                      width={"120px"}
+                      height={"120px"}
+                      ref={previewCanvasRef}
+                      style={{
+                        border:
+                          "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)",
+                        objectFit: "contain",
+                      }}
+                    />
+                  ) : (
+                    <GrayBoxImage
+                      index={-1}
+                      width={"145px"}
+                      height={"120px"}
+                      src={
+                        selectedFiles.length > 0
+                          ? URL.createObjectURL(selectedFiles[0])
+                          : ""
+                      }
+                    />
+                  )}
                   <Button
-                    onClick={onOpen}
+                    onClick={() => {
+                      onOpen();
+                      setAdjustedCrop(true);
+                    }}
                     display="flex"
                     height="38px"
                     padding="8px 16px"
@@ -666,11 +735,19 @@ export default function UploadPhotos() {
                               ? URL.createObjectURL(selectedFiles[0])
                               : ""
                           }
+                          setCompletedCropParent={(c) => setCompletedCrop(c)}
                         />
                       </ModalBody>
 
                       <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                        <Button
+                          colorScheme="blue"
+                          mr={3}
+                          onClick={() => {
+                            onClose();
+                            drawCroppedImage();
+                          }}
+                        >
                           완료
                         </Button>
                         <Button variant="ghost" onClick={onClose}>
@@ -2321,61 +2398,7 @@ export default function UploadPhotos() {
               옵션 추가
             </Button>
           </Flex>
-          <Flex // 개인화
-            display={"flex"}
-            width={"1280px"}
-            padding={"24px"}
-            flexDirection={"column"}
-            alignItems={"flex-start"}
-            gap={"32px"}
-            border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
-          >
-            <Flex
-              display={"flex"}
-              alignItems={"flex-start"}
-              alignSelf={"stretch"}
-            >
-              <Flex
-                display={"flex"}
-                flexDirection={"column"}
-                alignItems={"flex-start"}
-                gap={"4px"}
-              >
-                <Text
-                  color="var(--maincolorstextblack-222222, #222)"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="24px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.5px"
-                >
-                  개인화
-                </Text>
-                <Text
-                  width={"330px"}
-                  color="var(--maincolorstextblack-222222, #222)"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="14px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.042px"
-                >
-                  이름을 세기거나 이니셜을 넣는 등 개인 맞춤 작품을 위해 이
-                  작품에 대한 개인 정보를 수집하세요.
-                </Text>
-              </Flex>
-              <FormControl
-                display="flex"
-                alignItems="center"
-                justifyContent={"flex-end"}
-              >
-                <FormLabel htmlFor="email-alerts" mb="0"></FormLabel>
-                <Switch id="individualization" size={"md"} />
-              </FormControl>
-            </Flex>
-          </Flex>
+          <PersonalizeTab />
           <Flex // 배송
             display={"flex"}
             width={"1280px"}
@@ -2828,243 +2851,7 @@ export default function UploadPhotos() {
                       alignSelf={"stretch"}
                       background={"var(--maincolorslinegrayeeeeee, #EEE)"}
                     ></Flex>
-                    <Flex // 배송 업그레이드
-                      display={"flex"}
-                      alignSelf={"stretch"}
-                      alignItems={"flex-start"}
-                      gap={"40px"}
-                    >
-                      <Flex
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"flex-start"}
-                        width={"234px"}
-                        gap={"6px"}
-                        alignSelf={"stretch"}
-                      >
-                        <Flex
-                          display={"flex"}
-                          alignItems={"center"}
-                          width={"234px"}
-                          gap={"2px"}
-                        >
-                          <Text
-                            color="var(--maincolorstextblack-222222, #222)"
-                            fontFamily="Spoqa Han Sans Neo"
-                            fontSize="14px"
-                            fontStyle="normal"
-                            fontWeight={500}
-                            lineHeight="normal"
-                            letterSpacing="-0.042px"
-                          >
-                            배송 업그레이드*
-                          </Text>
-                          <Text
-                            color="var(--maincolorstextgray-595959, #666)"
-                            fontFamily="Spoqa Han Sans Neo"
-                            fontSize="13px"
-                            fontStyle="normal"
-                            fontWeight={400}
-                            lineHeight="140%"
-                            letterSpacing="-0.3px"
-                          >
-                            (선택사항)
-                          </Text>
-                        </Flex>
-                        <Text
-                          color="var(--maincolorstextgray-595959, #666)"
-                          fontFamily="Spoqa Han Sans Neo"
-                          fontSize="13px"
-                          fontStyle="normal"
-                          fontWeight={400}
-                          lineHeight="140%"
-                          letterSpacing="-0.3px"
-                        >
-                          구매자에게 더 빠른 배송을 선택할 수 있는 옵션을
-                          제공합니다. 이러한 비용은 표준 가격에 추가됩니다.
-                        </Text>
-                      </Flex>
-                      <Flex
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"flex-start"}
-                        gap={"16px"}
-                      >
-                        <Flex
-                          display={"flex"}
-                          flexDirection={"column"}
-                          alignItems={"flex-start"}
-                          gap={"6px"}
-                        >
-                          <Text
-                            color="var(--maincolorstextblack-222222, #222)"
-                            css={{
-                              fontFeatureSettings: "clig off, liga off",
-                              /* BODY/XS_14/R */
-                              fontFamily: "Spoqa Han Sans Neo",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "normal",
-                              letterSpacing: "-0.042px",
-                            }}
-                          >
-                            업그레이드
-                          </Text>
-                          <Select
-                            height={"40px"}
-                            gap={"10px"}
-                            flexDirection={"column"}
-                            justifyContent={"center"}
-                            alignItems={"flex-start"}
-                            colorScheme="white"
-                            color="#595959"
-                            fontSize="14px"
-                            fontWeight="400"
-                            letterSpacing={"-0.042px"}
-                            placeholder="업그레이드 서비스 선택"
-                          ></Select>
-                        </Flex>
-                        <Flex
-                          display={"flex"}
-                          flexDirection={"column"}
-                          alignItems={"flex-start"}
-                          gap={"6px"}
-                        >
-                          <Text
-                            color="var(--maincolorstextblack-222222, #222)"
-                            css={{
-                              fontFeatureSettings: "clig off, liga off",
-                              /* BODY/XS_14/R */
-                              fontFamily: "Spoqa Han Sans Neo",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "normal",
-                              letterSpacing: "-0.042px",
-                            }}
-                          >
-                            배송서비스
-                          </Text>
-                          <Select
-                            height={"40px"}
-                            gap={"10px"}
-                            flexDirection={"column"}
-                            justifyContent={"center"}
-                            alignItems={"flex-start"}
-                            colorScheme="white"
-                            color="#595959"
-                            fontSize="14px"
-                            fontWeight="400"
-                            letterSpacing={"-0.042px"}
-                            placeholder="배송 서비스 선택"
-                          ></Select>
-                        </Flex>
-                        <Flex
-                          alignItems={"flex-start"}
-                          alignSelf={"stretch"}
-                          gap={"12px"}
-                        >
-                          {" "}
-                          <Flex
-                            display={"flex"}
-                            flexDirection={"column"}
-                            alignItems={"flex-start"}
-                            gap={"6px"}
-                          >
-                            <Text
-                              color="var(--maincolorstextblack-222222, #222)"
-                              css={{
-                                fontFeatureSettings: "clig off, liga off",
-                                /* BODY/XS_14/R */
-                                fontFamily: "Spoqa Han Sans Neo",
-                                fontSize: "14px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "normal",
-                                letterSpacing: "-0.042px",
-                              }}
-                            >
-                              하나의 항목
-                            </Text>
-                            <Input
-                              height={"40px"}
-                              gap={"10px"}
-                              flexDirection={"column"}
-                              justifyContent={"center"}
-                              alignItems={"flex-start"}
-                              colorScheme="white"
-                              color="#595959"
-                              fontSize="14px"
-                              fontWeight="400"
-                              letterSpacing={"-0.042px"}
-                              placeholder="0원"
-                            ></Input>
-                          </Flex>{" "}
-                          <Flex
-                            display={"flex"}
-                            flexDirection={"column"}
-                            alignItems={"flex-start"}
-                            gap={"6px"}
-                          >
-                            <Text
-                              color="var(--maincolorstextblack-222222, #222)"
-                              css={{
-                                fontFeatureSettings: "clig off, liga off",
-                                /* BODY/XS_14/R */
-                                fontFamily: "Spoqa Han Sans Neo",
-                                fontSize: "14px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "normal",
-                                letterSpacing: "-0.042px",
-                              }}
-                            >
-                              추가 항목
-                            </Text>
-                            <Input
-                              height={"40px"}
-                              gap={"10px"}
-                              flexDirection={"column"}
-                              justifyContent={"center"}
-                              alignItems={"flex-start"}
-                              colorScheme="white"
-                              color="#595959"
-                              fontSize="14px"
-                              fontWeight="400"
-                              letterSpacing={"-0.042px"}
-                              placeholder="0원"
-                            ></Input>
-                          </Flex>
-                        </Flex>
-                      </Flex>
-                    </Flex>
-                    <Button
-                      alignItems={"center"}
-                      padding={"8px 16px 8px 8px"}
-                      backgroundColor={"transparent"}
-                    >
-                      <SvgPlus />
-                      <Text
-                        color="var(--maincolorstextblack-222222, #222)"
-                        css={`
-                          /* BODY/S_16/M */
-                          font-family: "Spoqa Han Sans Neo";
-                          font-size: 16px;
-                          font-style: normal;
-                          font-weight: 500;
-                          line-height: normal;
-                          letter-spacing: 0.048px;
-                        `}
-                      >
-                        배송 업그레이드 추가
-                      </Text>
-                    </Button>
-                    <Flex
-                      height={"1px"}
-                      alignSelf={"stretch"}
-                      background={"var(--maincolorslinegrayeeeeee, #EEE)"}
-                    ></Flex>
+
                     <Flex
                       justifyContent={"space-between"}
                       alignItems={"center"}
@@ -3199,43 +2986,6 @@ export default function UploadPhotos() {
                           }}
                         >
                           기본 배송
-                        </Text>
-                        <Select
-                          height={"40px"}
-                          width={"600px"}
-                          gap={"10px"}
-                          flexDirection={"column"}
-                          justifyContent={"center"}
-                          alignItems={"flex-start"}
-                          colorScheme="white"
-                          color="#595959"
-                          fontSize="14px"
-                          fontWeight="400"
-                          letterSpacing={"-0.042px"}
-                          placeholder="배송 서비스 선택"
-                        ></Select>
-                      </Flex>
-                      <Flex
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"flex-start"}
-                        gap={"6px"}
-                      >
-                        <Text
-                          color="var(--maincolorstextblack-222222, #222)"
-                          css={{
-                            fontFeatureSettings: "clig off, liga off",
-                            /* BODY/XS_14/R */
-                            fontFamily: "Spoqa Han Sans Neo",
-                            fontSize: "16px",
-
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "150%",
-                            letterSpacing: "-0.042px",
-                          }}
-                        >
-                          업그레이드
                         </Text>
                         <Select
                           height={"40px"}

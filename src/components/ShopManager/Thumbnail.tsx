@@ -33,21 +33,15 @@ function centerAspectCrop(
   );
 }
 
-export default function ThumbnailCrop({ imgSrc }) {
-  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+export default function ThumbnailCrop({ imgSrc, setCompletedCropParent }) {
   const imgRef = useRef<HTMLImageElement>(null);
-  const hiddenAnchorRef = useRef<HTMLAnchorElement>(null);
-  const blobUrlRef = useRef("");
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
-  const [scale, setScale] = useState(1);
-  const [rotate, setRotate] = useState(0);
   const [aspect, setAspect] = useState<number | undefined>(1 / 1);
 
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
-    if (aspect) {
-      const { width, height } = e.currentTarget;
-      setCrop(centerAspectCrop(width, height, aspect));
+    if (!completedCrop) {
+      setCrop(centerAspectCrop(300, 300, 1 / 1));
     }
   }
 
@@ -71,9 +65,9 @@ export default function ThumbnailCrop({ imgSrc }) {
     <div className="App">
       <div className="Crop-Controls">
         <div>
+          정사각형 비율{" "}
           <button onClick={handleToggleAspectClick}>
-            정사각형 비율{" "}
-            <Text as="u">{aspect ? "고정하기" : " 고정 해제"}</Text>
+            <Text as="u">{aspect ? "고정해제하기" : " 고정하기"}</Text>
           </button>
         </div>
       </div>
@@ -81,18 +75,13 @@ export default function ThumbnailCrop({ imgSrc }) {
         <ReactCrop
           crop={crop}
           onChange={(_, percentCrop) => setCrop(percentCrop)}
-          onComplete={(c) => setCompletedCrop(c)}
+          onComplete={(c) => {
+            setCompletedCrop(c);
+            setCompletedCropParent(c);
+          }}
           aspect={aspect}
-          // minWidth={400}
-          minHeight={200}
         >
-          <img
-            ref={imgRef}
-            alt="Crop me"
-            src={imgSrc}
-            style={{ transform: `scale(${scale}) rotate(${rotate}deg)` }}
-            onLoad={onImageLoad}
-          />
+          <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} />
         </ReactCrop>
       )}
     </div>
