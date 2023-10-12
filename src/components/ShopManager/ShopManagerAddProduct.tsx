@@ -284,8 +284,7 @@ export default function UploadPhotos() {
     name: productName,
     description: productDescription,
     price: productPrice,
-    thumbnail:
-      "https://static9.depositphotos.com/1022647/1077/i/950/depositphotos_10770202-stock-photo-modern-art-gallery-empty-picture.jpg", // 임시 썸네일
+    thumbnail: "", // 임시 썸네일
     category_name: selectedSubCategory,
     shopPK: shopPk!,
   };
@@ -2206,7 +2205,7 @@ export default function UploadPhotos() {
                         letter-spacing: -0.042px;
                       `}
                     >
-                      가격은 1,000원원 이상이여야 합니다.
+                      가격은 1,000원 이상이여야 합니다.
                     </Text>
                   ) : null}
                 </Flex>

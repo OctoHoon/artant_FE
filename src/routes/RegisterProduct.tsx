@@ -2205,7 +2205,7 @@ export default function UploadPhotos() {
                         letter-spacing: -0.042px;
                       `}
                     >
-                      가격은 1,000원원 이상이여야 합니다.
+                      가격은 1,000원 이상이여야 합니다.
                     </Text>
                   ) : null}
                 </Flex>
