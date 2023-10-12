@@ -290,7 +290,7 @@ export default function UploadPhotos() {
 
         await onSubmitImages(); // product에 images 등록
         setSelectedFiles([]);
-
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         console.log("화면이동");
         navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
       } catch (error) {
