@@ -93,7 +93,9 @@ export default function UploadPhotos() {
 
       image.onload = () => {
         const { width, height, x, y } = completedCrop;
-        const scale = image.height / 400;
+
+        const scale =
+          image.width > image.height ? image.height / 400 : image.width / 400;
 
         const offscreen = new OffscreenCanvas(width * scale, height * scale);
         const offscreenCtx = offscreen.getContext(
@@ -284,7 +286,8 @@ export default function UploadPhotos() {
     name: productName,
     description: productDescription,
     price: productPrice,
-    thumbnail: "", // 임시 썸네일
+    thumbnail:
+      "https://static9.depositphotos.com/1022647/1077/i/950/depositphotos_10770202-stock-photo-modern-art-gallery-empty-picture.jpg", // 임시 썸네일, // 임시 썸네일
     category_name: selectedSubCategory,
     shopPK: shopPk!,
   };
