@@ -77,6 +77,7 @@ export default function UploadPhotos() {
   const [productCount, setProductCount] = useState(0); // 제품 수량
   const [refreshOptionValue, setRefreshOptionValue] = useState("0"); // 갱신 옵션
   const [shippingOptionValue, setShippingOptionValue] = useState("0"); // 갱신 옵션
+  const [showSeo, setShowSeo] = useState(false);
 
   // image, video files
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
@@ -1652,33 +1653,38 @@ export default function UploadPhotos() {
                           text-decoration-line: underline;
                         `}
                         cursor={"pointer"}
+                        onClick={() => {
+                          setShowSeo(!showSeo);
+                        }}
                       >
-                        미리보기 표시
+                        {showSeo ? "가리기" : "보기"}
                       </Text>
                     </Flex>
-                    <Text
-                      display="flex"
-                      padding="11px 16px"
-                      alignItems="flex-start"
-                      h={"120px"}
-                      gap={"8px"}
-                      alignSelf="stretch"
-                      borderRadius="5px"
-                      border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-                      background="var(--maincolorsbg-white, #FFF)"
-                      color="var(--maincolorstextblack-222222, #222)"
-                      css={`
-                        font-feature-settings: "clig" off, "liga" off;
-                        font-family: "Spoqa Han Sans Neo";
-                        font-size: 14px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: normal;
-                        letter-spacing: -0.042px;
-                      `}
-                    >
-                      작성자: 아트앤트 <br /> 00000
-                    </Text>
+                    {showSeo && (
+                      <Text
+                        display="flex"
+                        padding="11px 16px"
+                        alignItems="flex-start"
+                        h={"120px"}
+                        gap={"8px"}
+                        alignSelf="stretch"
+                        borderRadius="5px"
+                        border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
+                        background="var(--maincolorsbg-white, #FFF)"
+                        color="var(--maincolorstextblack-222222, #222)"
+                        css={`
+                          font-feature-settings: "clig" off, "liga" off;
+                          font-family: "Spoqa Han Sans Neo";
+                          font-size: 14px;
+                          font-style: normal;
+                          font-weight: 400;
+                          line-height: normal;
+                          letter-spacing: -0.042px;
+                        `}
+                      >
+                        작성자: 아트앤트 <br /> 00000
+                      </Text>
+                    )}
                   </Flex>
                 </Flex>
               </Flex>
