@@ -58,6 +58,8 @@ import { type } from "os";
 import Footer from "../components/commons/Footer";
 import { PixelCrop } from "react-image-crop";
 import ThumbnailCrop from "../components/ShopManager/Thumbnail";
+import AddVariation from "../components/ShopManager/RegisterProdcuct.tsx/AddVariations";
+import PersonalizeTab from "../components/ShopManager/PersonalizeTab";
 
 interface IForm {
   file: FileList;
@@ -2342,121 +2344,8 @@ export default function UploadPhotos() {
               </Flex>
             </Flex>
           </Flex>
-          <Flex // 변형
-            display={"flex"}
-            width={"1280px"}
-            padding={"24px"}
-            flexDirection={"column"}
-            alignItems={"flex-start"}
-            gap={"32px"}
-            border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
-          >
-            <Flex
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"flex-start"}
-              gap={"4px"}
-            >
-              <Text
-                color="var(--maincolorstextblack-222222, #222)"
-                fontFamily="Spoqa Han Sans Neo"
-                fontSize="24px"
-                fontStyle="normal"
-                fontWeight={400}
-                lineHeight="normal"
-                letterSpacing="-0.5px"
-              >
-                변형
-              </Text>
-              <Text
-                color="var(--maincolorstextblack-222222, #222)"
-                fontFamily="Spoqa Han Sans Neo"
-                fontSize="14px"
-                fontStyle="normal"
-                fontWeight={400}
-                lineHeight="normal"
-                letterSpacing="-0.042px"
-              >
-                색상이나 크기와 같은 사용 가능한 옵션을 추가합니다. 구매자는
-                결제 시 이 중에서 선택하게 됩니다.
-              </Text>
-            </Flex>
-            <Button
-              display={"flex"}
-              padding={"11px 16px"}
-              flexDirection={"column"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              gap={"8px"}
-              backgroundColor={"transparent"}
-              border={
-                "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-              }
-              color="var(--maincolorstextgray-595959, #666)"
-              fontFamily="Spoqa Han Sans Neo"
-              fontSize="13px"
-              fontStyle="normal"
-              fontWeight={400}
-              lineHeight="140%"
-              letterSpacing="-0.3px"
-            >
-              변형 추가
-            </Button>
-          </Flex>
-          <Flex // 개인화
-            display={"flex"}
-            width={"1280px"}
-            padding={"24px"}
-            flexDirection={"column"}
-            alignItems={"flex-start"}
-            gap={"32px"}
-            border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
-          >
-            <Flex
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"flex-start"}
-              alignSelf={"stretch"}
-            >
-              <Flex
-                display={"flex"}
-                flexDirection={"column"}
-                alignItems={"flex-start"}
-                gap={"4px"}
-              >
-                <Text
-                  color="var(--maincolorstextblack-222222, #222)"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="24px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.5px"
-                >
-                  개인화
-                </Text>
-                <Text
-                  color="var(--maincolorstextblack-222222, #222)"
-                  fontFamily="Spoqa Han Sans Neo"
-                  fontSize="14px"
-                  fontStyle="normal"
-                  fontWeight={400}
-                  lineHeight="normal"
-                  letterSpacing="-0.042px"
-                >
-                  이 목록에 대한 개인 정보를 수집하세요.
-                </Text>
-              </Flex>
-              <FormControl
-                display="flex"
-                alignItems="center"
-                justifyContent={"flex-end"}
-              >
-                <FormLabel htmlFor="email-alerts" mb="0"></FormLabel>
-                <Switch id="individualization" size={"md"} />
-              </FormControl>
-            </Flex>
-          </Flex>
+          <AddVariation />
+          <PersonalizeTab />
           <Flex // 배송
             display={"flex"}
             width={"1280px"}

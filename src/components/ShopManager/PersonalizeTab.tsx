@@ -1,5 +1,6 @@
 import {
   Box,
+  Checkbox,
   Flex,
   FormControl,
   FormLabel,
@@ -11,6 +12,8 @@ import { useState } from "react";
 
 export default function PersonalizeTab() {
   const [showDetail, setShowDetail] = useState(false);
+  const [personalization, setPersonalization] = useState("");
+  const [isOption, setIsOption] = useState(false);
 
   const handleSwitchChange = () => {
     setShowDetail(!showDetail); // Toggle the showDetail state
@@ -78,6 +81,7 @@ export default function PersonalizeTab() {
             <Text fontSize={"13px"}>
               구매자가 개인화를 원할 때 볼 수 있는 설명을 입력해주세요{" "}
             </Text>
+            <Box height={"20px"} />
             <Input
               display="flex"
               padding="0px 16px"
@@ -89,8 +93,17 @@ export default function PersonalizeTab() {
               border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
               background="var(--maincolorsbg-white, #FFF)"
               placeholder="예시 : 팔찌에 새길 이름을 입력해주세요. 최대 12글자입니다."
-              onChange={(e) => {}}
+              onChange={(e) => {
+                setPersonalization(e.target.value);
+              }}
             />
+            <Box height={"20px"} />
+            <Checkbox
+              isChecked={isOption}
+              onChange={(e) => setIsOption(e.target.checked)}
+            >
+              개인화는 옵션입니다
+            </Checkbox>
           </Flex>
           <Flex
             flexDirection={"column"}
@@ -110,7 +123,10 @@ export default function PersonalizeTab() {
             >
               <Text>개인화 옵션을 추가하세요</Text>
               <Text fontSize={"13px"}>
-                예시 : 팔찌에 새길 이름을 입력해주세요. 최대 12글자입니다.
+                예시 :{" "}
+                {personalization
+                  ? personalization
+                  : "팔찌에 새길 이름을 입력해주세요. 최대 12글자입니다."}
               </Text>
               <Input
                 display="flex"

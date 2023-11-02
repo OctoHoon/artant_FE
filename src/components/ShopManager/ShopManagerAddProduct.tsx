@@ -48,6 +48,7 @@ import useUser from "../../lib/useUser";
 import ThumbnailCrop from "./Thumbnail";
 import { PixelCrop } from "react-image-crop";
 import PersonalizeTab from "./PersonalizeTab";
+import AddVariation from "./RegisterProdcuct.tsx/AddVariations";
 
 interface IForm {
   file: FileList;
@@ -2339,67 +2340,7 @@ export default function UploadPhotos() {
               </Flex>
             </Flex>
           </Flex>
-          <Flex // 변형
-            display={"flex"}
-            width={"1280px"}
-            padding={"24px"}
-            flexDirection={"column"}
-            alignItems={"flex-start"}
-            gap={"32px"}
-            border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
-          >
-            <Flex
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"flex-start"}
-              gap={"4px"}
-            >
-              <Text
-                color="var(--maincolorstextblack-222222, #222)"
-                fontFamily="Spoqa Han Sans Neo"
-                fontSize="24px"
-                fontStyle="normal"
-                fontWeight={400}
-                lineHeight="normal"
-                letterSpacing="-0.5px"
-              >
-                작품 옵션
-              </Text>
-              <Text
-                color="var(--maincolorstextblack-222222, #222)"
-                fontFamily="Spoqa Han Sans Neo"
-                fontSize="14px"
-                fontStyle="normal"
-                fontWeight={400}
-                lineHeight="normal"
-                letterSpacing="-0.042px"
-              >
-                색상이나 크기와 같은 사용 가능한 옵션을 추가합니다. 구매자는
-                결제 시 이 중에서 선택하게 됩니다.
-              </Text>
-            </Flex>
-            <Button
-              display={"flex"}
-              padding={"11px 16px"}
-              flexDirection={"column"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              gap={"8px"}
-              backgroundColor={"transparent"}
-              border={
-                "1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-              }
-              color="var(--maincolorstextgray-595959, #666)"
-              fontFamily="Spoqa Han Sans Neo"
-              fontSize="13px"
-              fontStyle="normal"
-              fontWeight={400}
-              lineHeight="140%"
-              letterSpacing="-0.3px"
-            >
-              옵션 추가
-            </Button>
-          </Flex>
+          <AddVariation />
           <PersonalizeTab />
           <Flex // 배송
             display={"flex"}
