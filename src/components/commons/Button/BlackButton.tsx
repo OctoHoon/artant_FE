@@ -6,6 +6,7 @@ export default function BlackButton({
   flex = "",
   type = false,
   width = "full",
+  onClick = () => {},
 }) {
   return (
     <Button
@@ -25,6 +26,7 @@ export default function BlackButton({
           ? "var(--maincolorsbggrayeaeaea, #EAEAEA)"
           : "var(--maincolorsbggray-555555, #555)",
       }}
+      onClick={onClick}
     >
       {title}
     </Button>

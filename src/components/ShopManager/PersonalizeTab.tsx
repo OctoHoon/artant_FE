@@ -65,7 +65,6 @@ export default function PersonalizeTab() {
           alignItems="center"
           justifyContent={"flex-end"}
         >
-          <FormLabel htmlFor="email-alerts" mb="0"></FormLabel>
           <Switch
             id="individualization"
             size={"md"}
