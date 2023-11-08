@@ -2,6 +2,7 @@ import { Flex, Text, Button, Switch, Select } from "@chakra-ui/react";
 import { useState } from "react";
 import BlackButton from "../../commons/Button/BlackButton";
 import WhiteButton from "../../commons/Button/WhiteButton";
+import RegisterHeader from "./RegisterHeader";
 
 type Policy = {
   return: boolean;
@@ -26,15 +27,10 @@ export default function Returns() {
       gap={"32px"}
       border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
     >
-      <Flex
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"flex-start"}
-        gap={"4px"}
-      >
-        <Text textStyle={"H3R"}>반품 및 교환</Text>
-        <Text textStyle={"B14R"}>선택한 정책이 이 목록에 적용됩니다.</Text>
-      </Flex>
+      <RegisterHeader
+        title={"반품 및 교환"}
+        description={"선택한 정책이 이 목록에 적용됩니다."}
+      />
 
       <Flex alignItems={"flex-start"} gap={"40px"} alignSelf={"stretch"}>
         <Flex

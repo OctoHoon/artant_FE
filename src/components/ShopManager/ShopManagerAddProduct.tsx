@@ -48,9 +48,9 @@ import useUser from "../../lib/useUser";
 import ThumbnailCrop from "./Thumbnail";
 import { PixelCrop } from "react-image-crop";
 import PersonalizeTab from "./PersonalizeTab";
-import AddVariation from "./RegisterProdcuct.tsx/AddVariations";
-import Returns from "./RegisterProdcuct.tsx/Returns";
-import Shipping from "./RegisterProdcuct.tsx/Shipping";
+import AddVariation from "./RegisterProdcuct/AddVariations";
+import Returns from "./RegisterProdcuct/Returns";
+import Shipping from "./RegisterProdcuct/Shipping";
 
 interface IForm {
   file: FileList;
