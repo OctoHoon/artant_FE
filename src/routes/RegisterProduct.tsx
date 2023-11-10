@@ -382,7 +382,15 @@ export default function UploadPhotos() {
                 title={"저장하고 계속"}
                 borderRadius={"5px"}
                 onClick={onSubmitAll}
-                isLoading={calculateLoadingState()}
+                isLoading={
+                  createPhotoMutation.isLoading ||
+                  uploadImageMutation.isLoading ||
+                  uploadURLMutation.isLoading ||
+                  createVideoMutation.isLoading ||
+                  uploadVideoMutation.isLoading ||
+                  uploadVideoURLMutation.isLoading ||
+                  uploadImageAndThumbnailMutation.isLoading
+                }
               />
             </Flex>
           </ActionSection>

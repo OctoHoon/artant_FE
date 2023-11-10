@@ -3,9 +3,6 @@ import {
   Input,
   InputGroup,
   InputRightAddon,
-  Radio,
-  RadioGroup,
-  Select,
   Text,
   Textarea,
   Box,
@@ -67,7 +64,7 @@ export default function ProductDetails({
     setSelectedSubCategory(value);
   };
 
-  const handleAddTag = () => {
+  const handleAddTag = (tempTag) => {
     const newTags = [...tags];
     newTags.push(tempTag);
     setTags(newTags);
@@ -79,7 +76,7 @@ export default function ProductDetails({
     setTags(newTags);
   };
 
-  const handleAddMaterial = () => {
+  const handleAddMaterial = (tempMaterial) => {
     const newMaterials = [...materials];
     newMaterials.push(tempMaterial);
     setMaterials(newMaterials);
@@ -91,8 +88,6 @@ export default function ProductDetails({
     setMaterials(newMaterials);
   };
 
-  const [tempTag, setTempTag] = useState("");
-  const [tempMaterial, setTempMaterial] = useState("");
   const [whoMade, setWhoMade] = useState("");
   const [whatMade, setWhatMade] = useState("");
   const [whenMade, setWhenMade] = useState("");
@@ -353,8 +348,6 @@ export default function ProductDetails({
             <TagInput
               placeholder={"모양, 색상, 스타일, 기능 등"}
               onAdd={handleAddTag}
-              tempValue={tempTag}
-              setTempValue={setTempTag}
             />
             <Flex gap={"12px"} alignItems={"flex-start"} flexWrap="wrap">
               {tags.map((tag, index) => (
@@ -389,8 +382,6 @@ export default function ProductDetails({
             <TagInput
               placeholder={"원재료, 성분 등"}
               onAdd={handleAddMaterial}
-              tempValue={tempMaterial}
-              setTempValue={setTempMaterial}
             />
             <Flex gap={"12px"} alignItems={"flex-start"} flexWrap="wrap">
               {materials.map((tag, index) => (
@@ -409,7 +400,16 @@ export default function ProductDetails({
   );
 }
 
-const TagInput = ({ placeholder, onAdd, tempValue, setTempValue }) => {
+const TagInput = ({ placeholder, onAdd }) => {
+  const [tempValue, setTempValue] = useState("");
+
+  const handleButtonClick = () => {
+    if (onAdd) {
+      onAdd(tempValue);
+    }
+    setTempValue(""); // Clear the input field
+  };
+
   return (
     <Flex display={"flex"} alignItems={"center"} gap={"20px"}>
       <InputGroup width={"565px"}>
@@ -431,7 +431,7 @@ const TagInput = ({ placeholder, onAdd, tempValue, setTempValue }) => {
           as={"button"}
           fontSize={"13px"}
           children="추가하기"
-          onClick={onAdd}
+          onClick={handleButtonClick}
         />
       </InputGroup>
     </Flex>

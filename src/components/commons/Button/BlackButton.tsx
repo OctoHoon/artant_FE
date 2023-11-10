@@ -11,6 +11,7 @@ export default function BlackButton({
 }) {
   return (
     <Button
+      isLoading={isLoading}
       width={width}
       padding={"10px 24px"}
       justifyContent={"center"}
