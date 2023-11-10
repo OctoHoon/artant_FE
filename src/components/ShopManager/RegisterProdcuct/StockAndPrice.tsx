@@ -37,12 +37,7 @@ export default function StockAndPrice({
         alignItems={"flex-start"}
         gap={"4px"}
       >
-        <Text
-          color="var(--maincolorstextblack-222222, #222)"
-          fontFamily="Spoqa Han Sans Neo"
-          textStyle={"H3R"}
-          letterSpacing="-0.5px"
-        >
+        <Text textStyle={"H3R"} letterSpacing="-0.5px">
           재고 및 가격
         </Text>
       </Flex>

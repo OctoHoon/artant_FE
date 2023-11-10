@@ -5,7 +5,8 @@ export default function BlackButton({
   borderRadius,
   flex = "",
   type = false,
-  width = "full",
+  width = "auto",
+  isLoading = false,
   onClick = () => {},
 }) {
   return (

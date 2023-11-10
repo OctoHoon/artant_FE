@@ -215,7 +215,7 @@ export default function UploadPhotos() {
 
       uploadVideoMutation.mutate({
         uploadURL: data.uploadURL,
-        file: selectedVideoFile!,
+        file: selectedVideoFile![0]!,
       });
     },
   });
@@ -2342,10 +2342,6 @@ export default function UploadPhotos() {
               </Flex>
             </Flex>
           </Flex>
-          <AddVariation />
-          <PersonalizeTab />
-          <Shipping />
-          <Returns />
           <Flex
             width={"1280px"}
             justifyContent={"space-between"}

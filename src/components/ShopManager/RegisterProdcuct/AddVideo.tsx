@@ -1,15 +1,22 @@
-import { Flex, Text, Button } from "@chakra-ui/react";
+import { Flex, Text, Button, Box } from "@chakra-ui/react";
 import RegisterHeader from "./RegisterHeader";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import WhiteButton from "../../commons/Button/WhiteButton";
 
-export default function AddVideo({ setSelectedVideoFile, videoFileInputRef }) {
+export default function AddVideo({ setSelectedVideoFile }) {
+  const videoFileInputRef = useRef<HTMLInputElement>(null);
+
   const [videoPreviewUrl, setVideoPreviewUrl] = useState<string>("");
 
   const onVideoFileSelect = () => {
     if (videoFileInputRef.current) {
-      console.log("여기");
       videoFileInputRef.current.click();
     }
+  };
+
+  const handleRemoveVideo = () => {
+    setVideoPreviewUrl("");
+    setSelectedVideoFile();
   };
 
   const handleFileInputChange = (event) => {
@@ -18,8 +25,10 @@ export default function AddVideo({ setSelectedVideoFile, videoFileInputRef }) {
       setVideoPreviewUrl("");
     }
 
-    const file = event.target.files[0];
-    if (file) {
+    const files = event.target.files;
+
+    if (files && files[0]) {
+      const file = files[0];
       // Maximum file size in bytes (100 MB)
       const maxFileSize = 100 * 1024 * 1024;
       if (file.size > maxFileSize) {
@@ -121,21 +130,10 @@ export default function AddVideo({ setSelectedVideoFile, videoFileInputRef }) {
               onChange={handleFileInputChange} // Set the event handler here
               accept="video/*" // Optionally, ensure only video files can be selected
             />
-            <Button
-              display={"flex"}
-              width={"248px"}
-              height={"248px"}
-              padding={"24px"}
-              flexDirection={"column"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              gap={"26px"}
-              border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-              variant="unstyled" // 클릭 효과와 색상 없애기
-              onClick={onVideoFileSelect}
-            >
-              {videoPreviewUrl ? (
-                <Flex position={"absolute"}>
+
+            {videoPreviewUrl ? (
+              <Flex flexDirection={"column"} height={"248px"}>
+                <Box width="248px" height="248px" justifyContent={"center"}>
                   <video
                     muted
                     loop
@@ -143,8 +141,27 @@ export default function AddVideo({ setSelectedVideoFile, videoFileInputRef }) {
                     src={videoPreviewUrl}
                     controls
                   />
-                </Flex>
-              ) : (
+                </Box>
+                <WhiteButton
+                  title={"삭제"}
+                  onClick={handleRemoveVideo}
+                  width="120px"
+                />
+              </Flex>
+            ) : (
+              <Button
+                display={"flex"}
+                width={"248px"}
+                height={"248px"}
+                padding={"24px"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                gap={"26px"}
+                border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
+                variant="unstyled" // 클릭 효과와 색상 없애기
+                onClick={onVideoFileSelect}
+              >
                 <Flex
                   display={"flex"}
                   flexDirection={"column"}
@@ -170,8 +187,8 @@ export default function AddVideo({ setSelectedVideoFile, videoFileInputRef }) {
                     최대 파일 용량: 100MB
                   </Text>
                 </Flex>
-              )}
-            </Button>
+              </Button>
+            )}
           </Flex>
         </Flex>
       </Flex>

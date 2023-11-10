@@ -16,33 +16,15 @@ import {
 import AddVariationModal from "./AddVariationsModal";
 import React, { useState } from "react";
 
-type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
-
-type SelectedOption = {
-  variation: OptionCategory | string;
-  detail: string[];
-  selectPrice: boolean;
-  selectQuantity: boolean;
-  selectSku: boolean;
-};
-
-type DetailCombination = {
-  detail1: string;
-  detail2: string;
-  price?: number;
-  quantity?: number;
-  sku?: string;
-  visible?: boolean;
-};
-
-export default function AddVariation() {
+export default function AddVariation({
+  selectedOptions,
+  setSelectedOptions,
+  detailCombinations,
+  setDetailCombinations,
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
   const [isMix, setIsMix] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([]);
-  const [detailCombinations, setDetailCombinations] = useState<
-    DetailCombination[]
-  >([]);
 
   const handleOptionsSelected = (options) => {
     setSelectedOptions(options);
@@ -84,8 +66,6 @@ export default function AddVariation() {
       return [...prevCombinations, newCombination];
     });
   };
-
-  console.log(detailCombinations);
 
   const inputTypes = [
     { key: "selectSku", placeholder: "SKU", name: "sku" },

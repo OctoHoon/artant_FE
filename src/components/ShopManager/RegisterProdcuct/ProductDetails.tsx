@@ -15,6 +15,30 @@ import { useState } from "react";
 import SectionTitle from "./SectionTitle";
 import RegisterHeader from "./RegisterHeader";
 import RadioOption from "./RadioOption";
+import InputOption from "./InputOption";
+import SelectOption from "./SelectOption";
+
+const whoMadeOptions = [
+  { label: "I did", value: "option1" },
+  { label: "A member of my shop", value: "option2" },
+  { label: "Another company or person", value: "option3" },
+];
+
+const whatIsItOptions = [
+  { label: "A finished product", value: "option1" },
+  { label: "A supply or tool to make things", value: "option2" },
+];
+
+const whenMadeOptions = [
+  { label: "Made to Order", value: "option1" },
+  { label: "2020-2023", value: "option2" },
+  { label: "2010-2019", value: "option3" },
+  { label: "2000-2009", value: "option4" },
+  { label: "1990-1999", value: "option5" },
+  { label: "Before 1990", value: "option6" },
+];
+
+const sectionOptions = ["팔찌", "어버이날 선물", "털실"];
 
 export default function ProductDetails({
   setProductName,
@@ -27,6 +51,10 @@ export default function ProductDetails({
   shippingOptionValue,
   setShippingOptionValue,
   setProductDescription,
+  tags,
+  setTags,
+  materials,
+  setMaterials,
 }) {
   const handleCategoryChange = (event) => {
     const { value } = event.target;
@@ -65,13 +93,9 @@ export default function ProductDetails({
 
   const [tempTag, setTempTag] = useState("");
   const [tempMaterial, setTempMaterial] = useState("");
-
-  const [tags, setTags] = useState<string[]>(["레드", "블루"]);
-
-  const [materials, setMaterials] = useState<string[]>([
-    "수채화 물감",
-    "아크릴 물감",
-  ]);
+  const [whoMade, setWhoMade] = useState("");
+  const [whatMade, setWhatMade] = useState("");
+  const [whenMade, setWhenMade] = useState("");
 
   return (
     <Flex // 목록 세부정보
@@ -109,16 +133,8 @@ export default function ProductDetails({
             }
             link={undefined}
           />
-          <Input
-            display="flex"
-            padding="0px 16px"
-            alignItems="center"
-            flex="1 0 0"
-            alignSelf="stretch"
-            borderRadius="5px"
-            border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-            background="var(--maincolorsbg-white, #FFF)"
-            placeholder="제목을 입력하세요"
+          <InputOption
+            placeholder={"제목을 입력하세요"}
             onChange={(e) => setProductName(e.target.value)}
           />
         </Flex>
@@ -133,66 +149,29 @@ export default function ProductDetails({
             description={undefined}
             link={"아트앤트에서 허용되는 품목 유형에 대해 자세히 알아보세요."}
           />
-
-          <Select
-            height={"40px"}
-            flex="1 0 0"
-            padding={"10px 0px"}
-            gap={"10px"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            alignItems={"flex-start"}
-            colorScheme="white"
-            color="#595959"
-            fontSize="14px"
-            fontWeight="400"
-            letterSpacing={"-0.042px"}
+          <SelectOption
             placeholder="누가 만들었나요?"
-          >
-            <option value="option1">I did</option>
-            <option value="option2">A member of my shop</option>
-            <option value="option3">Another company or person</option>
-          </Select>
-          <Select
-            height={"40px"}
-            flex="1 0 0"
-            padding={"10px 0px"}
-            gap={"10px"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            alignItems={"flex-start"}
-            colorScheme="white"
-            color="#595959"
-            fontSize="14px"
-            fontWeight="400"
-            letterSpacing={"-0.042px"}
+            options={whoMadeOptions}
+            value={whoMade}
+            onChange={(e) => setWhoMade(e.target.value)}
+            disabled={false} // Add other props like onChange, value as needed
+          />
+
+          <SelectOption
             placeholder="그것은 무엇입니까?"
-          >
-            <option value="option1">A finished product</option>
-            <option value="option2">A supply or tool to make things</option>
-          </Select>
-          <Select
-            height={"40px"}
-            flex="1 0 0"
-            padding={"10px 0px"}
-            gap={"10px"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            alignItems={"flex-start"}
-            colorScheme="white"
-            color="#595959"
-            fontSize="14px"
-            fontWeight="400"
-            letterSpacing={"-0.042px"}
+            options={whatIsItOptions}
+            value={whatMade}
+            onChange={(e) => setWhatMade(e.target.value)}
+            disabled={false} // Add other props like onChange, value as needed
+          />
+
+          <SelectOption
             placeholder="언제 만들었나요?"
-          >
-            <option value="option1">Made to Order</option>
-            <option value="option2">2020-2023</option>
-            <option value="option3">2010-2019</option>
-            <option value="option3">2000-2009</option>
-            <option value="option3">1990-1999</option>
-            <option value="option3">Before 1990</option>
-          </Select>
+            options={whenMadeOptions}
+            value={whenMade}
+            onChange={(e) => setWhenMade(e.target.value)}
+            disabled={false} // Add other props like onChange, value as needed
+          />
         </Flex>
         <Flex // 카테고리
           display={"flex"}
@@ -208,59 +187,24 @@ export default function ProductDetails({
             link={undefined}
           />
 
-          <Select
-            height={"40px"}
-            flex="1 0 0"
-            padding={"10px 0px"}
-            gap={"10px"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            alignItems={"flex-start"}
-            colorScheme="white"
-            color="#595959"
-            fontSize="14px"
-            fontWeight="400"
-            letterSpacing={"-0.042px"}
+          <SelectOption
             value={selectedCategory}
             onChange={handleCategoryChange}
-          >
-            <option value="">상위 카테고리 선택</option>
-            {Object.keys(subsubCategory).map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </Select>
-
-          <Select
-            height={"40px"}
-            flex="1 0 0"
-            padding={"10px 0px"}
-            gap={"10px"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            alignItems={"flex-start"}
-            colorScheme="white"
-            color="#595959"
-            fontSize="14px"
-            fontWeight="400"
-            letterSpacing={"-0.042px"}
+            options={Object.keys(subsubCategory)}
+            placeholder="상위 카테고리 선택"
+            disabled={undefined}
+          />
+          <SelectOption
             value={selectedSubCategory}
             onChange={handleSubCategoryChange}
-            disabled={!selectedCategory} // 상위 카테고리를 선택하지 않았을 때 비활성화
-          >
-            <option value="">
-              {selectedCategory
+            options={selectedCategory ? subsubCategory[selectedCategory] : []}
+            placeholder={
+              selectedCategory
                 ? "하위 카테고리 선택"
-                : "상위 카테고리를 먼저 선택하세요"}
-            </option>
-            {selectedCategory &&
-              subsubCategory[selectedCategory].map((subCategory) => (
-                <option key={subCategory} value={subCategory}>
-                  {subCategory}
-                </option>
-              ))}
-          </Select>
+                : "상위 카테고리를 먼저 선택하세요"
+            }
+            disabled={!selectedCategory}
+          />
         </Flex>
         <Flex // 갱신옵션
           display={"flex"}
@@ -368,40 +312,21 @@ export default function ProductDetails({
             </Text>
             <Text
               color="var(--maincolorstextblack-222222, #222)"
+              textStyle={"B14R"}
               css={{
-                fontFeatureSettings: "clig off, liga off",
-                /* BODY/XS_14/R_LINE */
-                fontFamily: "Spoqa Han Sans Neo",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "normal",
-                letterSpacing: "-0.042px",
                 textDecorationLine: "underline",
               }}
               cursor={"pointer"}
             >
               첫 번째 섹션 추가
             </Text>
-            <Select
-              height={"40px"}
-              width={"306px"}
-              padding={"10px 0px"}
-              gap={"10px"}
-              flexDirection={"column"}
-              justifyContent={"center"}
-              alignItems={"flex-start"}
-              colorScheme="white"
-              color="#595959"
-              fontSize="14px"
-              fontWeight="400"
-              letterSpacing={"-0.042px"}
-              placeholder="섹션 이름"
-            >
-              <option value="option1">팔찌</option>
-              <option value="option2">어버이날 선물</option>
-              <option value="option3">털실</option>
-            </Select>
+            <SelectOption
+              value={undefined}
+              onChange={undefined}
+              options={sectionOptions}
+              disabled={false}
+              placeholder={"섹션 이름"}
+            />
           </Flex>
         </Flex>
         <Flex // 태그
@@ -524,14 +449,13 @@ const TagBox = ({ tag, index, removeTag }) => {
       borderRadius="5px"
       border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
     >
-      <Box onClick={removeTag}>
+      <Box onClick={() => removeTag(index)} cursor="pointer">
         <SvgX />
       </Box>
       <Flex
         borderRight="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
         height="150%"
-        marginLeft={"8px"}
-        marginRight="8px" // Adjust this value as needed
+        marginX="8px"
       />
       <Text textStyle={"bodyMini"} padding={"3px 12px"}>
         {tag}

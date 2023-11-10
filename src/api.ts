@@ -216,13 +216,16 @@ export const getVideoUploadURL = () =>
     .then((response) => response.data);
 
 export interface IUploadVideoVarialbes {
-  file: FileList;
+  file: File;
   uploadURL: string;
 }
 
 export const uploadVideo = ({ file, uploadURL }: IUploadVideoVarialbes) => {
+  console.log(file);
+  console.log(uploadURL);
   const form = new FormData();
-  form.append("file", file[0]);
+  form.append("file", file);
+  console.log(form);
   return axios.post(uploadURL, form).then((response) => response.data);
 };
 
