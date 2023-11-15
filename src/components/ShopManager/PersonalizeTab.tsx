@@ -10,13 +10,16 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-export default function PersonalizeTab() {
-  const [showDetail, setShowDetail] = useState(false);
-  const [personalization, setPersonalization] = useState("");
-  const [isOption, setIsOption] = useState(false);
-
+export default function PersonalizeTab({
+  isPersonalizationEnabled,
+  setIsPersonalizationEnabled,
+  personalization,
+  setPersonalization,
+  isOption,
+  setIsOption,
+}) {
   const handleSwitchChange = () => {
-    setShowDetail(!showDetail); // Toggle the showDetail state
+    setIsPersonalizationEnabled(!isPersonalizationEnabled); // Toggle the showDetail state
   };
   return (
     <Flex // 개인화
@@ -69,11 +72,11 @@ export default function PersonalizeTab() {
             id="individualization"
             size={"md"}
             onChange={handleSwitchChange} // Link the switch to the handler
-            isChecked={showDetail}
+            isChecked={isPersonalizationEnabled}
           />
         </FormControl>
       </Flex>
-      {showDetail && (
+      {isPersonalizationEnabled && (
         <Flex alignSelf={"stretch"} gap={"60px"}>
           <Flex flexDirection={"column"} width={"600px"}>
             <Text>구매자를 위한 가이드</Text>

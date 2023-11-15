@@ -11,9 +11,7 @@ import {
   Select,
   Radio,
 } from "@chakra-ui/react";
-import ArtantButton from "../components/commons/ArtantButton";
 import BlackButton from "../components/commons/Button/BlackButton";
-import { FaChevronCircleDown } from "react-icons/fa";
 import PaginationController from "../components/commons/PaginationController";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
@@ -429,7 +427,7 @@ function ShopManagerListingsCard({ item }) {
         <Text fontSize={"14px"} noOfLines={2}>
           {item.name}
         </Text>
-        <Text>재고 : 1개</Text>
+        <Text>재고 : {item.stock || "1"}개</Text>
         <Text>가격: {item.price}원</Text>
         <Text color={"#9E76BE"}>ARTANT에서 활성화됨</Text>
         <Text fontSize={"12px"}>2023년 12월 18일 갱신</Text>
@@ -440,7 +438,7 @@ function ShopManagerListingsCard({ item }) {
         alignItems={"flex-end"}
         width={"full"}
       >
-        <Button background={"white"} onClick={() => navigate(`1`)}>
+        <Button background={"white"} onClick={() => navigate(`${item.pk}`)}>
           <Flex gap={"4px"} alignItems={"center"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

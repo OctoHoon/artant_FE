@@ -12,9 +12,34 @@ import {
 import BlackButton from "../components/commons/Button/BlackButton";
 import SearchBar from "../components/commons/SearchBar";
 import MessageTab from "../components/Messages/MessageTab";
-import ArtantButton from "../components/commons/ArtantButton";
+import { useEffect, useState } from "react";
+import useUser from "../lib/useUser";
+import { getShopDetails, updateShop } from "../api";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ShopManagerEditShop() {
+  const { userLoading, isLoggedIn, user } = useUser();
+
+  const [shopPK, setShopPK] = useState();
+
+  useEffect(() => {
+    setShopPK(user?.shop_pks[0]);
+  }, [user]);
+
+  const { isLoading, data } = useQuery(["shop", 1], getShopDetails);
+  const [shortDescription, setShortDescription] = useState();
+  const [announcement, setAnnouncement] = useState();
+  const [descriptionTitle, setDescriptionTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    console.log(data);
+    setAnnouncement(data?.announcement ?? "");
+    setShortDescription(data?.short_description ?? "");
+    setDescriptionTitle(data?.description_title ?? "");
+    setDescription(data?.description ?? "");
+  }, [data]);
+
   return (
     <Flex flexDirection={"column"} gap={"24px"}>
       <Flex
@@ -45,9 +70,18 @@ export default function ShopManagerEditShop() {
             alignSelf={"stretch"}
           >
             <Flex flexDirection={"column"} gap={"30px"} alignSelf={"stretch"}>
-              <EditAvatar />
+              <EditAvatar
+                shop_name={data && data.shop_name}
+                shortDescription={shortDescription}
+                setShortDescription={setShortDescription}
+                shop_pk={shopPK}
+              />
               <Divider />
-              <EditAnnouncement />
+              <EditAnnouncement
+                announcement={announcement}
+                setAnnouncement={setAnnouncement}
+                shop_pk={shopPK}
+              />
               <Divider />
               <EditArt />
               <Divider />
@@ -55,7 +89,7 @@ export default function ShopManagerEditShop() {
                 <Flex gap={"40px"}>
                   <Flex flexDirection={"column"} gap={"45px"} width={"248px"}>
                     <Text fontSize={"18px"} fontWeight={"500"}>
-                      에바아트프린트 소개
+                      {data && data.shop_name} 소개
                     </Text>
                     <Flex gap={"36px"}>
                       <Flex flexDirection={"column"} gap={"2px"}>
@@ -99,7 +133,7 @@ export default function ShopManagerEditShop() {
                             모든 것에 대한 사진을 공유하세요.
                           </Text>
                         </Flex>
-                        <Flex gap={"40px"}>
+                        <Flex gap={"40px"} textAlign="center">
                           <Button
                             display={"flex"}
                             width={"120px"}
@@ -115,17 +149,7 @@ export default function ShopManagerEditShop() {
                             onClick={() => {}}
                           >
                             <SvgCamera />
-                            <Text
-                              color="var(--maincolorstextblack-222222, #222)"
-                              textAlign="center"
-                              fontFamily="Spoqa Han Sans Neo"
-                              fontSize="13px"
-                              fontStyle="normal"
-                              fontWeight={400}
-                              lineHeight="normal"
-                              letterSpacing="-0.3px"
-                              mt={"-12px"}
-                            >
+                            <Text textStyle={"B13R"} mt={"-12px"}>
                               사진 추가
                             </Text>
                           </Button>
@@ -144,17 +168,7 @@ export default function ShopManagerEditShop() {
                             onClick={() => {}}
                           >
                             <SvgVideo />
-                            <Text
-                              color="var(--maincolorstextblack-222222, #222)"
-                              textAlign="center"
-                              fontFamily="Spoqa Han Sans Neo"
-                              fontSize="13px"
-                              fontStyle="normal"
-                              fontWeight={400}
-                              lineHeight="normal"
-                              letterSpacing="-0.3px"
-                              mt={"-12px"}
-                            >
+                            <Text textStyle={"B13R"} mt={"-12px"}>
                               동영상 추가
                             </Text>
                           </Button>
@@ -168,34 +182,15 @@ export default function ShopManagerEditShop() {
                         borderRadius={"5px"}
                       >
                         <Flex gap={"2px"}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <mask
-                              id="mask0_1193_14934"
-                              maskUnits="userSpaceOnUse"
-                              x="0"
-                              y="0"
-                              width="24"
-                              height="24"
-                            >
-                              <rect width="24" height="24" fill="#D9D9D9" />
-                            </mask>
-                            <g mask="url(#mask0_1193_14934)">
-                              <path
-                                d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                                fill="#1C1B1F"
-                              />
-                            </g>
-                          </svg>
+                          <PlusSVG />
                           스토리 헤드라인 추가
                         </Flex>
                         <Box height={"8px"} />
-                        <Input placeholder="입력하세요" width={"944px"} />
+                        <Input
+                          value={descriptionTitle}
+                          placeholder="입력하세요"
+                          width={"944px"}
+                        />
                         <Box height={"8px"} />
                         <Flex gap={"4px"} justifyContent={"flex-end"}>
                           <BlackButton
@@ -219,35 +214,16 @@ export default function ShopManagerEditShop() {
                         borderRadius={"5px"}
                       >
                         <Flex gap={"2px"}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <mask
-                              id="mask0_1193_14934"
-                              maskUnits="userSpaceOnUse"
-                              x="0"
-                              y="0"
-                              width="24"
-                              height="24"
-                            >
-                              <rect width="24" height="24" fill="#D9D9D9" />
-                            </mask>
-                            <g mask="url(#mask0_1193_14934)">
-                              <path
-                                d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                                fill="#1C1B1F"
-                              />
-                            </g>
-                          </svg>
+                          <PlusSVG />
                           당신의 이야기를 추가하세요. 쇼핑객에게 귀하의
                           비즈니스에 대해 간략하게 설명하세요.
                         </Flex>
                         <Box height={"8px"} />
-                        <Input placeholder="입력하세요" width={"944px"} />
+                        <Textarea
+                          value={description}
+                          placeholder="입력하세요"
+                          width={"944px"}
+                        />
                         <Box height={"8px"} />
                         <Flex gap={"4px"} justifyContent={"flex-end"}>
                           <BlackButton
@@ -276,30 +252,7 @@ export default function ShopManagerEditShop() {
                             fontWeight={"500"}
                             alignItems={"center"}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                            >
-                              <mask
-                                id="mask0_1210_9148"
-                                maskUnits="userSpaceOnUse"
-                                x="0"
-                                y="0"
-                                width="24"
-                                height="24"
-                              >
-                                <rect width="24" height="24" fill="#D9D9D9" />
-                              </mask>
-                              <g mask="url(#mask0_1210_9148)">
-                                <path
-                                  d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                                  fill="#1C1B1F"
-                                />
-                              </g>
-                            </svg>
+                            <PlusSVG />
                             SNS 계정 연동
                           </Flex>
                         </Button>
@@ -391,31 +344,12 @@ export default function ShopManagerEditShop() {
                           이해에 도움이 됩니다.
                         </Text>
                         <Button background={"white"} width={"104px"}>
-                          <Flex gap={"2px"} fontWeight={"500"}>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                            >
-                              <mask
-                                id="mask0_1210_6944"
-                                maskUnits="userSpaceOnUse"
-                                x="0"
-                                y="0"
-                                width="24"
-                                height="24"
-                              >
-                                <rect width="24" height="24" fill="#D9D9D9" />
-                              </mask>
-                              <g mask="url(#mask0_1210_6944)">
-                                <path
-                                  d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                                  fill="#1C1B1F"
-                                />
-                              </g>
-                            </svg>
+                          <Flex
+                            gap={"2px"}
+                            fontWeight={"500"}
+                            alignItems={"center"}
+                          >
+                            <PlusSVG />
                             FAQ 추가
                           </Flex>
                         </Button>
@@ -500,7 +434,8 @@ const SvgCamera = () => {
   );
 };
 
-function EditAnnouncement() {
+function EditAnnouncement({ shop_pk, announcement, setAnnouncement }) {
+  console.log(announcement);
   return (
     <Flex gap={"160px"} alignSelf={"stretch"}>
       <Flex flexDirection={"column"}>
@@ -518,39 +453,36 @@ function EditAnnouncement() {
         background={"#FAFAFA"}
       >
         <Flex gap={"2px"}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <mask
-              id="mask0_1193_14934"
-              maskUnits="userSpaceOnUse"
-              x="0"
-              y="0"
-              width="24"
-              height="24"
-            >
-              <rect width="24" height="24" fill="#D9D9D9" />
-            </mask>
-            <g mask="url(#mask0_1193_14934)">
-              <path
-                d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                fill="#1C1B1F"
-              />
-            </g>
-          </svg>
+          <PlusSVG />
           공지 추가
         </Flex>
         <Input
+          value={announcement}
           placeholder="이 공간을 사용하여 중요한 최신 정보를 구매자와 공유하세요. 새로운 제품과 특별 프로모션을 언급 할수 있습니다."
           width={"944px"}
           height={"60px"}
+          onChange={(e) => {
+            setAnnouncement(e.target.value);
+          }}
         />
         <Flex gap={"4px"} justifyContent={"flex-end"}>
-          <BlackButton title={"저장"} borderRadius={"100px"} width="min" />
+          <BlackButton
+            title={"저장"}
+            borderRadius={"100px"}
+            width="min"
+            onClick={async () => {
+              try {
+                const updateData = {
+                  announcement: announcement,
+                };
+                const result = await updateShop(shop_pk, updateData);
+                return result;
+              } catch (error) {
+                console.error("업데이트 실패", error);
+                throw error;
+              }
+            }}
+          />
           <BlackButton
             title={"취소"}
             borderRadius={"100px"}
@@ -638,30 +570,7 @@ function EditArt() {
             background={"#FAFAFA"}
           >
             <Flex gap={"2px"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <mask
-                  id="mask0_1193_14934"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="24"
-                  height="24"
-                >
-                  <rect width="24" height="24" fill="#D9D9D9" />
-                </mask>
-                <g mask="url(#mask0_1193_14934)">
-                  <path
-                    d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                    fill="#1C1B1F"
-                  />
-                </g>
-              </svg>
+              <PlusSVG />
               대기열 편집/추가
             </Flex>
             <Box height={"8px"} />
@@ -683,7 +592,12 @@ function EditArt() {
   );
 }
 
-function EditAvatar() {
+function EditAvatar({
+  shop_pk,
+  shop_name,
+  shortDescription,
+  setShortDescription,
+}) {
   return (
     <Flex gap={"60px"}>
       <Flex gap={"32px"} flex={"1 0 0"}>
@@ -718,7 +632,7 @@ function EditAvatar() {
         </Button>
         <Flex flexDirection={"column"} gap={"8px"} flex={"1 0 0"}>
           <Text fontWeight={"500"} fontSize={"16px"}>
-            에바아트프린트
+            {shop_name}
           </Text>
           <Flex
             padding={"24px"}
@@ -729,39 +643,33 @@ function EditAvatar() {
             background={"#FAFAFA"}
           >
             <Flex gap={"2px"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <mask
-                  id="mask0_1193_14934"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="24"
-                  height="24"
-                >
-                  <rect width="24" height="24" fill="#D9D9D9" />
-                </mask>
-                <g mask="url(#mask0_1193_14934)">
-                  <path
-                    d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
-                    fill="#1C1B1F"
-                  />
-                </g>
-              </svg>
+              <PlusSVG />
               당신의 스토어를 한 문장으로 표현해 보세요
             </Flex>
-            <Input placeholder="입력하세요" width={"934px"} />
+            <Input
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
+              placeholder="입력하세요"
+              width={"934px"}
+            />
             <Flex justifyContent={"space-between"} fontSize={"13px"}>
               <Flex gap={"4px"}>
                 <BlackButton
                   title={"저장"}
                   borderRadius={"100px"}
                   width="min"
+                  onClick={async () => {
+                    try {
+                      const updateData = {
+                        short_description: shortDescription,
+                      };
+                      const result = await updateShop(shop_pk, updateData);
+                      return result;
+                    } catch (error) {
+                      console.error("업데이트 실패", error);
+                      throw error;
+                    }
+                  }}
                 />
                 <BlackButton
                   title={"취소"}
@@ -770,7 +678,7 @@ function EditAvatar() {
                   width="min"
                 />
               </Flex>
-              0/55
+              {shortDescription && shortDescription.length}/55
             </Flex>
           </Flex>
         </Flex>
@@ -789,30 +697,7 @@ function EditAvatar() {
               border={"1px"}
             />
             <Flex position={"relative"} left={"-42px"} top={"18px"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <mask
-                  id="mask0_1193_14764"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="24"
-                  height="24"
-                >
-                  <rect width="24" height="24" fill="#D9D9D9" />
-                </mask>
-                <g mask="url(#mask0_1193_14764)">
-                  <path
-                    d="M12 16.7308C13.0449 16.7308 13.9279 16.3702 14.649 15.6491C15.3702 14.9279 15.7308 14.0449 15.7308 13C15.7308 11.9551 15.3702 11.0721 14.649 10.351C13.9279 9.6298 13.0449 9.26922 12 9.26922C10.9551 9.26922 10.0721 9.6298 9.35095 10.351C8.6298 11.0721 8.26923 11.9551 8.26923 13C8.26923 14.0449 8.6298 14.9279 9.35095 15.6491C10.0721 16.3702 10.9551 16.7308 12 16.7308ZM12 15.7308C11.2231 15.7308 10.5737 15.4699 10.0519 14.9481C9.53013 14.4263 9.26923 13.7769 9.26923 13C9.26923 12.2231 9.53013 11.5737 10.0519 11.0519C10.5737 10.5301 11.2231 10.2692 12 10.2692C12.7769 10.2692 13.4263 10.5301 13.9481 11.0519C14.4699 11.5737 14.7308 12.2231 14.7308 13C14.7308 13.7769 14.4699 14.4263 13.9481 14.9481C13.4263 15.4699 12.7769 15.7308 12 15.7308ZM4.61538 20C4.15513 20 3.77083 19.8458 3.4625 19.5375C3.15417 19.2292 3 18.8449 3 18.3846V7.61537C3 7.15512 3.15417 6.77083 3.4625 6.4625C3.77083 6.15417 4.15513 6 4.61538 6H7.57308L9.42308 4H14.5769L16.4269 6H19.3846C19.8449 6 20.2292 6.15417 20.5375 6.4625C20.8458 6.77083 21 7.15512 21 7.61537V18.3846C21 18.8449 20.8458 19.2292 20.5375 19.5375C20.2292 19.8458 19.8449 20 19.3846 20H4.61538Z"
-                    fill="#1C1B1F"
-                  />
-                </g>
-              </svg>
+              <PhotoSVG />
             </Flex>
           </Flex>
           <Button
@@ -827,3 +712,61 @@ function EditAvatar() {
     </Flex>
   );
 }
+
+const PhotoSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <mask
+        id="mask0_1193_14764"
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="24"
+        height="24"
+      >
+        <rect width="24" height="24" fill="#D9D9D9" />
+      </mask>
+      <g mask="url(#mask0_1193_14764)">
+        <path
+          d="M12 16.7308C13.0449 16.7308 13.9279 16.3702 14.649 15.6491C15.3702 14.9279 15.7308 14.0449 15.7308 13C15.7308 11.9551 15.3702 11.0721 14.649 10.351C13.9279 9.6298 13.0449 9.26922 12 9.26922C10.9551 9.26922 10.0721 9.6298 9.35095 10.351C8.6298 11.0721 8.26923 11.9551 8.26923 13C8.26923 14.0449 8.6298 14.9279 9.35095 15.6491C10.0721 16.3702 10.9551 16.7308 12 16.7308ZM12 15.7308C11.2231 15.7308 10.5737 15.4699 10.0519 14.9481C9.53013 14.4263 9.26923 13.7769 9.26923 13C9.26923 12.2231 9.53013 11.5737 10.0519 11.0519C10.5737 10.5301 11.2231 10.2692 12 10.2692C12.7769 10.2692 13.4263 10.5301 13.9481 11.0519C14.4699 11.5737 14.7308 12.2231 14.7308 13C14.7308 13.7769 14.4699 14.4263 13.9481 14.9481C13.4263 15.4699 12.7769 15.7308 12 15.7308ZM4.61538 20C4.15513 20 3.77083 19.8458 3.4625 19.5375C3.15417 19.2292 3 18.8449 3 18.3846V7.61537C3 7.15512 3.15417 6.77083 3.4625 6.4625C3.77083 6.15417 4.15513 6 4.61538 6H7.57308L9.42308 4H14.5769L16.4269 6H19.3846C19.8449 6 20.2292 6.15417 20.5375 6.4625C20.8458 6.77083 21 7.15512 21 7.61537V18.3846C21 18.8449 20.8458 19.2292 20.5375 19.5375C20.2292 19.8458 19.8449 20 19.3846 20H4.61538Z"
+          fill="#1C1B1F"
+        />
+      </g>
+    </svg>
+  );
+};
+
+const PlusSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <mask
+        id="mask0_1193_14934"
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="24"
+        height="24"
+      >
+        <rect width="24" height="24" fill="#D9D9D9" />
+      </mask>
+      <g mask="url(#mask0_1193_14934)">
+        <path
+          d="M11.5 12.5H6V11.5H11.5V6H12.5V11.5H18V12.5H12.5V18H11.5V12.5Z"
+          fill="#1C1B1F"
+        />
+      </g>
+    </svg>
+  );
+};

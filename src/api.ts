@@ -2,11 +2,13 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-const isDevelopment = true;
+// const isDevelopment = true;
 
-const baseUrl = isDevelopment
-  ? "http://127.0.0.1:8000/api/v1/"
-  : "http://147.46.245.226:8000/api/v1/";
+// const baseUrl = isDevelopment
+//   ? "http://127.0.0.1:8000/api/v1/"
+//   : "http://147.46.245.226:8000/api/v1/";
+
+const baseUrl = "http://artant.shop/api/v1/";
 
 const instance = axios.create({
   baseURL: baseUrl,
@@ -216,13 +218,16 @@ export const getVideoUploadURL = () =>
     .then((response) => response.data);
 
 export interface IUploadVideoVarialbes {
-  file: FileList;
+  file: File;
   uploadURL: string;
 }
 
 export const uploadVideo = ({ file, uploadURL }: IUploadVideoVarialbes) => {
+  console.log(file);
+  console.log(uploadURL);
   const form = new FormData();
-  form.append("file", file[0]);
+  form.append("file", file);
+  console.log(form);
   return axios.post(uploadURL, form).then((response) => response.data);
 };
 
@@ -252,6 +257,21 @@ export interface IUploadProductVariables {
   category_name: string;
   shopPK: string;
 }
+
+export const updateShop = async (pk, shopData) => {
+  try {
+    const response = await instance.put(`users/shops/${pk}`, shopData, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    // Handle the error appropriately
+    console.error("Error updating the shop:", error);
+    throw error;
+  }
+};
 
 export const uploadProduct = ({
   name,

@@ -57,8 +57,8 @@ export default function ReviewList() {
     setPage(value); // Update the page when the user changes it
   };
 
-  // console.log(data);
-  // console.log(data?.length);
+  console.log("데이터", data);
+  console.log(data?.length);
 
   return (
     <div>

@@ -5,11 +5,13 @@ export default function BlackButton({
   borderRadius,
   flex = "",
   type = false,
-  width = "full",
+  width = "auto",
+  isLoading = false,
   onClick = () => {},
 }) {
   return (
     <Button
+      isLoading={isLoading}
       width={width}
       padding={"10px 24px"}
       justifyContent={"center"}

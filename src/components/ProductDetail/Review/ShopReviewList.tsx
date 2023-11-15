@@ -53,8 +53,6 @@ export default function ShopReviewList({ shop_pk }) {
   const { pk } = useParams();
 
   const [reviews, setReviews] = useState([]);
-  console.log(reviews);
-  console.log(totalCount);
 
   const { isLoading, data } = useQuery(
     [shop_pk, page, selectedOption],

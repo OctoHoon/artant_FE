@@ -53,7 +53,6 @@ export const subsubCategory: Record<string, string[]> = {
       "설계&도면",
       "마커(Marker)",
       "연필&목탄",
-      "잉크",
     ],
   // prettier-ignore
   "공예": [

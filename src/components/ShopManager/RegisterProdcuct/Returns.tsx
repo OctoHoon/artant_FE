@@ -2,6 +2,7 @@ import { Flex, Text, Button, Switch, Select } from "@chakra-ui/react";
 import { useState } from "react";
 import BlackButton from "../../commons/Button/BlackButton";
 import WhiteButton from "../../commons/Button/WhiteButton";
+import RegisterHeader from "./RegisterHeader";
 
 type Policy = {
   return: boolean;
@@ -9,13 +10,9 @@ type Policy = {
   timeframe: number;
 };
 
-export default function Returns() {
+export default function Returns({ policy, setPolicy }) {
   const [changePolicy, setChangePolicy] = useState<boolean>(false);
-  const [policy, setPolicy] = useState<Policy>({
-    return: true,
-    exchange: true,
-    timeframe: 14,
-  });
+
   return (
     <Flex // 목록 세부정보
       display={"flex"}
@@ -26,15 +23,10 @@ export default function Returns() {
       gap={"32px"}
       border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
     >
-      <Flex
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"flex-start"}
-        gap={"4px"}
-      >
-        <Text textStyle={"H3R"}>반품 및 교환</Text>
-        <Text textStyle={"B14R"}>선택한 정책이 이 목록에 적용됩니다.</Text>
-      </Flex>
+      <RegisterHeader
+        title={"반품 및 교환"}
+        description={"선택한 정책이 이 목록에 적용됩니다."}
+      />
 
       <Flex alignItems={"flex-start"} gap={"40px"} alignSelf={"stretch"}>
         <Flex
@@ -81,27 +73,15 @@ const CheckPolicy = ({ policy, setChangePolicy }) => {
           alignItems="flex-start"
           gap="8px"
         >
-          {}
           <Flex alignItems={"center"} gap={"6px"}>
-            {" "}
             <Text textStyle={"B16M"}>
               {policy.return && "반품"}{" "}
               {policy.exchange && policy.return && " 및 "}{" "}
               {policy.exchange && "교환"}
               {!policy.return && !policy.exchange && "반품 및 교환 불가"}
             </Text>
-            <SvgCalendar />{" "}
-            <Text
-              color="var(--maincolorstextblack-222222, #222)"
-              fontFamily="Spoqa Han Sans Neo"
-              fontSize="16px"
-              fontStyle="normal"
-              fontWeight={500}
-              lineHeight="normal"
-              letterSpacing="0.048px"
-            >
-              {policy.timeframe}일
-            </Text>
+            <SvgCalendar />
+            <Text textStyle={"B16M"}>{policy.timeframe}일</Text>
           </Flex>
 
           <Text width={"440px"} textStyle={"B16R"}>

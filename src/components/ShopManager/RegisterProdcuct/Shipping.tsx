@@ -1,33 +1,37 @@
 import { Flex, Input, Select, Button, Text, Box } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
+import RegisterHeader from "./RegisterHeader";
+import SectionTitle from "./SectionTitle";
+import WhiteButton from "../../commons/Button/WhiteButton";
+import InputOption from "./InputOption";
+import SelectOption from "./SelectOption";
 
-type ProcessingTimeOption = {
-  key: string;
-  value: string;
-  min: number;
-  max: number;
-};
-
-export default function Shipping() {
+export default function Shipping({
+  setPostalCode,
+  processingTime,
+  setProcessingTime,
+  customProcessingTime,
+  setCustomProcessingTime,
+  freeShipping,
+  setFreeShipping,
+  shippingCost,
+  setShippingCost,
+}) {
   const processingTimeOptions = [
-    { key: "1일", value: "option1", min: 1, max: 1 },
-    { key: "1~2일", value: "option2", min: 1, max: 2 },
-    { key: "1~3일", value: "option3", min: 1, max: 3 },
-    { key: "3~5일", value: "option4", min: 3, max: 5 },
-    { key: "5~7일", value: "option5", min: 5, max: 7 },
-    { key: "직접 설정", value: "custom", min: 7, max: 7 },
+    { label: "1일", value: "option1", min: 1, max: 1 },
+    { label: "1~2일", value: "option2", min: 1, max: 2 },
+    { label: "1~3일", value: "option3", min: 1, max: 3 },
+    { label: "3~5일", value: "option4", min: 3, max: 5 },
+    { label: "5~7일", value: "option5", min: 5, max: 7 },
+    { label: "직접 설정", value: "custom", min: 7, max: 7 },
   ];
 
-  const [postalCode, setPostalCode] = useState<string>();
-  const [processingTime, setProcessingTime] =
-    useState<ProcessingTimeOption | null>(null);
-  const [customProcessingTime, setCustomProcessingTime] = useState({
-    min: "",
-    max: "",
-  });
+  const shippingOptions = ["직접배송", "위탁배송"];
 
-  const [freeShipping, setFreeShipping] = useState(false);
-  const [shippingCost, setShippingCost] = useState("0");
+  const shippingPriceOptions = [
+    { label: "무료배송", value: "true" },
+    { label: "고정가격", value: "false" },
+  ];
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
@@ -81,21 +85,13 @@ export default function Shipping() {
       gap={"32px"}
       border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
     >
-      <Flex
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"flex-start"}
-        gap={"4px"}
-      >
-        <Text textStyle={"H3R"} letterSpacing="-0.5px">
-          배송
-        </Text>
-        <Text textStyle={"B14R"}>
-          배송 프로필, 주문 처리 일정 등 배송 정보가 정확한지 확인하여
-          쇼핑객에게 배송 시간과 비용에 대한 명확한 기대치를 제공하세요. 배송
-          설정에서 언제든지 업데이트할 수 있습니다 .
-        </Text>
-      </Flex>
+      <RegisterHeader
+        title={"배송"}
+        description={
+          " 배송 프로필, 주문 처리 일정 등 배송 정보가 정확한지 확인하여 쇼핑객에게 배송 시간과 비용에 대한 명확한 기대치를 제공하세요. 배송 설정에서 언제든지 업데이트할 수 있습니다."
+        }
+      />
+
       <Flex
         display={"flex"}
         flexDirection={"column"}
@@ -109,16 +105,11 @@ export default function Shipping() {
           alignItems={"flex-start"}
           gap={"40px"}
         >
-          <Flex
-            display={"flex"}
-            flexDirection={"column"}
-            alignItems={"flex-start"}
-            width={"234px"}
-            gap={"6px"}
-            alignSelf={"stretch"}
-          >
-            <Text textStyle={"B14M"}>배송 옵션*</Text>
-          </Flex>
+          <SectionTitle
+            title={"배송 옵션*"}
+            description={undefined}
+            link={undefined}
+          />
 
           <Flex
             display={"flex"}
@@ -149,27 +140,14 @@ export default function Shipping() {
                 alignItems={"flex-start"}
                 gap={"40px"}
               >
-                <Flex
-                  display={"flex"}
-                  flexDirection={"column"}
-                  alignItems={"flex-start"}
-                  width={"234px"}
-                  gap={"6px"}
-                  alignSelf={"stretch"}
-                >
-                  <Text textStyle={"B16M"}>출발지 우편번호*</Text>
-                </Flex>
-                <Input
-                  display="flex"
-                  padding="0px 16px"
-                  alignItems="center"
+                <SectionTitle
+                  title={"출발지 우편번호*"}
+                  description={undefined}
+                  link={undefined}
+                />
+                <InputOption
                   width={"248px"}
-                  height={"40px"}
-                  alignSelf="stretch"
-                  borderRadius="5px"
-                  border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-                  background="var(--maincolorsbg-white, #FFF)"
-                  placeholder="우편번호 입력"
+                  placeholder={"우편번호 입력"}
                   onChange={(e) => setPostalCode(e.target.value)}
                 />
               </Flex>
@@ -179,23 +157,14 @@ export default function Shipping() {
                 alignItems={"flex-start"}
                 gap={"40px"}
               >
-                <Flex
-                  display={"flex"}
-                  flexDirection={"column"}
-                  alignItems={"flex-start"}
-                  width={"234px"}
-                  gap={"6px"}
-                  alignSelf={"stretch"}
-                >
-                  <Text textStyle={"B16M"}>시간*</Text>
-                  <Text
-                    color="var(--maincolorstextgray-595959, #666)"
-                    textStyle={"B13R"}
-                  >
-                    주문을 준비해서 우편으로 보내야 하나요? 쇼핑객들은 빠르게
-                    배송되는 품목을 구매할 사능성이 더 높다는 점을 명심하세요.
-                  </Text>
-                </Flex>
+                <SectionTitle
+                  title={"시간*"}
+                  description={
+                    "주문을 준비해서 우편으로 보내야 하나요? 쇼핑객들은 빠르게 배송되는 품목을 구매할 사능성이 더 높다는 점을 명심하세요."
+                  }
+                  link={undefined}
+                />
+
                 <Flex
                   display={"flex"}
                   flexDirection={"column"}
@@ -203,28 +172,14 @@ export default function Shipping() {
                   gap={"12px"}
                   flex={"1 0 0"}
                 >
-                  <Select
-                    height={"40px"}
-                    padding={"10px 0px"}
-                    gap={"10px"}
-                    flexDirection={"column"}
-                    justifyContent={"center"}
-                    alignItems={"flex-start"}
-                    colorScheme="white"
-                    color="#595959"
-                    fontSize="14px"
-                    fontWeight="400"
-                    letterSpacing={"-0.042px"}
-                    placeholder="상품 준비 시간을 선택하세요"
-                    onChange={handleSelectChange}
+                  <SelectOption
                     value={processingTime?.value || ""}
-                  >
-                    {processingTimeOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.key}
-                      </option>
-                    ))}
-                  </Select>
+                    onChange={handleSelectChange}
+                    options={processingTimeOptions}
+                    disabled={false}
+                    placeholder={"상품 준비 시간을 선택하세요"}
+                  />
+
                   {processingTime?.value === "custom" && (
                     <Flex>
                       <Text alignSelf={"center"}>최소</Text>
@@ -268,16 +223,12 @@ export default function Shipping() {
                 alignItems={"flex-start"}
                 gap={"40px"}
               >
-                <Flex
-                  display={"flex"}
-                  flexDirection={"column"}
-                  alignItems={"flex-start"}
-                  width={"234px"}
-                  gap={"6px"}
-                  alignSelf={"stretch"}
-                >
-                  <Text textStyle={"B16M"}>배송*</Text>
-                </Flex>
+                <SectionTitle
+                  title={"배송*"}
+                  description={undefined}
+                  link={undefined}
+                />
+
                 <Flex
                   display={"flex"}
                   flexDirection={"column"}
@@ -291,22 +242,13 @@ export default function Shipping() {
                     gap={"6px"}
                   >
                     <Text textStyle={"B14R"}>배송 서비스</Text>
-                    <Select
-                      height={"40px"}
-                      gap={"10px"}
-                      flexDirection={"column"}
-                      justifyContent={"center"}
-                      alignItems={"flex-start"}
-                      colorScheme="white"
-                      color="#595959"
-                      fontSize="14px"
-                      fontWeight="400"
-                      letterSpacing={"-0.042px"}
-                      placeholder="배송서비스를 선택하세요"
-                    >
-                      <option value="option1">국내배송</option>
-                      <option value="option2">해외배송</option>
-                    </Select>
+                    <SelectOption
+                      value={undefined}
+                      onChange={undefined}
+                      options={shippingOptions}
+                      disabled={false}
+                      placeholder={"배송 서비스를 선택하세요"}
+                    />
                   </Flex>
                   <Flex
                     display={"flex"}
@@ -320,27 +262,20 @@ export default function Shipping() {
                     >
                       배송비
                     </Text>
-                    <Select
-                      height={"40px"}
-                      gap={"10px"}
-                      flexDirection={"column"}
-                      justifyContent={"center"}
-                      alignItems={"flex-start"}
-                      colorScheme="white"
-                      color="#595959"
-                      fontSize="14px"
-                      fontWeight="400"
-                      letterSpacing={"-0.042px"}
-                      placeholder="배송비를 선택하세요"
+                    <SelectOption
+                      value={freeShipping}
                       onChange={(e) => {
-                        setFreeShipping(e.target.value === "option1");
-                        setShippingCost("0");
+                        const isFree = e.target.value === "true";
+                        setFreeShipping(isFree);
+                        if (isFree) {
+                          setShippingCost("0");
+                        }
                       }}
-                    >
-                      <option value="option1">무료배송</option>
-                      <option value="option2">고정가격</option>
-                    </Select>
-                    {!freeShipping && (
+                      options={shippingPriceOptions}
+                      disabled={false}
+                      placeholder={"배송비를 선택하세요"}
+                    />
+                    {freeShipping === false && (
                       <Flex
                         marginTop={"10px"}
                         display={"flex"}
@@ -354,21 +289,10 @@ export default function Shipping() {
                         >
                           배송비를 설정하세요
                         </Text>
-                        <Input
-                          type="number"
-                          height={"40px"}
-                          gap={"10px"}
-                          flexDirection={"column"}
-                          justifyContent={"center"}
-                          alignItems={"flex-start"}
-                          colorScheme="white"
-                          color="#595959"
-                          fontSize="14px"
-                          fontWeight="400"
-                          letterSpacing={"-0.042px"}
-                          placeholder="배송비"
+                        <InputOption
+                          placeholder={"배송비"}
                           onChange={(e) => setShippingCost(e.target.value)}
-                        ></Input>
+                        />
                       </Flex>
                     )}
                   </Flex>
@@ -399,20 +323,7 @@ export default function Shipping() {
                     배송 프로필 작동 방식
                   </Text>
                 </Flex>
-                <Button
-                  alignItems={"center"}
-                  padding={"10px 24px"}
-                  backgroundColor={"transparent"}
-                  borderRadius={"100px"}
-                  border={"1px solid var(--maincolorstextblack-222222, #222)"}
-                >
-                  <Text
-                    color="var(--maincolorstextblack-222222, #222)"
-                    textStyle={"B16M"}
-                  >
-                    배송 프로필 저장
-                  </Text>
-                </Button>
+                <WhiteButton title={"배송 프로필 저장"} onClick={undefined} />
               </Flex>
               <Flex
                 height={"1px"}
@@ -428,16 +339,11 @@ export default function Shipping() {
           alignItems={"flex-start"}
           gap={"40px"}
         >
-          <Flex
-            display={"flex"}
-            flexDirection={"column"}
-            alignItems={"flex-start"}
-            width={"234px"}
-            gap={"6px"}
-            alignSelf={"stretch"}
-          >
-            <Text textStyle={"B14M"}>배송비 미리보기</Text>
-          </Flex>
+          <SectionTitle
+            title={"배송비 미리보기"}
+            description={undefined}
+            link={undefined}
+          />
           <Flex alignItems={"center"} gap={"40px"} flex={"1 0 0"}>
             <Flex
               width={"600px"}
@@ -468,9 +374,7 @@ export default function Shipping() {
                     alignItems={"flex-start"}
                     colorScheme="white"
                     color="#595959"
-                    fontSize="14px"
-                    fontWeight="400"
-                    letterSpacing={"-0.042px"}
+                    textStyle={"B14R"}
                     placeholder="배송 서비스 선택"
                   ></Select>
                 </Flex>
