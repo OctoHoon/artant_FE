@@ -1,18 +1,4 @@
-import { FaStar, FaRegHeart } from "react-icons/fa";
 import { Box, Divider, Image } from "@chakra-ui/react";
-import Itemlists from "../components/Items/itemlists";
-import RecentlyViewed from "../components/RecentlyViewed";
-import Footer from "../components/commons/Footer";
-import ItemDetail from "../components/ProductDetail/ItemDetail";
-import CollectionList from "../components/ProductDetail/CollectionList";
-import RelatedKeywords from "../components/ProductDetail/RelatedKeywords";
-import ArtantRecommend from "../components/index/ArtantRecommend";
-import ArtistRecommend from "../components/index/ArtistRecommend";
-import GiftCategories from "../components/index/GiftCategories";
-import NewArrival from "../components/index/NewArrival";
-import CenteredText from "../components/index/CenterCopy";
-import NewsEvent from "../components/index/NewsEvent";
-import RegisterButton from "../components/index/RegisterButton";
 import ShopHeader from "../components/ShopDetail/ShopHeader";
 import ShopMiddle from "../components/ShopDetail/ShopMiddle";
 import ShopReviews from "../components/ShopDetail/ShopReviews";
@@ -26,6 +12,8 @@ import { getShopDetails } from "../api";
 export default function ShopDetail() {
   const { pk } = useParams();
   const { isLoading, data } = useQuery(["shop", pk], getShopDetails);
+
+  console.log(data);
   return (
     <Box mb={"120px"}>
       <ScrollToTop />

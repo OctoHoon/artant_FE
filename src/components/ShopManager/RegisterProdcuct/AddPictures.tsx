@@ -5,7 +5,20 @@ import RegisterHeader from "./RegisterHeader";
 import SectionTitle from "./SectionTitle";
 import { useRef } from "react";
 
-export default function AddPictures({ selectedFiles, setSelectedFiles }) {
+export default function AddPictures({
+  selectedFiles,
+  setSelectedFiles,
+  existingImages,
+}) {
+  const allImages = [
+    ...existingImages,
+    ...selectedFiles.map((file) => URL.createObjectURL(file)),
+  ];
+
+  while (allImages.length < 8) {
+    allImages.push("");
+  }
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onFileSelect = () => {
@@ -14,11 +27,18 @@ export default function AddPictures({ selectedFiles, setSelectedFiles }) {
     }
   };
 
-  const handleRemoveFile = (index) => {
-    setSelectedFiles((currentFiles) => {
-      // Create a new array without the file at the given index
-      return currentFiles.filter((_, fileIndex) => fileIndex !== index);
-    });
+  const handleRemoveFile = (index, isExisting) => {
+    if (isExisting) {
+      // Logic to handle the removal of existing images
+      // You might need to update the state or make an API call to remove the image
+    } else {
+      // Removing newly added file
+      setSelectedFiles((currentFiles) => {
+        return currentFiles.filter(
+          (_, fileIndex) => fileIndex !== index - existingImages.length
+        );
+      });
+    }
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,8 +48,9 @@ export default function AddPictures({ selectedFiles, setSelectedFiles }) {
       const newFiles = Array.from(selectedFilesList);
       setSelectedFiles([...selectedFiles, ...newFiles]);
     }
-    if (selectedFiles.length > 9) {
-      setSelectedFiles(selectedFiles.slice(0, 9));
+    // Ensure the total number of images does not exceed the limit
+    if (selectedFiles.length + existingImages.length > 9) {
+      setSelectedFiles(selectedFiles.slice(0, 9 - existingImages.length));
     }
   };
 
@@ -128,35 +149,34 @@ export default function AddPictures({ selectedFiles, setSelectedFiles }) {
                   사진 추가
                 </Text>
               </Button>
-
-              {[1, 1, 1, 1, 1, 1].map((url, index) => (
+              {allImages.slice(0, 6).map((image, index) => (
                 <GrayBoxImage
                   key={index}
                   index={index}
-                  src={
-                    selectedFiles.length > index
-                      ? URL.createObjectURL(selectedFiles[index])
-                      : ""
-                  }
+                  src={image || ""}
                   width={"120px"}
                   height={"120px"}
-                  onRemove={handleRemoveFile}
+                  onRemove={() =>
+                    handleRemoveFile(index, index < existingImages.length)
+                  }
                 />
               ))}
             </Flex>
+
             <Flex alignItems={"flex-start"} gap={"20px"}>
-              {[1, 1].map((url, index) => (
+              {allImages.slice(6, 9).map((image, index) => (
                 <GrayBoxImage
-                  key={index + 6}
-                  index={index + 6}
-                  src={
-                    selectedFiles.length > index + 6
-                      ? URL.createObjectURL(selectedFiles[index + 6])
-                      : ""
-                  }
+                  key={6 + index}
+                  index={6 + index}
+                  src={image}
                   width={"120px"}
                   height={"120px"}
-                  onRemove={handleRemoveFile}
+                  onRemove={() =>
+                    handleRemoveFile(
+                      6 + index,
+                      6 + index < existingImages.length
+                    )
+                  }
                 />
               ))}
             </Flex>

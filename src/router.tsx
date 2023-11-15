@@ -144,7 +144,7 @@ const router = createHashRouter(
               element: <ShopManagerListings />,
             },
             {
-              path: "listings/:pk",
+              path: "listings/:productPK",
               element: <ShopManagerListingEditing />,
             },
             {

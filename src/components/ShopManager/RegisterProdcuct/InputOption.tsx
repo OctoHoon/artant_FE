@@ -1,6 +1,7 @@
 import { Input } from "@chakra-ui/react";
 
 export default function InputOption({
+  value = "",
   placeholder,
   onChange,
   width = "full",
@@ -8,6 +9,7 @@ export default function InputOption({
 }) {
   return (
     <Input
+      value={value}
       disabled={disabled}
       width={width}
       display="flex"

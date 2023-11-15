@@ -38,6 +38,8 @@ const whenMadeOptions = [
 const sectionOptions = ["팔찌", "어버이날 선물", "털실"];
 
 export default function ProductDetails({
+  productName = "",
+  productDescription = "",
   setProductName,
   selectedCategory,
   setSelectedCategory,
@@ -129,6 +131,7 @@ export default function ProductDetails({
             link={undefined}
           />
           <InputOption
+            value={productName}
             placeholder={"제목을 입력하세요"}
             onChange={(e) => setProductName(e.target.value)}
           />
@@ -267,6 +270,7 @@ export default function ProductDetails({
             flex={"1 0 0"}
           >
             <Textarea
+              value={productDescription}
               display="flex"
               padding="11px 16px"
               alignItems="flex-start"

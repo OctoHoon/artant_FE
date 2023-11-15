@@ -8,6 +8,7 @@ import {
 
 export default function StockAndPrice({
   productPrice,
+  productCount,
   setProductPrice,
   setProductCount,
   setProductSKU,
@@ -80,6 +81,7 @@ export default function StockAndPrice({
           >
             <InputGroup width="200px">
               <Input
+                value={productPrice}
                 display="flex"
                 flex="1"
                 height="40px"
@@ -136,6 +138,7 @@ export default function StockAndPrice({
             </Text>
           </Flex>
           <Input
+            value={productCount}
             style={inputStyles}
             alignItems="center"
             width={"120px"}

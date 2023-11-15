@@ -31,7 +31,7 @@ export default function ReveiwSection({ shop_pk }) {
   const { isLoading, data } = useQuery([pk, page, ""], getReviews);
 
   const { isLoading: shopReviewisLoading, data: shopReviewData } = useQuery(
-    [shop_pk, page, ""],
+    [1, page, ""],
     getShopReviews
   );
   return (

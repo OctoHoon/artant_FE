@@ -3,10 +3,10 @@ import RegisterHeader from "./RegisterHeader";
 import { useEffect, useRef, useState } from "react";
 import WhiteButton from "../../commons/Button/WhiteButton";
 
-export default function AddVideo({ setSelectedVideoFile }) {
+export default function AddVideo({ setSelectedVideoFile, existingVideo = "" }) {
   const videoFileInputRef = useRef<HTMLInputElement>(null);
 
-  const [videoPreviewUrl, setVideoPreviewUrl] = useState<string>("");
+  const [videoPreviewUrl, setVideoPreviewUrl] = useState<string>();
 
   const onVideoFileSelect = () => {
     if (videoFileInputRef.current) {
@@ -42,6 +42,8 @@ export default function AddVideo({ setSelectedVideoFile }) {
       setVideoPreviewUrl(url);
     }
   };
+
+  console.log(existingVideo);
 
   // When you are done with the video (e.g., after upload or component unmounts)
   // you should revoke the object URL
@@ -131,14 +133,14 @@ export default function AddVideo({ setSelectedVideoFile }) {
               accept="video/*" // Optionally, ensure only video files can be selected
             />
 
-            {videoPreviewUrl ? (
+            {videoPreviewUrl || existingVideo ? (
               <Flex flexDirection={"column"} height={"248px"}>
                 <Box width="248px" height="248px" justifyContent={"center"}>
                   <video
                     muted
                     loop
                     width="100%"
-                    src={videoPreviewUrl}
+                    src={videoPreviewUrl ? videoPreviewUrl : existingVideo}
                     controls
                   />
                 </Box>

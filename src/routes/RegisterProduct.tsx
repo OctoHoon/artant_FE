@@ -27,15 +27,6 @@ import BlackButton from "../components/commons/Button/BlackButton";
 
 const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
 
-interface IForm {
-  file: FileList;
-}
-
-interface IUploadURLResponse {
-  id: string;
-  uploadURL: string;
-}
-
 type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
 
 type SelectedOption = {
@@ -310,9 +301,11 @@ export default function UploadPhotos() {
           <AddPictures
             selectedFiles={selectedFiles}
             setSelectedFiles={setSelectedFiles}
+            existingImages={[]}
           />
           <AddVideo setSelectedVideoFile={setSelectedVideoFile} />
           <ProductDetails
+            productName={productName}
             setProductName={setProductName}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
@@ -322,6 +315,7 @@ export default function UploadPhotos() {
             setRefreshOptionValue={setRefreshOptionValue}
             shippingOptionValue={shippingOptionValue}
             setShippingOptionValue={setShippingOptionValue}
+            productDescription={productDescription}
             setProductDescription={setProductDescription}
             tags={tags}
             setTags={setTags}
@@ -331,6 +325,7 @@ export default function UploadPhotos() {
           <StockAndPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}
+            productCount={productCount}
             setProductCount={setProductCount}
             setProductSKU={setProductSKU}
           />
@@ -382,15 +377,7 @@ export default function UploadPhotos() {
                 title={"저장하고 계속"}
                 borderRadius={"5px"}
                 onClick={onSubmitAll}
-                isLoading={
-                  createPhotoMutation.isLoading ||
-                  uploadImageMutation.isLoading ||
-                  uploadURLMutation.isLoading ||
-                  createVideoMutation.isLoading ||
-                  uploadVideoMutation.isLoading ||
-                  uploadVideoURLMutation.isLoading ||
-                  uploadImageAndThumbnailMutation.isLoading
-                }
+                isLoading={calculateLoadingState()}
               />
             </Flex>
           </ActionSection>
