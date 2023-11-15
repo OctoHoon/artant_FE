@@ -8,7 +8,7 @@ import axios from "axios";
 //   ? "http://127.0.0.1:8000/api/v1/"
 //   : "http://147.46.245.226:8000/api/v1/";
 
-const baseUrl = "http://artant.shop/api/v1/";
+const baseUrl = "https://artant.shop/api/v1/";
 
 const instance = axios.create({
   baseURL: baseUrl,
