@@ -2,18 +2,79 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-// const isDevelopment = true;
+const isDevelopment = true;
 
-// const baseUrl = isDevelopment
-//   ? "http://127.0.0.1:8000/api/v1/"
-//   : "http://147.46.245.226:8000/api/v1/";
+const baseUrl = isDevelopment
+  ? "http://127.0.0.1:8000/api/v1/"
+  : "https://artant.shop/api/v1/";
 
-const baseUrl = "https://artant.shop/api/v1/";
+// const baseUrl = "https://artant.shop/api/v1/";
 
 const instance = axios.create({
   baseURL: baseUrl,
   withCredentials: true,
 });
+
+export const createAddress = ({
+  user_name,
+  address_name,
+  cell_phone_number,
+  postal_code,
+  street_address_1,
+  street_address_2,
+}) => {
+  instance
+    .post(
+      `addresses/`,
+      {
+        user_name,
+        address_name,
+        cell_phone_number,
+        postal_code,
+        street_address_1,
+        street_address_2,
+      },
+
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+};
+
+export const createUser = ({
+  user_name,
+  password,
+  email,
+  name,
+  gender,
+  birthday,
+  description,
+  address,
+}) => {
+  instance
+    .post(
+      `users/`,
+      {
+        user_name,
+        password,
+        email,
+        name,
+        gender,
+        birthday,
+        description,
+        address,
+      },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+};
 
 export const getMe = () =>
   instance.get(`users/me`).then((response) => response.data);

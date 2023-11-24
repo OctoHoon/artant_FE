@@ -193,15 +193,19 @@ export default function ShopIntro() {
             {data && data.description != null
               ? showAll
                 ? data.description
-                : data.description.slice(0, 400)
+                : data.description.split("\n").slice(0, 10).join("\n")
               : intro}
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <ArtantButton
-                title={showAll ? "간략히 보기 " : "자세히 보기"}
-                width="auto"
-                onClick={() => setShowAll(!showAll)}
-              />
-            </Box>
+            {data &&
+              data.description &&
+              data.description.split("\n").length > 10 && (
+                <Box display="flex" alignItems="center" justifyContent="center">
+                  <ArtantButton
+                    title={showAll ? "간략히 보기 " : "자세히 보기"}
+                    width="auto"
+                    onClick={() => setShowAll(!showAll)}
+                  />
+                </Box>
+              )}
           </Box>
           <Box width="100%" justifyContent={"center"}></Box>
           <Box height="48px" />
