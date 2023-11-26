@@ -21,7 +21,7 @@ import useUser from "../lib/useUser";
 
 export default function ShopManagerListings() {
   const { userLoading, isLoggedIn, user } = useUser();
-  const firstShopPK = user?.shop_pks[0] || null;
+  const firstShopPK = user?.shop_pk || null;
   const [page, setPage] = useState(1);
   const { isLoading, data } = useQuery(
     ["shopProduct", firstShopPK, page],

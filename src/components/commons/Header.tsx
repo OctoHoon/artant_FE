@@ -30,7 +30,7 @@ import {
 
 export default function Header() {
   const { userLoading, isLoggedIn, user } = useUser();
-  const firstShopPK = user?.shop_pks[0] || null;
+  const firstShopPK = user?.shop_pk || null;
   const {
     isOpen: isLoginOpen,
     onClose: onLoginClose,
