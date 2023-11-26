@@ -105,14 +105,14 @@ export default function ShopHeader() {
                   gap="4px"
                   alignItems={"center"}
                 >
-                  <Link to={`/people/${data["users"][0]["pk"]}`}>
+                  <Link to={`/people/${data["user"]["pk"]}`}>
                     <Avatar
                       width="60px"
                       height="60px"
-                      src={data["users"][0]["avatar"]}
+                      src={data["user"]["avatar"]}
                     />
                   </Link>
-                  <Text>{data["users"][0]["username"]}</Text>
+                  <Text>{data["user"]["username"]}</Text>
 
                   <Flex
                     gap="6px"
