@@ -346,7 +346,7 @@ export const uploadProduct = ({
 }: IUploadProductVariables) =>
   instance
     .post(
-      `/shops/${shopPK}/products/create`,
+      `/shops/${shopPK}/create-product`,
       { name, description, price, category_name, thumbnail },
       {
         headers: {
