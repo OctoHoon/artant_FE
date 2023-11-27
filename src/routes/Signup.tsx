@@ -19,13 +19,15 @@ import {
   AiOutlineCamera,
   AiOutlineEye,
   AiOutlineEyeInvisible,
-  AiOutlineUpload,
 } from "react-icons/ai";
-import { createAddress, createUser } from "../api";
+import { createUser, getUploadURL, uploadImage } from "../api";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
 export default function Signup() {
+  const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
   const toast = useToast();
+
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -49,10 +51,12 @@ export default function Signup() {
   const [avatar, setAvatar] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
 
+  const handlePasswordVisibility = () => setShowPassword(!showPassword);
+
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     if (file) {
-      //   setAvatar(file);
+      setAvatar(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setAvatarPreview(reader.result as string);
@@ -65,71 +69,87 @@ export default function Signup() {
     document.getElementById("avatar")?.click();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submission logic
-    // onSubmitAll();
+  const extractErrorMessage = (error: unknown): string => {
+    // Check if error is an instance of Error
+    if (error instanceof Error) {
+      return error.message || "An unknown error occurred.";
+    }
+    // Handle other types of errors or return a generic message
+    return "An unknown error occurred.";
   };
 
-  const handlePasswordVisibility = () => setShowPassword(!showPassword);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const toastId = "loading-toast"; // Unique ID for the loading toast
 
-  //   const addressData = {
-  //     user_name: user_name,
-  //     address_name: address_name,
-  //     cell_phone_number: cell_phone_number,
-  //     postal_code: postal_code,
-  //     street_address_1: street_address_1,
-  //     street_address_2: street_address_2,
-  //   };
+    try {
+      toast({
+        id: toastId,
+        title: "계정 생성중...",
+        description: "잠시만 기다려주세요",
+        status: "info",
+        duration: null, // null duration keeps the toast open indefinitely
+        isClosable: false,
+      });
+      await onCreateUser();
+      toast.close(toastId);
 
-  //   const onCreateAddress = async () => {
-  //     try {
-  //       const result = await createAddress(addressData);
-  //       return result;
-  //     } catch (error) {
-  //       console.error("주소 생성 실패", error);
-  //       throw error;
-  //     }
-  //   };
+      toast({
+        title: "계정 생성 완료!",
+        description: "홈으로 돌아갑니다.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
 
-  //   const onCreateUser = async ({ address }) => {
-  //     try {
-  //       const result = await createUser({
-  //         user_name: user_name,
-  //         password: password,
-  //         email: email,
-  //         name: name,
-  //         gender: gender,
-  //         birthday: birthday,
-  //         description: description,
-  //         address: address,
-  //       });
-  //     } catch (error) {
-  //       console.error("계정 생성 실패", error);
-  //       throw error;
-  //     }
-  //   };
+      navigate(`/`);
+    } catch (error) {
+      console.error("Error during submission:", error);
+      toast.close(toastId);
 
-  //   const onSubmitAll = async () => {
-  //     try {
-  //       // 순차적으로 비동기 함수 실행
-  //       //   const result = await onCreateAddress(); // shop에 product 등록
+      const errorMessage = extractErrorMessage(error);
+      toast({
+        title: "계정 생성 실패",
+        description: errorMessage,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
-  //       await onCreateUser({ address: 1 });
-  //       toast({
-  //         title: "계정 생성 완료.",
-  //         description: `홈으로 돌아갑니다`,
-  //         status: "info",
-  //         duration: 5000,
-  //         isClosable: true,
-  //       });
+  const uploadImageMutation = useMutation(uploadImage, {});
+  const uploadURLMutation = useMutation(getUploadURL, {});
 
-  //       navigate(`/`);
-  //     } catch (error) {
-  //       alert("작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!");
-  //       console.error("Error during submission:", error);
-  //     }
-  //   };
+  const onCreateUser = async () => {
+    let thumbnail = "";
+    try {
+      if (avatar) {
+        const uploadURLResponse = await uploadURLMutation.mutateAsync();
+        console.log(`업로드 url ${uploadURLResponse}`);
+        const response = await uploadImageMutation.mutateAsync({
+          uploadURL: uploadURLResponse.uploadURL,
+          file: avatar,
+        });
+        thumbnail = `${IMAGE_DELIVERY_URL}/${response.result.id}/public`;
+      }
+
+      const result = await createUser({
+        username: username,
+        password: password,
+        email: email,
+        name: name,
+        gender: gender,
+        birthday: birthday,
+        description: description,
+        avatar: thumbnail,
+      });
+      return result;
+    } catch (error) {
+      console.error("Account creation failed", error);
+      throw error; // Re-throw the error as is
+    }
+  };
 
   return (
     <Box p={4} width={"1280px"}>
@@ -141,7 +161,7 @@ export default function Signup() {
           <VStack spacing={4} align="flex-start">
             {/* User fields */}
             <FormControl isRequired>
-              <FormLabel htmlFor="username">Username</FormLabel>
+              <FormLabel htmlFor="username">아이디</FormLabel>
               <Input
                 width={"200px"}
                 id="username"
@@ -151,7 +171,7 @@ export default function Signup() {
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">비밀번호</FormLabel>
 
               <InputGroup width={"200px"}>
                 <Input
@@ -173,7 +193,7 @@ export default function Signup() {
               </InputGroup>
             </FormControl>
             <FormControl isRequired>
-              <FormLabel htmlFor="username">Username</FormLabel>
+              <FormLabel htmlFor="name">닉네임</FormLabel>
               <Input
                 width={"200px"}
                 id="name"

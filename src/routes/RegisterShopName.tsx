@@ -53,15 +53,10 @@ export default function RegisterShopName() {
         >
           {" "}
           <Text
+            textStyle={"B22M"}
             color="#000"
             textAlign="center"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="22px"
-            fontStyle="normal"
-            fontWeight={500}
-            lineHeight="normal"
             letterSpacing="-0.3px"
-            textTransform="capitalize"
           >
             상점 이름을 지정하세요
           </Text>
@@ -70,13 +65,11 @@ export default function RegisterShopName() {
             color="#000"
             textAlign="center"
             fontFamily="Spoqa Han Sans Neo"
-            fontSize="16px"
-            fontStyle="normal"
-            fontWeight={400}
+            textStyle={"B16R"}
             lineHeight="150%"
             letterSpacing="-0.048px"
           >
-            땀을 흘리지 마십시오! 지금 이름 초안을 작성하고 나중에 변경할 수
+            땀 흘리지 마세요! 지금 이름 초안을 작성하고 나중에 변경할 수
             있습니다. 판매자는 자신이 <br />
             판매하는 제품, 스타일 등 거의 모든 것에서 영감을 얻는 경우가
             많습니다. 추가 이름 지정 팁

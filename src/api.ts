@@ -2,7 +2,7 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-const isDevelopment = false;
+const isDevelopment = true;
 
 const baseUrl = isDevelopment
   ? "http://127.0.0.1:8000/api/v1/"
@@ -15,65 +15,45 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-export const createAddress = ({
-  user_name,
-  address_name,
-  cell_phone_number,
-  postal_code,
-  street_address_1,
-  street_address_2,
-}) => {
-  instance
-    .post(
-      `addresses/`,
-      {
-        user_name,
-        address_name,
-        cell_phone_number,
-        postal_code,
-        street_address_1,
-        street_address_2,
-      },
-
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    )
-    .then((response) => response.data);
-};
-
-export const createUser = ({
-  user_name,
+export const createUser = async ({
+  username,
   password,
   email,
   name,
   gender,
   birthday,
   description,
-  address,
+  avatar,
 }) => {
-  instance
-    .post(
-      `users/`,
+  try {
+    const response = await instance.post(
+      `users/signup`,
       {
-        user_name,
+        username,
         password,
         email,
         name,
         gender,
         birthday,
         description,
-        address,
+        avatar,
       },
       {
         headers: {
           "X-CSRFToken": Cookie.get("csrftoken") || "",
         },
       }
-    )
-    .then((response) => response.data);
+    );
+    return response.data;
+  } catch (error) {
+    // Error handling can be more specific based on your needs
+    if (axios.isAxiosError(error) && error.response) {
+      // You can handle specific status codes or error messages here
+      throw new Error(error.response.data.message || "Error creating user.");
+    } else {
+      throw error; // Re-throw the error if it's not an Axios error
+    }
+  }
 };
 
 export const getMe = () =>
