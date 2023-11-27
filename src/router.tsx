@@ -35,7 +35,7 @@ import EventDetail from "./routes/EventDetail";
 import EventDetailTwo from "./routes/EventDetailTwo";
 import ShopManagerCommunity from "./routes/ShopManagerCommunity";
 import ItemsTag from "./routes/itemsTag";
-import Signup from "./routes/Singup";
+import Signup from "./routes/Signup";
 
 const router = createHashRouter(
   [
