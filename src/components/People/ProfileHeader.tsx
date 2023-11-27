@@ -52,11 +52,11 @@ export default function ProfileHeader() {
             </Flex>
           </Box>
         </Flex>
-        {!userLoading && user?.shop_names.length > 0 && (
-          <Link to={`/shop/${user.shop_pks[0]}`}>
+        {!userLoading && user?.shop_name && (
+          <Link to={`/shop/${user.shop_pk}`}>
             <Flex>
               <Box marginRight="12px" textAlign={"end"}>
-                <Text color={"#595959"}>{user?.shop_names[0]}</Text>
+                <Text color={"#595959"}>{user?.shop_name}</Text>
                 <Text color={"#595959"}>0 판매</Text>
               </Box>
               <Box width="40px">

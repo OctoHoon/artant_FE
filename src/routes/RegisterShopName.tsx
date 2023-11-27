@@ -8,7 +8,7 @@ import useUser from "../lib/useUser";
 
 export default function RegisterShopName() {
   const { userLoading, isLoggedIn, user } = useUser();
-  const firstShopPK = user?.shop_pks[0] || null;
+  const firstShopPK = user?.shop_pk || null;
 
   const [inputText, setInputText] = useState(""); // 입력된 텍스트 상태 추가
 

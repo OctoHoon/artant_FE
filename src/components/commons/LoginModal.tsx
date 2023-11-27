@@ -18,6 +18,7 @@ import SocialLogin from "../index/SocialLogin";
 import { usernameLogIn } from "../../api";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -28,6 +29,8 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
   const handleLogin = async () => {
@@ -113,6 +116,10 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             variant="outline"
             borderColor="blackAlpha.500"
             w="100%"
+            onClick={() => {
+              onClose();
+              navigate("/signup");
+            }}
           >
             회원가입
           </Button>

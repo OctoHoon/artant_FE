@@ -2,18 +2,79 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-// const isDevelopment = true;
+const isDevelopment = false;
 
-// const baseUrl = isDevelopment
-//   ? "http://127.0.0.1:8000/api/v1/"
-//   : "http://147.46.245.226:8000/api/v1/";
+const baseUrl = isDevelopment
+  ? "http://127.0.0.1:8000/api/v1/"
+  : "https://artant.shop/api/v1/";
 
-const baseUrl = "https://artant.shop/api/v1/";
+// const baseUrl = "https://artant.shop/api/v1/";
 
 const instance = axios.create({
   baseURL: baseUrl,
   withCredentials: true,
 });
+
+export const createAddress = ({
+  user_name,
+  address_name,
+  cell_phone_number,
+  postal_code,
+  street_address_1,
+  street_address_2,
+}) => {
+  instance
+    .post(
+      `addresses/`,
+      {
+        user_name,
+        address_name,
+        cell_phone_number,
+        postal_code,
+        street_address_1,
+        street_address_2,
+      },
+
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+};
+
+export const createUser = ({
+  user_name,
+  password,
+  email,
+  name,
+  gender,
+  birthday,
+  description,
+  address,
+}) => {
+  instance
+    .post(
+      `users/`,
+      {
+        user_name,
+        password,
+        email,
+        name,
+        gender,
+        birthday,
+        description,
+        address,
+      },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+};
 
 export const getMe = () =>
   instance.get(`users/me`).then((response) => response.data);
@@ -58,7 +119,7 @@ export const usernameLogIn = ({
   );
 
 export const getShops = () =>
-  instance.get("users/shops").then((response) => response.data);
+  instance.get("shops/").then((response) => response.data);
 
 export const getProducts = () =>
   instance.get("products/").then((response) => response.data);
@@ -106,17 +167,17 @@ export const getProductDetails = ({ queryKey }: QueryFunctionContext) => {
 };
 
 export const getArtistRecommended = () =>
-  instance.get("/users/shops").then((response) => response.data);
+  instance.get("shops/").then((response) => response.data);
 
 export const getShopDetails = ({ queryKey }: QueryFunctionContext) => {
   const [_, pk] = queryKey;
-  return instance.get(`users/shops/${pk}`).then((response) => response.data);
+  return instance.get(`shops/${pk}`).then((response) => response.data);
 };
 
 export const getShopProducts = ({ queryKey }: QueryFunctionContext) => {
   const [_, pk, page] = queryKey;
   return instance
-    .get(`users/shops/${pk}/products?page=${page}`)
+    .get(`shops/${pk}/products?page=${page}`)
     .then((response) => response.data);
 };
 
@@ -150,7 +211,7 @@ export const getReviews = ({ queryKey }: QueryFunctionContext) => {
 export const getShopReviews = ({ queryKey }: QueryFunctionContext) => {
   const [pk, page, selectedOption] = queryKey;
   return instance
-    .get(`users/shops/${pk}/reviews?page=${page}&sort=${selectedOption}`)
+    .get(`shops/${pk}/reviews?page=${page}&sort=${selectedOption}`)
     .then((response) => response.data);
 };
 
@@ -162,7 +223,9 @@ export const getReviewPhotos = ({ queryKey }: QueryFunctionContext) => {
 };
 
 export const getRecentlyViewedProducts = () =>
-  instance.get("products/recently-viewed").then((response) => response.data);
+  instance
+    .get("user-activities/recently-viewed")
+    .then((response) => response.data);
 
 export const getUploadURL = () =>
   instance
@@ -260,7 +323,7 @@ export interface IUploadProductVariables {
 
 export const updateShop = async (pk, shopData) => {
   try {
-    const response = await instance.put(`users/shops/${pk}`, shopData, {
+    const response = await instance.put(`shops/${pk}`, shopData, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
@@ -283,7 +346,7 @@ export const uploadProduct = ({
 }: IUploadProductVariables) =>
   instance
     .post(
-      `/users/shops/${shopPK}/products/create`,
+      `/shops/${shopPK}/create-product`,
       { name, description, price, category_name, thumbnail },
       {
         headers: {

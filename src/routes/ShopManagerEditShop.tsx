@@ -23,7 +23,7 @@ export default function ShopManagerEditShop() {
   const [shopPK, setShopPK] = useState();
 
   useEffect(() => {
-    setShopPK(user?.shop_pks[0]);
+    setShopPK(user?.shop_pk);
   }, [user]);
 
   const { isLoading, data } = useQuery(["shop", 1], getShopDetails);

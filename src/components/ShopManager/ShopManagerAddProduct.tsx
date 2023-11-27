@@ -67,7 +67,7 @@ export default function AddProduct() {
   const [shopPK, setShopPK] = useState("");
 
   useEffect(() => {
-    setShopPK(user?.shop_pks[0]);
+    setShopPK(user?.shop_pk);
   }, [user]);
 
   // product value

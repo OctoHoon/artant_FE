@@ -4,6 +4,7 @@ import ArtantButton from "../commons/ArtantButton";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { getShopDetails } from "../../api";
+import ArtantStar from "./ArtantStar";
 
 export default function ShopHeader() {
   const { pk } = useParams();
@@ -92,105 +93,7 @@ export default function ShopHeader() {
                   </Box>
                   <Box width="100px" />
                   {data.is_best_seller ? (
-                    <Box>
-                      <Text>아트앤트 스타 셀러입니다.</Text>
-                      <Box height="20px" />
-                      <Flex>
-                        <Box width="160px">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <mask
-                              id="mask0_465_6295"
-                              maskUnits="userSpaceOnUse"
-                              x="0"
-                              y="0"
-                              width="24"
-                              height="24"
-                            >
-                              <rect width="24" height="24" fill="#D9D9D9" />
-                            </mask>
-                            <g mask="url(#mask0_465_6295)">
-                              <path
-                                d="M18.6154 21.7885L17.9269 21.1L19.9827 19H15.1154V18H20.0019L17.9019 15.9L18.6154 15.2115L21.9039 18.5L18.6154 21.7885ZM4.61538 19C4.16794 19 3.78685 18.8426 3.4721 18.5279C3.15737 18.2132 3 17.8321 3 17.3846V6.61537C3 6.16794 3.15737 5.78685 3.4721 5.4721C3.78685 5.15737 4.16794 5 4.61538 5H19.3846C19.8321 5 20.2132 5.15737 20.5279 5.4721C20.8426 5.78685 21 6.16794 21 6.61537V14.05C20.6397 13.8731 20.2631 13.7372 19.8702 13.6423C19.4772 13.5474 19.0782 13.5 18.6731 13.5C17.2372 13.5 16.016 14.0032 15.0096 15.0096C14.0032 16.016 13.5 17.2372 13.5 18.6731V19H4.61538ZM12 12.1154L20 6.90385L19.6923 6L12 11L4.3077 6L4 6.90385L12 12.1154Z"
-                                fill="#9968D9"
-                              />
-                            </g>
-                          </svg>
-                          <Text fontWeight={"500"}>원활한 배송</Text>
-                          <Text fontSize={"13px"}>
-                            배송이 정시에 도착한 이력이 있습니다.
-                          </Text>
-                        </Box>
-                        <Box width="24px" />
-
-                        <Box width="160px">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <mask
-                              id="mask0_465_6295"
-                              maskUnits="userSpaceOnUse"
-                              x="0"
-                              y="0"
-                              width="24"
-                              height="24"
-                            >
-                              <rect width="24" height="24" fill="#D9D9D9" />
-                            </mask>
-                            <g mask="url(#mask0_465_6295)">
-                              <path
-                                d="M18.6154 21.7885L17.9269 21.1L19.9827 19H15.1154V18H20.0019L17.9019 15.9L18.6154 15.2115L21.9039 18.5L18.6154 21.7885ZM4.61538 19C4.16794 19 3.78685 18.8426 3.4721 18.5279C3.15737 18.2132 3 17.8321 3 17.3846V6.61537C3 6.16794 3.15737 5.78685 3.4721 5.4721C3.78685 5.15737 4.16794 5 4.61538 5H19.3846C19.8321 5 20.2132 5.15737 20.5279 5.4721C20.8426 5.78685 21 6.16794 21 6.61537V14.05C20.6397 13.8731 20.2631 13.7372 19.8702 13.6423C19.4772 13.5474 19.0782 13.5 18.6731 13.5C17.2372 13.5 16.016 14.0032 15.0096 15.0096C14.0032 16.016 13.5 17.2372 13.5 18.6731V19H4.61538ZM12 12.1154L20 6.90385L19.6923 6L12 11L4.3077 6L4 6.90385L12 12.1154Z"
-                                fill="#9968D9"
-                              />
-                            </g>
-                          </svg>
-                          <Text fontWeight={"500"}>빠른 답변</Text>
-                          <Text fontSize={"13px"}>
-                            메세지에 빠르게 회신한 이력이 있습니다.
-                          </Text>
-                        </Box>
-                        <Box width="24px" />
-                        <Box width="160px">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <mask
-                              id="mask0_465_6295"
-                              maskUnits="userSpaceOnUse"
-                              x="0"
-                              y="0"
-                              width="24"
-                              height="24"
-                            >
-                              <rect width="24" height="24" fill="#D9D9D9" />
-                            </mask>
-                            <g mask="url(#mask0_465_6295)">
-                              <path
-                                d="M18.6154 21.7885L17.9269 21.1L19.9827 19H15.1154V18H20.0019L17.9019 15.9L18.6154 15.2115L21.9039 18.5L18.6154 21.7885ZM4.61538 19C4.16794 19 3.78685 18.8426 3.4721 18.5279C3.15737 18.2132 3 17.8321 3 17.3846V6.61537C3 6.16794 3.15737 5.78685 3.4721 5.4721C3.78685 5.15737 4.16794 5 4.61538 5H19.3846C19.8321 5 20.2132 5.15737 20.5279 5.4721C20.8426 5.78685 21 6.16794 21 6.61537V14.05C20.6397 13.8731 20.2631 13.7372 19.8702 13.6423C19.4772 13.5474 19.0782 13.5 18.6731 13.5C17.2372 13.5 16.016 14.0032 15.0096 15.0096C14.0032 16.016 13.5 17.2372 13.5 18.6731V19H4.61538ZM12 12.1154L20 6.90385L19.6923 6L12 11L4.3077 6L4 6.90385L12 12.1154Z"
-                                fill="#9968D9"
-                              />
-                            </g>
-                          </svg>
-                          <Text fontWeight={"500"}>리뷰 후기</Text>
-                          <Text fontSize={"13px"}>
-                            리뷰 평점이 4.8 이상입니다.
-                          </Text>
-                        </Box>
-                      </Flex>
-                    </Box>
+                    <ArtantStar />
                   ) : (
                     <Box width={"528px"} />
                   )}
@@ -202,14 +105,14 @@ export default function ShopHeader() {
                   gap="4px"
                   alignItems={"center"}
                 >
-                  <Link to={`/people/${data["users"][0]["pk"]}`}>
+                  <Link to={`/people/${data["user"]["pk"]}`}>
                     <Avatar
                       width="60px"
                       height="60px"
-                      src={data["users"][0]["avatar"]}
+                      src={data["user"]["avatar"]}
                     />
                   </Link>
-                  <Text>{data["users"][0]["username"]}</Text>
+                  <Text>{data["user"]["username"]}</Text>
 
                   <Flex
                     gap="6px"
@@ -248,7 +151,7 @@ export default function ShopHeader() {
             </Flex>
           </Box>
           <Flex width={"1280px"} padding={"30px 0px"}>
-            <Box width="200px">
+            <Box width="210px">
               <Text fontSize="16px">공지사항</Text>
               <Text fontSize="13px" color="#595959">
                 2023.08.24 업데이트
