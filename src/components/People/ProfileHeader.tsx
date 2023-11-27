@@ -60,7 +60,7 @@ export default function ProfileHeader() {
                 <Text color={"#595959"}>0 판매</Text>
               </Box>
               <Box width="40px">
-                <Image src={user?.shop_avatars[0]} />
+                <Image src={user?.shop_avatar} />
               </Box>
             </Flex>
           </Link>
