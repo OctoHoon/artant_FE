@@ -5,10 +5,11 @@ import RegisterProcess from "../components/RegisterShop/RegisterProcess";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useUser from "../lib/useUser";
+import { useMutation } from "@tanstack/react-query";
+import { createShop } from "../api";
 
 export default function RegisterShopName() {
   const { userLoading, isLoggedIn, user } = useUser();
-  const firstShopPK = user?.shop_pk || null;
 
   const [inputText, setInputText] = useState(""); // 입력된 텍스트 상태 추가
 
@@ -19,13 +20,24 @@ export default function RegisterShopName() {
   );
   const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 생성
 
+  const createShopName = useMutation(createShop, {});
   // 이벤트 핸들러
-  const handleButtonClick = () => {
-    if (isLengthValid && !hasSpecialCharsOrSpaces && firstShopPK) {
-      // 조건이 만족되면 페이지 이동
-      navigate(`/your/shops/${firstShopPK}/onboarding/listings/create`);
-    } else {
-      // 조건이 만족되지 않으면 아무 작업도 하지 않음
+  const handleButtonClick = async () => {
+    if (isLengthValid && !hasSpecialCharsOrSpaces) {
+      console.log(user);
+      try {
+        // First, get the upload URL
+        const response = await createShopName.mutateAsync({
+          username: user.name,
+          shop_name: inputText,
+          register_step: undefined,
+        });
+        console.log(response);
+        navigate(`/your/shops/${response.id}/onboarding/listings/create`);
+      } catch (error) {
+        // Handle errors that occur during the upload or video creation process
+        console.error("Error in video submission process:", error);
+      }
     }
   };
   return (

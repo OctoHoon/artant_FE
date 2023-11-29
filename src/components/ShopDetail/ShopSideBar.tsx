@@ -4,21 +4,10 @@ import { useState } from "react";
 import ArtantButton from "../commons/ArtantButton";
 import BlackButton from "../commons/Button/BlackButton";
 
-const Selections = [
-  { name: "모든 작품", count: 794 },
-  { name: "판매중", count: 794 },
-  { name: "신작", count: 25 },
-  { name: "베스트 셀러 아트", count: 34 },
-  { name: "1일 이내 작품 준비", count: 170 },
-  { name: "추상화", count: 121 },
-  { name: "추상인 조경 예술", count: 30 },
-  { name: "흑백 예술", count: 52 },
-  { name: "파란 그림", count: 34 },
-  { name: "다채로운 그림", count: 230 },
-];
-
-export default function ShopSideBar({ total_count }) {
+export default function ShopSideBar({ sections }) {
   const [select, setSelect] = useState("모든 작품");
+  console.log(sections);
+
   return (
     <Box>
       <SearchBar
@@ -29,15 +18,24 @@ export default function ShopSideBar({ total_count }) {
         onSearch={() => {}}
       />
       <Box height="29px" />
+      <SelecitonButton
+        name={"전체 상품"}
+        count={0}
+        is_selected={"전체 상품" === select}
+        handleSelect={setSelect}
+      />
 
-      {Selections.map((selection, index) => (
-        <SelecitonButton
-          name={selection.name}
-          count={total_count}
-          is_selected={selection.name === select}
-          handleSelect={setSelect}
-        />
-      ))}
+      {sections &&
+        sections.map((section, index) => {
+          return (
+            <SelecitonButton
+              name={section.title}
+              count={section.product_count}
+              is_selected={section.name === select}
+              handleSelect={setSelect}
+            />
+          );
+        })}
       <Box height="32px" />
       <BlackButton
         title={"맞춤 주문 요청"}
@@ -45,7 +43,6 @@ export default function ShopSideBar({ total_count }) {
         width="252px"
       />
       <Box height="12px" />
-
       <ArtantButton title={"판매자 연락하기"} width="100%" onClick={() => {}} />
       <Box height="60px" />
       <Text textStyle={"B13R"}>1637 판매</Text>

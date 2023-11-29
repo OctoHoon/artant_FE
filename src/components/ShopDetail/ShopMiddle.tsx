@@ -5,19 +5,18 @@ import PaginationController from "../commons/PaginationController";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import PdpCard from "../commons/Card/PdpCard";
-import { getShopProducts } from "../../api";
+import { getShopDetails, getShopProducts } from "../../api";
 import { useState } from "react";
 
 const itemCount = 24;
 
-export default function ShopMiddle() {
+export default function ShopMiddle({ sections }) {
   const { pk } = useParams();
   const [page, setPage] = useState(1);
   const { isLoading, data } = useQuery(
     ["shopProduct", pk, page],
     getShopProducts
   );
-  console.log(data);
 
   const handlePageChange = (event, value) => {
     setPage(value); // Update the page when the user changes it
@@ -30,7 +29,7 @@ export default function ShopMiddle() {
       <Box height="30px" />
       <Flex gap="40px">
         <Box width="252px">
-          <ShopSideBar total_count={data ? data.total_count : 0} />
+          <ShopSideBar sections={sections} />
         </Box>
         <Box width="998px">
           <Box

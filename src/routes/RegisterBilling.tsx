@@ -11,10 +11,39 @@ import RegisterProcess from "../components/RegisterShop/RegisterProcess";
 import BlackButton from "../components/commons/Button/BlackButton";
 import Footer from "../components/commons/Footer";
 import ScrollToTop from "../components/commons/ScrollToTop";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { updateShop } from "../api";
+import useUser from "../lib/useUser";
 
 export default function RegisterBilling() {
   const toast = useToast();
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 생성
+  const { userLoading, isLoggedIn, user } = useUser();
+  const { shopPk } = useParams();
+
+  const handleButtonClick = async () => {
+    try {
+      const updateData = {
+        register_step: 4,
+        is_activated: true,
+      };
+      console.log(shopPk);
+      const result = await updateShop(shopPk, updateData);
+      console.log(result);
+      navigate("/your/shops/me");
+      toast({
+        title: "계정이 생성되었습니다",
+        description: "샵 매니저 페이지로 이동합니다.",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+    } catch (error) {
+      console.error("업데이트 실패", error);
+      throw error;
+    }
+  };
 
   return (
     <Flex flexDirection={"column"} gap={"60px"} mt={"32px"} mb={"120px"}>
@@ -269,25 +298,13 @@ export default function RegisterBilling() {
                 상점열기를 클릭하면 <Text as="u">이용약관</Text>에 동의하게
                 됩니다.
               </Text>
-              <Link
-                to={"/your/shops/me/"}
-                onClick={() =>
-                  toast({
-                    title: "Account created.",
-                    description: "We've created your account for you.",
-                    status: "success",
-                    duration: 2000,
-                    isClosable: true,
-                    position: "bottom-right",
-                  })
-                }
-              >
-                <BlackButton
-                  title={"상점열기"}
-                  borderRadius={"5px"}
-                  flex="1 0 0"
-                />
-              </Link>
+
+              <BlackButton
+                title={"상점열기"}
+                borderRadius={"5px"}
+                flex="1 0 0"
+                onClick={handleButtonClick}
+              />
             </Flex>
           </Flex>
         </Flex>

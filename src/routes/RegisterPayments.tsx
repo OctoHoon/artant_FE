@@ -14,10 +14,31 @@ import {
 import RegisterProcess from "../components/RegisterShop/RegisterProcess";
 import BlackButton from "../components/commons/Button/BlackButton";
 import Footer from "../components/commons/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ScrollToTop from "../components/commons/ScrollToTop";
+import useUser from "../lib/useUser";
+import { useMutation } from "@tanstack/react-query";
+import { updateShop } from "../api";
 
 export default function RegisterPayments() {
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 생성
+  const { userLoading, isLoggedIn, user } = useUser();
+  const { shopPk } = useParams();
+
+  const handleButtonClick = async () => {
+    try {
+      const updateData = {
+        register_step: 3,
+      };
+      const result = await updateShop(shopPk, updateData);
+      console.log(result);
+      navigate(`/your/shops/${shopPk}/onboarding/billing`);
+    } catch (error) {
+      console.error("업데이트 실패", error);
+      throw error;
+    }
+  };
+
   return (
     <Flex
       mt={"32px"}
@@ -742,9 +763,11 @@ export default function RegisterPayments() {
                 <Text as="u">이용약관</Text>및{" "}
                 <Text as="u">개인정보 보호정책</Text>에 동의하게 됩니다.
               </Text>
-              <Link to="/your/shops/:shopPk/onboarding/billing">
-                <BlackButton title={"저장하고 계속"} borderRadius={"5px"} />
-              </Link>
+              <BlackButton
+                title={"저장하고 계속"}
+                borderRadius={"5px"}
+                onClick={handleButtonClick}
+              />
             </Flex>
           </Flex>
         </Flex>

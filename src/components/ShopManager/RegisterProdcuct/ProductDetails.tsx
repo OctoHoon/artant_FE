@@ -468,7 +468,7 @@ const TagBox = ({ tag, index, removeTag }) => {
   );
 };
 
-const SvgX = () => {
+export const SvgX = () => {
   return (
     <div style={{ cursor: "pointer" }}>
       <svg

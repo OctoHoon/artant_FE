@@ -1,10 +1,37 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
-import ShopIntro from "../components/ShopDetail/ShopIntro";
-import Footer from "../components/commons/Footer";
-import ScrollToTop from "../components/commons/ScrollToTop";
-import { Link } from "react-router-dom";
+import { Box, Button, Flex, Image, Text, useToast } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
+import useUser from "../lib/useUser";
 
 export default function RegisterShop() {
+  const toast = useToast();
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 생성
+  const { userLoading, isLoggedIn, user } = useUser();
+
+  const handleButtonClick = () => {
+    if (user.shop_is_activated) {
+      toast({
+        title: "이미 갤러리가 열려있습니다.",
+        description: "Artant는 1계정 1갤러리를 원칙으로 합니다.",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+      return; // Exit the function if the shop is activated
+    }
+
+    // Define the navigation paths based on the shop registration step
+    const navigationPaths = {
+      1: `your/shops/${user.shop_pk}/onboarding/listings/create`,
+      2: `your/shops/${user.shop_pk}/onboarding/listings/payments`,
+      3: `your/shops/${user.shop_pk}/onboarding/listings/billing`,
+    };
+
+    // Navigate to the appropriate path or the default path if the step is not 1, 2, or 3
+    const path =
+      navigationPaths[user.shop_register_step] || "your/shops/onboarding/name";
+    navigate(path);
+  };
   return (
     <Flex flexDirection={"column"} width={"full"} alignItems={"center"}>
       <Flex
@@ -34,22 +61,21 @@ export default function RegisterShop() {
             alignItems={"flex-start"}
             zIndex="1"
           ></Flex>
-          <Link to="/your/shops/onboarding/name">
-            <Button
-              height={"47px"}
-              padding={"12px 56px"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              borderRadius={"100px"}
-              background={" var(--maincolorsbgblack-222222, #222);"}
-              fontSize={"18px"}
-              fontWeight={"500"}
-              textAlign={"center"}
-              color={"var(--maincolorstext-white, #FFF)"}
-            >
-              시작하기
-            </Button>
-          </Link>
+          <Button
+            height={"47px"}
+            padding={"12px 56px"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            borderRadius={"100px"}
+            background={" var(--maincolorsbgblack-222222, #222);"}
+            fontSize={"18px"}
+            fontWeight={"500"}
+            textAlign={"center"}
+            color={"var(--maincolorstext-white, #FFF)"}
+            onClick={handleButtonClick}
+          >
+            시작하기
+          </Button>
         </Flex>
       </Flex>
       <Flex
@@ -138,20 +164,19 @@ export default function RegisterShop() {
             color="var(--maincolorstextgray-595959, #666);"
           >
             오늘부터 판매를 시작하세요.
-            <Link to="/your/shops/onboarding/name">
-              <Button
-                padding={"12px 20px"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                gap={"2px"}
-                borderRadius={"5px"}
-                background={"var(--maincolorsiconblack-1-c-1-b-1-f, #1C1B1F);"}
-                color={"white"}
-                fontSize={"16px"}
-              >
-                ARTANT 매장을 오픈하세요!
-              </Button>
-            </Link>
+            <Button
+              padding={"12px 20px"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={"2px"}
+              borderRadius={"5px"}
+              background={"var(--maincolorsiconblack-1-c-1-b-1-f, #1C1B1F);"}
+              color={"white"}
+              fontSize={"16px"}
+              onClick={handleButtonClick}
+            >
+              ARTANT 매장을 오픈하세요!
+            </Button>
           </Flex>
         </Flex>
         <Flex
