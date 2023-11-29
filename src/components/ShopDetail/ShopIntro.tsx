@@ -1,15 +1,5 @@
-import {
-  Image,
-  Box,
-  Flex,
-  Text,
-  Fade,
-  IconButton,
-  Avatar,
-  Divider,
-} from "@chakra-ui/react";
+import { Image, Box, Flex, Text, IconButton, Avatar } from "@chakra-ui/react";
 import { useState } from "react";
-import { FaRegHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ArtantButton from "../commons/ArtantButton";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -74,19 +64,7 @@ export default function ShopIntro() {
       );
     }
   };
-  const defaultDescription =
-    "우리는 풍경, 음악, 예술, 옷, 가구, 정원 가꾸기, 교제, 사랑, 종교, 우리 자신 등 모든 곳에서 그것을 추구합니다.\n엘리트 아트 디자인의 일출은 두 소년의 만남에서 시작됩니다. Vitaliy는 어릴 때부터 예술을 좋아했습니다. 그의 부모는 그들의 아들이 미래에 큰 성공을 거두고 그를 예술 학교에 보낼 것이라고 확신했습니다. 시간이 지남에 따라 그는 손에 붓 없이 시간을 보내는 것을 상상할 수 없었습니다. 아이의 비틀거리고 불확실한 행동은 주인의 단호한 손놀림으로 발전했습니다. Vitaliy는 자신의 감정과 상상을 추상 작품으로 표현합니다. 그의 모든 작품은 그의 영혼의 일부로 만들어졌습니다.\n\n\
-  Ivan은 10살에 그림을 그리기 시작했습니다. 그는 예술에 빠져들게 되었고 부모는 그에게 좋은 예술 교육을 주기로 결정했고 운 좋게도 그를 같은 예술 학교에 보냈습니다. 소년들은 빠르게 공통점을 찾았고 확고한 우정이 생겼습니다. Ladovskiy는 다양한 그림 스타일을 혼합하여 성공할 수 있는 가변 예술가 중 한 명입니다. 그는 예술에 열정을 가진 모든 사람을 만족시키기 위해 다양한 스타일과 기술을 혼합할 수 있습니다.\n\
-  \n\
-  어린 시절부터 친한 친구가 그림을 그리는 소명을 발견하고 예술과 아름다움의 세계에 몰입할 수 있도록 가게를 열었습니다.\n\
-  따라서 당사의 Elite Art Design 커뮤니티는 다양한 기술과 스타일의 독창적인 작품을 제공하여 가정이나 사무실 공간에서 원하는 분위기를 얻을 수 있도록 도와줍니다. 현대 미술 팬이든 추상 미술 팬이든 여기에서 원하는 그림을 찾을 수 있습니다. 흑백 걸작도 사무실에서 구입할 수 있습니다.\n\
-  \n\
-  지난 7년 동안 우리는 인테리어 디자이너, 데코레이터, 스테이저, 빌더, 계약자 등과 많은 일을 해왔습니다. 그리고 우리는 당신의 꿈을 실현하게 되어 기쁩니다!\n\
-  \n\
-  모든 디자인은 3가지 모양/방향으로 분류되며 각 항목에 대해 약 10가지 크기를 사용할 수 있습니다. 그러나 사용자 정의 크기도 사용할 수 있습니다. 우리는 당신만을 위한 독특하고 완벽하게 맞는 예술을 만들기 위해 최선을 다할 것입니다!\n\
-  \n\
-  더 많이 일할수록 더 멀리 갈 수 있고 더 나아질 수 있다고 느낍니다!\n\
-  우리는 당신의 삶을 더 밝게 만들기 위해 노력합니다!";
+  const defaultDescription = "";
 
   const intro = showAll ? defaultDescription : defaultDescription.slice(0, 400);
 
@@ -160,6 +138,11 @@ export default function ShopIntro() {
                 onClick={() => handlePrevIndex()}
                 aria-label="Previous"
                 variant={"none"}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "grey",
+                  },
+                }}
               />
             </Box>
             <Box
@@ -174,14 +157,17 @@ export default function ShopIntro() {
                 onClick={() => handleNextIndex()}
                 aria-label="Next"
                 variant={"none"}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "grey",
+                  },
+                }}
               />
             </Box>
           </Box>
           <Box height={"40px"} />
           <Text fontSize="30px" fontWeight="500">
-            {data && data.description_title != null
-              ? data.description_title
-              : "인간의 영혼은 아름다움에 굶주려 있습니다."}
+            {(data && data.description_title) ?? ""}
           </Text>
           <Box height="24px" />
           <Box

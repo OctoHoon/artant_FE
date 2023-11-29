@@ -26,7 +26,7 @@ export default function ShopDetail() {
         gap={10}
         px={40}
       >
-        <ShopMiddle />
+        <ShopMiddle sections={data && data.sections_info} />
         <ShopReviews />
         <Box width={"1280px"} background={"#D9D9D9"} height={"1px"} />
         <ShopIntro />

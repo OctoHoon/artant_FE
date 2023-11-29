@@ -21,7 +21,7 @@ export default function ShopHeader() {
       ) : (
         <>
           <Box width={"100%"}>
-            <Image src={data!["background_pic"]} />
+            <Image src={data!["background_pic"]} width={"100%"} />
             <Flex position={"relative"}>
               <Box width={"100%"} bg="#FAFAFA" height={"170px"} />
               <Flex

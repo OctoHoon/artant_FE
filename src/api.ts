@@ -15,6 +15,33 @@ const instance = axios.create({
   withCredentials: true,
 });
 
+export const createShop = async ({ username, shop_name, register_step }) => {
+  try {
+    const response = await instance.post(
+      `shops/`,
+      {
+        username,
+        shop_name,
+        register_step: register_step || undefined,
+      },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    // Error handling can be more specific based on your needs
+    if (axios.isAxiosError(error) && error.response) {
+      // You can handle specific status codes or error messages here
+      throw new Error(error.response.data.message || "Error creating user.");
+    } else {
+      throw error; // Re-throw the error if it's not an Axios error
+    }
+  }
+};
+
 export const createUser = async ({
   username,
   password,
@@ -301,9 +328,30 @@ export interface IUploadProductVariables {
   shopPK: string;
 }
 
-export const updateShop = async (pk, shopData) => {
+export const createSection = async (shopId, data) => {
   try {
-    const response = await instance.put(`shops/${pk}`, shopData, {
+    const response = await instance.post(
+      `shops/${shopId}/create-section`,
+      data,
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    // Handle the error appropriately
+    console.error("Error updating the shop:", error);
+    throw error;
+  }
+};
+
+export const updateShop = async (shopId, shopData) => {
+  const updatedShopData = { ...shopData, id: shopId };
+
+  try {
+    const response = await instance.put(`shops/`, updatedShopData, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
