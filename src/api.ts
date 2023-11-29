@@ -177,7 +177,7 @@ export const getProductDetails = ({ queryKey }: QueryFunctionContext) => {
 };
 
 export const getArtistRecommended = () =>
-  instance.get("shops/").then((response) => response.data);
+  instance.get("shops/featured-shops").then((response) => response.data);
 
 export const getShopDetails = ({ queryKey }: QueryFunctionContext) => {
   const [_, pk] = queryKey;
