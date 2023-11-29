@@ -12,8 +12,16 @@ import SearchBar from "../commons/SearchBar";
 import FavoriteShop from "./FavoriteShop";
 import SquareShop from "./SquareShop";
 import { Link } from "react-router-dom";
+import { getRecommendedShops } from "../../api";
+import { useQuery } from "@tanstack/react-query";
 
 export default function FavoriteItems({ data }) {
+
+  const { isLoading: ShopIsLoading, data: ShopData } = useQuery(
+    ["RecommendedShops"],
+    getRecommendedShops
+  );
+
   return (
     <Box>
       <Flex justifyContent={"space-between"}>
@@ -174,7 +182,7 @@ export default function FavoriteItems({ data }) {
       </Text>
       <Box height="40px" />
       <Wrap spacing={5} justify={"space-around"}>
-        {data.map((shop, index) => (
+        {ShopData?.map((shop, index) => (
           <Link to={`/shop/${shop.pk}`}>
             <SquareShop key={index} data={shop} /* 여기에 다른 props 전달 */ />
           </Link>

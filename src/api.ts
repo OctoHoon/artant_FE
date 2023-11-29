@@ -125,8 +125,13 @@ export const usernameLogIn = ({
     }
   );
 
-export const getShops = () =>
-  instance.get("shops/").then((response) => response.data);
+
+
+export const getShopBanners = () =>
+  instance.get("shops/banners").then((response) => response.data);
+
+export const getRecommendedShops = () =>
+  instance.get("shops/recommended-shops").then((response) => response.data);
 
 export const getProducts = () =>
   instance.get("products/").then((response) => response.data);
@@ -134,7 +139,14 @@ export const getProducts = () =>
 export const getFavoriteProducts = ({ queryKey }: QueryFunctionContext) => {
   const [_, userPk] = queryKey;
   return instance
-    .get(`favorites/items/${userPk}`)
+    .get(`favorites/products/user/${userPk}`)
+    .then((response) => response.data);
+};
+
+export const getFavoriteShops = ({ queryKey }: QueryFunctionContext) => {
+  const [_, userPk] = queryKey;
+  return instance
+    .get(`favorites/shops/user/${userPk}`)
     .then((response) => response.data);
 };
 
@@ -174,7 +186,7 @@ export const getProductDetails = ({ queryKey }: QueryFunctionContext) => {
 };
 
 export const getArtistRecommended = () =>
-  instance.get("shops/").then((response) => response.data);
+  instance.get("shops/featured-shops").then((response) => response.data);
 
 export const getShopDetails = ({ queryKey }: QueryFunctionContext) => {
   const [_, pk] = queryKey;
@@ -190,7 +202,7 @@ export const getShopProducts = ({ queryKey }: QueryFunctionContext) => {
 
 export const toggleLikeProduct = (pk) => {
   return instance
-    .put(`favorites/items/toggle/${pk}`, null, {
+    .put(`favorites/products/${pk}`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
@@ -200,7 +212,7 @@ export const toggleLikeProduct = (pk) => {
 
 export const toggleLikeShop = (pk) => {
   return instance
-    .put(`favorites/shops/toggle/${pk}`, null, {
+    .put(`favorites/shops/${pk}`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },

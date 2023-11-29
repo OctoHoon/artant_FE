@@ -10,7 +10,7 @@ import FavoriteItems from "./FavoriteItems";
 import FavoriteShops from "./FavoriteShops";
 import useUser from "../../lib/useUser";
 import { useQuery } from "@tanstack/react-query";
-import { getFavoriteProducts, getShops, getUser } from "../../api";
+import { getFavoriteProducts, getFavoriteShops, getUser } from "../../api";
 
 export default function ProfileHeader() {
   const location = useLocation();
@@ -25,9 +25,9 @@ export default function ProfileHeader() {
   const { isLoading: FavoriteProductIsLoading, data: FavoriteProductsData } =
     useQuery(["FavoriteProducts", pk], getFavoriteProducts);
 
-  const { isLoading: ShopIsLoading, data: ShopData } = useQuery(
-    ["shops"],
-    getShops
+  const { isLoading: FavoriteShopIsLoading, data: FavoriteShopData } = useQuery(
+    ["FavoriteShops", pk],
+    getFavoriteShops
   );
 
   return (
@@ -88,7 +88,7 @@ export default function ProfileHeader() {
             height="108px"
             borderRadius={"10px"}
             objectFit={"cover"}
-            src={!ShopIsLoading && ShopData[0]?.avatar}
+            src={!FavoriteShopIsLoading && FavoriteShopData[0]?.avatar}
             border={index != 0 ? "2px" : 0}
           />
           <Box height="10px" />
@@ -97,8 +97,8 @@ export default function ProfileHeader() {
       </Flex>
       <Box height={"60px"} />
       {index === 1 ? (
-        ShopData ? (
-          <FavoriteShops data={ShopData} />
+        FavoriteShopData ? (
+          <FavoriteShops data={FavoriteShopData} />
         ) : null
       ) : FavoriteProductsData ? (
         <FavoriteItems data={FavoriteProductsData} />
