@@ -2,7 +2,7 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-const isDevelopment = true;
+const isDevelopment = false;
 
 const baseUrl = isDevelopment
   ? "http://127.0.0.1:8000/api/v1/"
@@ -125,8 +125,7 @@ export const usernameLogIn = ({
     }
   );
 
-export const getShops = () =>
-  instance.get("shops/").then((response) => response.data);
+
 
 export const getShopBanners = () =>
   instance.get("shops/banners").then((response) => response.data);
