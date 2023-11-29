@@ -12,14 +12,14 @@ import SearchBar from "../commons/SearchBar";
 import FavoriteShop from "./FavoriteShop";
 import SquareShop from "./SquareShop";
 import { Link } from "react-router-dom";
-import { getShops } from "../../api";
+import { getRecommendedShops } from "../../api";
 import { useQuery } from "@tanstack/react-query";
 
 export default function FavoriteItems({ data }) {
 
   const { isLoading: ShopIsLoading, data: ShopData } = useQuery(
-    ["shops"],
-    getShops
+    ["RecommendedShops"],
+    getRecommendedShops
   );
 
   return (

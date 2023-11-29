@@ -6,7 +6,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getShopBanners, getShops } from "../../api";
+import { getShopBanners } from "../../api";
 
 interface IShop {
   pk: number;

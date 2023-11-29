@@ -128,8 +128,11 @@ export const usernameLogIn = ({
 export const getShops = () =>
   instance.get("shops/").then((response) => response.data);
 
-  export const getShopBanners = () =>
+export const getShopBanners = () =>
   instance.get("shops/banners").then((response) => response.data);
+
+export const getRecommendedShops = () =>
+  instance.get("shops/recommended-shops").then((response) => response.data);
 
 export const getProducts = () =>
   instance.get("products/").then((response) => response.data);
