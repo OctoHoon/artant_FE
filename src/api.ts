@@ -2,7 +2,7 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-const isDevelopment = false;
+const isDevelopment = true;
 
 const baseUrl = isDevelopment
   ? "http://127.0.0.1:8000/api/v1/"
@@ -128,13 +128,16 @@ export const usernameLogIn = ({
 export const getShops = () =>
   instance.get("shops/").then((response) => response.data);
 
+  export const getShopBanners = () =>
+  instance.get("shops/banners").then((response) => response.data);
+
 export const getProducts = () =>
   instance.get("products/").then((response) => response.data);
 
 export const getFavoriteProducts = ({ queryKey }: QueryFunctionContext) => {
   const [_, userPk] = queryKey;
   return instance
-    .get(`favorites/items/${userPk}`)
+    .get(`favorites/products/user/${userPk}`)
     .then((response) => response.data);
 };
 
@@ -190,7 +193,7 @@ export const getShopProducts = ({ queryKey }: QueryFunctionContext) => {
 
 export const toggleLikeProduct = (pk) => {
   return instance
-    .put(`favorites/items/toggle/${pk}`, null, {
+    .put(`favorites/products/${pk}`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
@@ -200,7 +203,7 @@ export const toggleLikeProduct = (pk) => {
 
 export const toggleLikeShop = (pk) => {
   return instance
-    .put(`favorites/shops/toggle/${pk}`, null, {
+    .put(`favorites/shops/${pk}`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },

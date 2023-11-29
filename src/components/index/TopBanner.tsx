@@ -6,7 +6,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getShops } from "../../api";
+import { getShopBanners, getShops } from "../../api";
 
 interface IShop {
   pk: number;
@@ -32,7 +32,7 @@ export default function TopBanner() {
     usetransform: false,
   };
 
-  const { isLoading, data } = useQuery(["shops"], getShops);
+  const { isLoading, data } = useQuery(["shopBanners"], getShopBanners);
   console.log(data);
 
   return (
