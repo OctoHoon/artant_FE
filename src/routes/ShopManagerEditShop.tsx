@@ -1,4 +1,12 @@
-import { Button, Flex, Text, Divider, Box } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Text,
+  Divider,
+  Box,
+  SkeletonCircle,
+  SkeletonText,
+} from "@chakra-ui/react";
 import BlackButton from "../components/commons/Button/BlackButton";
 import { useEffect, useState } from "react";
 import useUser from "../lib/useUser";
@@ -9,6 +17,7 @@ import { PlusSVG } from "../components/ShopManager/EditShop/Svg";
 import EditAvatar from "../components/ShopManager/EditShop/EditAvatar";
 import EditShopContents from "../components/ShopManager/EditShop/EditShopContents";
 import EditArt from "../components/ShopManager/EditShop/EditArt";
+import EditBackgroundImg from "../components/ShopManager/EditShop/EditBackgroundImg";
 
 interface ISection {
   title: string;
@@ -84,12 +93,32 @@ export default function ShopManagerEditShop() {
             alignSelf={"stretch"}
           >
             <Flex flexDirection={"column"} gap={"30px"} alignSelf={"stretch"}>
-              <EditAvatar
-                shop_name={data && data.shop_name}
-                shortDescription={shortDescription}
-                setShortDescription={setShortDescription}
-                shop_pk={user && user.shop_pk}
-              />
+              {data && user && (
+                <EditBackgroundImg
+                  shop_pk={user.shop_pk}
+                  background_pic={data.background_pic}
+                />
+              )}
+              {data && user ? (
+                <EditAvatar
+                  shop_name={data.shop_name}
+                  shortDescription={shortDescription}
+                  setShortDescription={setShortDescription}
+                  shop_pk={user.shop_pk}
+                  shop_avatar={data.avatar}
+                />
+              ) : (
+                <Box padding="6" boxShadow="lg" bg="white">
+                  <SkeletonCircle size="10" />
+                  <SkeletonText
+                    mt="4"
+                    noOfLines={4}
+                    spacing="4"
+                    skeletonHeight="2"
+                  />
+                </Box>
+              )}
+
               <Divider />
               <EditAnnouncement
                 announcement={announcement}

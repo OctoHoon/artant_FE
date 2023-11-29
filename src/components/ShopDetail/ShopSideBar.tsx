@@ -6,7 +6,6 @@ import BlackButton from "../commons/Button/BlackButton";
 
 export default function ShopSideBar({ sections }) {
   const [select, setSelect] = useState("모든 작품");
-  console.log(sections);
 
   return (
     <Box>
@@ -19,9 +18,9 @@ export default function ShopSideBar({ sections }) {
       />
       <Box height="29px" />
       <SelecitonButton
-        name={"전체 상품"}
+        name={"모든 작품"}
         count={0}
-        is_selected={"전체 상품" === select}
+        is_selected={"모든 작품" === select}
         handleSelect={setSelect}
       />
 
