@@ -248,7 +248,7 @@ export const getRecentlyViewedProducts = () =>
 
 export const getUploadURL = () =>
   instance
-    .post(`products/photos/get-url`, null, {
+    .post(`common/images/get-url`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
@@ -292,7 +292,7 @@ export const createPhoto = ({ image, productPK }: ICreatePhotoVariables) =>
 
 export const getVideoUploadURL = () =>
   instance
-    .post(`products/videos/get-url`, null, {
+    .post(`common/videos/get-url`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
