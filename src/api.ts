@@ -237,7 +237,7 @@ export const getShopReviews = ({ queryKey }: QueryFunctionContext) => {
 export const getReviewPhotos = ({ queryKey }: QueryFunctionContext) => {
   const [pk, page] = queryKey;
   return instance
-    .get(`products/${pk}/reviews/photos?page=${page}`)
+    .get(`products/${pk}/reviews/images?page=${page}`)
     .then((response) => response.data);
 };
 
@@ -280,7 +280,7 @@ export interface ICreatePhotoVariables {
 export const createPhoto = ({ image, productPK }: ICreatePhotoVariables) =>
   instance
     .post(
-      `products/${productPK}/photos`,
+      `products/${productPK}/images`,
       { image },
       {
         headers: {
