@@ -2,7 +2,7 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-const isDevelopment = false;
+const isDevelopment = true;
 
 const baseUrl = isDevelopment
   ? "http://127.0.0.1:8000/api/v1/"
@@ -54,7 +54,7 @@ export const createUser = async ({
 }) => {
   try {
     const response = await instance.post(
-      `users/signup`,
+      `users/sign-up`,
       {
         username,
         password,
@@ -237,7 +237,7 @@ export const getShopReviews = ({ queryKey }: QueryFunctionContext) => {
 export const getReviewPhotos = ({ queryKey }: QueryFunctionContext) => {
   const [pk, page] = queryKey;
   return instance
-    .get(`products/${pk}/reviews/photos?page=${page}`)
+    .get(`products/${pk}/reviews/images?page=${page}`)
     .then((response) => response.data);
 };
 
@@ -248,7 +248,7 @@ export const getRecentlyViewedProducts = () =>
 
 export const getUploadURL = () =>
   instance
-    .post(`products/photos/get-url`, null, {
+    .post(`common/images/get-url`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
@@ -280,7 +280,7 @@ export interface ICreatePhotoVariables {
 export const createPhoto = ({ image, productPK }: ICreatePhotoVariables) =>
   instance
     .post(
-      `products/${productPK}/photos`,
+      `products/${productPK}/images`,
       { image },
       {
         headers: {
@@ -292,7 +292,7 @@ export const createPhoto = ({ image, productPK }: ICreatePhotoVariables) =>
 
 export const getVideoUploadURL = () =>
   instance
-    .post(`products/videos/get-url`, null, {
+    .post(`common/videos/get-url`, null, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
@@ -386,7 +386,7 @@ export const uploadProduct = ({
 }: IUploadProductVariables) =>
   instance
     .post(
-      `/shops/${shopPK}/create-product`,
+      `/shops/${shopPK}/products`,
       { name, description, price, category_name, thumbnail },
       {
         headers: {

@@ -46,7 +46,7 @@ export default function ShopIntro() {
   const handleNextIndex = () => {
     if (
       activeIndex !==
-      (data && data.image_urls.length > 0 ? data.image_urls : images).length - 1
+      (data && data.images.length > 0 ? data.images : images).length - 1
     ) {
       setActiveIndex(activeIndex + 1);
     } else {
@@ -59,7 +59,7 @@ export default function ShopIntro() {
       setActiveIndex(activeIndex - 1);
     } else {
       setActiveIndex(
-        (data && data.image_urls.length > 0 ? data.image_urls : images).length -
+        (data && data.images.length > 0 ? data.images : images).length -
           1
       );
     }
@@ -99,7 +99,7 @@ export default function ShopIntro() {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              {(data && data.image_urls.length > 0 ? data.image_urls : images)[
+              {(data && data.images.length > 0 ? data.images : images)[
                 activeIndex
               ].endsWith(".mp4") ? (
                 <video
@@ -114,8 +114,8 @@ export default function ShopIntro() {
                 <Image
                   objectFit={"cover"}
                   src={
-                    (data && data.image_urls.length > 0
-                      ? data.image_urls
+                    (data && data.images.length > 0
+                      ? data.images
                       : images)[activeIndex]
                   }
                   width="760px"
