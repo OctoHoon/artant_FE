@@ -54,7 +54,7 @@ export const createUser = async ({
 }) => {
   try {
     const response = await instance.post(
-      `users/signup`,
+      `users/sign-up`,
       {
         username,
         password,
