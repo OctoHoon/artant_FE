@@ -343,7 +343,7 @@ export interface IUploadProductVariables {
 export const createSection = async (shopId, data) => {
   try {
     const response = await instance.post(
-      `shops/${shopId}/create-section`,
+      `shops/${shopId}/section`,
       data,
       {
         headers: {
