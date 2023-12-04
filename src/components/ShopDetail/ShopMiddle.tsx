@@ -13,14 +13,16 @@ const itemCount = 24;
 export default function ShopMiddle({ sections }) {
   const { pk } = useParams();
   const [page, setPage] = useState(1);
+  const [select, setSelect] = useState("모든 작품");
   const { isLoading, data } = useQuery(
-    ["shopProduct", pk, page],
+    ["shopProduct", pk, page, select],
     getShopProducts
   );
 
   const handlePageChange = (event, value) => {
     setPage(value); // Update the page when the user changes it
   };
+
   return (
     <Box>
       <Text fontSize="24px" fontWeight="500">
@@ -29,7 +31,12 @@ export default function ShopMiddle({ sections }) {
       <Box height="30px" />
       <Flex gap="40px">
         <Box width="252px">
-          <ShopSideBar sections={sections} />
+          <ShopSideBar
+            sections={sections}
+            total_count={data ? data.total_count : 0}
+            select={select}
+            setSelect={setSelect}
+          />
         </Box>
         <Box width="998px">
           <Box

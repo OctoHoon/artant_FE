@@ -8,7 +8,12 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/react";
-import { getUploadURL, updateShop, uploadImage } from "../../../api";
+import {
+  IMAGE_DELIVERY_URL,
+  getUploadURL,
+  updateShop,
+  uploadImage,
+} from "../../../api";
 import BlackButton from "../../commons/Button/BlackButton";
 import { PhotoSVG, PlusSVG, SvgCamera } from "./Svg";
 import { AiOutlineCamera } from "react-icons/ai";
@@ -28,8 +33,6 @@ export default function EditAvatar({
   const [avatarPreview, setAvatarPreview] = useState<string | null>(
     shop_avatar
   );
-
-  const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
 
   const triggerFileInput = () => {
     document.getElementById("avatar")?.click();

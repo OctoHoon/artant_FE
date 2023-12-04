@@ -10,6 +10,9 @@ const baseUrl = isDevelopment
 
 // const baseUrl = "https://artant.shop/api/v1/";
 
+export const IMAGE_DELIVERY_URL =
+  "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
+
 const instance = axios.create({
   baseURL: baseUrl,
   withCredentials: true,
@@ -125,8 +128,6 @@ export const usernameLogIn = ({
     }
   );
 
-
-
 export const getShopBanners = () =>
   instance.get("shops/banners").then((response) => response.data);
 
@@ -156,15 +157,15 @@ export const getProductsParameter = ({ queryKey }: QueryFunctionContext) => {
     `products/?category=${category}&sort=${selectedOption}${location}`
   );
   return instance
-    .get(`products/?category=${category}&sort=${selectedOption}${location}`)
+    .get(`products/?category=${category}&sort=${selectedOption}&${location}`)
     .then((response) => response.data);
 };
 
 export const getProductsParameterTag = ({ queryKey }: QueryFunctionContext) => {
   const [tag, location, selectedOption] = queryKey;
-  console.log(`products/?category=${tag}&sort=${selectedOption}${location}`);
+  console.log(`products/?category=${tag}&sort=${selectedOption}&${location}`);
   return instance
-    .get(`products/?tag=${tag}&sort=${selectedOption}${location}`)
+    .get(`products/?tag=${tag}&sort=${selectedOption}&${location}`)
     .then((response) => response.data);
 };
 
@@ -194,9 +195,9 @@ export const getShopDetails = ({ queryKey }: QueryFunctionContext) => {
 };
 
 export const getShopProducts = ({ queryKey }: QueryFunctionContext) => {
-  const [_, pk, page] = queryKey;
+  const [_, pk, page, section] = queryKey;
   return instance
-    .get(`shops/${pk}/products?page=${page}`)
+    .get(`shops/${pk}/products?page=${page}&section=${section}`)
     .then((response) => response.data);
 };
 
@@ -332,25 +333,56 @@ export const createVideo = ({ video, productPK }: ICreateVideoVariables) =>
     .then((response) => response.data);
 
 export interface IUploadProductVariables {
+  shopPK: string;
   name: string;
+  made_by: string;
+  product_type: string;
+  product_creation_date: string;
+  category_name: string;
+  primary_color: string;
+  secondary_color: string;
+  tags: string[];
+  section: string;
+  materials: string[];
   description: string;
   price: number;
-  thumbnail: string;
-  category_name: string;
-  shopPK: string;
+  quantity: number;
+  sku: string;
+  processing_min: number;
+  processing_max: number;
+  shipping_price: number;
+  images: { image: string; order: number }[];
+  video: string;
+  is_personalization_enabled: boolean;
+  is_personalization_optional: boolean;
+  personalization_guide: string;
+  variations: Variation[];
+  variants: Variant[];
+}
+
+export interface Variation {
+  name: string;
+  is_sku_vary: boolean;
+  is_price_vary: boolean;
+  is_quantity_vary: boolean;
+  options: { name: string }[];
+}
+
+export interface Variant {
+  option_one: string;
+  option_two: string;
+  sku: string;
+  price: number;
+  quantity: number;
 }
 
 export const createSection = async (shopId, data) => {
   try {
-    const response = await instance.post(
-      `shops/${shopId}/section`,
-      data,
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    );
+    const response = await instance.post(`shops/${shopId}/section`, data, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    });
     return response.data;
   } catch (error) {
     // Handle the error appropriately
@@ -363,7 +395,7 @@ export const updateShop = async (shopId, shopData) => {
   const updatedShopData = { ...shopData, id: shopId };
 
   try {
-    const response = await instance.put(`shops/`, updatedShopData, {
+    const response = await instance.patch(`shops/${shopId}`, updatedShopData, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
@@ -378,16 +410,60 @@ export const updateShop = async (shopId, shopData) => {
 
 export const uploadProduct = ({
   name,
+  made_by,
+  product_type,
+  product_creation_date,
+  category_name,
+  primary_color,
+  secondary_color,
+  tags,
+  section,
+  materials,
   description,
   price,
-  thumbnail,
-  category_name,
+  quantity,
+  sku,
+  processing_min,
+  processing_max,
+  shipping_price,
+  images,
+  video,
+  is_personalization_enabled,
+  is_personalization_optional,
+  personalization_guide,
+  variations,
+  variants,
   shopPK,
 }: IUploadProductVariables) =>
   instance
     .post(
       `/shops/${shopPK}/products`,
-      { name, description, price, category_name, thumbnail },
+      {
+        name,
+        made_by,
+        product_type,
+        product_creation_date,
+        category_name,
+        primary_color,
+        secondary_color,
+        tags,
+        section,
+        materials,
+        description,
+        price,
+        quantity,
+        sku,
+        processing_min,
+        processing_max,
+        shipping_price,
+        images,
+        video,
+        is_personalization_enabled,
+        is_personalization_optional,
+        personalization_guide,
+        variations,
+        variants,
+      },
       {
         headers: {
           "X-CSRFToken": Cookie.get("csrftoken") || "",
@@ -395,7 +471,6 @@ export const uploadProduct = ({
       }
     )
     .then((response) => response.data);
-
 export interface IPutProductVariables {
   thumbnail: string;
   productPK: string;

@@ -154,7 +154,7 @@ export default function ShopHeader() {
             <Box width="210px">
               <Text fontSize="16px">공지사항</Text>
               <Text fontSize="13px" color="#595959">
-                2023.08.24 업데이트
+                {data.shop_policy_updated_at.replace(/-/g, ".")} 업데이트
               </Text>
             </Box>
             <Box width="150px" />

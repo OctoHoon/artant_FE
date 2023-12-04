@@ -6,6 +6,7 @@ import {
   createVideo,
   getUploadURL,
   getVideoUploadURL,
+  IMAGE_DELIVERY_URL,
   IUploadProductVariables,
   putProduct,
   uploadImage,
@@ -24,8 +25,7 @@ import WhiteButton from "../components/commons/Button/WhiteButton";
 import AddVideo from "../components/ShopManager/RegisterProdcuct/AddVideo";
 import AddPictures from "../components/ShopManager/RegisterProdcuct/AddPictures";
 import BlackButton from "../components/commons/Button/BlackButton";
-
-const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
+import useUser from "../lib/useUser";
 
 type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
 
@@ -71,6 +71,8 @@ export const ActionSection = ({ children, ...props }) => (
 );
 
 export default function UploadPhotos() {
+  const { userLoading, isLoggedIn, user } = useUser();
+
   const navigate = useNavigate();
   // product value
   const [productPK, setProductPK] = useState("");
@@ -224,10 +226,28 @@ export default function UploadPhotos() {
     name: productName,
     description: productDescription,
     price: productPrice,
-    thumbnail:
-      "https://static9.depositphotos.com/1022647/1077/i/950/depositphotos_10770202-stock-photo-modern-art-gallery-empty-picture.jpg", // 임시 썸네일
     category_name: selectedSubCategory,
     shopPK: shopPk!,
+    made_by: "",
+    product_type: "",
+    product_creation_date: "",
+    primary_color: "",
+    secondary_color: "",
+    tags: [],
+    section: "",
+    materials: [],
+    quantity: 0,
+    sku: "",
+    processing_min: 3,
+    processing_max: 7,
+    shipping_price: 0,
+    images: [],
+    video: "",
+    is_personalization_enabled: false,
+    is_personalization_optional: false,
+    personalization_guide: "",
+    variations: [],
+    variants: [],
   };
 
   const onSubmitProduct = async () => {
@@ -321,6 +341,9 @@ export default function UploadPhotos() {
             setTags={setTags}
             materials={materials}
             setMaterials={setMaterials}
+            section={undefined}
+            setSection={undefined}
+            pk={user.shop_pk}
           />
           <StockAndPrice
             productPrice={productPrice}

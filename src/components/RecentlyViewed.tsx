@@ -1,22 +1,7 @@
-import { FaStar, FaRegHeart } from "react-icons/fa";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  HStack,
-  Image,
-  Text,
-  VStack,
-  Wrap,
-} from "@chakra-ui/react";
-import ArtPiece from "./commons/Card/ArtPiece";
-import PdpCard from "./commons/Card/PdpCard";
-import ProductSmallCard from "./commons/Card/ProductSmallCard";
+import { Flex, Text, Wrap } from "@chakra-ui/react";
 import CardSmall from "./commons/Card/CardSmall";
 import { useQuery } from "@tanstack/react-query";
 import { getRecentlyViewedProducts } from "../api";
-import useUser from "../lib/useUser";
 
 interface Product {
   pk: number;

@@ -41,6 +41,7 @@ export default function ShopManagerEditShop() {
   const [descriptionTitle, setDescriptionTitle] = useState("");
   const [description, setDescription] = useState("");
   const [sections, setSections] = useState<ISection[]>([]);
+  const [images, setImages] = useState<File[]>([]);
 
   const handleCreateSection = async () => {
     try {
@@ -53,7 +54,6 @@ export default function ShopManagerEditShop() {
     }
   };
 
-  console.log(sections);
   useEffect(() => {
     console.log(data);
     setAnnouncement(data?.announcement ?? "");
@@ -61,6 +61,7 @@ export default function ShopManagerEditShop() {
     setDescriptionTitle(data?.description_title ?? "");
     setDescription(data?.description ?? "");
     setSections(data?.sections_info ?? []);
+    setImages(data?.images ?? []);
   }, [data]);
 
   return (
@@ -133,14 +134,18 @@ export default function ShopManagerEditShop() {
               />
               <Divider />
               <Flex gap={"30px"} flexDirection={"column"}>
-                <EditShopContents
-                  shop_pk={user && user.shop_pk}
-                  data={data}
-                  descriptionTitle={descriptionTitle}
-                  setDescriptionTitle={setDescriptionTitle}
-                  description={description}
-                  setDescription={setDescription}
-                />
+                {data && (
+                  <EditShopContents
+                    shop_pk={user && user.shop_pk}
+                    data={data}
+                    descriptionTitle={descriptionTitle}
+                    setDescriptionTitle={setDescriptionTitle}
+                    description={description}
+                    setDescription={setDescription}
+                    images={images}
+                  />
+                )}
+
                 <Divider />
                 <Flex flexDirection={"column"}>
                   <Flex>

@@ -13,6 +13,7 @@ import {
   uploadVideo,
   IUploadProductVariables,
   uploadProduct,
+  IMAGE_DELIVERY_URL,
 } from "../../api";
 import PersonalizeTab from "./PersonalizeTab";
 import AddVariation from "./RegisterProdcuct/AddVariations";
@@ -26,8 +27,6 @@ import AddVideo from "./RegisterProdcuct/AddVideo";
 import ProductDetails from "./RegisterProdcuct/ProductDetails";
 import StockAndPrice from "./RegisterProdcuct/StockAndPrice";
 import useUser from "../../lib/useUser";
-
-const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
 
 type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
 
@@ -59,6 +58,11 @@ type Policy = {
   return: boolean;
   exchange: boolean;
   timeframe: number;
+};
+
+type IImage = {
+  image: string;
+  order: number;
 };
 
 export default function AddProduct() {
@@ -115,67 +119,43 @@ export default function AddProduct() {
   const [detailCombinations, setDetailCombinations] = useState<
     DetailCombination[]
   >([]);
+  //section
+  const [section, setSection] = useState();
 
-  const createPhotoMutation = useMutation(createPhoto, {});
-  const uploadImageMutation = useMutation(uploadImage, {
-    onSuccess: ({ result }: any) => {
-      if (productPK) {
-        const responsephoto = createPhotoMutation.mutate({
-          image: `${IMAGE_DELIVERY_URL}/${result.id}/public`,
-          productPK,
-        });
-      }
-    },
-  });
-  const uploadImageAndThumbnailMutation = useMutation(uploadImage, {
-    onSuccess: ({ result }: any) => {
-      if (productPK) {
-        const thumbnailResponse = putProduct({
-          thumbnail: `${IMAGE_DELIVERY_URL}/${result.id}/public`,
-          productPK: productPK, // 제품 PK 값 설정
-        });
-        createPhotoMutation.mutate({
-          image: `${IMAGE_DELIVERY_URL}/${result.id}/public`,
-          productPK,
-        });
-      }
-    },
-  });
-  const uploadURLMutation = useMutation(getUploadURL, {});
+  const uploadImageMutation = useMutation(uploadImage, {}); //cloudflare에 올림
+  const uploadURLMutation = useMutation(getUploadURL, {}); //url 가져옴
 
   const onSubmitImages = async () => {
     try {
+      // Step 1: Get upload URLs for each file
       const uploadURLResponses = await Promise.all(
         selectedFiles.map(() => uploadURLMutation.mutateAsync())
       );
 
-      const uploadPromises = selectedFiles.map(async (file, index) => {
-        const response = uploadURLResponses[index];
-        if (index === 0) {
-          await uploadImageAndThumbnailMutation.mutateAsync({
+      // Step 2: Upload each file to the acquired URL
+      const uploadImageResponses = await Promise.all(
+        selectedFiles.map(async (file, index) => {
+          const response = uploadURLResponses[index];
+          return uploadImageMutation.mutateAsync({
             uploadURL: response.uploadURL,
             file: file,
           });
-        } else {
-          await uploadImageMutation.mutateAsync({
-            uploadURL: response.uploadURL,
-            file: file,
-          });
-        }
-      });
+        })
+      );
+      console.log(uploadImageResponses);
 
-      await Promise.all(uploadPromises);
+      // Step 3: Construct the images array
+      const images = uploadImageResponses.map((response, index) => ({
+        image: `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${response.result.id}/public`, // Assuming the response contains the URL as 'imageUrl'
+        order: index + 1, // Adding 1 since you want order to start from 1, not 0
+      }));
+
+      return images;
     } catch (error) {
       console.error("Error uploading photos:", error);
+      return []; // Return an empty array in case of an error
     }
   };
-
-  const createVideoMutation = useMutation(createVideo, {
-    onError: () => {
-      // mutate가 실패하면, 함수를 실행합니다.
-      console.log("createVideoMutation error");
-    },
-  });
 
   const uploadVideoMutation = useMutation(uploadVideo, {
     onError: () => {
@@ -191,10 +171,10 @@ export default function AddProduct() {
     },
   });
 
-  const onSubmitVideo = async ({ pk }) => {
+  const onSubmitVideo = async () => {
     if (!selectedVideoFile) {
-      console.error("No video file selected for upload.");
-      return;
+      // console.error("No video file selected for upload.");
+      return "";
     }
     try {
       // First, get the upload URL
@@ -208,34 +188,19 @@ export default function AddProduct() {
         uploadURL: uploadURLData.uploadURL,
         file: selectedVideoFile,
       });
-
-      // After successful upload, create the video record
-      await createVideoMutation.mutateAsync({
-        video: cloudflareStreamUrl,
-        productPK: pk,
-      });
+      return cloudflareStreamUrl;
     } catch (error) {
       // Handle errors that occur during the upload or video creation process
       console.error("Error in video submission process:", error);
+      return "";
     }
   };
 
-  const productData: IUploadProductVariables = {
-    name: productName,
-    description: productDescription,
-    price: productPrice,
-    thumbnail:
-      "https://static9.depositphotos.com/1022647/1077/i/950/depositphotos_10770202-stock-photo-modern-art-gallery-empty-picture.jpg", // 임시 썸네일
-    category_name: selectedSubCategory,
-    shopPK: shopPK,
-  };
-
-  const onSubmitProduct = async () => {
+  const onSubmitProduct = async ({ productData }) => {
     try {
       console.log(productData);
       const result = await uploadProduct(productData);
 
-      setProductPK(result["id"]);
       return result;
     } catch (error) {
       console.error("상품 업로드 실패", error);
@@ -254,9 +219,41 @@ export default function AddProduct() {
     ) {
       try {
         // 순차적으로 비동기 함수 실행
-        const result = await onSubmitProduct(); // shop에 product 등록
-        await onSubmitImages(); // product에 images 등록
-        await onSubmitVideo({ pk: result["id"] });
+        let videoUrl = await onSubmitVideo();
+        if (videoUrl == undefined) {
+          videoUrl = "";
+        }
+
+        const images = await onSubmitImages(); // product에 images 등록
+
+        const productData: IUploadProductVariables = {
+          name: productName,
+          description: productDescription,
+          price: productPrice,
+          category_name: selectedSubCategory,
+          shopPK: shopPK,
+          tags: tags,
+          materials: materials,
+          made_by: "I did",
+          product_type: "A finished product",
+          product_creation_date: "Made To Order",
+          primary_color: "",
+          secondary_color: "",
+          section: section ?? "",
+          quantity: 0,
+          sku: productSKU,
+          processing_min: 3,
+          processing_max: 7,
+          shipping_price: 0,
+          images: images,
+          video: videoUrl,
+          is_personalization_enabled: isPersonalizationEnabled,
+          is_personalization_optional: isOption,
+          personalization_guide: personalization,
+          variations: [],
+          variants: [],
+        };
+        await onSubmitProduct({ productData }); // shop에 product 등록
         setSelectedFiles([]);
         await new Promise((resolve) => setTimeout(resolve, 3000));
         navigate(`/your/shops/me/listings`);
@@ -273,13 +270,10 @@ export default function AddProduct() {
   };
 
   const calculateLoadingState = () =>
-    createPhotoMutation.isLoading ||
     uploadImageMutation.isLoading ||
     uploadURLMutation.isLoading ||
-    createVideoMutation.isLoading ||
     uploadVideoMutation.isLoading ||
-    uploadVideoURLMutation.isLoading ||
-    uploadImageAndThumbnailMutation.isLoading;
+    uploadVideoURLMutation.isLoading;
 
   return (
     <>
@@ -306,24 +300,29 @@ export default function AddProduct() {
             existingImages={[]}
           />
           <AddVideo setSelectedVideoFile={setSelectedVideoFile} />
-          <ProductDetails
-            productName={productName}
-            setProductName={setProductName}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            selectedSubCategory={selectedSubCategory}
-            setSelectedSubCategory={setSelectedSubCategory}
-            refreshOptionValue={refreshOptionValue}
-            setRefreshOptionValue={setRefreshOptionValue}
-            shippingOptionValue={shippingOptionValue}
-            setShippingOptionValue={setShippingOptionValue}
-            productDescription={productDescription}
-            setProductDescription={setProductDescription}
-            tags={tags}
-            setTags={setTags}
-            materials={materials}
-            setMaterials={setMaterials}
-          />
+          {!userLoading && (
+            <ProductDetails
+              productName={productName}
+              setProductName={setProductName}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedSubCategory={selectedSubCategory}
+              setSelectedSubCategory={setSelectedSubCategory}
+              refreshOptionValue={refreshOptionValue}
+              setRefreshOptionValue={setRefreshOptionValue}
+              shippingOptionValue={shippingOptionValue}
+              setShippingOptionValue={setShippingOptionValue}
+              productDescription={productDescription}
+              setProductDescription={setProductDescription}
+              tags={tags}
+              setTags={setTags}
+              materials={materials}
+              setMaterials={setMaterials}
+              section={section}
+              setSection={setSection}
+              pk={user.shop_pk}
+            />
+          )}
           <StockAndPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}

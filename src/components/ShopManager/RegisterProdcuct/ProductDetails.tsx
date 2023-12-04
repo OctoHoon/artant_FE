@@ -14,6 +14,8 @@ import RegisterHeader from "./RegisterHeader";
 import RadioOption from "./RadioOption";
 import InputOption from "./InputOption";
 import SelectOption from "./SelectOption";
+import { getShopDetails } from "../../../api";
+import { useQuery } from "@tanstack/react-query";
 
 const whoMadeOptions = [
   { label: "I did", value: "option1" },
@@ -35,8 +37,6 @@ const whenMadeOptions = [
   { label: "Before 1990", value: "option6" },
 ];
 
-const sectionOptions = ["팔찌", "어버이날 선물", "털실"];
-
 export default function ProductDetails({
   productName = "",
   productDescription = "",
@@ -54,7 +54,12 @@ export default function ProductDetails({
   setTags,
   materials,
   setMaterials,
+  section,
+  setSection,
+  pk,
 }) {
+  const { isLoading, data } = useQuery(["shop", pk], getShopDetails);
+
   const handleCategoryChange = (event) => {
     const { value } = event.target;
     setSelectedCategory(value);
@@ -319,13 +324,15 @@ export default function ProductDetails({
             >
               첫 번째 섹션 추가
             </Text>
-            <SelectOption
-              value={undefined}
-              onChange={undefined}
-              options={sectionOptions}
-              disabled={false}
-              placeholder={"섹션 이름"}
-            />
+            {!isLoading && (
+              <SelectOption
+                value={section}
+                onChange={(e) => setSection(e.target.value)}
+                options={data.sections_info.map((item) => item.title)}
+                disabled={false}
+                placeholder={"섹션 이름"}
+              />
+            )}
           </Flex>
         </Flex>
         <Flex // 태그

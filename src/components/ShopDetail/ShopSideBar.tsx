@@ -4,9 +4,12 @@ import { useState } from "react";
 import ArtantButton from "../commons/ArtantButton";
 import BlackButton from "../commons/Button/BlackButton";
 
-export default function ShopSideBar({ sections }) {
-  const [select, setSelect] = useState("모든 작품");
-
+export default function ShopSideBar({
+  select,
+  setSelect,
+  sections,
+  total_count,
+}) {
   return (
     <Box>
       <SearchBar
@@ -19,7 +22,7 @@ export default function ShopSideBar({ sections }) {
       <Box height="29px" />
       <SelecitonButton
         name={"모든 작품"}
-        count={0}
+        count={total_count}
         is_selected={"모든 작품" === select}
         handleSelect={setSelect}
       />
@@ -28,9 +31,10 @@ export default function ShopSideBar({ sections }) {
         sections.map((section, index) => {
           return (
             <SelecitonButton
+              key={index}
               name={section.title}
               count={section.product_count}
-              is_selected={section.name === select}
+              is_selected={section.title === select}
               handleSelect={setSelect}
             />
           );

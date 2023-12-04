@@ -25,6 +25,7 @@ import WhiteButton from "../components/commons/Button/WhiteButton";
 import BlackButton from "../components/commons/Button/BlackButton";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import useUser from "../lib/useUser";
 
 const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
 
@@ -66,6 +67,8 @@ type Policy = {
 };
 
 export default function ShopManagerListingEditing() {
+  const { userLoading, isLoggedIn, user } = useUser();
+
   const { productPK } = useParams();
   console.log(productPK);
   const { isLoading, data } = useQuery(
@@ -245,10 +248,28 @@ export default function ShopManagerListingEditing() {
     name: productName,
     description: productDescription,
     price: productPrice,
-    thumbnail:
-      "https://static9.depositphotos.com/1022647/1077/i/950/depositphotos_10770202-stock-photo-modern-art-gallery-empty-picture.jpg", // 임시 썸네일
     category_name: selectedSubCategory,
     shopPK: shopPk!,
+    made_by: "",
+    product_type: "",
+    product_creation_date: "",
+    primary_color: "",
+    secondary_color: "",
+    tags: [],
+    section: "",
+    materials: [],
+    quantity: 0,
+    sku: "",
+    processing_min: 3,
+    processing_max: 7,
+    shipping_price: 0,
+    images: [],
+    video: "",
+    is_personalization_enabled: false,
+    is_personalization_optional: false,
+    personalization_guide: "",
+    variations: [],
+    variants: [],
   };
 
   const onSubmitProduct = async () => {
@@ -342,6 +363,9 @@ export default function ShopManagerListingEditing() {
             setTags={setTags}
             materials={materials}
             setMaterials={setMaterials}
+            section={undefined}
+            setSection={undefined}
+            pk={user.shop_pk}
           />
           <StockAndPrice
             productPrice={productPrice}

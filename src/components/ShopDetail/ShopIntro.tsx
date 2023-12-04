@@ -6,15 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getShopDetails } from "../../api";
 
 const images = [
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
+  "https://i.etsystatic.com/isa/259811/1059261681376/isa_760xN.1059261681376_92ku.jpg?version=0.jpg",
 ];
 
 export default function ShopIntro() {
@@ -59,8 +51,7 @@ export default function ShopIntro() {
       setActiveIndex(activeIndex - 1);
     } else {
       setActiveIndex(
-        (data && data.images.length > 0 ? data.images : images).length -
-          1
+        (data && data.images.length > 0 ? data.images : images).length - 1
       );
     }
   };
@@ -114,9 +105,9 @@ export default function ShopIntro() {
                 <Image
                   objectFit={"cover"}
                   src={
-                    (data && data.images.length > 0
-                      ? data.images
-                      : images)[activeIndex]
+                    (data && data.images.length > 0 ? data.images : images)[
+                      activeIndex
+                    ]
                   }
                   width="760px"
                   height="468px"

@@ -11,6 +11,7 @@ import {
 import BlackButton from "../../commons/Button/BlackButton";
 import { PlusSVG, SvgCamera, SvgVideo } from "./Svg";
 import { updateShop } from "../../../api";
+import EditIntroImage from "./EditIntroImage";
 
 export default function EditShopContents({
   shop_pk,
@@ -19,6 +20,7 @@ export default function EditShopContents({
   setDescriptionTitle,
   description,
   setDescription,
+  images,
 }) {
   const toast = useToast();
   return (
@@ -44,68 +46,7 @@ export default function EditShopContents({
       </Flex>
       <Flex flexDirection={"column"} gap={"40px"}>
         <Flex flexDirection={"column"} gap={"24px"} alignSelf={"stretch"}>
-          <Flex
-            width={"760px"}
-            flexDirection={"column"}
-            gap={"24px"}
-            alignSelf={"stretch"}
-            background={"#FAFAFA"}
-            borderRadius={"5px"}
-            padding={"24px"}
-            textAlign={"center"}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <Flex flexDirection={"column"} gap={"8px"}>
-              <Text fontSize={"16px"}>
-                동영상과 최대 5장의 사진을 추가하세요.
-              </Text>
-              <Text color={"#555"}>
-                프로세스,작업 공간 또는 구매자에게 영감을 줄 수 있는 모든 것에
-                대한 사진을 공유하세요.
-              </Text>
-            </Flex>
-            <Flex gap={"40px"} textAlign="center">
-              <Button
-                display={"flex"}
-                width={"120px"}
-                height={"120px"}
-                padding={"24px"}
-                flexDirection={"column"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                gap={"20px"}
-                border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-                variant="unstyled" // 클릭 효과와 색상 없애기
-                disabled={false}
-                onClick={() => {}}
-              >
-                <SvgCamera />
-                <Text textStyle={"B13R"} mt={"-12px"}>
-                  사진 추가
-                </Text>
-              </Button>
-              <Button
-                display={"flex"}
-                width={"120px"}
-                height={"120px"}
-                padding={"24px"}
-                flexDirection={"column"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                gap={"20px"}
-                border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
-                variant="unstyled" // 클릭 효과와 색상 없애기
-                disabled={false}
-                onClick={() => {}}
-              >
-                <SvgVideo />
-                <Text textStyle={"B13R"} mt={"-12px"}>
-                  동영상 추가
-                </Text>
-              </Button>
-            </Flex>
-          </Flex>
+          <EditIntroImage shop_pk={shop_pk} imagesUrl={images} />
           <Flex
             padding={"24px"}
             flexDirection={"column"}

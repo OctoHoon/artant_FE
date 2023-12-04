@@ -34,7 +34,6 @@ interface IProduct {
 }
 
 export default function Itemlists() {
-  const [itemCount, setItemCount] = useState<number>(0);
   const [selectedValue, setSelectedValue] = useState("추천순");
   const handleSelectionChange = (value: string) => {
     setSelectedValue(value);
@@ -42,7 +41,6 @@ export default function Itemlists() {
   };
 
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
 
   const { category } = useParams();
 
