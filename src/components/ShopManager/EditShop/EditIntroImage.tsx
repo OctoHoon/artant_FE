@@ -38,6 +38,7 @@ export default function EditIntroImage({ shop_pk, imagesUrl }) {
       existed: true,
     }))
   );
+  console.log(images);
 
   useEffect(() => {
     setImages(
@@ -130,6 +131,8 @@ export default function EditIntroImage({ shop_pk, imagesUrl }) {
                 file: image.file!,
               })
               .then((uploadResponse) => {
+                console.log("1");
+
                 // Store the upload response at the same index as the original image
                 uploadResponses[index] = {
                   image: `${IMAGE_DELIVERY_URL}/${uploadResponse.result.id}/public`,
@@ -143,12 +146,15 @@ export default function EditIntroImage({ shop_pk, imagesUrl }) {
             image: image.url,
             order: index + 1,
           };
+          console.log("2");
+
           return Promise.resolve();
         }
       });
+      console.log("3");
 
       await Promise.all(uploadPromises);
-
+      console.log("4");
       // Filter out any undefined entries and sort by order
       imagesData = uploadResponses
         .filter((response) => response !== undefined)
@@ -171,6 +177,23 @@ export default function EditIntroImage({ shop_pk, imagesUrl }) {
         const updateData = {
           images: imagesData,
           video: cloudflareStreamUrl ?? "",
+        };
+        console.log(updateData);
+        console.log(shop_pk);
+
+        const result = await updateShop(shop_pk, updateData);
+        toast.close(toastId);
+        toast({
+          title: "업데이트 완료!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        return result;
+      } else {
+        const updateData = {
+          images: imagesData,
+          video: "",
         };
         console.log(updateData);
         console.log(shop_pk);
