@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const itemCount = 24;
 
-export default function ShopMiddle({ sections }) {
+export default function ShopMiddle({ common_sections, featured_sections }) {
   const { pk } = useParams();
   const [page, setPage] = useState(1);
   const [select, setSelect] = useState("모든 작품");
@@ -32,14 +32,8 @@ export default function ShopMiddle({ sections }) {
       <Flex gap="40px">
         <Box width="252px">
           <ShopSideBar
-            sections={sections}
-            total_count={data ? data.total_count : 0}
-            select={select}
-            setSelect={setSelect}
-          />
-          <ShopSideBar
-            sections={sections}
-            total_count={data ? data.total_count : 0}
+            common_sections={common_sections}
+            featured_sections={featured_sections}
             select={select}
             setSelect={setSelect}
           />

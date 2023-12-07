@@ -7,8 +7,8 @@ import BlackButton from "../commons/Button/BlackButton";
 export default function ShopSideBar({
   select,
   setSelect,
-  sections,
-  total_count,
+  common_sections,
+  featured_sections,
 }) {
   return (
     <Box>
@@ -20,15 +20,21 @@ export default function ShopSideBar({
         onSearch={() => {}}
       />
       <Box height="29px" />
-      <SelecitonButton
-        name={"모든 작품"}
-        count={total_count}
-        is_selected={"모든 작품" === select}
-        handleSelect={setSelect}
-      />
+      {common_sections &&
+        common_sections.map((section, index) => {
+          return (
+            <SelecitonButton
+              key={index}
+              name={section.title}
+              count={section.product_count}
+              is_selected={section.title === select}
+              handleSelect={setSelect}
+            />
+          );
+        })}
 
-      {sections &&
-        sections.map((section, index) => {
+      {featured_sections &&
+        featured_sections.map((section, index) => {
           return (
             <SelecitonButton
               key={index}

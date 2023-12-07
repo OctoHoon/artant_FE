@@ -352,7 +352,7 @@ export interface IUploadProductVariables {
   processing_max: number;
   shipping_price: number;
   images: { image: string; order: number }[];
-  video: string;
+  video: string | null;
   is_personalization_enabled: boolean;
   is_personalization_optional: boolean;
   personalization_guide: string;

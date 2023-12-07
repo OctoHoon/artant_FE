@@ -6,6 +6,7 @@ import {
   Box,
   SkeletonCircle,
   SkeletonText,
+  useToast,
 } from "@chakra-ui/react";
 import BlackButton from "../components/commons/Button/BlackButton";
 import { useEffect, useState } from "react";
@@ -34,6 +35,7 @@ interface IImages {
 
 export default function ShopManagerEditShop() {
   const { userLoading, isLoggedIn, user } = useUser();
+  const toast = useToast();
 
   const [shopPK, setShopPK] = useState();
 
@@ -53,16 +55,15 @@ export default function ShopManagerEditShop() {
 
   const handleCreateSection = async () => {
     try {
-      const sectionData = sections.map((section) => [
-        {
-          id: section.id ?? null,
-          title: section.title,
-          product_count: section.product_count ?? 0,
-        },
-      ]);
+      const sectionData = sections.map((section) => ({
+        id: section.id ?? null,
+        title: section.title,
+      }));
       console.log(sectionData);
-      const response = await updateShop(shopPK, sectionData);
-      console.log("Section created:", response);
+      const response = await updateShop(shopPK, {
+        sections: sectionData,
+      });
+
       // Handle any additional logic after successful creation
     } catch (error) {
       console.error("Error creating section:", error);
@@ -155,6 +156,7 @@ export default function ShopManagerEditShop() {
               />
               <Divider />
               <EditArt
+                common_sections={data ? data.common_sections : []}
                 sections={sections}
                 setSections={setSections}
                 createSection={handleCreateSection}

@@ -16,7 +16,12 @@ import { SvgX } from "../RegisterProdcuct/ProductDetails";
 import { MessageSvg, PlusSVG } from "./Svg";
 import DragSections from "./DragSection";
 
-export default function EditArt({ sections, setSections, createSection }) {
+export default function EditArt({
+  common_sections,
+  sections,
+  setSections,
+  createSection,
+}) {
   const [input, setInput] = useState("");
   const addSections = (newSection) => {
     setSections((prevSections) => [...prevSections, newSection]);
@@ -41,6 +46,14 @@ export default function EditArt({ sections, setSections, createSection }) {
                 type={undefined}
                 onSearch={undefined}
               />
+              {common_sections.map((section) => {
+                return (
+                  <MessageTab
+                    tabname={section.title}
+                    count={section.product_count}
+                  />
+                );
+              })}
               {sections.map((section) => {
                 return (
                   <MessageTab

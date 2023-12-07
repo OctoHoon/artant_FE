@@ -92,10 +92,9 @@ export default function StockAndPrice({
                 placeholder="0"
                 onChange={(e) => {
                   // 숫자만 입력 가능하도록 정규식으로 필터링
-                  const inputValue = e.target.value;
-                  const numericValue = Number(
-                    inputValue.replace(/[^0-9]/g, "")
-                  );
+                  let inputValue = e.target.value.replace(/[^0-9]/g, "");
+                  inputValue = inputValue.replace(/^0+(?=\d)/, ""); //leading 0 제거
+                  const numericValue = Number(inputValue);
                   setProductPrice(numericValue);
                 }}
                 textAlign="right" // 우측 정렬

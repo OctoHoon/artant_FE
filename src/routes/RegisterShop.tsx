@@ -8,6 +8,18 @@ export default function RegisterShop() {
   const { userLoading, isLoggedIn, user } = useUser();
 
   const handleButtonClick = () => {
+    if (!user) {
+      toast({
+        title: "먼저 로그인해주세요",
+        description: "로그인을 해야 계정 생성이 가능합니다.",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+      return; // Exit the function if the shop is activated
+    }
+
     if (user.shop_is_activated) {
       toast({
         title: "이미 갤러리가 열려있습니다.",
