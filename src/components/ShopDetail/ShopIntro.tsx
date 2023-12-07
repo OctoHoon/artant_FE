@@ -116,7 +116,7 @@ export default function ShopIntro() {
                   />
                 )}
               </Box>
-              ){/* Button */}
+              {/* Button */}
               <Box
                 position="absolute"
                 top="50%"
