@@ -21,6 +21,8 @@ export default function EditShopContents({
   description,
   setDescription,
   images,
+  setImages,
+  resetImages,
 }) {
   const toast = useToast();
   return (
@@ -46,7 +48,12 @@ export default function EditShopContents({
       </Flex>
       <Flex flexDirection={"column"} gap={"40px"}>
         <Flex flexDirection={"column"} gap={"24px"} alignSelf={"stretch"}>
-          <EditIntroImage shop_pk={shop_pk} imagesUrl={images} />
+          <EditIntroImage
+            shop_pk={shop_pk}
+            images={images}
+            setImages={setImages}
+            resetImages={resetImages}
+          />
           <Flex
             padding={"24px"}
             flexDirection={"column"}

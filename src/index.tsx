@@ -17,15 +17,15 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={client}>
-      <MuiThemeProvider theme={muiTheme}>
-        <ChakraProvider theme={theme}>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <RouterProvider router={router}></RouterProvider>
-          {/* Your main application component */}
-        </ChakraProvider>
-      </MuiThemeProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
+  //<React.StrictMode>
+  <QueryClientProvider client={client}>
+    <MuiThemeProvider theme={muiTheme}>
+      <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <RouterProvider router={router}></RouterProvider>
+        {/* Your main application component */}
+      </ChakraProvider>
+    </MuiThemeProvider>
+  </QueryClientProvider>
+  //</React.StrictMode>
 );

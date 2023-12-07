@@ -14,7 +14,7 @@ cd artant-FE/
 git fetch origin
 
 echo "Pulling latest changes from Git repository..."
-git pull
+git pull origin main
 echo "Pull completed."
 
 # Check for errors in git pull

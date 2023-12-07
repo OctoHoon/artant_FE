@@ -14,6 +14,7 @@ import BlackButton from "../../commons/Button/BlackButton";
 import SearchBar from "../../commons/SearchBar";
 import { SvgX } from "../RegisterProdcuct/ProductDetails";
 import { MessageSvg, PlusSVG } from "./Svg";
+import DragSections from "./DragSection";
 
 export default function EditArt({ sections, setSections, createSection }) {
   const [input, setInput] = useState("");
@@ -40,7 +41,6 @@ export default function EditArt({ sections, setSections, createSection }) {
                 type={undefined}
                 onSearch={undefined}
               />
-              <MessageTab tabname={"모든 작품"} count={797} />
               {sections.map((section) => {
                 return (
                   <MessageTab
@@ -87,21 +87,14 @@ export default function EditArt({ sections, setSections, createSection }) {
               대기열 편집/추가
             </Flex>
             <Box height={"8px"} />
-            {sections.map((section, index) => {
-              return (
-                <TagBox
-                  tag={section.title}
-                  index={index}
-                  removeTag={removeSection}
-                />
-              );
-            })}
-            <TagInput placeholder={"입력하세요"} onAdd={addSections} />
-            <Input
-              placeholder="입력하세요"
-              width={"944px"}
-              onChange={(e) => setInput(e.target.value)}
+            <DragSections
+              sections={sections}
+              setSections={setSections}
+              deleteSection={removeSection}
             />
+
+            <TagInput placeholder={"입력하세요"} onAdd={addSections} />
+
             <Box height={"8px"} />
             <Flex gap={"4px"} justifyContent={"flex-end"}>
               <BlackButton

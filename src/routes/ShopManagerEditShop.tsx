@@ -10,18 +10,26 @@ import {
 import BlackButton from "../components/commons/Button/BlackButton";
 import { useEffect, useState } from "react";
 import useUser from "../lib/useUser";
-import { createSection, getShopDetails, updateShop } from "../api";
+import { getShopDetails, updateShop } from "../api";
 import { useQuery } from "@tanstack/react-query";
 import EditAnnouncement from "../components/ShopManager/EditShop/EditAnnouncement";
 import { PlusSVG } from "../components/ShopManager/EditShop/Svg";
 import EditAvatar from "../components/ShopManager/EditShop/EditAvatar";
-import EditShopContents from "../components/ShopManager/EditShop/EditShopContents";
 import EditArt from "../components/ShopManager/EditShop/EditArt";
 import EditBackgroundImg from "../components/ShopManager/EditShop/EditBackgroundImg";
+import EditShopContents from "../components/ShopManager/EditShop/EditShopContents";
 
 interface ISection {
+  id: number | null;
   title: string;
   product_count: number;
+}
+
+interface IImages {
+  id: number | null;
+  url: string;
+  file: File | null;
+  existed: boolean;
 }
 
 export default function ShopManagerEditShop() {
@@ -41,16 +49,35 @@ export default function ShopManagerEditShop() {
   const [descriptionTitle, setDescriptionTitle] = useState("");
   const [description, setDescription] = useState("");
   const [sections, setSections] = useState<ISection[]>([]);
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<IImages[]>([]);
 
   const handleCreateSection = async () => {
     try {
-      const sectionTitle = { section: sections[0].title };
-      const response = await createSection(shopPK, sectionTitle);
+      const sectionData = sections.map((section) => [
+        {
+          id: section.id ?? null,
+          title: section.title,
+          product_count: section.product_count ?? 0,
+        },
+      ]);
+      console.log(sectionData);
+      const response = await updateShop(shopPK, sectionData);
       console.log("Section created:", response);
       // Handle any additional logic after successful creation
     } catch (error) {
       console.error("Error creating section:", error);
+    }
+  };
+
+  const resetImages = () => {
+    if (data?.images) {
+      const newImages = data.images.map((item) => ({
+        id: item.id,
+        url: item.image,
+        file: null,
+        existed: true,
+      }));
+      setImages(newImages);
     }
   };
 
@@ -61,7 +88,7 @@ export default function ShopManagerEditShop() {
     setDescriptionTitle(data?.description_title ?? "");
     setDescription(data?.description ?? "");
     setSections(data?.sections_info ?? []);
-    setImages(data?.images ?? []);
+    resetImages();
   }, [data]);
 
   return (
@@ -143,6 +170,8 @@ export default function ShopManagerEditShop() {
                     description={description}
                     setDescription={setDescription}
                     images={images}
+                    setImages={setImages}
+                    resetImages={resetImages}
                   />
                 )}
 

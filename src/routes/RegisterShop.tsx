@@ -22,14 +22,15 @@ export default function RegisterShop() {
 
     // Define the navigation paths based on the shop registration step
     const navigationPaths = {
-      1: `your/shops/${user.shop_pk}/onboarding/listings/create`,
-      2: `your/shops/${user.shop_pk}/onboarding/listings/payments`,
-      3: `your/shops/${user.shop_pk}/onboarding/listings/billing`,
+      1: `/your/shops/${user.shop_pk}/onboarding/listings/create`,
+      2: `/your/shops/${user.shop_pk}/onboarding/listings/payments`,
+      3: `/your/shops/${user.shop_pk}/onboarding/listings/billing`,
     };
 
     // Navigate to the appropriate path or the default path if the step is not 1, 2, or 3
     const path =
-      navigationPaths[user.shop_register_step] || "your/shops/onboarding/name";
+      navigationPaths[user.shop_register_step] || "/your/shops/onboarding/name";
+    console.log(path);
     navigate(path);
   };
   return (

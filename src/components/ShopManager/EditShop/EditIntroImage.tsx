@@ -21,34 +21,15 @@ import {
 } from "../../../api";
 import BlackButton from "../../commons/Button/BlackButton";
 import { useMutation } from "@tanstack/react-query";
+import DragImages from "./DragImages";
 
-type Images = {
-  file: File | null;
-  url: string;
-  existed: boolean;
-};
-
-export default function EditIntroImage({ shop_pk, imagesUrl }) {
+export default function EditIntroImage({
+  shop_pk,
+  images,
+  setImages,
+  resetImages,
+}) {
   const toast = useToast();
-
-  const [images, setImages] = useState<Images[]>(() =>
-    imagesUrl.map((url) => ({
-      file: null,
-      url: url,
-      existed: true,
-    }))
-  );
-  console.log(images);
-
-  useEffect(() => {
-    setImages(
-      imagesUrl.map((url) => ({
-        file: null,
-        url: url,
-        existed: true,
-      }))
-    );
-  }, [imagesUrl]);
 
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
 
@@ -56,6 +37,7 @@ export default function EditIntroImage({ shop_pk, imagesUrl }) {
     const files = e.target.files;
     if (files) {
       const newImages = Array.from(files).map((file) => ({
+        id: null,
         file: file,
         url: URL.createObjectURL(file),
         existed: false,
@@ -301,22 +283,11 @@ export default function EditIntroImage({ shop_pk, imagesUrl }) {
           </Button>
         </label>
       </Flex>
-      <Flex gap={"10px"}>
-        {images.map((image, index) => (
-          <Box key={index} position="relative">
-            <Image src={image.url} alt={`image-${index}`} boxSize="100px" />
-            <IconButton
-              aria-label="Delete image"
-              icon={<CloseIcon />}
-              size="sm"
-              position="absolute"
-              top="1"
-              right="1"
-              onClick={() => deleteImage(index)}
-            />
-          </Box>
-        ))}
-      </Flex>
+      <DragImages
+        images={images}
+        setImages={setImages}
+        deleteImage={deleteImage}
+      />
 
       {selectedVideo && (
         <Box position="relative" boxSize="200px">
@@ -353,15 +324,7 @@ export default function EditIntroImage({ shop_pk, imagesUrl }) {
           borderRadius={"100px"}
           type={true}
           width="min"
-          onClick={() =>
-            setImages(
-              imagesUrl.map((url) => ({
-                file: null,
-                url: url,
-                existed: true,
-              }))
-            )
-          }
+          onClick={resetImages}
         />
       </Flex>
     </Flex>

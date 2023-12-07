@@ -2,7 +2,7 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
-const isDevelopment = false;
+const isDevelopment = true;
 
 const baseUrl = isDevelopment
   ? "http://127.0.0.1:8000/api/v1/"
@@ -378,7 +378,7 @@ export interface Variant {
 
 export const createSection = async (shopId, data) => {
   try {
-    const response = await instance.post(`shops/${shopId}/section`, data, {
+    const response = await instance.patch(`shops/${shopId}`, data, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
