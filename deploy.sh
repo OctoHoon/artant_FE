@@ -25,6 +25,7 @@ fi
 
 # Run yarn build
 echo "Running yarn build..."
+yarn install
 yarn build
 echo "Build completed."
 
