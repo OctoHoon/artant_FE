@@ -328,7 +328,7 @@ export default function ProductDetails({
               <SelectOption
                 value={section}
                 onChange={(e) => setSection(e.target.value)}
-                options={data.sections_info.map((item) => item.title)}
+                options={data.featured_sections.map((item) => item.title)}
                 disabled={false}
                 placeholder={"섹션 이름"}
               />

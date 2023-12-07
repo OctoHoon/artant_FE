@@ -84,78 +84,80 @@ export default function ShopIntro() {
           </Flex>
         </Box>
         <Box maxW="958px">
-          <Box position="relative" width="760px" height="468px">
-            {/* Image */}
-            <Box
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              {(data && data.images.length > 0 ? data.images : images)[
-                activeIndex
-              ].endsWith(".mp4") ? (
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  width="100%"
-                  height="100%"
-                  src="https://v.etsystatic.com/video/upload/ac_none,du_15,q_auto:good/poster_movie_vxlej8.mp4"
+          {data && data.images.length > 0 && (
+            <Box position="relative" width="760px" height="468px">
+              {/* Image */}
+              <Box
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                {(data && data.images.length > 0 ? data.images : images)[
+                  activeIndex
+                ].image.endsWith(".mp4") ? (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    width="100%"
+                    height="100%"
+                    src="https://v.etsystatic.com/video/upload/ac_none,du_15,q_auto:good/poster_movie_vxlej8.mp4"
+                  />
+                ) : (
+                  <Image
+                    objectFit={"cover"}
+                    src={
+                      (data && data.images.length > 0 ? data.images : images)[
+                        activeIndex
+                      ].image
+                    }
+                    width="760px"
+                    height="468px"
+                    alt={`Image ${activeIndex}`}
+                  />
+                )}
+              </Box>
+              ){/* Button */}
+              <Box
+                position="absolute"
+                top="50%"
+                left="5%"
+                transform="translate(-50%, -50%)"
+                zIndex="1" // Ensure the button appears on top of the image
+              >
+                <IconButton
+                  icon={<SvgChevronLeft />}
+                  onClick={() => handlePrevIndex()}
+                  aria-label="Previous"
+                  variant={"none"}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "grey",
+                    },
+                  }}
                 />
-              ) : (
-                <Image
-                  objectFit={"cover"}
-                  src={
-                    (data && data.images.length > 0 ? data.images : images)[
-                      activeIndex
-                    ]
-                  }
-                  width="760px"
-                  height="468px"
-                  alt={`Image ${activeIndex}`}
+              </Box>
+              <Box
+                position="absolute"
+                top="50%"
+                right="0%"
+                transform="translate(-50%, -50%)"
+                zIndex="1" // Ensure the button appears on top of the image
+              >
+                <IconButton
+                  icon={<SvgChevronRight />}
+                  onClick={() => handleNextIndex()}
+                  aria-label="Next"
+                  variant={"none"}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "grey",
+                    },
+                  }}
                 />
-              )}
+              </Box>
             </Box>
+          )}
 
-            {/* Button */}
-            <Box
-              position="absolute"
-              top="50%"
-              left="5%"
-              transform="translate(-50%, -50%)"
-              zIndex="1" // Ensure the button appears on top of the image
-            >
-              <IconButton
-                icon={<SvgChevronLeft />}
-                onClick={() => handlePrevIndex()}
-                aria-label="Previous"
-                variant={"none"}
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "grey",
-                  },
-                }}
-              />
-            </Box>
-            <Box
-              position="absolute"
-              top="50%"
-              right="0%"
-              transform="translate(-50%, -50%)"
-              zIndex="1" // Ensure the button appears on top of the image
-            >
-              <IconButton
-                icon={<SvgChevronRight />}
-                onClick={() => handleNextIndex()}
-                aria-label="Next"
-                variant={"none"}
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "grey",
-                  },
-                }}
-              />
-            </Box>
-          </Box>
           <Box height={"40px"} />
           <Text fontSize="30px" fontWeight="500">
             {(data && data.description_title) ?? ""}

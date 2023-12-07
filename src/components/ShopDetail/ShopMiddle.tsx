@@ -37,6 +37,12 @@ export default function ShopMiddle({ sections }) {
             select={select}
             setSelect={setSelect}
           />
+          <ShopSideBar
+            sections={sections}
+            total_count={data ? data.total_count : 0}
+            select={select}
+            setSelect={setSelect}
+          />
         </Box>
         <Box width="998px">
           <Box
