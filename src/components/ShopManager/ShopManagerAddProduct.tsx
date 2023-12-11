@@ -14,6 +14,7 @@ import {
   IUploadProductVariables,
   uploadProduct,
   IMAGE_DELIVERY_URL,
+  Variant,
 } from "../../api";
 import PersonalizeTab from "./PersonalizeTab";
 import AddVariation from "./RegisterProdcuct/AddVariations";
@@ -28,23 +29,16 @@ import ProductDetails from "./RegisterProdcuct/ProductDetails";
 import StockAndPrice from "./RegisterProdcuct/StockAndPrice";
 import useUser from "../../lib/useUser";
 
-type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
-
 type SelectedOption = {
-  variation: OptionCategory | string;
-  detail: string[];
-  selectPrice: boolean;
-  selectQuantity: boolean;
-  selectSku: boolean;
+  name: string;
+  is_sku_vary: boolean;
+  is_price_vary: boolean;
+  is_quantity_vary: boolean;
+  options: OptionDetail[];
 };
 
-type DetailCombination = {
-  detail1: string;
-  detail2: string;
-  price?: number;
-  quantity?: number;
-  sku?: string;
-  visible?: boolean;
+type OptionDetail = {
+  name: string;
 };
 
 type ProcessingTimeOption = {
@@ -116,9 +110,7 @@ export default function AddProduct() {
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
   const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
   const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([]);
-  const [detailCombinations, setDetailCombinations] = useState<
-    DetailCombination[]
-  >([]);
+  const [detailCombinations, setDetailCombinations] = useState<Variant[]>([]);
   //section
   const [section, setSection] = useState();
 
@@ -250,8 +242,8 @@ export default function AddProduct() {
           is_personalization_enabled: isPersonalizationEnabled,
           is_personalization_optional: isOption,
           personalization_guide: personalization,
-          variations: [],
-          variants: [],
+          variations: selectedOptions,
+          variants: detailCombinations,
         };
         await onSubmitProduct({ productData }); // shop에 product 등록
         setSelectedFiles([]);

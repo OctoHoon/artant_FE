@@ -33,14 +33,15 @@ export default function AddVariation({
   const handleInputChange = (
     type: "sku" | "price" | "quantity" | "visible" | string,
     value: string | number | boolean,
-    detail1: string,
-    detail2?: string
+    option_one: string,
+    option_two: string
   ) => {
     setDetailCombinations((prevCombinations) => {
       const combinationIndex = prevCombinations.findIndex(
         (combination) =>
-          combination.detail1 === detail1 &&
-          (combination.detail2 === detail2 || combination.detail2 === "")
+          combination.option_one === option_one &&
+          (combination.option_two === option_two ||
+            combination.option_two === "")
       );
 
       // If the combination exists, update it
@@ -55,8 +56,8 @@ export default function AddVariation({
 
       // If the combination doesn't exist, add it
       const newCombination = {
-        detail1,
-        detail2: detail2 || "", // Default detail2 to an empty string if not provided
+        option_one,
+        option_two: option_two || "", // Default detail2 to an empty string if not provided
         [type]: value,
       };
       if (type !== "visible") {
@@ -68,9 +69,9 @@ export default function AddVariation({
   };
 
   const inputTypes = [
-    { key: "selectSku", placeholder: "SKU", name: "sku" },
-    { key: "selectPrice", placeholder: "가격", name: "price" },
-    { key: "selectQuantity", placeholder: "수량", name: "quantity" },
+    { key: "is_sku_vary", placeholder: "SKU", name: "sku" },
+    { key: "is_price_vary", placeholder: "가격", name: "price" },
+    { key: "is_quantity_vary", placeholder: "수량", name: "quantity" },
   ];
 
   return (
@@ -119,29 +120,29 @@ export default function AddVariation({
         </Text>
       </Flex>
 
-      {selectedOptions[0]?.variation ? ( // 옵션 설정 된 게 있는지 없는지 확인
+      {selectedOptions[0]?.name ? ( // 옵션 설정 된 게 있는지 없는지 확인
         isMix ? ( // 공통으로 연결 되는 부분(selectPrice, Quantity, Sku) 있으면 연결 되어서 표가 하나로
           <TableContainer>
             <Table variant="simple">
               <Thead>
                 <Tr>
-                  <Th>{selectedOptions[0].variation}</Th>
-                  <Th>{selectedOptions[1].variation}</Th>
-                  {(selectedOptions[0].selectSku ||
-                    selectedOptions[1].selectSku) && <Th>SKU</Th>}
-                  {(selectedOptions[0].selectPrice ||
-                    selectedOptions[1].selectPrice) && <Th>가격</Th>}
-                  {(selectedOptions[0].selectQuantity ||
-                    selectedOptions[1].selectQuantity) && <Th>수량</Th>}
-                  <Th>옵션 사용 여부</Th>
+                  <Th>{selectedOptions[0].name}</Th>
+                  <Th>{selectedOptions[1].name}</Th>
+                  {(selectedOptions[0].is_sku_vary ||
+                    selectedOptions[1].is_sku_vary) && <Th>SKU</Th>}
+                  {(selectedOptions[0].is_price_vary ||
+                    selectedOptions[1].is_price_vary) && <Th>가격</Th>}
+                  {(selectedOptions[0].is_quantity_vary ||
+                    selectedOptions[1].is_quantity_vary) && <Th>수량</Th>}
+                  {/* <Th>옵션 사용 여부</Th> */}
                 </Tr>
               </Thead>
               <Tbody>
-                {selectedOptions[0]?.detail.map((detail1, idx1) =>
-                  selectedOptions[1]?.detail.map((detail2, idx2) => (
-                    <Tr key={`${detail1}-${detail2}`}>
-                      <Td>{detail1}</Td>
-                      <Td>{detail2}</Td>
+                {selectedOptions[0]?.options.map((detail1, idx1) =>
+                  selectedOptions[1]?.options.map((detail2, idx2) => (
+                    <Tr key={`${detail1.name}-${detail2.name}`}>
+                      <Td>{detail1.name}</Td>
+                      <Td>{detail2.name}</Td>
 
                       {inputTypes.map(
                         (inputType) =>
@@ -155,8 +156,8 @@ export default function AddVariation({
                                   handleInputChange(
                                     inputType.name,
                                     e.target.value,
-                                    detail1,
-                                    detail2
+                                    detail1.name,
+                                    detail2.name
                                   )
                                 }
                               />
@@ -164,7 +165,7 @@ export default function AddVariation({
                           )
                       )}
 
-                      <Td>
+                      {/* <Td>
                         <FormControl
                           display="flex"
                           alignItems="center"
@@ -183,13 +184,13 @@ export default function AddVariation({
                               handleInputChange(
                                 "visible",
                                 e.target.checked,
-                                detail1,
-                                detail2
+                                detail1.name,
+                                detail2.name
                               )
                             }
                           />
                         </FormControl>
-                      </Td>
+                      </Td> */}
                     </Tr>
                   ))
                 )}
@@ -205,7 +206,7 @@ export default function AddVariation({
               handleInputChange={handleInputChange}
               detailCombinations={detailCombinations}
             />
-            {selectedOptions[1].detail.length !== 0 && (
+            {selectedOptions[1].options.length !== 0 && (
               <IndividualTable
                 option={selectedOptions[1]}
                 handleInputChange={handleInputChange}
@@ -253,9 +254,9 @@ export default function AddVariation({
 
 const IndividualTable = ({ option, handleInputChange, detailCombinations }) => {
   const inputTypes = [
-    { key: "selectSku", placeholder: "SKU", name: "sku" },
-    { key: "selectPrice", placeholder: "가격", name: "price" },
-    { key: "selectQuantity", placeholder: "수량", name: "quantity" },
+    { key: "is_sku_vary", placeholder: "SKU", name: "sku" },
+    { key: "is_price_vary", placeholder: "가격", name: "price" },
+    { key: "is_quantity_vary", placeholder: "수량", name: "quantity" },
   ];
 
   return (
@@ -263,17 +264,17 @@ const IndividualTable = ({ option, handleInputChange, detailCombinations }) => {
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th>{option.variation}</Th>
-            {option.selectSku && <Th>SKU</Th>}
-            {option.selectPrice && <Th>가격</Th>}
-            {option.selectQuantity && <Th>수량</Th>}
-            <Th>옵션 사용 여부</Th>
+            <Th>{option.name}</Th>
+            {option.is_sku_vary && <Th>SKU</Th>}
+            {option.is_price_vary && <Th>가격</Th>}
+            {option.is_quantity_vary && <Th>수량</Th>}
+            {/* <Th>옵션 사용 여부</Th> */}
           </Tr>
         </Thead>
         <Tbody>
-          {option.detail.map((detail, idx) => (
+          {option.options.map((detail, idx) => (
             <Tr key={idx}>
-              <Td>{detail}</Td>
+              <Td>{detail.name}</Td>
               {inputTypes.map(
                 (inputType) =>
                   option[inputType.key] && (
@@ -283,9 +284,9 @@ const IndividualTable = ({ option, handleInputChange, detailCombinations }) => {
                         type="text"
                         onChange={(e) =>
                           handleInputChange(
-                            detail.name,
+                            inputType.name,
                             e.target.value,
-                            detail,
+                            detail.name,
                             null
                           )
                         }
@@ -294,7 +295,7 @@ const IndividualTable = ({ option, handleInputChange, detailCombinations }) => {
                   )
               )}
 
-              <Td>
+              {/* <Td>
                 <FormControl
                   display="flex"
                   alignItems="center"
@@ -304,20 +305,20 @@ const IndividualTable = ({ option, handleInputChange, detailCombinations }) => {
                     id={`visibility-switch-${idx}`}
                     size={"md"}
                     isChecked={
-                      detailCombinations.find((c) => c.detail1 === detail)
+                      detailCombinations.find((c) => c.option_one === option)
                         .visible
                     }
                     onChange={(e) => {
                       handleInputChange(
                         "visible",
                         e.target.checked,
-                        detail,
+                        detail.name,
                         null
                       );
                     }}
                   />
                 </FormControl>
-              </Td>
+              </Td> */}
             </Tr>
           ))}
         </Tbody>

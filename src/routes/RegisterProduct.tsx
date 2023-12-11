@@ -13,6 +13,7 @@ import {
   uploadImage,
   uploadProduct,
   uploadVideo,
+  Variant,
 } from "../api";
 import { useState } from "react";
 import RegisterProcess from "../components/RegisterShop/RegisterProcess";
@@ -28,23 +29,16 @@ import AddPictures from "../components/ShopManager/RegisterProdcuct/AddPictures"
 import BlackButton from "../components/commons/Button/BlackButton";
 import useUser from "../lib/useUser";
 
-type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
-
 type SelectedOption = {
-  variation: OptionCategory | string;
-  detail: string[];
-  selectPrice: boolean;
-  selectQuantity: boolean;
-  selectSku: boolean;
+  name: string;
+  is_sku_vary: boolean;
+  is_price_vary: boolean;
+  is_quantity_vary: boolean;
+  options: OptionDetail[];
 };
 
-type DetailCombination = {
-  detail1: string;
-  detail2: string;
-  price?: number;
-  quantity?: number;
-  sku?: string;
-  visible?: boolean;
+type OptionDetail = {
+  name: string;
 };
 
 type ProcessingTimeOption = {
@@ -115,13 +109,13 @@ export default function UploadPhotos() {
   const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
   const { shopPk } = useParams();
   const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([]);
-  const [detailCombinations, setDetailCombinations] = useState<
-    DetailCombination[]
-  >([]);
+  const [detailCombinations, setDetailCombinations] = useState<Variant[]>([]);
   const [section, setSection] = useState();
 
   const uploadImageMutation = useMutation(uploadImage, {}); //cloudflare에 올림
   const uploadURLMutation = useMutation(getUploadURL, {}); //url 가져옴
+
+  console.log(detailCombinations);
 
   const onSubmitImages = async () => {
     try {
@@ -247,8 +241,8 @@ export default function UploadPhotos() {
           is_personalization_enabled: isPersonalizationEnabled,
           is_personalization_optional: isOption,
           personalization_guide: personalization,
-          variations: [],
-          variants: [],
+          variations: selectedOptions,
+          variants: detailCombinations,
         };
 
         const result = await onSubmitProduct({ productData }); // shop에 product 등록
