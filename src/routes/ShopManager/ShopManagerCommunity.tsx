@@ -15,7 +15,7 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { MenuTextBox } from "./ShopManagerFinance";
-import BlackButton from "../components/commons/Button/BlackButton";
+import BlackButton from "../../components/commons/Button/BlackButton";
 
 const data = [
   { title: "새로운소식", description: "아트앤트의 최신 정보를 알아보세요." },

@@ -8,9 +8,10 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiOutlineCamera } from "react-icons/ai";
-import { getUploadURL, updateShop, uploadImage } from "../../../api";
 import BlackButton from "../../commons/Button/BlackButton";
 import { useMutation } from "@tanstack/react-query";
+import { getUploadURL, uploadImage } from "../../../services/productService";
+import { updateShop } from "../../../services/shopService";
 
 export default function EditBackgroundImg({ shop_pk, background_pic }) {
   const toast = useToast();

@@ -8,7 +8,6 @@ import Footer from "../components/commons/Footer";
 import TopBanner from "../components/index/TopBanner";
 import RegisterButton from "../components/index/RegisterButton";
 import CenteredText from "../components/index/CenterCopy";
-import ItemListFive from "../components/ProductDetail/ItemsListFive";
 import RecentlyViewed from "../components/RecentlyViewed";
 import useUser from "../lib/useUser";
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import StarRating from "../StarRating";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { toggleLikeProduct } from "../../../api";
+import { toggleLikeProduct } from "../../../services/userService";
 
 export default function CardSmall({
   pk,

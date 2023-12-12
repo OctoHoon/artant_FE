@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Image, Text, useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
 
 export default function RegisterShop() {
   const toast = useToast();

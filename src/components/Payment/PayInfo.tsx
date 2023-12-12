@@ -22,8 +22,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import ArtantButton from "../commons/ArtantButton";
-import { addToPurchase } from "../../api";
 import { useNavigate } from "react-router-dom";
+import { addToPurchase } from "../../services/userService";
 
 export default function PayInfo({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure();

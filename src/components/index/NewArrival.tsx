@@ -1,10 +1,7 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
-
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { getProductsNew } from "../../api";
 import NewArrivalCard from "../commons/Card/NewArrivalCard";
+import { getProductsNew } from "../../services/productService";
 
 interface Product {
   pk: number;

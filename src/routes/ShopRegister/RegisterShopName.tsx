@@ -1,12 +1,12 @@
 import { Box, Button, Flex, HStack, Input, Text } from "@chakra-ui/react";
-import Footer from "../components/commons/Footer";
-import ProfileHeader from "../components/People/ProfileHeader";
-import RegisterProcess from "../components/RegisterShop/RegisterProcess";
+import Footer from "../../components/commons/Footer";
+import ProfileHeader from "../../components/People/ProfileHeader";
+import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
 import { useMutation } from "@tanstack/react-query";
-import { createShop } from "../api";
+import { createShop } from "../../services/shopService";
 
 export default function RegisterShopName() {
   const { userLoading, isLoggedIn, user } = useUser();

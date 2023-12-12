@@ -5,8 +5,8 @@ import PaginationController from "../commons/PaginationController";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import PdpCard from "../commons/Card/PdpCard";
-import { getShopDetails, getShopProducts } from "../../api";
 import { useState } from "react";
+import { getShopProducts } from "../../services/shopService";
 
 const itemCount = 24;
 

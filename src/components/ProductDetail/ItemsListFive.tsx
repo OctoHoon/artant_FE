@@ -1,19 +1,8 @@
-import { FaStar, FaRegHeart } from "react-icons/fa";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import PdpCard from "../commons/Card/PdpCard";
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProductDetails, getShopProducts } from "../../api";
 import { useState } from "react";
+import { getShopProducts } from "../../services/shopService";
 
 export default function ItemListFive({ title, shop_pk }) {
   const [page, setPage] = useState(1);

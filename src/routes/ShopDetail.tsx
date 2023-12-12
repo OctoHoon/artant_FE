@@ -7,7 +7,7 @@ import ShopPolicy from "../components/ShopDetail/ShopPolicy";
 import ScrollToTop from "../components/commons/ScrollToTop";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getShopDetails } from "../api";
+import { getShopDetails } from "../services/shopService";
 
 export default function ShopDetail() {
   const { pk } = useParams();

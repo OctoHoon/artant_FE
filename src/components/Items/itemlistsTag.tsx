@@ -14,9 +14,10 @@ import axios from "axios";
 import CustomSelect from "./CustomSelect";
 import DrawerFilter from "./Drawer/DrawerFilter";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getProductsParameter, getProductsParameterTag } from "../../api";
+
 import PaginationController from "../commons/PaginationController";
 import { subCategory, subsubCategory } from "../data/options";
+import { getProductsParameterTag } from "../../services/productService";
 
 interface IProduct {
   pk: number;

@@ -1,7 +1,7 @@
 import { Flex, Text, Wrap } from "@chakra-ui/react";
 import ArtPiece from "../commons/Card/ArtPiece";
 import { useQuery } from "@tanstack/react-query";
-import { getProductsRecommended } from "../../api";
+import { getProductsRecommended } from "../../services/productService";
 
 interface Product {
   pk: number;

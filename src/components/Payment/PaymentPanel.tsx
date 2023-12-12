@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import BlackButton from "../commons/Button/BlackButton";
-import { addToPurchase } from "../../api";
+import { addToPurchase } from "../../services/userService";
 
 export default function PaymentPanel({ data }) {
   const navigate = useNavigate();

@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import Footer from "../components/commons/Footer";
 import ProfileHeader from "../components/People/ProfileHeader";
 
 export default function ShopDetail() {

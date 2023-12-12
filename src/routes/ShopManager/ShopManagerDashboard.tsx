@@ -1,12 +1,9 @@
 import { Flex, Text, Box, Select, Wrap, Image } from "@chakra-ui/react";
-import ArtPiece from "../components/commons/Card/ArtPiece";
-import RecentlyViewed from "../components/RecentlyViewed";
-import PdpCard from "../components/commons/Card/PdpCard";
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
 import { useState } from "react";
-import { getShopProducts } from "../api";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { getShopProducts } from "../../services/shopService";
 
 export default function ShopManager() {
   const { userLoading, isLoggedIn, user } = useUser();

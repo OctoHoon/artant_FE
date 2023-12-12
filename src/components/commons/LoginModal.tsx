@@ -15,10 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import SocialLogin from "../index/SocialLogin";
-import { usernameLogIn } from "../../api";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { usernameLogIn } from "../../services/userService";
 
 interface LoginModalProps {
   isOpen: boolean;

@@ -1,9 +1,9 @@
 import { Flex, Text, Wrap } from "@chakra-ui/react";
 import PdpCard from "../commons/Card/PdpCard";
 import SimilarProductCard from "../commons/Card/SimilarProductCard";
-import { getRecentlyViewedProducts } from "../../api";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import CardSmall from "../commons/Card/CardSmall";
+import { getRecentlyViewedProducts } from "../../services/userService";
 
 interface Product {
   pk: number;

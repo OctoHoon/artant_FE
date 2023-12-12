@@ -14,13 +14,10 @@ import {
   Wrap,
 } from "@chakra-ui/react";
 import ProductSmall from "../commons/Card/ProductSmallCard";
-import {
-  IoMdCheckmarkCircle,
-  IoMdCheckmarkCircleOutline,
-} from "react-icons/io"; // Import the check icon
-import { getRecentlyViewedProducts } from "../../api";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { IoMdCheckmarkCircle } from "react-icons/io"; // Import the check icon
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
+import { getRecentlyViewedProducts } from "../../services/userService";
 
 interface AddCartDrawerProps {
   isOpen: boolean;

@@ -3,8 +3,8 @@ import StarRating from "../commons/StarRating";
 import ArtantButton from "../commons/ArtantButton";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
-import { getShopDetails } from "../../api";
 import ArtantStar from "./ArtantStar";
+import { getShopDetails } from "../../services/shopService";
 
 export default function ShopHeader() {
   const { pk } = useParams();

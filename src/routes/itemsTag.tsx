@@ -1,17 +1,5 @@
-import { FaStar, FaRegHeart } from "react-icons/fa";
-import {
-  Box,
-  Button,
-  Grid,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import Itemlists from "../components/Items/itemlists";
+import { Box } from "@chakra-ui/react";
 import RecentlyViewed from "../components/RecentlyViewed";
-import Footer from "../components/commons/Footer";
-import ItemListFive from "../components/ProductDetail/ItemsListFive";
 import RegisterButton from "../components/index/RegisterButton";
 import ItemlistsTag from "../components/Items/itemlistsTag";
 

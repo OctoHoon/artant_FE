@@ -27,13 +27,14 @@ import AddCartDrawer from "./AddCartDrawer";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
+
+import useUser from "../../lib/useUser";
+import { getProductDetails } from "../../services/productService";
 import {
   IUploadCartVariables,
   addToCart,
-  getProductDetails,
   toggleLikeProduct,
-} from "../../api";
-import useUser from "../../lib/useUser";
+} from "../../services/userService";
 
 export default function ProductPanel() {
   const { pk } = useParams();

@@ -1,9 +1,9 @@
 import { Flex, Text, Wrap } from "@chakra-ui/react";
 import PdpCard from "../commons/Card/PdpCard";
 import SimilarProductCard from "../commons/Card/SimilarProductCard";
-import { getRecentlyViewedProducts } from "../../api";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import CardSmall from "../commons/Card/CardSmall";
+import { getRecentlyViewedProducts } from "../../services/userService";
 
 interface Product {
   pk: number;
@@ -26,128 +26,7 @@ export default function SimilarItemList({ title }) {
     ["RecentlyViewedProducts"],
     getRecentlyViewedProducts
   );
-  const arts = [
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 2,
-      source: "/assets/images/card_image_custom-1.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 3,
-      source: "/assets/images/card_image_custom-2.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: false,
-      is_best_seller: true,
-      is_liked: true,
-    },
-    {
-      pk: 4,
-      source: "/assets/images/card_image_custom-3.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 2,
-      reviews: 2532,
-      price: 120000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: true,
-      is_liked: false,
-    },
-    {
-      pk: 1,
-      source: "/assets/images/card_image_custom.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 2,
-      source: "/assets/images/card_image_custom-1.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: false,
-      is_liked: true,
-    },
-    {
-      pk: 3,
-      source: "/assets/images/card_image_custom-2.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 4,
-      reviews: 2532,
-      price: 100000,
-      originalPrice: 200000,
-      free_shipping: false,
-      is_best_seller: true,
-      is_liked: true,
-    },
-    {
-      pk: 4,
-      source: "/assets/images/card_image_custom-3.png",
-      category: "Print",
-      title: "우리의 꿈은",
-      description: "애니메이션화, CG, 스타 서정배",
-      artist: "김성은",
-      star: 2,
-      reviews: 2532,
-      price: 120000,
-      originalPrice: 200000,
-      free_shipping: true,
-      is_best_seller: true,
-      is_liked: false,
-    },
-  ];
+
   return (
     <Flex
       flexDirection={"column"}

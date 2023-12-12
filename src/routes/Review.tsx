@@ -1,23 +1,13 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  HStack,
-  Input,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Input, Button } from "@chakra-ui/react";
 import PaginationController from "../components/commons/PaginationController";
 import SearchBar from "../components/commons/SearchBar";
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
 import ArtantButton from "../components/commons/ArtantButton";
 import BlackButton from "../components/commons/Button/BlackButton";
 import { Rating } from "@mui/material";
-import { Star } from "@mui/icons-material";
 import StarRating from "../components/commons/StarRating";
-import { getPurchase } from "../api";
 import { useQuery } from "@tanstack/react-query";
+import { getPurchase } from "../services/userService";
 
 export default function Review() {
   const [value, setValue] = React.useState("");

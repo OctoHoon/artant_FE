@@ -11,8 +11,8 @@ import {
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { toggleLikeProduct } from "../../../api";
 import { useMutation } from "@tanstack/react-query";
+import { toggleLikeProduct } from "../../../services/userService";
 
 function NewArrivalCard({ pk, source, price, originalPrice, is_liked }) {
   const gray = useColorModeValue("gray.600", "gray.300");

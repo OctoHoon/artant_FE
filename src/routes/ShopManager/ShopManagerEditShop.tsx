@@ -8,17 +8,17 @@ import {
   SkeletonText,
   useToast,
 } from "@chakra-ui/react";
-import BlackButton from "../components/commons/Button/BlackButton";
+import BlackButton from "../../components/commons/Button/BlackButton";
 import { useEffect, useState } from "react";
-import useUser from "../lib/useUser";
-import { getShopDetails, updateShop } from "../api";
+import useUser from "../../lib/useUser";
 import { useQuery } from "@tanstack/react-query";
-import EditAnnouncement from "../components/ShopManager/EditShop/EditAnnouncement";
-import { PlusSVG } from "../components/ShopManager/EditShop/Svg";
-import EditAvatar from "../components/ShopManager/EditShop/EditAvatar";
-import EditArt from "../components/ShopManager/EditShop/EditArt";
-import EditBackgroundImg from "../components/ShopManager/EditShop/EditBackgroundImg";
-import EditShopContents from "../components/ShopManager/EditShop/EditShopContents";
+import EditAnnouncement from "../../components/ShopManager/EditShop/EditAnnouncement";
+import { PlusSVG } from "../../components/ShopManager/EditShop/Svg";
+import EditAvatar from "../../components/ShopManager/EditShop/EditAvatar";
+import EditArt from "../../components/ShopManager/EditShop/EditArt";
+import EditBackgroundImg from "../../components/ShopManager/EditShop/EditBackgroundImg";
+import EditShopContents from "../../components/ShopManager/EditShop/EditShopContents";
+import { getShopDetails, updateShop } from "../../services/shopService";
 
 interface ISection {
   id: number | null;

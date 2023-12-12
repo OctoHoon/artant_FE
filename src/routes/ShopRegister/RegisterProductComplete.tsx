@@ -1,12 +1,12 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
-import Footer from "../components/commons/Footer";
-import ProfileHeader from "../components/People/ProfileHeader";
-import RegisterProcess from "../components/RegisterShop/RegisterProcess";
+import Footer from "../../components/commons/Footer";
+import ProfileHeader from "../../components/People/ProfileHeader";
+import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
 import { useQuery } from "@tanstack/react-query";
-import { getProductDetails } from "../api";
+import { getProductDetails } from "../../services/productService";
 
 export default function RegisterShopName() {
   const { shopPk, productPk } = useParams();

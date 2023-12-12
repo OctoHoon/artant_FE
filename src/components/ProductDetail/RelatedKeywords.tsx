@@ -1,27 +1,7 @@
 import { FaStar, FaRegHeart } from "react-icons/fa";
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import ArtPiece from "../commons/Card/ArtPiece";
-import Collection from "../commons/Card/Collection";
-import RelatedKeyword from "../RelatedKeyword";
+import { AspectRatio, Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import CollectionKeyword from "../CollectionKeyword";
-
-const images = [
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-  "https://i.etsystatic.com/38936109/r/il/885c66/5074138856/il_1588xN.5074138856_o7f8.jpg",
-  "https://i.etsystatic.com/38936109/r/il/725f41/5074138400/il_794xN.5074138400_a0p9.jpg",
-];
 
 export default function RelatedKeywords({ category, subCategory }) {
   const arts = [

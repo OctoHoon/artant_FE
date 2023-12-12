@@ -1,17 +1,4 @@
-import {
-  Flex,
-  Checkbox,
-  Menu,
-  MenuButton,
-  Button,
-  MenuList,
-  MenuItem,
-  RadioGroup,
-  Stack,
-  Radio,
-  Text,
-  Box,
-} from "@chakra-ui/react";
+import { Flex, Checkbox, Text, Box } from "@chakra-ui/react";
 
 export default function DiscountInfo({ data }) {
   let totalPrice = 0;

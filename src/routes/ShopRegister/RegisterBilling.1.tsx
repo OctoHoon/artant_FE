@@ -7,13 +7,12 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import RegisterProcess from "../components/RegisterShop/RegisterProcess";
-import BlackButton from "../components/commons/Button/BlackButton";
-import Footer from "../components/commons/Footer";
-import ScrollToTop from "../components/commons/ScrollToTop";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { updateShop } from "../api";
-import useUser from "../lib/useUser";
+import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
+import BlackButton from "../../components/commons/Button/BlackButton";
+import ScrollToTop from "../../components/commons/ScrollToTop";
+import { useNavigate, useParams } from "react-router-dom";
+import useUser from "../../lib/useUser";
+import { updateShop } from "../../services/shopService";
 
 export default function RegisterBilling() {
   const toast = useToast();
@@ -65,9 +64,7 @@ export default function RegisterBilling() {
               borderRadius={"100px"}
               background={"#FF6701"}
             >
-              <Box width={"18px"} height={"18px"}>
-                <LockWhite />
-              </Box>
+              <Box width={"18px"} height={"18px"}></Box>
               <Flex
                 paddingTop={"2px"}
                 alignItems={"center"}
@@ -310,34 +307,5 @@ export default function RegisterBilling() {
         </Flex>
       </Flex>
     </Flex>
-  );
-}
-
-function LockWhite() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-    >
-      <mask
-        id="mask0_945_10742"
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="18"
-        height="18"
-      >
-        <rect width="18" height="18" fill="#D9D9D9" />
-      </mask>
-      <g mask="url(#mask0_945_10742)">
-        <path
-          d="M4.96153 15.75C4.62836 15.75 4.34314 15.6314 4.10589 15.3941C3.86863 15.1569 3.75 14.8716 3.75 14.5385V7.96153C3.75 7.62836 3.86863 7.34314 4.10589 7.10589C4.34314 6.86863 4.62836 6.75 4.96153 6.75H6V5.25C6 4.41442 6.29111 3.70553 6.87332 3.12332C7.45553 2.54111 8.16442 2.25 9 2.25C9.83558 2.25 10.5445 2.54111 11.1267 3.12332C11.7089 3.70553 12 4.41442 12 5.25V6.75H13.0385C13.3716 6.75 13.6569 6.86863 13.8941 7.10589C14.1314 7.34314 14.25 7.62836 14.25 7.96153V14.5385C14.25 14.8716 14.1314 15.1569 13.8941 15.3941C13.6569 15.6314 13.3716 15.75 13.0385 15.75H4.96153ZM9 12.375C9.31635 12.375 9.58294 12.2666 9.79976 12.0498C10.0166 11.8329 10.125 11.5663 10.125 11.25C10.125 10.9337 10.0166 10.6671 9.79976 10.4502C9.58294 10.2334 9.31635 10.125 9 10.125C8.68365 10.125 8.41706 10.2334 8.20024 10.4502C7.98341 10.6671 7.875 10.9337 7.875 11.25C7.875 11.5663 7.98341 11.8329 8.20024 12.0498C8.41706 12.2666 8.68365 12.375 9 12.375ZM6.75 6.75H11.25V5.25C11.25 4.625 11.0312 4.09375 10.5938 3.65625C10.1562 3.21875 9.625 3 9 3C8.375 3 7.84375 3.21875 7.40625 3.65625C6.96875 4.09375 6.75 4.625 6.75 5.25V6.75Z"
-          fill="white"
-        />
-      </g>
-    </svg>
   );
 }

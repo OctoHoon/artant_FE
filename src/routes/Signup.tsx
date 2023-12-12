@@ -20,9 +20,10 @@ import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
-import { createUser, getUploadURL, uploadImage } from "../api";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import { getUploadURL, uploadImage } from "../services/productService";
+import { createUser } from "../services/userService";
 
 export default function Signup() {
   const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";

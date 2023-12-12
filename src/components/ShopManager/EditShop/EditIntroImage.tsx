@@ -11,17 +11,18 @@ import {
 import { SvgCamera, SvgVideo } from "./Svg";
 import { ChangeEvent, useEffect, useState } from "react";
 import { CloseIcon } from "@chakra-ui/icons";
-import {
-  IMAGE_DELIVERY_URL,
-  getUploadURL,
-  getVideoUploadURL,
-  updateShop,
-  uploadImage,
-  uploadVideo,
-} from "../../../api";
+
 import BlackButton from "../../commons/Button/BlackButton";
 import { useMutation } from "@tanstack/react-query";
 import DragImages from "./DragImages";
+import {
+  getUploadURL,
+  getVideoUploadURL,
+  uploadImage,
+  uploadVideo,
+} from "../../../services/productService";
+import { updateShop } from "../../../services/shopService";
+import { IMAGE_DELIVERY_URL } from "../../../services/apiConfig";
 
 export default function EditIntroImage({
   shop_pk,

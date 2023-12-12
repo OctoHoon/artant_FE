@@ -22,8 +22,10 @@ import ReviewPhotos from "./ReviewPhotos";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { getProductDetails, getReviews, getShopReviews } from "../../../api";
+
 import ShopReviewList from "./ShopReviewList";
+import { getReviews } from "../../../services/productService";
+import { getShopReviews } from "../../../services/shopService";
 
 export default function ReveiwSection({ shop_pk }) {
   const [page, setPage] = useState(1);

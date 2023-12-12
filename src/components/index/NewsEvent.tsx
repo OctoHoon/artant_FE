@@ -1,6 +1,5 @@
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 
-import GiftCategory from "../commons/Card/GiftCategory";
 import NewsOne from "../commons/Card/NewsOne";
 import NewsTwo from "../commons/Card/NewsTwo";
 

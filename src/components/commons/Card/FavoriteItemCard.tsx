@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { toggleLikeProduct } from "../../../api";
+import { toggleLikeProduct } from "../../../services/userService";
 
 export default function FavoriteItemCard({
   pk,

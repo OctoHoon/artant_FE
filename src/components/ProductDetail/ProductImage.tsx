@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Image,
-  AspectRatio,
-  IconButton,
-  Fade,
-  Flex,
-} from "@chakra-ui/react";
-import {
-  FaChevronLeft,
-  FaChevronRight,
-  FaPlayCircle,
-  FaRegHeart,
-} from "react-icons/fa";
+import { Box, Image, AspectRatio, IconButton, Flex } from "@chakra-ui/react";
+import { FaPlayCircle } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getProductDetails, toggleLikeProduct } from "../../api";
+import { getProductDetails } from "../../services/productService";
+import { toggleLikeProduct } from "../../services/userService";
 
 export default function ProductImage(is_liked) {
   const [isHovered, setIsHovered] = useState(false);

@@ -1,8 +1,8 @@
 import { Fade, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { toggleLikeProduct } from "../../../api";
 import { Link } from "react-router-dom";
+import { toggleLikeProduct } from "../../../services/userService";
 
 export default function SimilarProductCard({
   pk,

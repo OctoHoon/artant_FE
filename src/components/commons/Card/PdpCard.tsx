@@ -2,7 +2,7 @@ import { AspectRatio, Fade, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { toggleLikeProduct } from "../../../api";
+import { toggleLikeProduct } from "../../../services/userService";
 
 export default function PdpCard({
   pk,

@@ -1,56 +1,41 @@
+import { Flex, Text } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { useState } from "react";
+import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
+import AddVariation from "../../components/ShopManager/RegisterProdcuct/AddVariations";
+import PersonalizeTab from "../../components/ShopManager/PersonalizeTab";
+import Shipping from "../../components/ShopManager/RegisterProdcuct/Shipping";
+import Returns from "../../components/ShopManager/RegisterProdcuct/Returns";
+import StockAndPrice from "../../components/ShopManager/RegisterProdcuct/StockAndPrice";
+import ProductDetails from "../../components/ShopManager/RegisterProdcuct/ProductDetails";
+import WhiteButton from "../../components/commons/Button/WhiteButton";
+import AddVideo from "../../components/ShopManager/RegisterProdcuct/AddVideo";
+import AddPictures from "../../components/ShopManager/RegisterProdcuct/AddPictures";
+import BlackButton from "../../components/commons/Button/BlackButton";
+import useUser from "../../lib/useUser";
 import {
   IUploadProductVariables,
-  createPhoto,
-  createVideo,
-  getProductDetails,
+  Variant,
   getUploadURL,
   getVideoUploadURL,
-  putProduct,
   uploadImage,
   uploadProduct,
   uploadVideo,
-} from "../api";
-import { Flex, Text } from "@chakra-ui/react";
-import AddPictures from "../components/ShopManager/RegisterProdcuct/AddPictures";
-import AddVideo from "../components/ShopManager/RegisterProdcuct/AddVideo";
-import ProductDetails from "../components/ShopManager/RegisterProdcuct/ProductDetails";
-import StockAndPrice from "../components/ShopManager/RegisterProdcuct/StockAndPrice";
-import AddVariation from "../components/ShopManager/RegisterProdcuct/AddVariations";
-import PersonalizeTab from "../components/ShopManager/PersonalizeTab";
-import Shipping from "../components/ShopManager/RegisterProdcuct/Shipping";
-import Returns from "../components/ShopManager/RegisterProdcuct/Returns";
-import { ActionSection } from "./RegisterProduct";
-import WhiteButton from "../components/commons/Button/WhiteButton";
-import BlackButton from "../components/commons/Button/BlackButton";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import useUser from "../lib/useUser";
-
-const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
-
-interface IUploadURLResponse {
-  id: string;
-  uploadURL: string;
-}
-
-type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
+} from "../../services/productService";
+import { updateShop } from "../../services/shopService";
 
 type SelectedOption = {
-  variation: OptionCategory | string;
-  detail: string[];
-  selectPrice: boolean;
-  selectQuantity: boolean;
-  selectSku: boolean;
+  name: string;
+  is_sku_vary: boolean;
+  is_price_vary: boolean;
+  is_quantity_vary: boolean;
+  options: OptionDetail[];
 };
 
-type DetailCombination = {
-  detail1: string;
-  detail2: string;
-  price?: number;
-  quantity?: number;
-  sku?: string;
-  visible?: boolean;
+type OptionDetail = {
+  name: string;
 };
 
 type ProcessingTimeOption = {
@@ -66,20 +51,23 @@ type Policy = {
   timeframe: number;
 };
 
-export default function ShopManagerListingEditing() {
+export const ActionSection = ({ children, ...props }) => (
+  <Flex
+    width="1280px"
+    justifyContent="space-between"
+    alignItems="center"
+    {...props}
+  >
+    {children}
+  </Flex>
+);
+
+export default function UploadPhotos() {
   const { userLoading, isLoggedIn, user } = useUser();
-
-  const { productPK } = useParams();
-  console.log(productPK);
-  const { isLoading, data } = useQuery(
-    ["products", productPK],
-    getProductDetails
-  );
-
-  const shopPk = data && data.shop_pk;
 
   const navigate = useNavigate();
   // product value
+  const [productPK, setProductPK] = useState("");
   const [productName, setProductName] = useState(""); // 제품 이름
   const [productDescription, setProductDescription] = useState(""); // 제품 설명
   const [productPrice, setProductPrice] = useState(0); // 제품 가격
@@ -114,92 +102,49 @@ export default function ShopManagerListingEditing() {
     timeframe: 14,
   });
   // image, video files
-  const [existingImages, setExistingImages] = useState([]);
-  const [existingVideo, setExistingVideo] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
   const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
+  const { shopPk } = useParams();
   const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([]);
-  const [detailCombinations, setDetailCombinations] = useState<
-    DetailCombination[]
-  >([]);
+  const [detailCombinations, setDetailCombinations] = useState<Variant[]>([]);
+  const [section, setSection] = useState();
 
-  useEffect(() => {
-    // Pre-populate form fields when data is available
-    if (data) {
-      setProductName(data.name);
-      setExistingImages(data.images.map((images) => images.image));
-      if (data.video) {
-        setExistingVideo(data.video.video);
-      }
-      setProductDescription(data.description);
-      setProductPrice(data.price);
-      setProductCount(data.quantity);
-      setSelectedCategory(data.category);
-      setSelectedSubCategory(data.subCategory);
-      // ... set other details like description, price, etc.
-    }
-  }, [data]);
+  const uploadImageMutation = useMutation(uploadImage, {}); //cloudflare에 올림
+  const uploadURLMutation = useMutation(getUploadURL, {}); //url 가져옴
 
-  const createPhotoMutation = useMutation(createPhoto, {});
-  const uploadImageMutation = useMutation(uploadImage, {
-    onSuccess: ({ result }: any) => {
-      if (productPK) {
-        const responsephoto = createPhotoMutation.mutate({
-          image: `${IMAGE_DELIVERY_URL}/${result.id}/public`,
-          productPK,
-        });
-      }
-    },
-  });
-  const uploadImageAndThumbnailMutation = useMutation(uploadImage, {
-    onSuccess: ({ result }: any) => {
-      if (productPK) {
-        const thumbnailResponse = putProduct({
-          thumbnail: `${IMAGE_DELIVERY_URL}/${result.id}/public`,
-          productPK: productPK, // 제품 PK 값 설정
-        });
-        createPhotoMutation.mutate({
-          image: `${IMAGE_DELIVERY_URL}/${result.id}/public`,
-          productPK,
-        });
-      }
-    },
-  });
-  const uploadURLMutation = useMutation(getUploadURL, {});
+  console.log(detailCombinations);
 
   const onSubmitImages = async () => {
     try {
+      // Step 1: Get upload URLs for each file
       const uploadURLResponses = await Promise.all(
         selectedFiles.map(() => uploadURLMutation.mutateAsync())
       );
 
-      const uploadPromises = selectedFiles.map(async (file, index) => {
-        const response = uploadURLResponses[index];
-        if (index === 0) {
-          await uploadImageAndThumbnailMutation.mutateAsync({
+      // Step 2: Upload each file to the acquired URL
+      const uploadImageResponses = await Promise.all(
+        selectedFiles.map(async (file, index) => {
+          const response = uploadURLResponses[index];
+          return uploadImageMutation.mutateAsync({
             uploadURL: response.uploadURL,
             file: file,
           });
-        } else {
-          await uploadImageMutation.mutateAsync({
-            uploadURL: response.uploadURL,
-            file: file,
-          });
-        }
-      });
+        })
+      );
+      console.log(uploadImageResponses);
 
-      await Promise.all(uploadPromises);
+      // Step 3: Construct the images array
+      const images = uploadImageResponses.map((response, index) => ({
+        image: `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${response.result.id}/public`, // Assuming the response contains the URL as 'imageUrl'
+        order: index + 1, // Adding 1 since you want order to start from 1, not 0
+      }));
+
+      return images;
     } catch (error) {
       console.error("Error uploading photos:", error);
+      return []; // Return an empty array in case of an error
     }
   };
-
-  const createVideoMutation = useMutation(createVideo, {
-    onError: () => {
-      // mutate가 실패하면, 함수를 실행합니다.
-      console.log("createVideoMutation error");
-    },
-  });
 
   const uploadVideoMutation = useMutation(uploadVideo, {
     onError: () => {
@@ -215,10 +160,10 @@ export default function ShopManagerListingEditing() {
     },
   });
 
-  const onSubmitVideo = async ({ pk }) => {
+  const onSubmitVideo = async () => {
     if (!selectedVideoFile) {
-      console.error("No video file selected for upload.");
-      return;
+      // console.error("No video file selected for upload.");
+      return "";
     }
     try {
       // First, get the upload URL
@@ -232,49 +177,19 @@ export default function ShopManagerListingEditing() {
         uploadURL: uploadURLData.uploadURL,
         file: selectedVideoFile,
       });
-
-      // After successful upload, create the video record
-      await createVideoMutation.mutateAsync({
-        video: cloudflareStreamUrl,
-        productPK: pk,
-      });
+      return cloudflareStreamUrl;
     } catch (error) {
       // Handle errors that occur during the upload or video creation process
       console.error("Error in video submission process:", error);
+      return "";
     }
   };
 
-  const productData: IUploadProductVariables = {
-    name: productName,
-    description: productDescription,
-    price: productPrice,
-    category_name: selectedSubCategory,
-    shopPK: shopPk!,
-    made_by: "",
-    product_type: "",
-    product_creation_date: "",
-    primary_color: "",
-    secondary_color: "",
-    tags: [],
-    section: "",
-    materials: [],
-    quantity: 0,
-    sku: "",
-    processing_min: 3,
-    processing_max: 7,
-    shipping_price: 0,
-    images: [],
-    video: "",
-    is_personalization_enabled: false,
-    is_personalization_optional: false,
-    personalization_guide: "",
-    variations: [],
-    variants: [],
-  };
-
-  const onSubmitProduct = async () => {
+  const onSubmitProduct = async ({ productData }) => {
     try {
+      console.log(productData);
       const result = await uploadProduct(productData);
+
       return result;
     } catch (error) {
       console.error("상품 업로드 실패", error);
@@ -293,13 +208,50 @@ export default function ShopManagerListingEditing() {
     ) {
       try {
         // 순차적으로 비동기 함수 실행
-        const result = await onSubmitProduct(); // shop에 product 등록
-        await onSubmitImages(); // product에 images 등록
-        await onSubmitVideo({ pk: productPK });
+        let videoUrl = await onSubmitVideo();
+        if (videoUrl == undefined) {
+          videoUrl = "";
+        }
+        const images = await onSubmitImages(); // product에 images 등록
+
+        const productData: IUploadProductVariables = {
+          name: productName,
+          description: productDescription,
+          price: productPrice,
+          category_name: selectedSubCategory,
+          shopPK: shopPk!,
+          tags: tags,
+          materials: materials,
+          made_by: "I did",
+          product_type: "A finished product",
+          product_creation_date: "Made To Order",
+          primary_color: "",
+          secondary_color: "",
+          section: section ?? "",
+          quantity: 0,
+          sku: productSKU,
+          processing_min: 3,
+          processing_max: 7,
+          shipping_price: 0,
+          images: images,
+          video: videoUrl,
+          is_personalization_enabled: isPersonalizationEnabled,
+          is_personalization_optional: isOption,
+          personalization_guide: personalization,
+          variations: selectedOptions,
+          variants: detailCombinations,
+        };
+
+        const result = await onSubmitProduct({ productData }); // shop에 product 등록
         setSelectedFiles([]);
         await new Promise((resolve) => setTimeout(resolve, 3000));
-        navigate(`/your/shops/me/listings`);
+        const updateData = {
+          register_step: 2,
+        };
+        const response = await updateShop(shopPk, updateData);
+        navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
       } catch (error) {
+        console.log(error);
         alert(
           "작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!"
         );
@@ -311,14 +263,10 @@ export default function ShopManagerListingEditing() {
   };
 
   const calculateLoadingState = () =>
-    createPhotoMutation.isLoading ||
     uploadImageMutation.isLoading ||
     uploadURLMutation.isLoading ||
-    createVideoMutation.isLoading ||
     uploadVideoMutation.isLoading ||
-    uploadVideoURLMutation.isLoading ||
-    uploadImageAndThumbnailMutation.isLoading;
-
+    uploadVideoURLMutation.isLoading;
   return (
     <>
       {" "}
@@ -336,19 +284,17 @@ export default function ShopManagerListingEditing() {
           alignItems={"flex-start"}
           gap={"60px"}
         >
+          {" "}
+          <RegisterProcess currentPage={2} />
           <RegisterProductHeader />
           <AddPictures
             selectedFiles={selectedFiles}
             setSelectedFiles={setSelectedFiles}
-            existingImages={existingImages}
+            existingImages={[]}
           />
-          <AddVideo
-            setSelectedVideoFile={setSelectedVideoFile}
-            existingVideo={existingVideo}
-          />
+          <AddVideo setSelectedVideoFile={setSelectedVideoFile} />
           <ProductDetails
             productName={productName}
-            productDescription={productDescription}
             setProductName={setProductName}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
@@ -358,13 +304,14 @@ export default function ShopManagerListingEditing() {
             setRefreshOptionValue={setRefreshOptionValue}
             shippingOptionValue={shippingOptionValue}
             setShippingOptionValue={setShippingOptionValue}
+            productDescription={productDescription}
             setProductDescription={setProductDescription}
             tags={tags}
             setTags={setTags}
             materials={materials}
             setMaterials={setMaterials}
-            section={undefined}
-            setSection={undefined}
+            section={section}
+            setSection={setSection}
             pk={user.shop_pk}
           />
           <StockAndPrice
@@ -405,8 +352,12 @@ export default function ShopManagerListingEditing() {
               <WhiteButton
                 title={"취소"}
                 borderRadius={"5px"}
-                onClick={() => navigate(`/your/shops/me/listings`)}
+                onClick={undefined}
               />
+              <Text textStyle={"B14R"}>
+                이목록은 아직 활성화 되지 않았습니다. 매장을 오픈하면 쇼핑객에게
+                제공됩니다.
+              </Text>
             </Flex>
             <Flex gap={"12px"} alignItems={"center"}>
               <WhiteButton
@@ -417,7 +368,7 @@ export default function ShopManagerListingEditing() {
               <BlackButton
                 title={"저장하고 계속"}
                 borderRadius={"5px"}
-                onClick={undefined}
+                onClick={onSubmitAll}
                 isLoading={calculateLoadingState()}
               />
             </Flex>
@@ -426,22 +377,25 @@ export default function ShopManagerListingEditing() {
       </Flex>
     </>
   );
-}
 
-function RegisterProductHeader() {
-  return (
-    <Flex
-      display={"flex"}
-      height={"68px"}
-      flexDirection={"column"}
-      alignItems={"flex-start"}
-      gap={"12px"}
-    >
-      {" "}
-      <Text textStyle={"H2R"} letterSpacing="0.5px">
-        작품 수정하기
-      </Text>
-      <Text textStyle={"B14R"}>항목에 대한 사진과 세부정보를 수정하세요.</Text>
-    </Flex>
-  );
+  function RegisterProductHeader() {
+    return (
+      <Flex
+        display={"flex"}
+        height={"68px"}
+        flexDirection={"column"}
+        alignItems={"flex-start"}
+        gap={"12px"}
+      >
+        {" "}
+        <Text textStyle={"H2R"} letterSpacing="0.5px">
+          작품 만들기
+        </Text>
+        <Text textStyle={"B14R"}>
+          항목에 대한 사진과 세부정보를 추가하세요. 지금 당장 가능한 내용을
+          작성하세요. 나중에 편집할 수 있습니다.
+        </Text>
+      </Flex>
+    );
+  }
 }

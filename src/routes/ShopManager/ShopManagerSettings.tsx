@@ -12,8 +12,8 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { MenuTextBox } from "./ShopManagerFinance";
-import ArtantButton from "../components/commons/ArtantButton";
-import BlackButton from "../components/commons/Button/BlackButton";
+import ArtantButton from "../../components/commons/ArtantButton";
+import BlackButton from "../../components/commons/Button/BlackButton";
 
 export default function ShopManagerSettings() {
   return (

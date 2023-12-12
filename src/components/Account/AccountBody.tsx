@@ -14,8 +14,6 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import MessageTab from "../Messages/MessageTab";
-import MessagesPreview from "../Messages/MessagesPreview";
 import SnsTab from "./SnsTab";
 import useUser from "../../lib/useUser";
 

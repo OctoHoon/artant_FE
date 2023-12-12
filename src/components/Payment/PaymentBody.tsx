@@ -1,19 +1,4 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Radio,
-  RadioGroup,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import CartComponent from "../Cart/CartComponent";
-import CartPanel from "../Cart/CartPanel";
+import { Box, Flex } from "@chakra-ui/react";
 import PaymentPanel from "./PaymentPanel";
 import ReceiverInfo from "./ReceiverInfo";
 import ProductInfo from "./ProductInfo";
