@@ -23,7 +23,7 @@ import RegisterProduct from "./routes/ShopRegister/RegisterProduct";
 import RegisterShopName from "./routes/ShopRegister/RegisterShopName";
 import RegisterProductComplete from "./routes/ShopRegister/RegisterProductComplete";
 import RegisterPayments from "./routes/ShopRegister/RegisterPayments";
-import RegisterBilling from "./routes/ShopRegister/RegisterBilling.1";
+import RegisterBilling from "./routes/ShopRegister/RegisterBilling";
 import ShopManagerListingEditing from "./routes/ShopManager/ShopManagerListingEditing";
 import ShopManagerArtantSeller from "./routes/ShopManager/ShopMangerArtantSeller";
 import ShopManagerStats from "./routes/ShopManager/ShopManagerStats";

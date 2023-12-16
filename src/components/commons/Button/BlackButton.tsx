@@ -8,6 +8,7 @@ export default function BlackButton({
   width = "auto",
   isLoading = false,
   onClick = () => {},
+  color = "#222",
 }) {
   return (
     <Button
@@ -17,7 +18,7 @@ export default function BlackButton({
       justifyContent={"center"}
       alignItems={"center"}
       borderRadius={borderRadius}
-      background={type ? "white" : "#222"}
+      background={type ? "white" : color}
       fontSize={"16px"}
       fontWeight={"500"}
       color={type ? "black" : "white"}

@@ -24,16 +24,7 @@ export default function RegisterProcess({ currentPage }) {
             <NotCurrentCircle />
           )}
 
-          <Text
-            color="var(--maincolorstextblack-222222, #222)"
-            textAlign="center"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="14px"
-            fontStyle="normal"
-            fontWeight={400}
-            lineHeight="normal"
-            letterSpacing="-0.042px"
-          >
+          <Text textAlign="center" textStyle={"B14R"}>
             상점 이름을 지정하세요
           </Text>
         </Flex>
@@ -51,16 +42,7 @@ export default function RegisterProcess({ currentPage }) {
           ) : (
             <NotCurrentCircle />
           )}
-          <Text
-            color="var(--maincolorstextblack-222222, #222)"
-            textAlign="center"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="14px"
-            fontStyle="normal"
-            fontWeight={400}
-            lineHeight="normal"
-            letterSpacing="-0.042px"
-          >
+          <Text textAlign="center" textStyle={"B14R"}>
             상품 등록 하기
           </Text>
         </Flex>
@@ -78,16 +60,7 @@ export default function RegisterProcess({ currentPage }) {
           ) : (
             <NotCurrentCircle />
           )}
-          <Text
-            color="var(--maincolorstextblack-222222, #222)"
-            textAlign="center"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="14px"
-            fontStyle="normal"
-            fontWeight={400}
-            lineHeight="normal"
-            letterSpacing="-0.042px"
-          >
+          <Text textAlign="center" textStyle={"B14R"}>
             지급 방식
           </Text>
         </Flex>
@@ -105,16 +78,7 @@ export default function RegisterProcess({ currentPage }) {
           ) : (
             <NotCurrentCircle />
           )}
-          <Text
-            color="var(--maincolorstextblack-222222, #222)"
-            textAlign="center"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="14px"
-            fontStyle="normal"
-            fontWeight={400}
-            lineHeight="normal"
-            letterSpacing="-0.042px"
-          >
+          <Text textAlign="center" textStyle={"B14R"}>
             결제 설정
           </Text>
         </Flex>

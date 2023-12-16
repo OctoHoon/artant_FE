@@ -56,7 +56,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     <Modal onClose={onClose} isOpen={isOpen}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Log in</ModalHeader>
+        <ModalHeader alignSelf={"center"}>
+          <Text fontWeight={"500"}>log in</Text>
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody mx={5}>
           <VStack spacing={5}>
@@ -81,7 +83,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <Checkbox right={6} colorScheme="blackAlpha">
                 로그인 상태 유지
               </Checkbox>
-              <Text>아이디/비밀번호</Text>
+              <Text fontWeight={"300"}>아이디/비밀번호</Text>
             </HStack>
           </VStack>
           <Button
@@ -95,16 +97,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               background: "var(--maincolorsbggray-555555, #555)",
             }}
           >
-            <Text
-              color="#DBDBDB"
-              textAlign="center"
-              fontFamily="Spoqa Han Sans Neo"
-              fontSize="16px"
-              fontStyle="normal"
-              fontWeight={400}
-              lineHeight="normal"
-              letterSpacing="-0.3px"
-            >
+            <Text color="#DBDBDB" textAlign="center" textStyle={"B16R"}>
               로그인
             </Text>
           </Button>
