@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { toggleLikeProduct } from "../../../api";
+import { toggleLikeProduct } from "../../../services/userService";
 
 export default function FavoriteItemCard({
   pk,
@@ -24,7 +24,7 @@ export default function FavoriteItemCard({
   artist,
   price,
   originalPrice,
-  free_shipping,
+  is_free_shipping,
   is_best_seller,
   is_liked,
   message,
@@ -205,7 +205,7 @@ export default function FavoriteItemCard({
             gap={"5px"}
             flexWrap={"wrap"}
           >
-            {[free_shipping, is_best_seller].map((tag, index) => (
+            {[is_free_shipping, is_best_seller].map((tag, index) => (
               <Flex
                 width={"62px"}
                 height={"18px"}

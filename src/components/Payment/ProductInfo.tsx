@@ -1,18 +1,4 @@
-import {
-  Flex,
-  Checkbox,
-  Menu,
-  MenuButton,
-  Button,
-  MenuList,
-  MenuItem,
-  RadioGroup,
-  Stack,
-  Radio,
-  Text,
-  Box,
-  Image,
-} from "@chakra-ui/react";
+import { Flex, Text, Box, Image } from "@chakra-ui/react";
 
 export default function ProductInfo({ data }) {
   return (

@@ -3,24 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
-import {
-  createPhoto,
-  uploadImage,
-  putProduct,
-  getUploadURL,
-  createVideo,
-  getVideoUploadURL,
-  uploadVideo,
-  IUploadProductVariables,
-  uploadProduct,
-  IMAGE_DELIVERY_URL,
-  Variant,
-} from "../../api";
+
 import PersonalizeTab from "./PersonalizeTab";
 import AddVariation from "./RegisterProdcuct/AddVariations";
 import Returns from "./RegisterProdcuct/Returns";
 import Shipping from "./RegisterProdcuct/Shipping";
-import { ActionSection } from "../../routes/RegisterProduct";
+import { ActionSection } from "../../routes/ShopRegister/RegisterProduct";
 import BlackButton from "../commons/Button/BlackButton";
 import WhiteButton from "../commons/Button/WhiteButton";
 import AddPictures from "./RegisterProdcuct/AddPictures";
@@ -28,6 +16,15 @@ import AddVideo from "./RegisterProdcuct/AddVideo";
 import ProductDetails from "./RegisterProdcuct/ProductDetails";
 import StockAndPrice from "./RegisterProdcuct/StockAndPrice";
 import useUser from "../../lib/useUser";
+import {
+  IUploadProductVariables,
+  Variant,
+  getUploadURL,
+  getVideoUploadURL,
+  uploadImage,
+  uploadProduct,
+  uploadVideo,
+} from "../../services/productService";
 
 type SelectedOption = {
   name: string;

@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
-import MessagesHeader from "../components/Messages/MessagesHeader";
-import MessagesBody from "../components/Messages/MessagesBody";
+import MessagesHeader from "../../components/Messages/MessagesHeader";
+import MessagesBody from "../../components/Messages/MessagesBody";
 
 export default function ShopManagerMessages() {
   return (

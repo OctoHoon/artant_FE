@@ -1,9 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 import Artist from "../commons/Card/Artist";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { getArtistRecommended } from "../../api";
+import { getArtistRecommended } from "../../services/shopService";
 
 interface Shop {
   pk: number;

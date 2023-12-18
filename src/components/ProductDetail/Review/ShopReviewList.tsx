@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 import ReviewPhotos from "./ReviewPhotos";
 import PaginationController from "../../commons/PaginationController";
 import { useQuery } from "@tanstack/react-query";
-import { getProductDetails, getReviews, getShopReviews } from "../../../api";
+import { getShopReviews } from "../../../services/shopService";
 
 interface IReview {
   user: {

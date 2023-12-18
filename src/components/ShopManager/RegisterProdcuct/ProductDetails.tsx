@@ -14,8 +14,8 @@ import RegisterHeader from "./RegisterHeader";
 import RadioOption from "./RadioOption";
 import InputOption from "./InputOption";
 import SelectOption from "./SelectOption";
-import { getShopDetails } from "../../../api";
 import { useQuery } from "@tanstack/react-query";
+import { getShopDetails } from "../../../services/shopService";
 
 const whoMadeOptions = [
   { label: "I did", value: "option1" },

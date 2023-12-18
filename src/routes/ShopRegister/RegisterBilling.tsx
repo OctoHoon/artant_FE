@@ -7,13 +7,12 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import RegisterProcess from "../components/RegisterShop/RegisterProcess";
-import BlackButton from "../components/commons/Button/BlackButton";
-import Footer from "../components/commons/Footer";
-import ScrollToTop from "../components/commons/ScrollToTop";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { updateShop } from "../api";
-import useUser from "../lib/useUser";
+import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
+import BlackButton from "../../components/commons/Button/BlackButton";
+import ScrollToTop from "../../components/commons/ScrollToTop";
+import { useNavigate, useParams } from "react-router-dom";
+import useUser from "../../lib/useUser";
+import { updateShop } from "../../services/shopService";
 
 export default function RegisterBilling() {
   const toast = useToast();

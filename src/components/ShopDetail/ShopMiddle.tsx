@@ -5,8 +5,8 @@ import PaginationController from "../commons/PaginationController";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import PdpCard from "../commons/Card/PdpCard";
-import { getShopDetails, getShopProducts } from "../../api";
 import { useState } from "react";
+import { getShopProducts } from "../../services/shopService";
 
 const itemCount = 24;
 
@@ -64,7 +64,7 @@ export default function ShopMiddle({ common_sections, featured_sections }) {
                   artist={art.shop_name}
                   price={art.price}
                   originalPrice={art.original_price}
-                  free_shipping={art.free_shipping}
+                  is_free_shipping={art.is_free_shipping}
                   is_best_seller={art.is_best_seller}
                   is_liked={art.is_liked}
                 />
@@ -89,7 +89,7 @@ export default function ShopMiddle({ common_sections, featured_sections }) {
                     artist={art.shop_name}
                     price={art.price}
                     originalPrice={art.original_price}
-                    free_shipping={art.free_shipping}
+                    is_free_shipping={art.is_free_shipping}
                     is_best_seller={art.is_best_seller}
                     is_liked={art.is_liked}
                   />

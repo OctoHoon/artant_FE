@@ -1,7 +1,7 @@
 import { Flex, Text, Wrap } from "@chakra-ui/react";
 import CardSmall from "./commons/Card/CardSmall";
 import { useQuery } from "@tanstack/react-query";
-import { getRecentlyViewedProducts } from "../api";
+import { getRecentlyViewedProducts } from "../services/userService";
 
 interface Product {
   pk: number;
@@ -15,7 +15,7 @@ interface Product {
   shop_name: string;
   is_best_seller: boolean;
   is_star_seller: boolean;
-  free_shipping: boolean;
+  is_free_shipping: boolean;
   is_liked: boolean;
 }
 
@@ -50,7 +50,7 @@ export default function RecentlyViewed({ title }) {
               reviews={art.rating_count}
               price={art.price}
               originalPrice={art.original_price}
-              free_shipping={art.free_shipping}
+              is_free_shipping={art.is_free_shipping}
               is_best_seller={art.is_best_seller}
               is_liked={art.is_liked}
               key={index}

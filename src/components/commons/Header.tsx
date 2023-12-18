@@ -18,7 +18,6 @@ import { Text } from "@chakra-ui/react";
 import SignUpModal from "../index/SignUpModal";
 import useUser from "../../lib/useUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { logOut } from "../../api";
 import {
   AvatarMenuList,
   SvgArtantLogo,
@@ -27,6 +26,7 @@ import {
   SvgHeart,
   SvgShop,
 } from "../data/Header";
+import { logOut } from "../../services/userService";
 
 export default function Header() {
   const { userLoading, isLoggedIn, user } = useUser();

@@ -5,9 +5,9 @@ import { CssBaseline, ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { BrowserRouter, RouterProvider } from "react-router-dom";
 import router from "./router";
-import theme from "./theme";
+import theme from "./styles/theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "./fonts.css";
+import "./styles/fonts.css";
 
 const client = new QueryClient();
 

@@ -1,6 +1,6 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
-import { updateShop } from "../../../api";
 import BlackButton from "../../commons/Button/BlackButton";
+import { updateShop } from "../../../services/shopService";
 
 export default function EditAnnouncement({
   shop_pk,

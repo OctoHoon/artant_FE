@@ -5,8 +5,8 @@ import { useState } from "react";
 import ShopReview from "./ShopReview";
 import PaginationController from "../commons/PaginationController";
 import { useParams } from "react-router-dom";
-import { getShopReviews } from "../../api";
 import { useQuery } from "@tanstack/react-query";
+import { getShopReviews } from "../../services/shopService";
 
 const ReveiwKeyword = [
   {

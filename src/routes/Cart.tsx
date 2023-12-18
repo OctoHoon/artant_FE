@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import Footer from "../components/commons/Footer";
 import CartBody from "../components/Cart/CartBody";
 import { useQuery } from "@tanstack/react-query";
-import { getCart } from "../api";
+import { getCart } from "../services/userService";
 
 export default function Cart() {
   const { isLoading, data } = useQuery(["Cart"], getCart);

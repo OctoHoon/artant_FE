@@ -10,7 +10,7 @@ import {
   Switch,
   Text,
 } from "@chakra-ui/react";
-import BlackButton from "../components/commons/Button/BlackButton";
+import BlackButton from "../../components/commons/Button/BlackButton";
 
 export default function ShopManagerOrders() {
   return (

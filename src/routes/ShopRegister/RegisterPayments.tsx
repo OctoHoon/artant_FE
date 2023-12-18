@@ -11,14 +11,12 @@ import {
   Switch,
   Text,
 } from "@chakra-ui/react";
-import RegisterProcess from "../components/RegisterShop/RegisterProcess";
-import BlackButton from "../components/commons/Button/BlackButton";
-import Footer from "../components/commons/Footer";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import ScrollToTop from "../components/commons/ScrollToTop";
-import useUser from "../lib/useUser";
-import { useMutation } from "@tanstack/react-query";
-import { updateShop } from "../api";
+import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
+import BlackButton from "../../components/commons/Button/BlackButton";
+import { useNavigate, useParams } from "react-router-dom";
+import ScrollToTop from "../../components/commons/ScrollToTop";
+import useUser from "../../lib/useUser";
+import { updateShop } from "../../services/shopService";
 
 export default function RegisterPayments() {
   const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 생성

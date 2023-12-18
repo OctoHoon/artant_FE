@@ -14,9 +14,9 @@ import axios from "axios";
 import CustomSelect from "./CustomSelect";
 import DrawerFilter from "./Drawer/DrawerFilter";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getProductsParameter } from "../../api";
 import PaginationController from "../commons/PaginationController";
 import { subCategory, subsubCategory } from "../data/options";
+import { getProductsParameter } from "../../services/productService";
 
 interface IProduct {
   pk: number;
@@ -28,7 +28,7 @@ interface IProduct {
   thumbnail: string; // Adjust this according to your API response
   category: string;
   shop_name: string;
-  free_shipping: boolean;
+  is_free_shipping: boolean;
   is_best_seller: boolean;
   is_liked: boolean;
 }
@@ -205,7 +205,7 @@ export default function Itemlists() {
                 reviews={art.rating_count}
                 price={art.price}
                 originalPrice={art.original_price}
-                free_shipping={art.free_shipping}
+                is_free_shipping={art.is_free_shipping}
                 is_best_seller={art.is_best_seller}
                 is_liked={art.is_liked}
                 key={art.name}

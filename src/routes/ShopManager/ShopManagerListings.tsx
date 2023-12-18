@@ -11,13 +11,13 @@ import {
   Select,
   Radio,
 } from "@chakra-ui/react";
-import BlackButton from "../components/commons/Button/BlackButton";
-import PaginationController from "../components/commons/PaginationController";
+import BlackButton from "../../components/commons/Button/BlackButton";
+import PaginationController from "../../components/commons/PaginationController";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getShopProducts } from "../api";
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
+import { getShopProducts } from "../../services/shopService";
 
 export default function ShopManagerListings() {
   const { userLoading, isLoggedIn, user } = useUser();
@@ -112,7 +112,7 @@ export default function ShopManagerListings() {
                   스토어에 무료 배송 설정
                 </Text>
                 <Text>
-                  Copy 30,000만원이상 주문에 무료 배송을 제공하면 검색 결과에서
+                  30,000원 이상 주문에 무료 배송을 제공하면 검색 결과에서
                   우선순위를 차지할 수 있습니다. 대량 가격 책정 도구를 사용하면
                   쉽게 설정할 수 있습니다. <Text as="u">자세히 알아보기</Text>
                 </Text>

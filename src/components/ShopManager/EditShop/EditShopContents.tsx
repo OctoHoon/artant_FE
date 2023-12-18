@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import BlackButton from "../../commons/Button/BlackButton";
 import { PlusSVG, SvgCamera, SvgVideo } from "./Svg";
-import { updateShop } from "../../../api";
 import EditIntroImage from "./EditIntroImage";
+import { updateShop } from "../../../services/shopService";
 
 export default function EditShopContents({
   shop_pk,

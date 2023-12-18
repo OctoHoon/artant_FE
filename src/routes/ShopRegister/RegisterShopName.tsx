@@ -1,12 +1,12 @@
 import { Box, Button, Flex, HStack, Input, Text } from "@chakra-ui/react";
-import Footer from "../components/commons/Footer";
-import ProfileHeader from "../components/People/ProfileHeader";
-import RegisterProcess from "../components/RegisterShop/RegisterProcess";
+import Footer from "../../components/commons/Footer";
+import ProfileHeader from "../../components/People/ProfileHeader";
+import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
 import { useMutation } from "@tanstack/react-query";
-import { createShop } from "../api";
+import { createShop } from "../../services/shopService";
 
 export default function RegisterShopName() {
   const { userLoading, isLoggedIn, user } = useUser();
@@ -120,16 +120,7 @@ export default function RegisterShopName() {
               >
                 <HStack>
                   {isLengthValid ? <CorrectCheck /> : <NormalCheck />}
-                  <Text
-                    color="#000"
-                    textAlign="center"
-                    fontFamily="Spoqa Han Sans Neo"
-                    fontSize="14px"
-                    fontStyle="normal"
-                    fontWeight={400}
-                    lineHeight="normal"
-                    letterSpacing="-0.042px"
-                  >
+                  <Text color="#000" textAlign="center" textStyle={"B14R"}>
                     4~20자 사이
                   </Text>
                 </HStack>
@@ -139,16 +130,7 @@ export default function RegisterShopName() {
                   ) : (
                     <NormalCheck />
                   )}
-                  <Text
-                    color="#000"
-                    textAlign="center"
-                    fontFamily="Spoqa Han Sans Neo"
-                    fontSize="14px"
-                    fontStyle="normal"
-                    fontWeight={400}
-                    lineHeight="normal"
-                    letterSpacing="-0.042px"
-                  >
+                  <Text color="#000" textAlign="center" textStyle={"B14R"}>
                     특수 문자 및 공백이 없습니다.
                   </Text>
                 </HStack>

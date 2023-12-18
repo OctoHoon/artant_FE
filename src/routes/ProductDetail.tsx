@@ -1,13 +1,12 @@
 import { Box } from "@chakra-ui/react";
-import Footer from "../components/commons/Footer";
 import ItemDetail from "../components/ProductDetail/ItemDetail";
 import CollectionList from "../components/ProductDetail/CollectionList";
 import RelatedKeywords from "../components/ProductDetail/RelatedKeywords";
 import ItemListFive from "../components/ProductDetail/ItemsListFive";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProductDetails } from "../api";
 import SimilarItemFive from "../components/ProductDetail/SimilarItemFive";
+import { getProductDetails } from "../services/productService";
 
 export default function ProductDetail() {
   const { pk } = useParams();

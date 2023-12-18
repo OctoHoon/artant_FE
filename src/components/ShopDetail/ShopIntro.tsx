@@ -3,7 +3,7 @@ import { useState } from "react";
 import ArtantButton from "../commons/ArtantButton";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getShopDetails } from "../../api";
+import { getShopDetails } from "../../services/shopService";
 
 const images = [
   "https://i.etsystatic.com/isa/259811/1059261681376/isa_760xN.1059261681376_92ku.jpg?version=0.jpg",

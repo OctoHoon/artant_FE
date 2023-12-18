@@ -1,9 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import CartHeader from "../components/Cart/CartHeader";
-import CartBody from "../components/Cart/CartBody";
 import PaymentHeader from "../components/Payment/PaymentHeader";
 import PaymentBody from "../components/Payment/PaymentBody";
-import DiscountInfo from "../components/Payment/DiscountInfo";
 import { useLocation } from "react-router-dom";
 
 export default function Payment() {

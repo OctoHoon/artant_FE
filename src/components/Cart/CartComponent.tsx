@@ -8,9 +8,9 @@ import {
   Textarea,
   Input,
 } from "@chakra-ui/react";
-import { deleteCartLine } from "../../api";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { deleteCartLine } from "../../services/userService";
 
 export default function CartComponent({
   suggest,

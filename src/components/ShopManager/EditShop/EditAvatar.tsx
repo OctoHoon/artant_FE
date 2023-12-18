@@ -8,17 +8,14 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/react";
-import {
-  IMAGE_DELIVERY_URL,
-  getUploadURL,
-  updateShop,
-  uploadImage,
-} from "../../../api";
+
 import BlackButton from "../../commons/Button/BlackButton";
 import { PhotoSVG, PlusSVG, SvgCamera } from "./Svg";
-import { AiOutlineCamera } from "react-icons/ai";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { getUploadURL, uploadImage } from "../../../services/productService";
+import { IMAGE_DELIVERY_URL } from "../../../services/apiConfig";
+import { updateShop } from "../../../services/shopService";
 
 export default function EditAvatar({
   shop_pk,

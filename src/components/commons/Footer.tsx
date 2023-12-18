@@ -94,7 +94,7 @@ export default function Footer() {
             <Box>
               <Flex>
                 <Text color={"gray"} fontSize={"12px"} letterSpacing={"-0.3px"}>
-                  대표이사 서존
+                  대표이사 서정배
                 </Text>
                 <Divider
                   orientation="vertical"
@@ -103,7 +103,7 @@ export default function Footer() {
                   mx={2}
                 />
                 <Text color={"gray"} fontSize={"12px"} letterSpacing={"-0.3px"}>
-                  서울특별시 강남구 영동대로 602, 6층 브이208호
+                  서울특별시 서초구 사임당로 64, 교대벤처타워3층
                 </Text>
                 <Divider
                   orientation="vertical"
