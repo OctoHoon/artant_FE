@@ -14,7 +14,7 @@ interface Product {
   category: string;
   shop_name: string;
   is_best_seller: boolean;
-  free_shipping: boolean;
+  is_free_shipping: boolean;
   is_liked: boolean;
 }
 
@@ -55,7 +55,7 @@ export default function ArtantRecommend() {
               reviews={art.rating_count}
               price={art.price}
               originalPrice={art.original_price}
-              free_shipping={art.free_shipping}
+              is_free_shipping={art.is_free_shipping}
               is_best_seller={art.is_best_seller}
               is_liked={art.is_liked}
               key={index}

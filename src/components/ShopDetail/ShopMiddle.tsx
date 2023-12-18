@@ -64,7 +64,7 @@ export default function ShopMiddle({ common_sections, featured_sections }) {
                   artist={art.shop_name}
                   price={art.price}
                   originalPrice={art.original_price}
-                  free_shipping={art.free_shipping}
+                  is_free_shipping={art.is_free_shipping}
                   is_best_seller={art.is_best_seller}
                   is_liked={art.is_liked}
                 />
@@ -89,7 +89,7 @@ export default function ShopMiddle({ common_sections, featured_sections }) {
                     artist={art.shop_name}
                     price={art.price}
                     originalPrice={art.original_price}
-                    free_shipping={art.free_shipping}
+                    is_free_shipping={art.is_free_shipping}
                     is_best_seller={art.is_best_seller}
                     is_liked={art.is_liked}
                   />

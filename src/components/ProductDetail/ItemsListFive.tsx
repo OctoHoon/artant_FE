@@ -35,7 +35,7 @@ export default function ItemListFive({ title, shop_pk }) {
                   artist={product.shop_name}
                   price={product.price}
                   originalPrice={product.original_price}
-                  free_shipping={product.free_shipping}
+                  is_free_shipping={product.is_free_shipping}
                   is_best_seller={product.is_best_seller}
                   is_liked={product.is_liked}
                   key={index}

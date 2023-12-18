@@ -16,7 +16,7 @@ export default function CardSmall({
   reviews,
   price,
   originalPrice,
-  free_shipping,
+  is_free_shipping,
   is_best_seller,
   is_liked,
 }) {
@@ -194,7 +194,7 @@ export default function CardSmall({
             gap={"5px"}
             flexWrap={"wrap"}
           >
-            {[free_shipping, is_best_seller].map((tag, index) => (
+            {[is_free_shipping, is_best_seller].map((tag, index) => (
               <Flex
                 width={"62px"}
                 height={"18px"}
