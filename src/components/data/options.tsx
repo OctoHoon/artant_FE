@@ -101,6 +101,22 @@ export const color_options = [
   "컬러풀",
 ];
 
+export const color_options_dict = [
+  { label: "화이트", value: "white" },
+  { label: "블랙", value: "black" },
+  { label: "블루", value: "blue" },
+  { label: "그린", value: "green" },
+  { label: "그레이", value: "gray" },
+  { label: "오렌지", value: "orange" },
+  { label: "퍼플", value: "purple" },
+  { label: "레드", value: "red" },
+  { label: "브라운", value: "brown" },
+  { label: "옐로우", value: "yellow" },
+  { label: "골드", value: "gold" },
+  { label: "실버", value: "silver" },
+  { label: "컬러풀", value: "colorful" },
+];
+
 export const shipping_options = [
   "아트앤트 기프트 카드 허용",
   "선물 포장 가능",

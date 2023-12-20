@@ -6,9 +6,10 @@ import {
   Text,
   Textarea,
   Box,
+  Button,
 } from "@chakra-ui/react";
-import { subsubCategory } from "../../data/options";
-import { useState } from "react";
+import { color_options_dict, subsubCategory } from "../../data/options";
+import { useRef, useState } from "react";
 import SectionTitle from "./SectionTitle";
 import RegisterHeader from "./RegisterHeader";
 import RadioOption from "./RadioOption";
@@ -16,25 +17,30 @@ import InputOption from "./InputOption";
 import SelectOption from "./SelectOption";
 import { useQuery } from "@tanstack/react-query";
 import { getShopDetails } from "../../../services/shopService";
+import { SvgCamera } from "../EditShop/Svg";
+import SectionCreateModal from "./SectionCreateModal";
 
 const whoMadeOptions = [
-  { label: "I did", value: "option1" },
-  { label: "A member of my shop", value: "option2" },
-  { label: "Another company or person", value: "option3" },
+  { label: "자신", value: "I did" },
+  { label: "내 샵 멤버", value: "A member of my shop" },
+  { label: "다른 회사나 사람", value: "Another company or person" },
 ];
 
 const whatIsItOptions = [
-  { label: "A finished product", value: "option1" },
-  { label: "A supply or tool to make things", value: "option2" },
+  { label: "완제품", value: "A finished product" },
+  {
+    label: "물건 만드는데 필요한 물품이나 도구",
+    value: "A supply or tool to make things",
+  },
 ];
 
 const whenMadeOptions = [
-  { label: "Made to Order", value: "option1" },
+  { label: "주문제작", value: "option1" },
   { label: "2020-2023", value: "option2" },
   { label: "2010-2019", value: "option3" },
   { label: "2000-2009", value: "option4" },
   { label: "1990-1999", value: "option5" },
-  { label: "Before 1990", value: "option6" },
+  { label: "1990년 이전", value: "option6" },
 ];
 
 export default function ProductDetails({
@@ -57,6 +63,10 @@ export default function ProductDetails({
   section,
   setSection,
   pk,
+  primary_color_input,
+  setPrimaryColorInput,
+  secondary_color_input,
+  setSecondaryColorInput,
 }) {
   const { isLoading, data } = useQuery(["shop", pk], getShopDetails);
 
@@ -98,7 +108,32 @@ export default function ProductDetails({
   const [whoMade, setWhoMade] = useState("");
   const [whatMade, setWhatMade] = useState("");
   const [whenMade, setWhenMade] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [digitalFile, setDigitalFile] = useState<File | null>();
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const onFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileSelect = (event) => {
+    const files = event.target.files;
+
+    if (files && files[0]) {
+      const file = files[0];
+      // Maximum file size in bytes (100 MB)
+
+      setDigitalFile(files[0]);
+    }
+  };
+
+  console.log(primary_color_input);
+
+  console.log(digitalFile);
   return (
     <Flex // 목록 세부정보
       display={"flex"}
@@ -209,6 +244,28 @@ export default function ProductDetails({
             disabled={!selectedCategory}
           />
         </Flex>
+        <Flex>
+          <SectionTitle
+            title={"제품 특성"}
+            description={"카테고리에 해당하는 제품 특성을 입력해주세요"}
+            link={undefined}
+          />
+          <SelectOption
+            placeholder="메인 컬러"
+            options={color_options_dict}
+            value={primary_color_input}
+            onChange={(e) => setPrimaryColorInput(e.target.value)}
+            disabled={false} // Add other props like onChange, value as needed
+          />
+
+          <SelectOption
+            placeholder="서브 컬러"
+            options={color_options_dict}
+            value={secondary_color_input}
+            onChange={(e) => setSecondaryColorInput(e.target.value)}
+            disabled={false} // Add other props like onChange, value as needed
+          />
+        </Flex>
         <Flex // 갱신옵션
           display={"flex"}
           alignSelf={"stretch"}
@@ -253,6 +310,59 @@ export default function ProductDetails({
             description2={"구매자가 다운로드할 디지털 파일입니다."}
           />
         </Flex>
+        {shippingOptionValue == 2 && (
+          <Flex // 디지털 파일
+            display={"flex"}
+            alignSelf={"stretch"}
+            alignItems={"flex-start"}
+            gap={"40px"}
+          >
+            <SectionTitle
+              title={"디지털 파일*"}
+              description={undefined}
+              link={undefined}
+            />
+            <Flex alignItems={"flex-start"} gap={"20px"}>
+              {digitalFile ? (
+                <Text>{digitalFile.name}</Text>
+              ) : (
+                <>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileSelect}
+                    multiple
+                    display="none" // 숨길 input 엘리먼트
+                    ref={fileInputRef}
+                  />
+                  <Button
+                    display={"flex"}
+                    width={"120px"}
+                    height={"120px"}
+                    padding={"24px"}
+                    flexDirection={"column"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    gap={"20px"}
+                    border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
+                    variant="unstyled" // 클릭 효과와 색상 없애기
+                    onClick={onFileSelect}
+                  >
+                    <SvgCamera />
+                    <Text
+                      color="var(--maincolorstextblack-222222, #222)"
+                      textAlign="center"
+                      textStyle={"B13R"}
+                      mt={"-12px"}
+                    >
+                      파일 추가
+                    </Text>
+                  </Button>
+                </>
+              )}
+            </Flex>
+          </Flex>
+        )}
         <Flex // 설명
           display={"flex"}
           alignSelf={"stretch"}
@@ -321,9 +431,17 @@ export default function ProductDetails({
                 textDecorationLine: "underline",
               }}
               cursor={"pointer"}
+              onClick={() => setIsModalOpen(true)}
             >
-              첫 번째 섹션 추가
+              섹션 추가
             </Text>
+            {section in data.featured_sections ? null : <Text>{section}</Text>}
+            <SectionCreateModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              sectionName={section}
+              setSectionName={setSection}
+            />
             {!isLoading && (
               <SelectOption
                 value={section}

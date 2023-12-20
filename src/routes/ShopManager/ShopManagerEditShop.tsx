@@ -41,7 +41,7 @@ export default function ShopManagerEditShop() {
 
   useEffect(() => {
     if (!userLoading) {
-      setShopPK(user?.shop_pk);
+      setShopPK(user?.shop.pk);
     }
   }, [user]);
 
@@ -61,7 +61,7 @@ export default function ShopManagerEditShop() {
       }));
       console.log(sectionData);
       const response = await updateShop(shopPK, {
-        sections: sectionData,
+        sections_input: sectionData,
       });
 
       // Handle any additional logic after successful creation
@@ -124,7 +124,7 @@ export default function ShopManagerEditShop() {
             <Flex flexDirection={"column"} gap={"30px"} alignSelf={"stretch"}>
               {data && user && (
                 <EditBackgroundImg
-                  shop_pk={user.shop_pk}
+                  shop_pk={user.shop.pk}
                   background_pic={data.background_pic}
                 />
               )}
@@ -133,7 +133,7 @@ export default function ShopManagerEditShop() {
                   shop_name={data.shop_name}
                   shortDescription={shortDescription}
                   setShortDescription={setShortDescription}
-                  shop_pk={user.shop_pk}
+                  shop_pk={user.shop.pk}
                   shop_avatar={data.avatar}
                 />
               ) : (
@@ -152,7 +152,7 @@ export default function ShopManagerEditShop() {
               <EditAnnouncement
                 announcement={announcement}
                 setAnnouncement={setAnnouncement}
-                shop_pk={user && user.shop_pk}
+                shop_pk={user && user.shop.pk}
               />
               <Divider />
               <EditArt
@@ -165,7 +165,7 @@ export default function ShopManagerEditShop() {
               <Flex gap={"30px"} flexDirection={"column"}>
                 {data && (
                   <EditShopContents
-                    shop_pk={user && user.shop_pk}
+                    shop_pk={user && user.shop.pk}
                     data={data}
                     descriptionTitle={descriptionTitle}
                     setDescriptionTitle={setDescriptionTitle}

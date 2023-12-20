@@ -27,8 +27,7 @@ import {
   uploadProduct,
   uploadVideo,
 } from "../../services/productService";
-
-const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
+import { IMAGE_DELIVERY_URL } from "../../services/apiConfig";
 
 interface IUploadURLResponse {
   id: string;
@@ -123,6 +122,8 @@ export default function ShopManagerListingEditing() {
   const [detailCombinations, setDetailCombinations] = useState<
     DetailCombination[]
   >([]);
+  const [primary_color_input, setPrimaryColorInput] = useState("");
+  const [secondary_color_input, setSecondaryColorInput] = useState("");
 
   useEffect(() => {
     // Pre-populate form fields when data is available
@@ -249,28 +250,28 @@ export default function ShopManagerListingEditing() {
     name: productName,
     description: productDescription,
     price: productPrice,
-    category_name: selectedSubCategory,
+    category_name_input: selectedSubCategory,
     shopPK: shopPk!,
     made_by: "",
     product_type: "",
     product_creation_date: "",
-    primary_color: "",
-    secondary_color: "",
-    tags: [],
-    section: "",
-    materials: [],
+    primary_color_input: "",
+    secondary_color_input: "",
+    tags_input: [],
+    section_input: "",
+    materials_input: [],
     quantity: 0,
     sku: "",
     processing_min: 3,
     processing_max: 7,
     shipping_price: 0,
-    images: [],
-    video: "",
+    images_input: [],
+    video_input: "",
     is_personalization_enabled: false,
     is_personalization_optional: false,
     personalization_guide: "",
-    variations: [],
-    variants: [],
+    variations_input: [],
+    variants_input: [],
   };
 
   const onSubmitProduct = async () => {
@@ -366,7 +367,11 @@ export default function ShopManagerListingEditing() {
             setMaterials={setMaterials}
             section={undefined}
             setSection={undefined}
-            pk={user.shop_pk}
+            pk={user.shop.pk}
+            primary_color_input={primary_color_input}
+            setPrimaryColorInput={setPrimaryColorInput}
+            secondary_color_input={secondary_color_input}
+            setSecondaryColorInput={setSecondaryColorInput}
           />
           <StockAndPrice
             productPrice={productPrice}

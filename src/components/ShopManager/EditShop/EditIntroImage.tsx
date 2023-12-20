@@ -158,8 +158,8 @@ export default function EditIntroImage({
         });
 
         const updateData = {
-          images: imagesData,
-          video: cloudflareStreamUrl ?? "",
+          images_input: imagesData,
+          video_input: cloudflareStreamUrl ?? "",
         };
         console.log(updateData);
         console.log(shop_pk);

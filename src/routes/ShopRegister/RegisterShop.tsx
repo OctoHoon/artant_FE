@@ -20,7 +20,7 @@ export default function RegisterShop() {
       return; // Exit the function if the shop is activated
     }
 
-    if (user.shop_is_activated) {
+    if (user.shop?.is_activated) {
       toast({
         title: "이미 갤러리가 열려있습니다.",
         description: "Artant는 1계정 1갤러리를 원칙으로 합니다.",
@@ -34,14 +34,15 @@ export default function RegisterShop() {
 
     // Define the navigation paths based on the shop registration step
     const navigationPaths = {
-      1: `/your/shops/${user.shop_pk}/onboarding/listings/create`,
-      2: `/your/shops/${user.shop_pk}/onboarding/listings/payments`,
-      3: `/your/shops/${user.shop_pk}/onboarding/listings/billing`,
+      1: `/your/shops/${user.shop?.pk}/onboarding/listings/create`,
+      2: `/your/shops/${user.shop?.pk}/onboarding/listings/payments`,
+      3: `/your/shops/${user.shop?.pk}/onboarding/listings/billing`,
     };
 
     // Navigate to the appropriate path or the default path if the step is not 1, 2, or 3
     const path =
-      navigationPaths[user.shop_register_step] || "/your/shops/onboarding/name";
+      navigationPaths[user.shop?.register_step] ||
+      "/your/shops/onboarding/name";
     console.log(path);
     navigate(path);
   };

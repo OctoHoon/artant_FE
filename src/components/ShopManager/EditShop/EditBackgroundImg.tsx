@@ -10,12 +10,12 @@ import { useEffect, useState } from "react";
 import { AiOutlineCamera } from "react-icons/ai";
 import BlackButton from "../../commons/Button/BlackButton";
 import { useMutation } from "@tanstack/react-query";
-import { getUploadURL, uploadImage } from "../../../services/productService";
 import { updateShop } from "../../../services/shopService";
+import { getUploadURL, uploadImage } from "../../../services/productService";
+import { IMAGE_DELIVERY_URL } from "../../../services/apiConfig";
 
 export default function EditBackgroundImg({ shop_pk, background_pic }) {
   const toast = useToast();
-  const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
 
   const [backgroundImg, setBackgroundImg] = useState<File | null>(null);
   const [backgroundImgPreview, setBackgroundImgPreview] = useState<

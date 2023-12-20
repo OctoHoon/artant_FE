@@ -7,10 +7,10 @@ import { getShopProducts } from "../../services/shopService";
 
 export default function ShopManager() {
   const { userLoading, isLoggedIn, user } = useUser();
-  const firstShopPK = user?.shop_pk || null;
+  const shopPk = user?.shop_pk || null;
   const [page, setPage] = useState(1);
   const { isLoading, data } = useQuery(
-    ["shopProduct", firstShopPK, page],
+    ["shopProduct", shopPk, page],
     getShopProducts
   );
 
@@ -39,17 +39,17 @@ export default function ShopManager() {
             }
             display={"flex"}
           >
-            <Link to={`/shop/${user.shop_pk}`}>
+            <Link to={`/shop/${user.shop.pk}`}>
               <Image
                 width={"58px"}
                 height={"58px"}
-                src={user && user.shop_avatar}
+                src={user && user.shop.avatar}
               ></Image>{" "}
             </Link>
           </Box>
           <Flex flexDirection={"column"} gap={"6px"}>
             <Text fontSize={"20px"}>
-              어서오세요, {user && user.shop_name}샵!
+              어서오세요, {user && user.shop.shop_name}샵!
             </Text>
             <Link to={"/your/shops/me/listings/create"}>
               <Text color="#666" as="u">

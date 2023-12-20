@@ -28,11 +28,8 @@ export default function RegisterShopName() {
       try {
         // First, get the upload URL
         const response = await createShopName.mutateAsync({
-          username: user.name,
           shop_name: inputText,
-          register_step: undefined,
         });
-        console.log(response);
         navigate(`/your/shops/${response.id}/onboarding/listings/create`);
       } catch (error) {
         // Handle errors that occur during the upload or video creation process
@@ -153,24 +150,24 @@ export default function RegisterShopName() {
                     좋은 생각입니다. 이 이름을 사용 할 수 있습니다!
                   </Text>
                 </>
-              ) : inputText !== "" ? (
-                <>
-                  <SvgWarning />
-                  <Text
-                    color="var(--maincolorstextredf-12-e-24, #F12E24)"
-                    textAlign="center"
-                    fontFamily="Spoqa Han Sans Neo"
-                    fontSize="16px"
-                    fontStyle="normal"
-                    fontWeight={400}
-                    lineHeight="normal"
-                    letterSpacing="-0.048px"
-                  >
-                    상점 이름을 다시 입력해주세요!
-                  </Text>
-                </>
               ) : (
-                <Box height={"24px"} />
+                inputText !== "" && (
+                  <>
+                    <SvgWarning />
+                    <Text
+                      color="var(--maincolorstextredf-12-e-24, #F12E24)"
+                      textAlign="center"
+                      fontFamily="Spoqa Han Sans Neo"
+                      fontSize="16px"
+                      fontStyle="normal"
+                      fontWeight={400}
+                      lineHeight="normal"
+                      letterSpacing="-0.048px"
+                    >
+                      상점 이름을 다시 입력해주세요!
+                    </Text>
+                  </>
+                )
               )}
             </HStack>
           </Flex>

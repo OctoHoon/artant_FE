@@ -8,7 +8,12 @@ import PersonalizeTab from "./PersonalizeTab";
 import AddVariation from "./RegisterProdcuct/AddVariations";
 import Returns from "./RegisterProdcuct/Returns";
 import Shipping from "./RegisterProdcuct/Shipping";
-import { ActionSection } from "../../routes/ShopRegister/RegisterProduct";
+import {
+  ActionSection,
+  Policy,
+  ProcessingTimeOption,
+  SelectedOption,
+} from "../../routes/ShopRegister/RegisterProduct";
 import BlackButton from "../commons/Button/BlackButton";
 import WhiteButton from "../commons/Button/WhiteButton";
 import AddPictures from "./RegisterProdcuct/AddPictures";
@@ -25,36 +30,6 @@ import {
   uploadProduct,
   uploadVideo,
 } from "../../services/productService";
-
-type SelectedOption = {
-  name: string;
-  is_sku_vary: boolean;
-  is_price_vary: boolean;
-  is_quantity_vary: boolean;
-  options: OptionDetail[];
-};
-
-type OptionDetail = {
-  name: string;
-};
-
-type ProcessingTimeOption = {
-  key: string;
-  value: string;
-  min: number;
-  max: number;
-};
-
-type Policy = {
-  return: boolean;
-  exchange: boolean;
-  timeframe: number;
-};
-
-type IImage = {
-  image: string;
-  order: number;
-};
 
 export default function AddProduct() {
   const { userLoading, isLoggedIn, user } = useUser();
@@ -103,6 +78,8 @@ export default function AddProduct() {
     exchange: true,
     timeframe: 14,
   });
+  const [primary_color_input, setPrimaryColorInput] = useState("");
+  const [secondary_color_input, setSecondaryColorInput] = useState("");
   // image, video files
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
   const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
@@ -134,10 +111,10 @@ export default function AddProduct() {
       console.log(uploadImageResponses);
 
       // Step 3: Construct the images array
-      const images = uploadImageResponses.map((response, index) => ({
-        image: `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${response.result.id}/public`, // Assuming the response contains the URL as 'imageUrl'
-        order: index + 1, // Adding 1 since you want order to start from 1, not 0
-      }));
+      const images = uploadImageResponses.map(
+        (response) =>
+          `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${response.result.id}/public` // Assuming the response contains the URL as 'imageUrl'
+      );
 
       return images;
     } catch (error) {
@@ -208,39 +185,50 @@ export default function AddProduct() {
     ) {
       try {
         // 순차적으로 비동기 함수 실행
-        let videoUrl = await onSubmitVideo();
-        if (videoUrl == undefined) {
-          videoUrl = "";
+        let images: string[] = [];
+        let videoUrl = "";
+        try {
+          videoUrl = await onSubmitVideo();
+          if (videoUrl == undefined) {
+            videoUrl = "";
+          }
+        } catch (error) {
+          console.log(error);
+          alert("동영상 업로드 중 문제가 생겼습니다.");
         }
 
-        const images = await onSubmitImages(); // product에 images 등록
-
+        try {
+          images = await onSubmitImages(); // product에 images 등록
+        } catch (error) {
+          console.log(error);
+          alert("사진 업로드 중 문제가 발생했습니다.");
+        }
         const productData: IUploadProductVariables = {
           name: productName,
           description: productDescription,
           price: productPrice,
-          category_name: selectedSubCategory,
+          category_name_input: selectedSubCategory,
           shopPK: shopPK,
-          tags: tags,
-          materials: materials,
+          tags_input: tags,
+          materials_input: materials,
           made_by: "I did",
           product_type: "A finished product",
           product_creation_date: "Made To Order",
-          primary_color: "",
-          secondary_color: "",
-          section: section ?? "",
+          primary_color_input: "",
+          secondary_color_input: "",
+          section_input: section ?? "",
           quantity: 0,
           sku: productSKU,
           processing_min: 3,
           processing_max: 7,
           shipping_price: 0,
-          images: images,
-          video: videoUrl,
+          images_input: images,
+          video_input: videoUrl,
           is_personalization_enabled: isPersonalizationEnabled,
           is_personalization_optional: isOption,
           personalization_guide: personalization,
-          variations: selectedOptions,
-          variants: detailCombinations,
+          variations_input: selectedOptions,
+          variants_input: detailCombinations,
         };
         await onSubmitProduct({ productData }); // shop에 product 등록
         setSelectedFiles([]);
@@ -309,7 +297,11 @@ export default function AddProduct() {
               setMaterials={setMaterials}
               section={section}
               setSection={setSection}
-              pk={user.shop_pk}
+              pk={user.shop.pk}
+              primary_color_input={primary_color_input}
+              setPrimaryColorInput={setPrimaryColorInput}
+              secondary_color_input={secondary_color_input}
+              setSecondaryColorInput={setSecondaryColorInput}
             />
           )}
           <StockAndPrice

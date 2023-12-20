@@ -3,14 +3,12 @@ import { instance } from "./apiConfig";
 import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-export const createShop = async ({ username, shop_name, register_step }) => {
+export const createShop = async ({ shop_name }) => {
   try {
     const response = await instance.post(
       `shops/`,
       {
-        username,
         shop_name,
-        register_step: register_step || undefined,
       },
       {
         headers: {

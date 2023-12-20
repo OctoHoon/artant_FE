@@ -25,12 +25,12 @@ export interface IUploadProductVariables {
   made_by: string;
   product_type: string;
   product_creation_date: string;
-  category_name: string;
-  primary_color: string;
-  secondary_color: string;
-  tags: string[];
-  section: string;
-  materials: string[];
+  category_name_input: string;
+  primary_color_input: string;
+  secondary_color_input: string;
+  tags_input: string[];
+  section_input: string;
+  materials_input: string[];
   description: string;
   price: number;
   quantity: number;
@@ -38,77 +38,22 @@ export interface IUploadProductVariables {
   processing_min: number;
   processing_max: number;
   shipping_price: number;
-  images: { image: string; order: number }[];
-  video: string | null;
+  images_input: string[];
+  video_input: string | null;
   is_personalization_enabled: boolean;
   is_personalization_optional: boolean;
   personalization_guide: string;
-  variations: Variation[];
-  variants: Variant[];
+  variations_input: Variation[];
+  variants_input: Variant[];
 }
 
-export const uploadProduct = ({
-  name,
-  made_by,
-  product_type,
-  product_creation_date,
-  category_name,
-  primary_color,
-  secondary_color,
-  tags,
-  section,
-  materials,
-  description,
-  price,
-  quantity,
-  sku,
-  processing_min,
-  processing_max,
-  shipping_price,
-  images,
-  video,
-  is_personalization_enabled,
-  is_personalization_optional,
-  personalization_guide,
-  variations,
-  variants,
-  shopPK,
-}: IUploadProductVariables) =>
+export const uploadProduct = (uploadProduct: IUploadProductVariables) =>
   instance
-    .post(
-      `/shops/${shopPK}/products`,
-      {
-        name,
-        made_by,
-        product_type,
-        product_creation_date,
-        category_name,
-        primary_color,
-        secondary_color,
-        tags,
-        section,
-        materials,
-        description,
-        price,
-        quantity,
-        sku,
-        processing_min,
-        processing_max,
-        shipping_price,
-        images,
-        video,
-        is_personalization_enabled,
-        is_personalization_optional,
-        personalization_guide,
-        variations,
-        variants,
+    .post(`/shops/${uploadProduct.shopPK}/products`, uploadProduct, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    )
+    })
     .then((response) => response.data);
 export interface IPutProductVariables {
   thumbnail: string;

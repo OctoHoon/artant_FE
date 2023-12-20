@@ -477,7 +477,7 @@ export default function RegisterPayments() {
             >
               <Flex flexDirection={"column"} gap={"8px"}>
                 <Text fontSize={"22px"} fontWeight={"500"}>
-                  세무상 판매자는 어떤 유형인가요?
+                  판매자는 어떤 유형인가요?
                 </Text>
                 <Flex alignItems={"center"}>
                   <Text fontSize={"14px"} lineHeight={"140%"}>

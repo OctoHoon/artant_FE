@@ -30,7 +30,7 @@ import { logOut } from "../../services/userService";
 
 export default function Header() {
   const { userLoading, isLoggedIn, user } = useUser();
-  const firstShopPK = user?.shop_pk || null;
+  const shopIsActivated = user?.shop?.is_activated || null;
   const {
     isOpen: isLoginOpen,
     onClose: onLoginClose,
@@ -92,59 +92,57 @@ export default function Header() {
         />
 
         <HStack spacing={2} alignItems={"center"} marginLeft={"180px"}>
-          {!userLoading ? (
-            !isLoggedIn ? (
-              <>
-                <Flex alignItems={"center"} gap={"10px"} color={"#777"}>
-                  <Box
-                    as="button"
-                    onClick={onLoginOpen}
-                    bg="transparent"
-                    border="none"
-                    _hover={{ bg: "transparent" }}
-                    _active={{ bg: "transparent" }}
-                    _focus={{ outline: "none" }}
-                    height={"16px"}
-                  >
-                    <Text fontSize="13px">로그인</Text>
-                  </Box>
-                  <Text>•</Text>
-                  <Box
-                    as="button"
-                    onClick={onLoginOpen}
-                    bg="transparent"
-                    border="none"
-                    _hover={{ bg: "transparent" }}
-                    _active={{ bg: "transparent" }}
-                    _focus={{ outline: "none" }}
-                    height={"16px"}
-                  >
-                    <Text fontSize="13px">회원가입</Text>
-                  </Box>
-                  <Text>•</Text>
-                  <Box height={"16px"}>
-                    <Link to={"/"}>
-                      <Text fontSize="13px">고객센터</Text>
-                    </Link>
-                  </Box>
-                  <Divider
-                    orientation="vertical"
-                    height="16px"
-                    borderColor="#D9D9D9"
-                    mx={2}
-                  />{" "}
-                  <Box color={"#1C1B1F"} height={"24px"}>
-                    <Link to={"/"}>
-                      <SvgHeart />
-                    </Link>
-                  </Box>
-                  <Box color={"#1C1B1F"} height={"24px"}>
-                    <Link to={"/"}>
-                      <SvgBasket />
-                    </Link>
-                  </Box>
-                </Flex>
-              </>
+          {!userLoading &&
+            (!isLoggedIn ? (
+              <Flex alignItems={"center"} gap={"10px"} color={"#777"}>
+                <Box
+                  as="button"
+                  onClick={onLoginOpen}
+                  bg="transparent"
+                  border="none"
+                  _hover={{ bg: "transparent" }}
+                  _active={{ bg: "transparent" }}
+                  _focus={{ outline: "none" }}
+                  height={"16px"}
+                >
+                  <Text fontSize="13px">로그인</Text>
+                </Box>
+                <Text>•</Text>
+                <Box
+                  as="button"
+                  onClick={onLoginOpen}
+                  bg="transparent"
+                  border="none"
+                  _hover={{ bg: "transparent" }}
+                  _active={{ bg: "transparent" }}
+                  _focus={{ outline: "none" }}
+                  height={"16px"}
+                >
+                  <Text fontSize="13px">회원가입</Text>
+                </Box>
+                <Text>•</Text>
+                <Box height={"16px"}>
+                  <Link to={"/"}>
+                    <Text fontSize="13px">고객센터</Text>
+                  </Link>
+                </Box>
+                <Divider
+                  orientation="vertical"
+                  height="16px"
+                  borderColor="#D9D9D9"
+                  mx={2}
+                />{" "}
+                <Box color={"#1C1B1F"} height={"24px"}>
+                  <Link to={"/"}>
+                    <SvgHeart />
+                  </Link>
+                </Box>
+                <Box color={"#1C1B1F"} height={"24px"}>
+                  <Link to={"/"}>
+                    <SvgBasket />
+                  </Link>
+                </Box>
+              </Flex>
             ) : (
               <Flex alignItems={"center"} gap={"10px"} color={"#777"}>
                 <Text
@@ -189,8 +187,8 @@ export default function Header() {
                 <Box color={"#1C1B1F"} height={"24px"}>
                   <Link
                     to={
-                      firstShopPK
-                        ? `/shop/${firstShopPK}`
+                      shopIsActivated
+                        ? `/shop/${user.shop.pk}`
                         : `your/shops/register`
                     }
                   >
@@ -203,8 +201,7 @@ export default function Header() {
                   </Link>
                 </Box>
               </Flex>
-            )
-          ) : null}
+            ))}
         </HStack>
 
         <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />

@@ -22,11 +22,11 @@ import {
 } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { getUploadURL, uploadImage } from "../services/productService";
 import { createUser } from "../services/userService";
+import { IMAGE_DELIVERY_URL } from "../services/apiConfig";
+import { getUploadURL, uploadImage } from "../services/productService";
 
 export default function Signup() {
-  const IMAGE_DELIVERY_URL = "https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw";
   const toast = useToast();
 
   const navigate = useNavigate();
@@ -275,7 +275,7 @@ export default function Signup() {
               />
             </FormControl>
             {/* Address fields */}
-            <FormControl>
+            {/* <FormControl>
               <FormLabel htmlFor="user_name">배송지 이름</FormLabel>
               <Input
                 width={"200px"}
