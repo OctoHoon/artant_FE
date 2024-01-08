@@ -5,7 +5,6 @@ import {
   Input,
   Text,
   Image,
-  Box,
   FormControl,
   Switch,
   Select,
@@ -13,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import BlackButton from "../../components/commons/Button/BlackButton";
 import PaginationController from "../../components/commons/PaginationController";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useUser from "../../lib/useUser";
@@ -21,10 +20,10 @@ import { getShopProducts } from "../../services/shopService";
 
 export default function ShopManagerListings() {
   const { userLoading, isLoggedIn, user } = useUser();
-  const firstShopPK = user?.shop_pk || null;
+  const shopPK = user?.shop.pk || null;
   const [page, setPage] = useState(1);
   const { isLoading, data } = useQuery(
-    ["shopProduct", firstShopPK, page],
+    ["shopProduct", shopPK, page],
     getShopProducts
   );
 

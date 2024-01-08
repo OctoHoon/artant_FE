@@ -16,9 +16,7 @@ import { Link } from "react-router-dom";
 
 export default function CartBody({ data }) {
   const { userLoading, isLoggedIn, user } = useUser();
-  const [cartData, setCartData] = useState(
-    data?.cartline.slice().reverse() || []
-  );
+  const [cartData, setCartData] = useState(data.shop_cartlines || []);
   const [selectedItems, setSelectedItems] = useState<any[]>([]); // 선택된 아이템을 담을 객체
   const [selectAll, setSelectAll] = useState(false);
 
@@ -32,13 +30,6 @@ export default function CartBody({ data }) {
       : cartData; // 모든 상품 선택
     setSelectedItems(updatedSelectedItems);
   };
-
-  // data가 로드되면 cartData 업데이트
-  useEffect(() => {
-    if (data && data.cartline) {
-      setCartData(data.cartline.slice().reverse());
-    }
-  }, [data]);
 
   const deleteCartItem = (index) => {
     // index에 해당하는 데이터 삭제
@@ -65,6 +56,11 @@ export default function CartBody({ data }) {
       }
     }
   };
+  // console.log(data);
+  // console.log(data.shop_cartlines);
+  // console.log(data);
+
+  // console.log(data.shop_cartlines);
 
   return (
     <Flex flexDirection={"column"} gap={"20px"}>
@@ -167,8 +163,8 @@ export default function CartBody({ data }) {
                         " var(--maincolorsbggrayf-9-f-9-f-9, #F9F9F9);"
                       }
                     >
-                      {item.product.price.toLocaleString()}원 + 배송비 0원 ={" "}
-                      {item.product.price.toLocaleString()}원
+                      {/* {item.product.price.toLocaleString()}원 + 배송비 0원 ={" "} */}
+                      {/* {item.product.price.toLocaleString()}원 */}
                     </Flex>
                   </React.Fragment>
                 ))}
