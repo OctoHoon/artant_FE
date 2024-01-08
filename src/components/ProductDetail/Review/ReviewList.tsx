@@ -112,7 +112,8 @@ export default function ReviewList() {
       </Box>
       {isLoading ? null : (
         <>
-          {data.reviews.length == 0 ? (
+          {/* {data.reviews.length == 0 ? ( */}
+          {true ? (
             <Box padding={"40px"} textAlign={"center"}>
               <Text>리뷰 없음</Text>
             </Box>

@@ -5,6 +5,8 @@ import {
   Flex,
   Grid,
   HStack,
+  Skeleton,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import ArtPiece from "../commons/Card/ArtPiece";
@@ -179,7 +181,24 @@ export default function Itemlists() {
       </HStack>
 
       {isLoading ? (
-        <Box />
+        <Flex gap={"20px"} marginY={"100px"}>
+          <Skeleton width={"290px"} height={"450px"}>
+            <div>contents wrapped</div>
+            <div>won't be visible</div>
+          </Skeleton>
+          <Skeleton width={"290px"} height={"450px"}>
+            <div>contents wrapped</div>
+            <div>won't be visible</div>
+          </Skeleton>
+          <Skeleton width={"290px"} height={"450px"}>
+            <div>contents wrapped</div>
+            <div>won't be visible</div>
+          </Skeleton>
+          <Skeleton width={"290px"} height={"450px"}>
+            <div>contents wrapped</div>
+            <div>won't be visible</div>
+          </Skeleton>
+        </Flex>
       ) : (
         <>
           <Grid

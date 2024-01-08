@@ -5,9 +5,11 @@ export default function useUser() {
   const { isLoading, data, isError } = useQuery(["me"], getMe, {
     retry: false,
   });
+  const isTokenValid = !isError && !!data;
+
   return {
     userLoading: isLoading,
     user: data,
-    isLoggedIn: !isError,
+    isLoggedIn: isTokenValid,
   };
 }

@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import FavoriteItems from "./FavoriteItems";
 import FavoriteShops from "./FavoriteShops";
-import useUser from "../../lib/useUser";
 import { useQuery } from "@tanstack/react-query";
 import {
   getFavoriteProducts,

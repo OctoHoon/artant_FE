@@ -115,7 +115,8 @@ export default function ShopReviewList({ shop_pk }) {
       </Box>
       {isLoading ? null : (
         <>
-          {data.reviews.length === 0 ? (
+          {true ? (
+            // {data.reviews.length === 0 ? (
             <Box padding={"40px"} textAlign={"center"}>
               <Text>리뷰 없음</Text>
             </Box>

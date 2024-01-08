@@ -11,7 +11,9 @@ export default function SocialLogin() {
         <Divider />
       </HStack>
       <VStack>
-        <Text fontSize={"16px"}>간편하게 로그인</Text>
+        <Text textStyle={"B14R"} color={"#767676"}>
+          SNS로 간편하게 로그인
+        </Text>
         <HStack spacing={6} marginBottom={6} marginTop={2}>
           <SocialLoginButton src={"/assets/images/google.png"} />
           <SocialLoginButton src={"/assets/images/naver.png"} />

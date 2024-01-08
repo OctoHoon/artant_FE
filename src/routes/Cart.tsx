@@ -19,7 +19,7 @@ export default function Cart() {
         mb={"120px"}
       >
         {/* <CartHeader data={!isLoading ? data : null} /> */}
-        <CartBody data={data && data} />
+        {data && <CartBody data={data && data} />}
       </Box>
     </Box>
   );

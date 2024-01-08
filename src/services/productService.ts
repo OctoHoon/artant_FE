@@ -193,14 +193,17 @@ export const getProductDetails = ({ queryKey }: QueryFunctionContext) => {
 
 export const getReviews = ({ queryKey }: QueryFunctionContext) => {
   const [pk, page, selectedOption] = queryKey;
-  return instance
-    .get(`products/${pk}/reviews?page=${page}&sort=${selectedOption}`)
-    .then((response) => response.data);
+  return (
+    instance
+      //?page=${page}&sort=${selectedOption}
+      .get(`reviews/products/${pk}`)
+      .then((response) => response.data)
+  );
 };
 
 export const getReviewPhotos = ({ queryKey }: QueryFunctionContext) => {
   const [pk, page] = queryKey;
   return instance
-    .get(`products/${pk}/reviews/images?page=${page}`)
+    .get(`reviews/products/${pk}/images?page=${page}`)
     .then((response) => response.data);
 };

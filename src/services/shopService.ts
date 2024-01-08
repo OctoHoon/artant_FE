@@ -90,6 +90,6 @@ export const getShopProducts = ({ queryKey }: QueryFunctionContext) => {
 export const getShopReviews = ({ queryKey }: QueryFunctionContext) => {
   const [pk, page, selectedOption] = queryKey;
   return instance
-    .get(`shops/${pk}/reviews?page=${page}&sort=${selectedOption}`)
+    .get(`reviews/${pk}/reviews?page=${page}&sort=${selectedOption}`)
     .then((response) => response.data);
 };

@@ -15,3 +15,18 @@ export const instance = axios.create({
   baseURL: baseUrl,
   withCredentials: true,
 });
+
+instance.interceptors.request.use(
+  (config) => {
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (jwtToken) {
+      config.headers["Authorization"] = `Bearer ${jwtToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default instance;
