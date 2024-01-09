@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useToast } from "@chakra-ui/react";
 import ArtantRecommend from "../components/index/ArtantRecommend";
 import NewArrival from "../components/index/NewArrival";
 import GiftCategories from "../components/index/GiftCategories";
@@ -10,9 +10,41 @@ import RegisterButton from "../components/index/RegisterButton";
 import CenteredText from "../components/index/CenterCopy";
 import RecentlyViewed from "../components/RecentlyViewed";
 import useUser from "../lib/useUser";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+import { kakaoLogin } from "../services/userService";
+import { useEffect } from "react";
 
 export default function Home() {
   const { userLoading, isLoggedIn, user } = useUser();
+
+  const { search } = useLocation();
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const confirmLogin = async () => {
+    const params = new URLSearchParams(search);
+    const code = params.get("code");
+    if (code) {
+      console.log(code);
+      const status = await kakaoLogin(code);
+      if (status === 200) {
+        toast({
+          status: "success",
+          title: "Welcome!",
+          position: "bottom-right",
+          description: "Happy to have you back!",
+        });
+        queryClient.refetchQueries(["me"]);
+        navigate("/");
+      }
+    }
+  };
+
+  useEffect(() => {
+    confirmLogin();
+  }, []);
+
   return (
     <Box>
       <TopBanner />

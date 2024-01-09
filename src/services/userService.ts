@@ -45,7 +45,7 @@ export const createUser = async ({
 };
 
 export interface IUsernameLoginVariables {
-  username: string;
+  email: string;
   password: string;
 }
 export interface IUsernameLoginSuccess {
@@ -55,13 +55,10 @@ export interface IUsernameLoginError {
   error: string;
 }
 
-export const usernameLogIn = ({
-  username,
-  password,
-}: IUsernameLoginVariables) =>
+export const usernameLogIn = ({ email, password }: IUsernameLoginVariables) =>
   instance.post(
     `users/log-in`,
-    { username, password },
+    { email, password },
     {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
@@ -182,3 +179,16 @@ export const getRecentlyViewedProducts = () =>
   instance
     .get("user-activities/recently-viewed")
     .then((response) => response.data);
+
+export const kakaoLogin = (code: string) =>
+  instance
+    .post(
+      `/users/kakao`,
+      { code },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoekn") || "",
+        },
+      }
+    )
+    .then((response) => response.status);

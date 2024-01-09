@@ -1,4 +1,4 @@
-import { createHashRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Root from "./routes/Root";
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
@@ -36,8 +36,9 @@ import EventDetailTwo from "./routes/EventDetailTwo";
 import ShopManagerCommunity from "./routes/ShopManager/ShopManagerCommunity";
 import ItemsTag from "./routes/itemsTag";
 import Signup from "./routes/Signup";
+import KakaoConfirm from "./routes/KakaoConfirm";
 
-const router = createHashRouter(
+const router = createBrowserRouter(
   [
     {
       path: "/",
