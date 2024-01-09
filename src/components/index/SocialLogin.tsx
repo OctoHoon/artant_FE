@@ -1,6 +1,13 @@
 import { Box, Divider, HStack, Image, Text, VStack } from "@chakra-ui/react";
 
 export default function SocialLogin() {
+  const kakaoParams = {
+    client_id: "08257a5e580b5be1b9a8785b4f4ace12",
+    redirect_uri: "http://127.0.0.1:3000/social/kakao",
+    response_type: "code",
+  };
+  const params = new URLSearchParams(kakaoParams).toString();
+  console.log(params);
   return (
     <Box mb={4}>
       <HStack my={8}>
@@ -15,19 +22,26 @@ export default function SocialLogin() {
           SNS로 간편하게 로그인
         </Text>
         <HStack spacing={6} marginBottom={6} marginTop={2}>
-          <SocialLoginButton src={"/assets/images/google.png"} />
-          <SocialLoginButton src={"/assets/images/naver.png"} />
-          <SocialLoginButton src={"/assets/images/kakao.png"} />
+          <SocialLoginButton
+            src={"/assets/images/google.png"}
+            params={undefined}
+          />
+          <SocialLoginButton
+            src={"/assets/images/naver.png"}
+            params={undefined}
+          />
+          <SocialLoginButton src={"/assets/images/kakao.png"} params={params} />
         </HStack>
       </VStack>
     </Box>
   );
 }
 
-const SocialLoginButton = ({ src }) => {
+const SocialLoginButton = ({ src, params }) => {
   return (
     <Box
-      as="button"
+      as="a"
+      href={`https://kauth.kakao.com/oauth/authorize?${params}`}
       w="48px"
       h="48px"
       rounded="full"

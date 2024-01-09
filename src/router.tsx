@@ -36,6 +36,7 @@ import EventDetailTwo from "./routes/EventDetailTwo";
 import ShopManagerCommunity from "./routes/ShopManager/ShopManagerCommunity";
 import ItemsTag from "./routes/itemsTag";
 import Signup from "./routes/Signup";
+import KakaoConfirm from "./routes/KakaoConfirm";
 
 const router = createHashRouter(
   [
@@ -47,6 +48,10 @@ const router = createHashRouter(
         {
           path: "",
           element: <Home />,
+        },
+        {
+          path: "social/kakao",
+          element: <KakaoConfirm />,
         },
         {
           path: "signup",

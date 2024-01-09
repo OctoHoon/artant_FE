@@ -182,3 +182,16 @@ export const getRecentlyViewedProducts = () =>
   instance
     .get("user-activities/recently-viewed")
     .then((response) => response.data);
+
+export const kakaoLogin = (code: string) =>
+  instance
+    .post(
+      `/users/kakao`,
+      { code },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoekn") || "",
+        },
+      }
+    )
+    .then((response) => response.status);
