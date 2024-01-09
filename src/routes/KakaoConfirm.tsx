@@ -14,18 +14,17 @@ export default function KakaoConfirm() {
     const code = params.get("code");
     if (code) {
       console.log(code);
-      return;
-      //   const status = await kakaoLogin(code);
-      //   if (status === 200) {
-      //     toast({
-      //       status: "success",
-      //       title: "Welcome!",
-      //       position: "bottom-right",
-      //       description: "Happy to have you back!",
-      //     });
-      //     queryClient.refetchQueries(["me"]);
-      //     navigate("/");
-      //   }
+      const status = await kakaoLogin(code);
+      if (status === 200) {
+        toast({
+          status: "success",
+          title: "Welcome!",
+          position: "bottom-right",
+          description: "Happy to have you back!",
+        });
+        queryClient.refetchQueries(["me"]);
+        navigate("/");
+      }
     }
   };
   useEffect(() => {

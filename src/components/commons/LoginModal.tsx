@@ -29,7 +29,7 @@ interface LoginModalProps {
 }
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
-  const [username, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // Track password visibility
   const [loginError, setLoginError] = useState("");
@@ -44,16 +44,16 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   };
 
   const handleLogin = async () => {
-    console.log(username);
+    console.log(email);
     console.log(password);
 
-    if (!isEmailValid(username)) {
+    if (!isEmailValid(email)) {
       setLoginError("아이디(이메일)는 이메일 형식으로 입력해주세요.");
       return;
     }
 
     try {
-      const response = await usernameLogIn({ username, password });
+      const response = await usernameLogIn({ email, password });
 
       console.log("Login successful:", response.data);
       queryClient.refetchQueries(["me"]);
