@@ -3,35 +3,33 @@ import { instance } from "./apiConfig";
 import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-export const createUser = async ({
-  username,
-  password,
-  email,
-  name,
-  gender,
-  birthday,
-  description,
-  avatar,
-}) => {
+export interface IUserSignUpVariables {
+  name: string;
+  username: string;
+  password: string;
+  password_confirm: string;
+  email: string;
+  gender: string;
+  birthday: string;
+  cell_phone_number: string;
+  description: string;
+  avatar: string;
+  agreed_to_terms_of_service: boolean;
+  agreed_to_electronic_transactions: boolean;
+  agreed_to_privacy_policy: boolean;
+  confirmed_age_over_14: boolean;
+  agreed_to_third_party_sharing: boolean;
+  agreed_to_optional_privacy_policy: boolean;
+  agreed_to_marketing_mails: boolean;
+}
+
+export const createUser = async (userData: IUserSignUpVariables) => {
   try {
-    const response = await instance.post(
-      `users/sign-up`,
-      {
-        username,
-        password,
-        email,
-        name,
-        gender,
-        birthday,
-        description,
-        avatar,
+    const response = await instance.post(`users/sign-up`, userData, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
       },
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    );
+    });
     return response.data;
   } catch (error) {
     // Error handling can be more specific based on your needs
@@ -41,6 +39,24 @@ export const createUser = async ({
     } else {
       throw error; // Re-throw the error if it's not an Axios error
     }
+  }
+};
+
+export const validateEmail = async ({ email }) => {
+  try {
+    console.log(email);
+    const response = await instance.post(
+      `users/validate-email`,
+      { email: email },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error validating email:", error);
   }
 };
 

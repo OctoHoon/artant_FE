@@ -122,3 +122,14 @@ export const shipping_options = [
   "선물 포장 가능",
   "사용자 정의 가능 ",
 ];
+
+export const yearOptions = Array.from(
+  { length: new Date().getFullYear() - 1900 + 1 },
+  (_, index) => (1900 + index).toString()
+);
+export const monthOptions = Array.from({ length: 12 }, (_, index) =>
+  (index + 1).toString()
+);
+export const dayOptions = Array.from({ length: 31 }, (_, index) =>
+  (index + 1).toString()
+);

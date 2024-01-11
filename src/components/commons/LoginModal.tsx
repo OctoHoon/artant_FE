@@ -39,16 +39,23 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return true;
-    //    return emailRegex.test(email);
+    return emailRegex.test(email);
   };
 
   const handleLogin = async () => {
     console.log(email);
     console.log(password);
 
+    if (email === "") {
+      setLoginError("아이디(이메일)을 입력해주세요.");
+      return;
+    }
     if (!isEmailValid(email)) {
       setLoginError("아이디(이메일)는 이메일 형식으로 입력해주세요.");
+      return;
+    }
+    if (password === "") {
+      setLoginError("비밀번호를 입력해주세요.");
       return;
     }
 
@@ -59,7 +66,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
       queryClient.refetchQueries(["me"]);
       onClose();
     } catch (error) {
-      setLoginError("Login failed. Please check your credentials.");
+      setLoginError("아이디나 비밀번호를 확인해주세요.");
       console.error("Login error:", error);
     }
   };
@@ -83,7 +90,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 variant="flushed"
                 focusBorderColor="black"
                 placeholder="아이디를 입력하세요"
-                // value={email}
+                value={email}
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 errorBorderColor="red.500"
@@ -116,11 +123,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 {loginError}
               </Text>
             )}
-            <Flex justifyContent="space-between" marginLeft="25px">
-              <Checkbox right={6} colorScheme="blackAlpha">
-                로그인 상태 유지
-              </Checkbox>
-              <Text fontWeight="300">아이디/비밀번호</Text>
+            <Flex justifyContent="space-between">
+              <Checkbox>로그인 상태 유지</Checkbox>
+              <Text fontWeight="300">아이디/비밀번호 찾기</Text>
             </Flex>
             <Button
               py={6}
@@ -131,7 +136,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               onClick={handleLogin}
               backgroundColor="#5400FD"
               _hover={{
-                background: "var(--maincolorsbggray-555555, #555)",
+                background: "var(--maincolorsbggray-555555, #5400FD)",
               }}
             >
               <Text color="#DBDBDB" textAlign="center" textStyle="B16B">
