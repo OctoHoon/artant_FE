@@ -186,7 +186,9 @@ function SignUpButton({ text, onClose, navigate }) {
       borderRadius="0px"
       onClick={() => {
         onClose();
-        navigate("/signup");
+        text === "일반 회원가입"
+          ? navigate("/signup")
+          : navigate("/corportate_signup");
       }}
     >
       {text}

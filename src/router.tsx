@@ -37,6 +37,7 @@ import ShopManagerCommunity from "./routes/ShopManager/ShopManagerCommunity";
 import ItemsTag from "./routes/itemsTag";
 import Signup from "./routes/Signup";
 import KakaoConfirm from "./routes/KakaoConfirm";
+import CorporateSignup from "./routes/CorporateSignup";
 
 const router = createBrowserRouter(
   [
@@ -52,6 +53,10 @@ const router = createBrowserRouter(
         {
           path: "signup",
           element: <Signup />,
+        },
+        {
+          path: "corportate_signup",
+          element: <CorporateSignup />,
         },
         {
           path: "items/:category",
