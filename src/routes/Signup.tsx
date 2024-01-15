@@ -34,6 +34,7 @@ import {
   yearOptions,
 } from "../components/data/options";
 import { emailRegex, passwordRegex, same3word } from "../utils/regex";
+import { faSleigh } from "@fortawesome/free-solid-svg-icons";
 
 export default function Signup() {
   const toast = useToast();
@@ -273,6 +274,9 @@ export default function Signup() {
         agreed_to_optional_privacy_policy:
           agreements.agreed_to_optional_privacy_policy,
         agreed_to_marketing_mails: agreements.agreed_to_marketing_mails,
+        is_corporate: false,
+        corporate_number: null,
+        corporate_name: null,
       });
       return result;
     } catch (error) {
@@ -430,7 +434,7 @@ export default function Signup() {
             </FormControl>
             {/* Birthday field */}
             <FormControl isRequired>
-              <FormLabel htmlFor="birthday">Birthday</FormLabel>
+              <FormLabel htmlFor="birthday">생년월일</FormLabel>
               <div style={{ display: "flex", gap: "10px" }}>
                 <Select
                   id="birthdayYear"

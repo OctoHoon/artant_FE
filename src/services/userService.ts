@@ -4,6 +4,9 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 export interface IUserSignUpVariables {
+  is_corporate: boolean;
+  corporate_number: string | null;
+  corporate_name: string | null;
   name: string;
   username: string;
   password: string;
@@ -44,10 +47,26 @@ export const createUser = async (userData: IUserSignUpVariables) => {
 
 export const validateEmail = async ({ email }) => {
   try {
-    console.log(email);
     const response = await instance.post(
       `users/validate-email`,
       { email: email },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error validating email:", error);
+  }
+};
+
+export const validateCorporateNumber = async ({ corporateNumber }) => {
+  try {
+    const response = await instance.post(
+      `users/validate-corporate-number`,
+      { corporate_number: corporateNumber },
       {
         headers: {
           "X-CSRFToken": Cookie.get("csrftoken") || "",
