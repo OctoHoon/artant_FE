@@ -16,6 +16,7 @@ import {
   InputRightElement,
   IconButton,
   InputGroup,
+  Box,
 } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -146,15 +147,15 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <SocialLogin />
             <Flex flexDirection="column" gap="8px">
               <SignUpButton
-                text="일반 회원가입"
+                text="회원가입"
                 onClose={onClose}
                 navigate={navigate}
               />
-              <SignUpButton
+              {/* <SignUpButton
                 text="사업자 회원가입"
                 onClose={onClose}
                 navigate={navigate}
-              />
+              /> */}
             </Flex>
             <Flex
               alignSelf="center"
@@ -186,9 +187,7 @@ function SignUpButton({ text, onClose, navigate }) {
       borderRadius="0px"
       onClick={() => {
         onClose();
-        text === "일반 회원가입"
-          ? navigate("/signup")
-          : navigate("/corportate_signup");
+        navigate("/signup");
       }}
     >
       {text}
