@@ -18,7 +18,7 @@ import ArtantRadio from "../commons/Button/ArtantRadio";
 export default function IdRecoveryForm() {
   const toast = useToast();
   const navigate = useNavigate();
-  const [recoveryOption, setRecoveryOption] = useState("");
+  const [recoveryOption, setRecoveryOption] = useState("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
 
@@ -134,41 +134,72 @@ export default function IdRecoveryForm() {
             </Flex>
           </RadioGroup>
         </Flex>
-        <VStack spacing={4} align="flex-start" width={"full"}>
-          <AccountRecoveryInput
-            id={"name"}
-            type={"text"}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            isInvalid={undefined}
-            errorBorderColor={undefined}
-            placeholder={"이름을 입력하세요."}
-            onBlur={undefined}
-          />
-          <AccountRecoveryInput
-            id={"tel"}
-            type={"tel"}
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            isInvalid={undefined}
-            errorBorderColor={undefined}
-            placeholder={"휴대폰 번호를 입력하세요(-제외)"}
-            onBlur={undefined}
-          />
-        </VStack>
-        <Button
-          type="submit"
-          textStyle={"B16M"}
-          width="360px"
-          height="56px"
-          border="1px"
-          variant="outline"
-          backgroundColor="#5400FD;"
-          color={"white"}
-          borderRadius="0px"
-        >
-          인증번호 전송
-        </Button>
+        {/* 휴대폰으로 찾기 */}
+        {recoveryOption === "phone" && (
+          <VStack spacing={"40px"} align="center">
+            <VStack spacing={4} align="flex-start" width={"full"}>
+              <AccountRecoveryInput
+                id={"name"}
+                type={"text"}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                isInvalid={undefined}
+                errorBorderColor={undefined}
+                placeholder={"이름을 입력하세요."}
+                onBlur={undefined}
+              />
+              <AccountRecoveryInput
+                id={"tel"}
+                type={"tel"}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                isInvalid={undefined}
+                errorBorderColor={undefined}
+                placeholder={"휴대폰 번호를 입력하세요(-제외)"}
+                onBlur={undefined}
+              />
+            </VStack>
+            <Button
+              type="submit"
+              textStyle={"B16M"}
+              width="360px"
+              height="56px"
+              border="1px"
+              variant="outline"
+              backgroundColor="#5400FD;"
+              color={"white"}
+              borderRadius="0px"
+            >
+              인증번호 전송
+            </Button>
+          </VStack>
+        )}
+        {/* 본인 확인 후 찾기 */}
+        {recoveryOption === "identity" && (
+          <VStack spacing={"32px"}>
+            <Button
+              textStyle={"B16M"}
+              width="360px"
+              height="56px"
+              border="1px"
+              variant="outline"
+              backgroundColor="#5400FD;"
+              color={"white"}
+              borderRadius="0px"
+            >
+              본인명의 휴대폰 인증
+            </Button>
+            <Text
+              textColor={"#666"}
+              flex="1 0 0"
+              textStyle={"B16R"}
+              textAlign={"center"}
+              whiteSpace="pre-line"
+            >
+              {"회원님의 명의로 등록된 \n휴대폰으로 본인확인을 진행합니다."}
+            </Text>
+          </VStack>
+        )}
       </VStack>
     </form>
   );
