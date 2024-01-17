@@ -15,6 +15,8 @@ export default function ProductDetail() {
   const shopPk = data && data.shop_pk;
   const isLikded = data && data.is_liked;
 
+  console.log(data);
+
   return (
     <Box
       display="flex"

@@ -67,7 +67,7 @@ export default function Home() {
           <GiftCategories />
           <NewsEvent />
           <ArtistRecommend />
-          {isLoggedIn ? <RecentlyViewed title={"최근 본 작품"} /> : null}
+          <RecentlyViewed title={"최근 본 작품"} />
         </Box>
         <RegisterButton />
       </Flex>
