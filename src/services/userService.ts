@@ -47,15 +47,9 @@ export const createUser = async (userData: IUserSignUpVariables) => {
 
 export const validateEmail = async ({ email }) => {
   try {
-    const response = await instance.post(
-      `users/validate-email`,
-      { email: email },
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    );
+    const response = await instance.post(`users/validate-email`, {
+      email: email,
+    });
     return response;
   } catch (error) {
     console.error("Error validating email:", error);
@@ -64,18 +58,24 @@ export const validateEmail = async ({ email }) => {
 
 export const validateCorporateNumber = async ({ corporateNumber }) => {
   try {
-    const response = await instance.post(
-      `users/validate-corporate-number`,
-      { corporate_number: corporateNumber },
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    );
+    const response = await instance.post(`users/validate-corporate-number`, {
+      corporate_number: corporateNumber,
+    });
     return response;
   } catch (error) {
     console.error("Error validating email:", error);
+  }
+};
+
+export const sendPasswordResetEmail = async ({ name, email }) => {
+  try {
+    const response = await instance.post(`users/request-password-reset`, {
+      name: name,
+      email: email,
+    });
+    return response;
+  } catch (error) {
+    console.error("Error sending email:", error);
   }
 };
 
