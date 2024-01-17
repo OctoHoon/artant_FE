@@ -19,7 +19,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usernameLogIn } from "../../services/userService";
 import SocialLogin from "../index/SocialLogin";
 import { HiEye, HiEyeOff } from "react-icons/hi"; // Import eye icons
@@ -136,7 +136,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               >
                 로그인 상태 유지
               </Checkbox>
-              <Text fontWeight="300">아이디/비밀번호 찾기</Text>
+              <Link to="/account-recovery">
+                <Text fontWeight="300">아이디/비밀번호 찾기</Text>
+              </Link>
             </Flex>
             <Button
               py={6}
