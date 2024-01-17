@@ -82,6 +82,7 @@ export const validateCorporateNumber = async ({ corporateNumber }) => {
 export interface IUsernameLoginVariables {
   email: string;
   password: string;
+  rememberMe: boolean;
 }
 export interface IUsernameLoginSuccess {
   ok: string;
@@ -90,10 +91,14 @@ export interface IUsernameLoginError {
   error: string;
 }
 
-export const usernameLogIn = ({ email, password }: IUsernameLoginVariables) =>
+export const usernameLogIn = ({
+  email,
+  password,
+  rememberMe,
+}: IUsernameLoginVariables) =>
   instance.post(
     `users/log-in`,
-    { email, password },
+    { email, password, rememberMe },
     {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
