@@ -8,6 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import IdRecoveryForm from "./IdRecoveryForm";
+import PwRecoveryForm from "./PwRecoveryForm";
 
 export default function RecoveryTabs() {
   return (
@@ -39,14 +40,11 @@ export default function RecoveryTabs() {
         </Tab>
       </TabList>
       <TabPanels>
-        <TabPanel padding={0}>
+        <TabPanel p={0}>
           <IdRecoveryForm />
         </TabPanel>
-        <TabPanel>
-          {/* 비밀번호 찾기 컴포넌트를 여기에 추가하세요 */}
-          <VStack spacing={4} align="flex-start">
-            <Text textStyle={"B16M"}>비밀번호 찾기 기능은 준비 중입니다.</Text>
-          </VStack>
+        <TabPanel p={0}>
+          <PwRecoveryForm />
         </TabPanel>
       </TabPanels>
     </Tabs>

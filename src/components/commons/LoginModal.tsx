@@ -137,7 +137,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 로그인 상태 유지
               </Checkbox>
               <Link to="/account-recovery">
-                <Text fontWeight="300">아이디/비밀번호 찾기</Text>
+                <Text onClick={onClose} fontWeight="300">
+                  아이디/비밀번호 찾기
+                </Text>
               </Link>
             </Flex>
             <Button

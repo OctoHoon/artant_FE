@@ -32,7 +32,7 @@ export default function InputIdandPw({
       <SignupInput
         label={"아이디"}
         id={"username"}
-        type={"text"}
+        type={"email"}
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder={"아이디(이메일)을 입력하세요."}
