@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
-import SignupForm from "../components/Signup/SignupForm";
+import RecoveryTabs from "../components/AccountRecovery/RecoveryTabs";
 
-export default function Signup() {
+export default function AccountRecovery() {
   return (
     <Flex
       p={4}
@@ -19,9 +19,9 @@ export default function Signup() {
         gap={"32px"}
       >
         <Text textStyle={"B20M"} textAlign={"center"}>
-          회원가입
+          계정 찾기
         </Text>
-        <SignupForm />
+        <RecoveryTabs />
       </Flex>
     </Flex>
   );

@@ -110,7 +110,7 @@ export default function Header() {
                 <Text>•</Text>
                 <Box
                   as="button"
-                  onClick={onLoginOpen}
+                  onClick={() => navigate("/signup")}
                   bg="transparent"
                   border="none"
                   _hover={{ bg: "transparent" }}

@@ -16,9 +16,10 @@ import {
   InputRightElement,
   IconButton,
   InputGroup,
+  Box,
 } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usernameLogIn } from "../../services/userService";
 import SocialLogin from "../index/SocialLogin";
 import { HiEye, HiEyeOff } from "react-icons/hi"; // Import eye icons
@@ -33,7 +34,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // Track password visibility
   const [loginError, setLoginError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
+  console.log(rememberMe);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -43,9 +46,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   };
 
   const handleLogin = async () => {
-    console.log(email);
-    console.log(password);
-
     if (email === "") {
       setLoginError("아이디(이메일)을 입력해주세요.");
       return;
@@ -60,7 +60,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     }
 
     try {
-      const response = await usernameLogIn({ email, password });
+      const response = await usernameLogIn({ email, password, rememberMe });
 
       console.log("Login successful:", response.data);
       queryClient.refetchQueries(["me"]);
@@ -124,8 +124,23 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               </Text>
             )}
             <Flex justifyContent="space-between">
-              <Checkbox>로그인 상태 유지</Checkbox>
-              <Text fontWeight="300">아이디/비밀번호 찾기</Text>
+              <Checkbox
+                _checked={{
+                  "& .chakra-checkbox__control": {
+                    background: "#5400FD",
+                  },
+                }}
+                isChecked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                color={"#666666"}
+              >
+                로그인 상태 유지
+              </Checkbox>
+              <Link to="/account-recovery">
+                <Text onClick={onClose} fontWeight="300">
+                  아이디/비밀번호 찾기
+                </Text>
+              </Link>
             </Flex>
             <Button
               py={6}
@@ -146,15 +161,15 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <SocialLogin />
             <Flex flexDirection="column" gap="8px">
               <SignUpButton
-                text="일반 회원가입"
+                text="회원가입"
                 onClose={onClose}
                 navigate={navigate}
               />
-              <SignUpButton
+              {/* <SignUpButton
                 text="사업자 회원가입"
                 onClose={onClose}
                 navigate={navigate}
-              />
+              /> */}
             </Flex>
             <Flex
               alignSelf="center"
@@ -186,9 +201,7 @@ function SignUpButton({ text, onClose, navigate }) {
       borderRadius="0px"
       onClick={() => {
         onClose();
-        text === "일반 회원가입"
-          ? navigate("/signup")
-          : navigate("/corportate_signup");
+        navigate("/signup");
       }}
     >
       {text}

@@ -47,15 +47,9 @@ export const createUser = async (userData: IUserSignUpVariables) => {
 
 export const validateEmail = async ({ email }) => {
   try {
-    const response = await instance.post(
-      `users/validate-email`,
-      { email: email },
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    );
+    const response = await instance.post(`users/validate-email`, {
+      email: email,
+    });
     return response;
   } catch (error) {
     console.error("Error validating email:", error);
@@ -64,24 +58,31 @@ export const validateEmail = async ({ email }) => {
 
 export const validateCorporateNumber = async ({ corporateNumber }) => {
   try {
-    const response = await instance.post(
-      `users/validate-corporate-number`,
-      { corporate_number: corporateNumber },
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    );
+    const response = await instance.post(`users/validate-corporate-number`, {
+      corporate_number: corporateNumber,
+    });
     return response;
   } catch (error) {
     console.error("Error validating email:", error);
   }
 };
 
+export const sendPasswordResetEmail = async ({ name, email }) => {
+  try {
+    const response = await instance.post(`users/request-password-reset`, {
+      name: name,
+      email: email,
+    });
+    return response;
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+};
+
 export interface IUsernameLoginVariables {
   email: string;
   password: string;
+  rememberMe: boolean;
 }
 export interface IUsernameLoginSuccess {
   ok: string;
@@ -90,10 +91,14 @@ export interface IUsernameLoginError {
   error: string;
 }
 
-export const usernameLogIn = ({ email, password }: IUsernameLoginVariables) =>
+export const usernameLogIn = ({
+  email,
+  password,
+  rememberMe,
+}: IUsernameLoginVariables) =>
   instance.post(
     `users/log-in`,
-    { email, password },
+    { email, password, rememberMe },
     {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
