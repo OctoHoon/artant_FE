@@ -1,8 +1,9 @@
-import { Radio } from "@chakra-ui/react";
+import { Radio, Text } from "@chakra-ui/react";
 
 export default function ArtantRadio({ value, text }) {
   return (
     <Radio
+      size={"lg"}
       value={value}
       _checked={{
         bg: "#5400FD",
@@ -10,7 +11,7 @@ export default function ArtantRadio({ value, text }) {
         borderColor: "gray",
       }}
     >
-      {text}
+      <Text textStyle={"B16R"}>{text}</Text>
     </Radio>
   );
 }
