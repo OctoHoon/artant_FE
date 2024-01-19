@@ -13,7 +13,7 @@ export default function ShopDetail() {
   const { pk } = useParams();
   const { isLoading, data } = useQuery(["shop", pk], getShopDetails);
 
-  console.log(data);
+  console.log("데이터", data);
   return (
     <Box mb={"120px"}>
       <ScrollToTop />
@@ -28,7 +28,7 @@ export default function ShopDetail() {
       >
         <ShopMiddle
           common_sections={data && data.common_sections}
-          featured_sections={data && data.featured_sections}
+          featured_sections={[]}
         />
         <ShopReviews />
         <Box width={"1280px"} background={"#D9D9D9"} height={"1px"} />

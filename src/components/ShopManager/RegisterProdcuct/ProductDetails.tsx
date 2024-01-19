@@ -435,7 +435,7 @@ export default function ProductDetails({
             >
               섹션 추가
             </Text>
-            {section in data.featured_sections ? null : <Text>{section}</Text>}
+            {/* {section in data.featured_sections ? null : <Text>{section}</Text>} */}
             <SectionCreateModal
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}

@@ -88,7 +88,7 @@ export default function ShopManagerEditShop() {
     setShortDescription(data?.short_description ?? "");
     setDescriptionTitle(data?.description_title ?? "");
     setDescription(data?.description ?? "");
-    setSections(data?.featured_sections ?? []);
+    // setSections(data?.featured_sections ?? []);
     resetImages();
   }, [data]);
 
