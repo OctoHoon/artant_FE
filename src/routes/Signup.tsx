@@ -18,7 +18,7 @@ export default function Signup() {
         padding={"40px 48px"}
         gap={"32px"}
       >
-        <Text textStyle={"B20M"} textAlign={"center"}>
+        <Text textStyle={"H5M"} textAlign={"center"}>
           회원가입
         </Text>
         <SignupForm />
