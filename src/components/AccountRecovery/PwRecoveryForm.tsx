@@ -31,6 +31,7 @@ export default function PwRecoveryForm() {
   const handleValidateEmail = () => {
     // Email 정규식 확인
     if (!emailRegex.test(email) && email) {
+      setisUserEmailAvailable(false);
       setUserEmailValidationMessage("이메일 형식이 올바르지 않습니다.");
       return;
     }
