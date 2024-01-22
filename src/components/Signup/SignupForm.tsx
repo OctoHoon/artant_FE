@@ -274,6 +274,9 @@ export default function SignupForm() {
           border="1px"
           variant="outline"
           backgroundColor="#5400FD;"
+          _hover={{
+            background: "var(--maincolorsbggray-555555, #5400FD)",
+          }}
           color={"white"}
           borderRadius="0px"
         >
