@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 import AccountRecoveryInput from "./component/AccountRecoveryInput";
 import ArtantRadio from "../commons/Button/ArtantRadio";
 import ValidationMessage from "./component/ValidationMessage";
-import { extractErrorMessage, validateEmail } from "./AccountRecovery";
+import { emailRegex } from "../../utils/regex";
+import { extractErrorMessage } from "./AccountRecovery";
 import { sendPasswordResetEmail } from "../../services/userService";
 
 export default function PwRecoveryForm() {
@@ -22,17 +23,24 @@ export default function PwRecoveryForm() {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
-  const [isSendAvailable, setisSendAvailable] = useState(true); // Initially assuming the email is available
+  const [isUserEmailAvailable, setisUserEmailAvailable] = useState(true); // name, email 모두 available 한지. 이메일 정규식, 일치 유저 확인
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const [emailValidationMessage, setUserEmailValidationMessage] = useState("");
+  const [userEmailValidationMessage, setUserEmailValidationMessage] =
+    useState("");
 
-  const handleValidateEmail = async () => {
-    validateEmail(email, setisSendAvailable, setUserEmailValidationMessage); // 이메일 형식 올바른지 확인
+  const handleValidateEmail = () => {
+    // Email 정규식 확인
+    if (!emailRegex.test(email) && email) {
+      setisUserEmailAvailable(false);
+      setUserEmailValidationMessage("이메일 형식이 올바르지 않습니다.");
+      return;
+    }
+    setisUserEmailAvailable(true);
+    setUserEmailValidationMessage("");
   };
 
   const handleSubmitForEmailRecovery = async (e: React.FormEvent) => {
     e.preventDefault();
-    const toastId = "loading-toast"; // Unique ID for the loading toast
 
     if (!name || !email) {
       // Show an error message
@@ -59,14 +67,13 @@ export default function PwRecoveryForm() {
         setUserEmailValidationMessage(
           "입력된 정보와 일치하는 유저가 없습니다."
         );
-        setisSendAvailable(false);
+        setisUserEmailAvailable(false);
       }
     } catch (error) {
       console.error("Error during submission:", error);
-
       const errorMessage = extractErrorMessage(error);
       toast({
-        title: "계정 생성 실패",
+        title: "이메일 전송 실패",
         description: errorMessage,
         status: "error",
         duration: 5000,
@@ -77,7 +84,6 @@ export default function PwRecoveryForm() {
 
   const handleSubmitForPhoneRecovery = async (e: React.FormEvent) => {
     e.preventDefault();
-    const toastId = "loading-toast"; // Unique ID for the loading toast
 
     if (!name || !phoneNumber) {
       // Show an error message
@@ -103,20 +109,38 @@ export default function PwRecoveryForm() {
           flexDirection={"column"}
         >
           <Text textStyle={"B16R"} textAlign={"center"} whiteSpace="pre-line">
-            {`${email}로 비밀번호 재설정
-             이메일을 발송하셨습니다.`}
+            <span style={{ color: "#5400FD" }}>{email}</span>
+            {`으로 
+            비밀번호 재설정 이메일을 발송하셨습니다.`}
           </Text>
-          <Text textStyle={"B16R"} textAlign={"center"} whiteSpace="pre-line">
+          <Text
+            textColor={"#666"}
+            textStyle={"B14M"}
+            textAlign={"center"}
+            whiteSpace="pre-line"
+          >
             {`이메일을 받지 못하셨나요? 
             스팸함을 확인해 보시거나, 입력하신 이름과 아이디(이메일)이 
             회원정보와 일치하는지 확인해주세요.`}
           </Text>
 
-          <Text textStyle={"B16R"} textAlign={"center"} whiteSpace="pre-line">
+          <Text
+            textColor={"#666"}
+            textStyle={"B14R"}
+            textAlign={"center"}
+            whiteSpace="pre-line"
+          >
             {`아이디(이메일)를 잊으신 경우, 먼저 아이디(이메일) 
             찾기를 진행해주세요.`}
           </Text>
-          <Text textStyle={"B16M"}>아이디(이메일)찾기</Text>
+          <Text
+            textColor={"#5365AE"}
+            textStyle={"B14R"}
+            onClick={() => window.location.reload()}
+            cursor="pointer"
+          >
+            {`아이디(이메일)찾기 >`}
+          </Text>
         </Flex>
       ) : (
         <>
@@ -182,8 +206,8 @@ export default function PwRecoveryForm() {
                     onBlur={handleValidateEmail}
                   />
                   <ValidationMessage
-                    message={emailValidationMessage}
-                    isValid={isSendAvailable}
+                    message={userEmailValidationMessage}
+                    isValid={isUserEmailAvailable}
                   />
                 </VStack>
                 <Button

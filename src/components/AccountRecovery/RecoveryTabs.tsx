@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import IdRecoveryForm from "./IdRecoveryForm";
 import PwRecoveryForm from "./PwRecoveryForm";
+import { useState } from "react";
 
 export default function RecoveryTabs() {
   return (

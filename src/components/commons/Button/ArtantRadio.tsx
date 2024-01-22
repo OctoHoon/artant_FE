@@ -1,5 +1,6 @@
 import { Radio, Text } from "@chakra-ui/react";
 
+// TODO: style 수정 https://chakra-ui.com/docs/components/radio/theming
 export default function ArtantRadio({ value, text }) {
   return (
     <Radio
