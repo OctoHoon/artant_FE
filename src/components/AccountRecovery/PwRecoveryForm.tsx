@@ -220,6 +220,9 @@ export default function PwRecoveryForm() {
                   backgroundColor="#5400FD;"
                   color={"white"}
                   borderRadius="0px"
+                  _hover={{
+                    background: "var(--maincolorsbggray-555555, #5400FD)",
+                  }}
                 >
                   비밀번호 찾기
                 </Button>
@@ -265,6 +268,9 @@ export default function PwRecoveryForm() {
                   backgroundColor="#5400FD;"
                   color={"white"}
                   borderRadius="0px"
+                  _hover={{
+                    background: "var(--maincolorsbggray-555555, #5400FD)",
+                  }}
                 >
                   비밀번호 찾기
                 </Button>

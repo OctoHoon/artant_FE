@@ -101,6 +101,9 @@ export default function IdRecoveryForm() {
               backgroundColor="#5400FD;"
               color={"white"}
               borderRadius="0px"
+              _hover={{
+                background: "var(--maincolorsbggray-555555, #5400FD)",
+              }}
             >
               인증번호 전송
             </Button>
@@ -118,6 +121,9 @@ export default function IdRecoveryForm() {
               backgroundColor="#5400FD;"
               color={"white"}
               borderRadius="0px"
+              _hover={{
+                background: "var(--maincolorsbggray-555555, #5400FD)",
+              }}
             >
               본인명의 휴대폰 인증
             </Button>
