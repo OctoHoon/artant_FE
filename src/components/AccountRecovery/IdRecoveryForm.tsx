@@ -17,13 +17,13 @@ import ArtantRadio from "../commons/Button/ArtantRadio";
 
 export default function IdRecoveryForm() {
   const toast = useToast();
-  const navigate = useNavigate();
+
   const [recoveryOption, setRecoveryOption] = useState("phone");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // 페이지 새로고침 방지
     const toastId = "loading-toast"; // Unique ID for the loading toast
 
     if (!name || !phoneNumber) {
@@ -37,82 +37,14 @@ export default function IdRecoveryForm() {
       });
       return;
     }
-
-    // try {
-    //   // toast({
-    //   //   id: toastId,
-    //   //   title: "계정 생성중...",
-    //   //   description: "잠시만 기다려주세요",
-    //   //   status: "info",
-    //   //   duration: null, // null duration keeps the toast open indefinitely
-    //   //   isClosable: false,
-    //   // });
-    //   // await createUserAccount({
-    //   //   name: name,
-    //   //   username: username.split("@")[0],
-    //   //   password: password,
-    //   //   password_confirm: password_check,
-    //   //   email: username,
-    //   //   gender: gender,
-    //   //   birthday: `${birthday["year"]}-${birthday["month"]}-${birthday["day"]}`,
-    //   //   cell_phone_number: phoneNumber,
-    //   //   description: "",
-    //   //   avatar: "",
-    //   //   agreed_to_terms_of_service: agreements.agreed_to_terms_of_service,
-    //   //   agreed_to_electronic_transactions:
-    //   //     agreements.agreed_to_electronic_transactions,
-    //   //   agreed_to_privacy_policy: agreements.agreed_to_privacy_policy,
-    //   //   confirmed_age_over_14: agreements.confirmed_age_over_14,
-    //   //   agreed_to_third_party_sharing: agreements.agreed_to_third_party_sharing,
-    //   //   agreed_to_optional_privacy_policy:
-    //   //     agreements.agreed_to_optional_privacy_policy,
-    //   //   agreed_to_marketing_mails: agreements.agreed_to_marketing_mails,
-    //   //   is_corporate: false,
-    //   //   corporate_number: null,
-    //   //   corporate_name: null,
-    //   // });
-    //   toast.close(toastId);
-
-    //   toast({
-    //     title: "계정 생성 완료!",
-    //     description: "홈으로 돌아갑니다.",
-    //     status: "success",
-    //     duration: 5000,
-    //     isClosable: true,
-    //   });
-
-    //   navigate(`/`);
-    // } catch (error) {
-    //   console.error("Error during submission:", error);
-    //   toast.close(toastId);
-
-    //   const errorMessage = extractErrorMessage(error);
-    //   toast({
-    //     title: "계정 생성 실패",
-    //     description: errorMessage,
-    //     status: "error",
-    //     duration: 5000,
-    //     isClosable: true,
-    //   });
-    // }
   };
 
   return (
     <form onSubmit={handleSubmit} style={{ width: "100%" }}>
       <VStack spacing={"40px"} align="center">
-        <Spacer h={"40px"}></Spacer>
-        <Flex
-          p="18px 0"
-          alignItems="center"
-          justifyContent={"center"}
-          gap="8px"
-        >
-          <Text
-            flex="1 0 0"
-            textStyle={"B16R"}
-            textAlign={"center"}
-            whiteSpace="pre-line"
-          >
+        <Spacer h={"40px"} />
+        <Flex p="18px 0" alignItems={"center"}>
+          <Text textStyle={"B16R"} textAlign={"center"} whiteSpace="pre-line">
             {"아이디를 잃어버리셨나요?\n하단의 정보를 상세히 입력하세요."}
           </Text>
         </Flex>
@@ -169,6 +101,9 @@ export default function IdRecoveryForm() {
               backgroundColor="#5400FD;"
               color={"white"}
               borderRadius="0px"
+              _hover={{
+                background: "var(--maincolorsbggray-555555, #5400FD)",
+              }}
             >
               인증번호 전송
             </Button>
@@ -186,6 +121,9 @@ export default function IdRecoveryForm() {
               backgroundColor="#5400FD;"
               color={"white"}
               borderRadius="0px"
+              _hover={{
+                background: "var(--maincolorsbggray-555555, #5400FD)",
+              }}
             >
               본인명의 휴대폰 인증
             </Button>

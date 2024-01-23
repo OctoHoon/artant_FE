@@ -18,7 +18,7 @@ export default function AccountRecovery() {
         padding={"40px 48px"}
         gap={"32px"}
       >
-        <Text textStyle={"B20M"} textAlign={"center"}>
+        <Text textStyle={"H5M"} textAlign={"center"}>
           계정 찾기
         </Text>
         <RecoveryTabs />
