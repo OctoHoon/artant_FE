@@ -26,38 +26,42 @@ export default function RecentlyViewed({ title }) {
   );
 
   return (
-    <Flex
-      flexDirection={"column"}
-      gap={"24px"}
-      alignItems={"flex-start"}
-      width={"1280px"}
-    >
-      <Text fontSize={"30px"} fontWeight={"500"}>
-        {title}
-      </Text>
+    <>
+      {data && data.length >= 1 && (
+        <Flex
+          flexDirection={"column"}
+          gap={"24px"}
+          alignItems={"flex-start"}
+          width={"1280px"}
+        >
+          <Text fontSize={"30px"} fontWeight={"500"}>
+            {title}
+          </Text>
 
-      {isLoading || !data ? null : (
-        <Wrap spacing={"45px"}>
-          {data.slice(0, 5).map((art: Product, index) => (
-            <CardSmall
-              pk={art.pk}
-              source={art.thumbnail}
-              category={art.category}
-              title={art.name}
-              description=""
-              artist={art.shop_name}
-              star={art.rating}
-              reviews={art.rating_count}
-              price={art.price}
-              originalPrice={art.original_price}
-              is_free_shipping={art.is_free_shipping}
-              is_best_seller={art.is_best_seller}
-              is_liked={art.is_liked}
-              key={index}
-            />
-          ))}
-        </Wrap>
+          {isLoading || !data ? null : (
+            <Wrap spacing={"45px"}>
+              {data.slice(0, 5).map((art: Product, index) => (
+                <CardSmall
+                  pk={art.pk}
+                  source={art.thumbnail}
+                  category={art.category}
+                  title={art.name}
+                  description=""
+                  artist={art.shop_name}
+                  star={art.rating}
+                  reviews={art.rating_count}
+                  price={art.price}
+                  originalPrice={art.original_price}
+                  is_free_shipping={art.is_free_shipping}
+                  is_best_seller={art.is_best_seller}
+                  is_liked={art.is_liked}
+                  key={index}
+                />
+              ))}
+            </Wrap>
+          )}
+        </Flex>
       )}
-    </Flex>
+    </>
   );
 }

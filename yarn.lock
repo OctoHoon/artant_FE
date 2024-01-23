@@ -4340,6 +4340,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-image-crop@^8.1.6":
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/@types/react-image-crop/-/react-image-crop-8.1.6.tgz#9e25b6245733284f0ab4b594047b8c4f6d08f7a4"
+  integrity sha512-mH3qs5sk2lq0JitgAOyyFeQQ8Zlz+yCIhn4CNznmoRyH4PIRMpZUWi+hGqLyUeKTSMAg+daS3txHMR3oBAkkRg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-lifecycles-compat@^3.0.1":
   version "3.0.1"
   resolved "https://registry.npmjs.org/@types/react-lifecycles-compat/-/react-lifecycles-compat-3.0.1.tgz"
@@ -10273,10 +10280,10 @@ react-icons@^5.0.1:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.0.1.tgz#1694e11bfa2a2888cab47dcc30154ce90485feee"
   integrity sha512-WqLZJ4bLzlhmsvme6iFdgO8gfZP17rfjYEJ2m9RsZjZ+cc4k1hTzknEz63YS1MeT50kVzoa1Nz36f4BEx+Wigw==
 
-react-image-crop@^10.1.8:
-  version "10.1.8"
-  resolved "https://registry.npmjs.org/react-image-crop/-/react-image-crop-10.1.8.tgz"
-  integrity sha512-4rb8XtXNx7ZaOZarKKnckgz4xLMvds/YrU6mpJfGhGAsy2Mg4mIw1x+DCCGngVGq2soTBVVOxx2s/C6mTX9+pA==
+react-image-crop@^11.0.5:
+  version "11.0.5"
+  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-11.0.5.tgz#c7abcf9cae28305d253d55d481158a594a937867"
+  integrity sha512-A/Y/kspOzki1zDL/bSgwWIY1X3CQ9F1QwpdnncWLBVAktnKfAZDIQnWmjXzuzEjZHDMsBlArytIcPBVi6DNklg==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -10445,7 +10452,7 @@ react-scripts@5.0.1:
 
 react-slick@^0.29.0:
   version "0.29.0"
-  resolved "https://registry.npmjs.org/react-slick/-/react-slick-0.29.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.29.0.tgz#0bed5ea42bf75a23d40c0259b828ed27627b51bb"
   integrity sha512-TGdOKE+ZkJHHeC4aaoH85m8RnFyWqdqRfAGkhd6dirmATXMZWAxOpTLmw2Ll/jPTQ3eEG7ercFr/sbzdeYCJXA==
   dependencies:
     classnames "^2.2.5"
@@ -10995,7 +11002,7 @@ slash@^4.0.0:
 
 slick-carousel@^1.8.1:
   version "1.8.1"
-  resolved "https://registry.npmjs.org/slick-carousel/-/slick-carousel-1.8.1.tgz"
+  resolved "https://registry.yarnpkg.com/slick-carousel/-/slick-carousel-1.8.1.tgz#a4bfb29014887bb66ce528b90bd0cda262cc8f8d"
   integrity sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==
 
 sockjs@^0.3.24:

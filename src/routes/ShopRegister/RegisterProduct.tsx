@@ -200,6 +200,8 @@ export default function UploadPhotos() {
     }
   };
 
+  console.log(selectedFiles);
+
   const onSubmitAll = async () => {
     //validate 넣어야함
     if (
