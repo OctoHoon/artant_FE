@@ -144,12 +144,7 @@ export default function ProductDetails({
       gap={"32px"}
       border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
     >
-      <RegisterHeader
-        title={"작품 세부정보"}
-        description={
-          "당신의 작품에 대한 모든 것을 전 세계에 알리고 그들이 그것을 좋아할 이유를 알려주세요."
-        }
-      />
+      <RegisterHeader title={"작품 세부정보"} description={""} />
       <Flex
         display={"flex"}
         flexDirection={"column"}
@@ -158,18 +153,12 @@ export default function ProductDetails({
         gap={"24px"}
       >
         <Flex // 제목
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
-          <SectionTitle
-            title={"제목*"}
-            description={
-              "구매자가 귀하의 상품을 검색하는 데 사용할 키워드를 포함하십시오"
-            }
-            link={undefined}
-          />
+          <Text textStyle={"B14M"}>제목*</Text>
           <InputOption
             value={productName}
             placeholder={"제목을 입력하세요"}
@@ -177,100 +166,69 @@ export default function ProductDetails({
           />
         </Flex>
         <Flex // 이 목록 정보
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
-          <SectionTitle
-            title={"이 작품 정보*"}
-            description={undefined}
-            link={"아트앤트에서 허용되는 품목 유형에 대해 자세히 알아보세요."}
-          />
-          <SelectOption
-            placeholder="누가 만들었나요?"
-            options={whoMadeOptions}
-            value={whoMade}
-            onChange={(e) => setWhoMade(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
-
-          <SelectOption
-            placeholder="그것은 무엇입니까?"
-            options={whatIsItOptions}
-            value={whatMade}
-            onChange={(e) => setWhatMade(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
-
-          <SelectOption
-            placeholder="언제 만들었나요?"
-            options={whenMadeOptions}
-            value={whenMade}
-            onChange={(e) => setWhenMade(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
+          <Text textStyle={"B14M"}>이 목록 정보*</Text>
+          <Flex alignSelf={"stretch"} gap={"20px"}>
+            <SelectOption
+              placeholder="누가 만들었나요?"
+              options={whoMadeOptions}
+              value={whoMade}
+              onChange={(e) => setWhoMade(e.target.value)}
+              disabled={false} // Add other props like onChange, value as needed
+            />
+            <SelectOption
+              placeholder="그것은 무엇입니까?"
+              options={whatIsItOptions}
+              value={whatMade}
+              onChange={(e) => setWhatMade(e.target.value)}
+              disabled={false} // Add other props like onChange, value as needed
+            />
+            <SelectOption
+              placeholder="언제 만들었나요?"
+              options={whenMadeOptions}
+              value={whenMade}
+              onChange={(e) => setWhenMade(e.target.value)}
+              disabled={false} // Add other props like onChange, value as needed
+            />
+          </Flex>
         </Flex>
         <Flex // 카테고리
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
-          <SectionTitle
-            title={"카테고리*"}
-            description={
-              "더 많은 쇼핑객이 해당 상품을 찾는 데 도움이 되는 카테고리 제안을 받으려면 상품에 대한 2~3단어 설명을 입력하세요."
-            }
-            link={undefined}
-          />
-
-          <SelectOption
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            options={Object.keys(subsubCategory)}
-            placeholder="상위 카테고리 선택"
-            disabled={undefined}
-          />
-          <SelectOption
-            value={selectedSubCategory}
-            onChange={handleSubCategoryChange}
-            options={selectedCategory ? subsubCategory[selectedCategory] : []}
-            placeholder={
-              selectedCategory
-                ? "하위 카테고리 선택"
-                : "상위 카테고리를 먼저 선택하세요"
-            }
-            disabled={!selectedCategory}
-          />
-        </Flex>
-        <Flex>
-          <SectionTitle
-            title={"제품 특성"}
-            description={"카테고리에 해당하는 제품 특성을 입력해주세요"}
-            link={undefined}
-          />
-          <SelectOption
-            placeholder="메인 컬러"
-            options={color_options_dict}
-            value={primary_color_input}
-            onChange={(e) => setPrimaryColorInput(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
-
-          <SelectOption
-            placeholder="서브 컬러"
-            options={color_options_dict}
-            value={secondary_color_input}
-            onChange={(e) => setSecondaryColorInput(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
+          <Text textStyle={"B14M"}>카테고리*</Text>
+          <Flex alignSelf={"stretch"} gap={"20px"}>
+            <SelectOption
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              options={Object.keys(subsubCategory)}
+              placeholder="상위 카테고리 선택"
+              disabled={undefined}
+            />
+            <SelectOption
+              value={selectedSubCategory}
+              onChange={handleSubCategoryChange}
+              options={selectedCategory ? subsubCategory[selectedCategory] : []}
+              placeholder={
+                selectedCategory
+                  ? "하위 카테고리 선택"
+                  : "상위 카테고리를 먼저 선택하세요"
+              }
+              disabled={!selectedCategory}
+            />
+          </Flex>
         </Flex>
         <Flex // 갱신옵션
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
           <SectionTitle
             title={"갱신 옵션*"}
@@ -291,10 +249,10 @@ export default function ProductDetails({
           />
         </Flex>
         <Flex // 배송 상품 유형
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
           <SectionTitle
             title={"유형*"}

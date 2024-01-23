@@ -33,32 +33,15 @@ export default function PersonalizeTab({
     >
       <Flex display={"flex"} alignItems={"flex-start"} alignSelf={"stretch"}>
         <Flex
-          display={"flex"}
           flexDirection={"column"}
           alignItems={"flex-start"}
           gap={"4px"}
+          width={"full"}
         >
-          <Text
-            color="var(--maincolorstextblack-222222, #222)"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="24px"
-            fontStyle="normal"
-            fontWeight={400}
-            lineHeight="normal"
-            letterSpacing="-0.5px"
-          >
-            개인화
+          <Text fontSize="24px" letterSpacing="-0.5px">
+            개인 맞춤 설정
           </Text>
-          <Text
-            width={"330px"}
-            color="var(--maincolorstextblack-222222, #222)"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="14px"
-            fontStyle="normal"
-            fontWeight={400}
-            lineHeight="normal"
-            letterSpacing="-0.042px"
-          >
+          <Text textStyle={"B14R"}>
             이름을 세기거나 이니셜을 넣는 등 개인 맞춤 작품을 위해 이 작품에
             대한 개인 정보를 수집하세요.
           </Text>

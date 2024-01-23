@@ -5,6 +5,9 @@ import SectionTitle from "./SectionTitle";
 import WhiteButton from "../../commons/Button/WhiteButton";
 import InputOption from "./InputOption";
 import SelectOption from "./SelectOption";
+import DaumPostcode from "react-daum-postcode";
+import DaumPostCode from "./DaumPostCode";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 export default function Shipping({
   setPostalCode,
@@ -73,6 +76,13 @@ export default function Shipping({
         };
       });
     }
+  };
+
+  const [onAddressSelect, setOnAddressSelect] = useState({});
+  console.log(onAddressSelect);
+
+  const handleAddressSelect = (address) => {
+    setOnAddressSelect(address); // 주소 API 실행 후 받아온 data를 state에 저장
   };
 
   return (
@@ -145,11 +155,49 @@ export default function Shipping({
                   description={undefined}
                   link={undefined}
                 />
-                <InputOption
+                <Input
                   width={"248px"}
                   placeholder={"우편번호 입력"}
-                  onChange={(e) => setPostalCode(e.target.value)}
+                  value={onAddressSelect["zonecode"]}
+                  isDisabled
                 />
+                <DaumPostCode onAddressSelect={handleAddressSelect} />
+              </Flex>
+              <Flex
+                display={"flex"}
+                alignSelf={"stretch"}
+                alignItems={"flex-start"}
+                gap={"40px"}
+              >
+                <SectionTitle
+                  title={"주소"}
+                  description={undefined}
+                  link={undefined}
+                />
+                <Input
+                  width={"248px"}
+                  placeholder={"기본주소를 입력해주세요."}
+                  value={onAddressSelect["roadAddress"]}
+                  isDisabled
+                />
+              </Flex>
+              <Flex
+                display={"flex"}
+                alignSelf={"stretch"}
+                alignItems={"flex-start"}
+                gap={"40px"}
+              >
+                <SectionTitle
+                  title={""}
+                  description={undefined}
+                  link={undefined}
+                />
+                {onAddressSelect["roadAddress"] && (
+                  <Input
+                    width={"248px"}
+                    placeholder={"상세주소를 입력해주세요."}
+                  />
+                )}
               </Flex>
               <Flex // 처리시간
                 display={"flex"}
@@ -158,7 +206,7 @@ export default function Shipping({
                 gap={"40px"}
               >
                 <SectionTitle
-                  title={"시간*"}
+                  title={"출고 소요일*"}
                   description={
                     "주문을 준비해서 우편으로 보내야 하나요? 쇼핑객들은 빠르게 배송되는 품목을 구매할 사능성이 더 높다는 점을 명심하세요."
                   }
