@@ -1,9 +1,10 @@
 import { Button, Flex, HStack, Input, Text, Image } from "@chakra-ui/react";
-import { CloseIcon } from "@chakra-ui/icons"; // Import CloseIcon from Chakra UI
+import { CloseIcon, EditIcon } from "@chakra-ui/icons"; // Import CloseIcon from Chakra UI
 
 import RegisterHeader from "./RegisterHeader";
 import SectionTitle from "./SectionTitle";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import ImageCropperModal from "./components/ImageCropperModal";
 
 export default function AddPictures({
   selectedFiles,
@@ -52,6 +53,21 @@ export default function AddPictures({
     if (selectedFiles.length + existingImages.length > 9) {
       setSelectedFiles(selectedFiles.slice(0, 9 - existingImages.length));
     }
+  };
+
+  const [isCropModalOpen, setIsCropModalOpen] = useState(false);
+  const [currentImageToCrop, setCurrentImageToCrop] = useState<string>("");
+
+  const handleCropImage = (index) => {
+    const imageToCrop = allImages[index];
+    setCurrentImageToCrop(imageToCrop);
+    setIsCropModalOpen(true);
+  };
+
+  const handleImageCropped = (croppedBlob: Blob) => {
+    // croppedBlob을 처리하는 로직
+    // 예: File 객체로 변환 후, selectedFiles에 추가
+    setIsCropModalOpen(false);
   };
 
   return (
@@ -159,6 +175,7 @@ export default function AddPictures({
                   onRemove={() =>
                     handleRemoveFile(index, index < existingImages.length)
                   }
+                  onCrop={() => handleCropImage(index)}
                 />
               ))}
             </Flex>
@@ -177,9 +194,16 @@ export default function AddPictures({
                       6 + index < existingImages.length
                     )
                   }
+                  onCrop={() => handleCropImage(6 + index)}
                 />
               ))}
             </Flex>
+            <ImageCropperModal
+              isOpen={isCropModalOpen}
+              onClose={() => setIsCropModalOpen(false)}
+              imageSrc={currentImageToCrop}
+              onImageCropped={handleImageCropped}
+            />
             <HStack>
               <SvgWarning />
               <Text
@@ -202,7 +226,7 @@ export default function AddPictures({
   );
 }
 
-const GrayBoxImage = ({ src, width, height, index, onRemove }) => {
+const GrayBoxImage = ({ src, width, height, index, onRemove, onCrop }) => {
   const textArray = [
     "정면",
     "측면",
@@ -285,6 +309,17 @@ const GrayBoxImage = ({ src, width, height, index, onRemove }) => {
         _hover={{ backgroundColor: "whiteAlpha.800" }} // Slightly more opaque on hover
       >
         <CloseIcon color="red.500" />
+      </Button>
+      <Button
+        position="absolute"
+        left="0"
+        top="0"
+        size="sm"
+        onClick={() => onCrop(index)}
+        backgroundColor="whiteAlpha.700"
+        _hover={{ backgroundColor: "whiteAlpha.800" }}
+      >
+        <EditIcon color="blue.500" />
       </Button>
     </Flex>
   );

@@ -39,6 +39,7 @@ import Signup from "./routes/Signup";
 import KakaoConfirm from "./routes/KakaoConfirm";
 import CorporateSignup from "./routes/CorporateSignup";
 import AccountRecovery from "./routes/AccountRecovery";
+import Mypage from "./routes/Mypage";
 
 const router = createBrowserRouter(
   [
@@ -50,6 +51,10 @@ const router = createBrowserRouter(
         {
           path: "",
           element: <Home />,
+        },
+        {
+          path: "image-crop",
+          element: <Mypage />,
         },
         {
           path: "signup",
