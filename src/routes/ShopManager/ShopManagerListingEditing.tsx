@@ -368,10 +368,6 @@ export default function ShopManagerListingEditing() {
             section={undefined}
             setSection={undefined}
             pk={user.shop.pk}
-            primary_color_input={primary_color_input}
-            setPrimaryColorInput={setPrimaryColorInput}
-            secondary_color_input={secondary_color_input}
-            setSecondaryColorInput={setSecondaryColorInput}
           />
           <StockAndPrice
             productPrice={productPrice}

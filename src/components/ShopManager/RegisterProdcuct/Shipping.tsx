@@ -95,12 +95,7 @@ export default function Shipping({
       gap={"32px"}
       border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
     >
-      <RegisterHeader
-        title={"배송"}
-        description={
-          " 배송 프로필, 주문 처리 일정 등 배송 정보가 정확한지 확인하여 쇼핑객에게 배송 시간과 비용에 대한 명확한 기대치를 제공하세요. 배송 설정에서 언제든지 업데이트할 수 있습니다."
-        }
-      />
+      <RegisterHeader title={"배송"} description={""} />
 
       <Flex
         display={"flex"}

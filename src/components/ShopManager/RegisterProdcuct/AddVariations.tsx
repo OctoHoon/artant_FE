@@ -10,11 +10,43 @@ import {
   Th,
   Thead,
   Tr,
+  Box,
   FormControl,
   Switch,
+  Input,
 } from "@chakra-ui/react";
 import AddVariationModal from "./AddVariationsModal";
 import React, { useState } from "react";
+
+const optionNumber = [
+  {
+    value: 0,
+    label: "없음",
+  },
+  {
+    value: 1,
+    label: "1개",
+  },
+  {
+    value: 2,
+    label: "2개",
+  },
+];
+
+const variationOptions = [
+  {
+    value: "size",
+    label: "크기",
+  },
+  {
+    value: "material",
+    label: "재료",
+  },
+  {
+    value: "custom",
+    label: "직접 입력",
+  },
+];
 
 export default function AddVariation({
   selectedOptions,
@@ -22,6 +54,8 @@ export default function AddVariation({
   detailCombinations,
   setDetailCombinations,
 }) {
+  const [optionNumbers, setOptionNumbers] = useState("0");
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
   const [isMix, setIsMix] = useState(false);
@@ -74,6 +108,9 @@ export default function AddVariation({
     { key: "is_quantity_vary", placeholder: "수량", name: "quantity" },
   ];
 
+  const [variationType, setVariationType] = useState("");
+  const [variationSecond, setVariationSecond] = useState({});
+
   return (
     <Flex // 변형
       display={"flex"}
@@ -92,32 +129,144 @@ export default function AddVariation({
         gap={"4px"}
       >
         <Flex justifyContent={"space-between"} alignSelf={"stretch"}>
-          <Text
-            color="var(--maincolorstextblack-222222, #222)"
-            fontFamily="Spoqa Han Sans Neo"
-            fontSize="24px"
-            fontStyle="normal"
-            fontWeight={400}
-            lineHeight="normal"
-            letterSpacing="-0.5px"
-          >
-            작품 옵션
-          </Text>
-          {selectedOptions && <Button onClick={onOpen}>옵션 변경</Button>}
+          <Text textStyle={"H3R"}>옵션</Text>
         </Flex>
 
-        <Text
-          color="var(--maincolorstextblack-222222, #222)"
-          fontFamily="Spoqa Han Sans Neo"
-          fontSize="14px"
-          fontStyle="normal"
-          fontWeight={400}
-          lineHeight="normal"
-          letterSpacing="-0.042px"
-        >
+        <Text textStyle={"B14R"}>
           색상이나 크기와 같은 사용 가능한 옵션을 추가합니다. 구매자는 결제 시
           이 중에서 선택하게 됩니다.
         </Text>
+      </Flex>
+      <Flex flexDirection={"column"} gap={"32px"}>
+        <Flex flexDirection={"column"} gap={"12px"}>
+          <Text>옵션명 개수*</Text>
+          <select
+            onChange={(e) => setOptionNumbers(e.target.value)}
+            style={{
+              display: "inline-flex",
+              height: "36px",
+              padding: "0px 15px",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: "5px",
+              flexShrink: 0,
+              border: "1px solid #D9D9D9",
+              width: "120px",
+            }}
+          >
+            {optionNumber.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </Flex>
+      </Flex>
+
+      {optionNumbers != "0" && (
+        <Flex flexDirection={"column"} gap={"12px"}>
+          <Text>옵션 입력*</Text>
+          <Box width={"1232px"} height={"1px"} background={"#EEEEEE"} />
+          <Flex flexDirection={"column"} gap={"12px"}>
+            <Flex>
+              <Text width={variationType === "custom" ? "400px" : "140px"}>
+                옵션명
+              </Text>
+              <Text>옵션값</Text>
+            </Flex>
+            <Flex gap={"20px"}>
+              <select
+                onChange={(e) => setVariationType(e.target.value)}
+                style={{
+                  display: "inline-flex",
+                  height: "36px",
+                  padding: "0px 15px",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  gap: "5px",
+                  flexShrink: 0,
+                  border: "1px solid #D9D9D9",
+                  width: "120px",
+                }}
+              >
+                {variationOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+
+              {variationType === "custom" && (
+                <Input
+                  width={"240px"}
+                  placeholder="옵션명을 직접 입력해주세요"
+                />
+              )}
+              <Input
+                width={"400px"}
+                placeholder="옵션 값을 쉼표(,)로 구분하여 입력"
+              />
+            </Flex>
+            {optionNumbers === "2" && (
+              <Flex gap={"20px"}>
+                <select
+                  onChange={(e) => setVariationType(e.target.value)}
+                  style={{
+                    display: "inline-flex",
+                    height: "36px",
+                    padding: "0px 15px",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    gap: "5px",
+                    flexShrink: 0,
+                    border: "1px solid #D9D9D9",
+                    width: "120px",
+                  }}
+                >
+                  {variationOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+
+                {variationType === "custom" && (
+                  <Input
+                    width={"240px"}
+                    placeholder="옵션명을 직접 입력해주세요"
+                  />
+                )}
+                <Input
+                  width={"400px"}
+                  placeholder="옵션 값을 쉼표(,)로 구분하여 입력"
+                />
+              </Flex>
+            )}
+            <Button width={"240px"}>옵션목록으로 적용</Button>
+          </Flex>
+        </Flex>
+      )}
+
+      <Flex flexDirection={"column"} gap={"12px"}>
+        <Text textStyle={"B14M"}>단일 작품등록*</Text>
+        <Flex width={"1200px"}>
+          <Flex flexDirection={"column"} width={"full"}>
+            <Flex>작품명</Flex>
+            <Flex>TEXT</Flex>
+          </Flex>
+          <Flex flexDirection={"column"} width={"full"}>
+            <Flex>작품명</Flex>
+            <Flex>TEXT</Flex>
+          </Flex>
+          <Flex flexDirection={"column"} width={"full"}>
+            <Flex>작품명</Flex>
+            <Flex>TEXT</Flex>
+          </Flex>
+          <Flex flexDirection={"column"} width={"full"}>
+            <Flex>작품명</Flex>
+            <Flex>TEXT</Flex>
+          </Flex>
+        </Flex>
       </Flex>
 
       {selectedOptions[0]?.name ? ( // 옵션 설정 된 게 있는지 없는지 확인

@@ -298,10 +298,6 @@ export default function AddProduct() {
               section={section}
               setSection={setSection}
               pk={user.shop.pk}
-              primary_color_input={primary_color_input}
-              setPrimaryColorInput={setPrimaryColorInput}
-              secondary_color_input={secondary_color_input}
-              setSecondaryColorInput={setSecondaryColorInput}
             />
           )}
           <StockAndPrice
