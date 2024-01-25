@@ -11,6 +11,13 @@ export default function AddPictures({
   setSelectedFiles,
   existingImages,
 }) {
+  const [originalFiles, setOriginalFiles] = useState<File[]>([]); // 자르기 전 원본 이미지들을 저장하는 상태
+  const [isCropModalOpen, setIsCropModalOpen] = useState(false);
+  const [currentImageToCrop, setCurrentImageToCrop] = useState<string>("");
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
+    null
+  );
+
   const allImages = [
     ...existingImages,
     ...selectedFiles.map((file) => URL.createObjectURL(file)),
@@ -23,7 +30,7 @@ export default function AddPictures({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onFileSelect = () => {
-    if (fileInputRef.current && selectedFiles.length < 9) {
+    if (fileInputRef.current && selectedFiles.length < 8) {
       fileInputRef.current.click();
     }
   };
@@ -39,6 +46,11 @@ export default function AddPictures({
           (_, fileIndex) => fileIndex !== index - existingImages.length
         );
       });
+      setOriginalFiles((currentFiles) =>
+        currentFiles.filter(
+          (_, fileIndex) => fileIndex !== index - existingImages.length
+        )
+      );
     }
   };
 
@@ -48,6 +60,7 @@ export default function AddPictures({
     if (selectedFilesList) {
       const newFiles = Array.from(selectedFilesList);
       setSelectedFiles([...selectedFiles, ...newFiles]);
+      setOriginalFiles([...originalFiles, ...newFiles]); // 원본 파일 상태 업데이트
     }
     // Ensure the total number of images does not exceed the limit
     if (selectedFiles.length + existingImages.length > 9) {
@@ -55,18 +68,44 @@ export default function AddPictures({
     }
   };
 
-  const [isCropModalOpen, setIsCropModalOpen] = useState(false);
-  const [currentImageToCrop, setCurrentImageToCrop] = useState<string>("");
-
+  // 크롭하려는 이미지 선택
   const handleCropImage = (index) => {
-    const imageToCrop = allImages[index];
-    setCurrentImageToCrop(imageToCrop);
+    // 원본 파일이 있는지 확인
+    const originalFile = originalFiles[index];
+    if (!originalFile) {
+      // 원본 파일이 없는 경우, selectedFiles에서 가져옵니다
+      const imageFile = selectedFiles[index];
+      setOriginalFiles((prev) => {
+        const updatedFiles = [...prev];
+        updatedFiles[index] = imageFile;
+        return updatedFiles;
+      });
+      setCurrentImageIndex(index);
+      setCurrentImageToCrop(URL.createObjectURL(imageFile));
+    } else {
+      // 원본 파일이 있는 경우, 해당 파일을 사용합니다
+      setCurrentImageIndex(index);
+      setCurrentImageToCrop(URL.createObjectURL(originalFile));
+    }
     setIsCropModalOpen(true);
   };
 
   const handleImageCropped = (croppedBlob: Blob) => {
-    // croppedBlob을 처리하는 로직
-    // 예: File 객체로 변환 후, selectedFiles에 추가
+    // Blob을 File 객체로 변환
+    const croppedFile = new File([croppedBlob], "cropped-image.jpg", {
+      type: "image/jpeg",
+    });
+
+    // selectedfiles 변환
+    if (currentImageIndex != null) {
+      setSelectedFiles((prevFiles) => {
+        const newFiles = [...prevFiles];
+        newFiles[currentImageIndex] = croppedFile;
+        return newFiles;
+      });
+    }
+
+    // 크롭 모달 닫기
     setIsCropModalOpen(false);
   };
 
