@@ -79,6 +79,26 @@ export const sendPasswordResetEmail = async ({ name, email }) => {
   }
 };
 
+export const resetPassword = async ({
+  uid,
+  token,
+  new_password,
+  confirm_password,
+}) => {
+  try {
+    const response = await instance.post("users/password-reset-confirm", {
+      uid: uid,
+      token: token,
+      new_password: new_password,
+      confirm_password: confirm_password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error in password reset confirm:", error);
+    throw error;
+  }
+};
+
 export interface IUsernameLoginVariables {
   email: string;
   password: string;

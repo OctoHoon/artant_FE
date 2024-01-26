@@ -2,21 +2,17 @@ import {
   VStack,
   Text,
   FormControl,
-  FormLabel,
   Button,
   useToast,
   Flex,
-  RadioGroup,
-  Spacer,
   InputGroup,
   Input,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-import ArtantRadio from "../commons/Button/ArtantRadio";
 import { validateUserPassword } from "../Signup/Signup";
-import SignupInput from "../Signup/component/SignupInput";
 import ValidationMessage from "../Signup/component/ValidationMessage";
+import { resetPassword } from "../../services/userService";
 
 export default function ResetPasswordForm() {
   const toast = useToast();
@@ -41,11 +37,57 @@ export default function ResetPasswordForm() {
     e.preventDefault(); // 페이지 새로고침 방지
     const toastId = "loading-toast"; // Unique ID for the loading toast
 
+    // 비밀번호 일치 여부 검증
     if (password !== password_check) {
       setPasswordCheckValidationMessage("비밀번호가 일치하지 않습니다.");
       return;
     } else {
       setPasswordCheckValidationMessage("");
+    }
+
+    // URL에서 uid와 token 추출
+    const queryParams = new URLSearchParams(window.location.search);
+    const uid = queryParams.get("uid");
+    const token = queryParams.get("token");
+
+    // 필수 값 검증
+    if (!uid || !token) {
+      toast({
+        id: toastId,
+        title: "오류",
+        description: "잘못된 접근입니다.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    // 비밀번호 재설정 API 호출
+    try {
+      const response = await resetPassword({
+        uid,
+        token,
+        new_password: password,
+        confirm_password: password_check,
+      });
+      toast({
+        id: toastId,
+        title: "성공",
+        description: "비밀번호가 재설정되었습니다.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        id: toastId,
+        title: "오류",
+        description: "비밀번호 재설정에 실패했습니다.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -78,8 +120,15 @@ export default function ResetPasswordForm() {
                   value={password}
                   isInvalid={!isPasswordValid}
                   onChange={(e) => {
-                    setPassword(e.target.value);
-                    handleValidatePassword();
+                    const newPassword = e.target.value;
+                    setPassword(newPassword);
+                    setTimeout(() => {
+                      validateUserPassword(
+                        newPassword,
+                        setIsPasswordValid,
+                        setPasswordValidationMessage
+                      );
+                    }, 0);
                   }}
                   onBlur={handleValidatePassword}
                 />
@@ -100,7 +149,7 @@ export default function ResetPasswordForm() {
                   value={password_check}
                   onChange={(e) => setPasswordCheck(e.target.value)}
                   onBlur={undefined}
-                  isInvalid={undefined}
+                  isInvalid={password !== password_check}
                   errorBorderColor="red.300"
                 />
               </InputGroup>
