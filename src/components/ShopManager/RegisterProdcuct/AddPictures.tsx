@@ -70,23 +70,47 @@ export default function AddPictures({
 
   // 크롭하려는 이미지 선택
   const handleCropImage = (index) => {
-    // 원본 파일이 있는지 확인
-    const originalFile = originalFiles[index];
-    if (!originalFile) {
-      // 원본 파일이 없는 경우, selectedFiles에서 가져옵니다
-      const imageFile = selectedFiles[index];
-      setOriginalFiles((prev) => {
-        const updatedFiles = [...prev];
-        updatedFiles[index] = imageFile;
-        return updatedFiles;
-      });
-      setCurrentImageIndex(index);
-      setCurrentImageToCrop(URL.createObjectURL(imageFile));
+    setCurrentImageIndex(index);
+
+    // existingImages에 있는 이미지일 경우
+    if (index < existingImages.length) {
+      // existingImages에서 직접 URL을 사용
+      setCurrentImageToCrop(existingImages[index]);
+
+      // originalFiles 상태에 원본 이미지가 없다면 추가
+      if (!originalFiles[index]) {
+        fetch(existingImages[index])
+          .then((response) => response.blob())
+          .then((blob) => {
+            const file = new File([blob], `image-${index}.jpg`, {
+              type: "image/jpeg",
+            });
+            setOriginalFiles((prev) => {
+              const updatedFiles = [...prev];
+              updatedFiles[index] = file;
+              return updatedFiles;
+            });
+          });
+      }
     } else {
-      // 원본 파일이 있는 경우, 해당 파일을 사용합니다
-      setCurrentImageIndex(index);
-      setCurrentImageToCrop(URL.createObjectURL(originalFile));
+      // selectedFiles에서 이미지를 가져오는 경우
+      const fileIndex = index - existingImages.length;
+      const imageFile = selectedFiles[fileIndex];
+      if (imageFile) {
+        // 이미지 파일 URL 설정
+        setCurrentImageToCrop(URL.createObjectURL(imageFile));
+
+        // 원본 파일이 없는 경우 추가
+        if (!originalFiles[index]) {
+          setOriginalFiles((prev) => {
+            const updatedFiles = [...prev];
+            updatedFiles[index] = imageFile;
+            return updatedFiles;
+          });
+        }
+      }
     }
+
     setIsCropModalOpen(true);
   };
 
