@@ -1,15 +1,23 @@
 import { Button, Flex, HStack, Input, Text, Image } from "@chakra-ui/react";
-import { CloseIcon } from "@chakra-ui/icons"; // Import CloseIcon from Chakra UI
+import { CloseIcon, EditIcon } from "@chakra-ui/icons"; // Import CloseIcon from Chakra UI
 
 import RegisterHeader from "./RegisterHeader";
 import SectionTitle from "./SectionTitle";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import ImageCropperModal from "./components/ImageCropperModal";
 
 export default function AddPictures({
   selectedFiles,
   setSelectedFiles,
   existingImages,
 }) {
+  const [originalFiles, setOriginalFiles] = useState<File[]>([]); // 자르기 전 원본 이미지들을 저장하는 상태
+  const [isCropModalOpen, setIsCropModalOpen] = useState(false);
+  const [currentImageToCrop, setCurrentImageToCrop] = useState<string>("");
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
+    null
+  );
+
   const allImages = [
     ...existingImages,
     ...selectedFiles.map((file) => URL.createObjectURL(file)),
@@ -22,7 +30,7 @@ export default function AddPictures({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onFileSelect = () => {
-    if (fileInputRef.current && selectedFiles.length < 9) {
+    if (fileInputRef.current && selectedFiles.length < 8) {
       fileInputRef.current.click();
     }
   };
@@ -38,6 +46,11 @@ export default function AddPictures({
           (_, fileIndex) => fileIndex !== index - existingImages.length
         );
       });
+      setOriginalFiles((currentFiles) =>
+        currentFiles.filter(
+          (_, fileIndex) => fileIndex !== index - existingImages.length
+        )
+      );
     }
   };
 
@@ -47,11 +60,77 @@ export default function AddPictures({
     if (selectedFilesList) {
       const newFiles = Array.from(selectedFilesList);
       setSelectedFiles([...selectedFiles, ...newFiles]);
+      setOriginalFiles([...originalFiles, ...newFiles]); // 원본 파일 상태 업데이트
     }
     // Ensure the total number of images does not exceed the limit
     if (selectedFiles.length + existingImages.length > 9) {
       setSelectedFiles(selectedFiles.slice(0, 9 - existingImages.length));
     }
+  };
+
+  // 크롭하려는 이미지 선택
+  const handleCropImage = (index) => {
+    setCurrentImageIndex(index);
+
+    // existingImages에 있는 이미지일 경우
+    if (index < existingImages.length) {
+      // existingImages에서 직접 URL을 사용
+      setCurrentImageToCrop(existingImages[index]);
+
+      // originalFiles 상태에 원본 이미지가 없다면 추가
+      if (!originalFiles[index]) {
+        fetch(existingImages[index])
+          .then((response) => response.blob())
+          .then((blob) => {
+            const file = new File([blob], `image-${index}.jpg`, {
+              type: "image/jpeg",
+            });
+            setOriginalFiles((prev) => {
+              const updatedFiles = [...prev];
+              updatedFiles[index] = file;
+              return updatedFiles;
+            });
+          });
+      }
+    } else {
+      // selectedFiles에서 이미지를 가져오는 경우
+      const fileIndex = index - existingImages.length;
+      const imageFile = selectedFiles[fileIndex];
+      if (imageFile) {
+        // 이미지 파일 URL 설정
+        setCurrentImageToCrop(URL.createObjectURL(imageFile));
+
+        // 원본 파일이 없는 경우 추가
+        if (!originalFiles[index]) {
+          setOriginalFiles((prev) => {
+            const updatedFiles = [...prev];
+            updatedFiles[index] = imageFile;
+            return updatedFiles;
+          });
+        }
+      }
+    }
+
+    setIsCropModalOpen(true);
+  };
+
+  const handleImageCropped = (croppedBlob: Blob) => {
+    // Blob을 File 객체로 변환
+    const croppedFile = new File([croppedBlob], "cropped-image.jpg", {
+      type: "image/jpeg",
+    });
+
+    // selectedfiles 변환
+    if (currentImageIndex != null) {
+      setSelectedFiles((prevFiles) => {
+        const newFiles = [...prevFiles];
+        newFiles[currentImageIndex] = croppedFile;
+        return newFiles;
+      });
+    }
+
+    // 크롭 모달 닫기
+    setIsCropModalOpen(false);
   };
 
   return (
@@ -159,6 +238,7 @@ export default function AddPictures({
                   onRemove={() =>
                     handleRemoveFile(index, index < existingImages.length)
                   }
+                  onCrop={() => handleCropImage(index)}
                 />
               ))}
             </Flex>
@@ -177,9 +257,16 @@ export default function AddPictures({
                       6 + index < existingImages.length
                     )
                   }
+                  onCrop={() => handleCropImage(6 + index)}
                 />
               ))}
             </Flex>
+            <ImageCropperModal
+              isOpen={isCropModalOpen}
+              onClose={() => setIsCropModalOpen(false)}
+              imageSrc={currentImageToCrop}
+              onImageCropped={handleImageCropped}
+            />
             <HStack>
               <SvgWarning />
               <Text
@@ -202,7 +289,7 @@ export default function AddPictures({
   );
 }
 
-const GrayBoxImage = ({ src, width, height, index, onRemove }) => {
+const GrayBoxImage = ({ src, width, height, index, onRemove, onCrop }) => {
   const textArray = [
     "정면",
     "측면",
@@ -285,6 +372,17 @@ const GrayBoxImage = ({ src, width, height, index, onRemove }) => {
         _hover={{ backgroundColor: "whiteAlpha.800" }} // Slightly more opaque on hover
       >
         <CloseIcon color="red.500" />
+      </Button>
+      <Button
+        position="absolute"
+        left="0"
+        top="0"
+        size="sm"
+        onClick={() => onCrop(index)}
+        backgroundColor="whiteAlpha.700"
+        _hover={{ backgroundColor: "whiteAlpha.800" }}
+      >
+        <EditIcon color="blue.500" />
       </Button>
     </Flex>
   );
