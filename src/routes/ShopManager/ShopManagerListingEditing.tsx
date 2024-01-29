@@ -28,6 +28,7 @@ import {
   uploadVideo,
 } from "../../services/productService";
 import { IMAGE_DELIVERY_URL } from "../../services/apiConfig";
+import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
 
 interface IUploadURLResponse {
   id: string;
@@ -369,19 +370,21 @@ export default function ShopManagerListingEditing() {
             setSection={undefined}
             pk={user.shop.pk}
           />
-          <StockAndPrice
+          {/* <StockAndPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}
             productCount={productCount}
             setProductCount={setProductCount}
             setProductSKU={setProductSKU}
-          />
+          /> */}
           <AddVariation
+            productName={productName}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
             detailCombinations={detailCombinations}
             setDetailCombinations={setDetailCombinations}
           />
+          <OpenInfo />
           <PersonalizeTab
             personalization={personalization}
             setPersonalization={setPersonalization}

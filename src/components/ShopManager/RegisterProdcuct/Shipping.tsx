@@ -105,6 +105,7 @@ export default function Shipping({
         gap={"24px"}
       >
         <Flex // 배송 옵션
+          flexDirection={"column"}
           display={"flex"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
@@ -123,7 +124,7 @@ export default function Shipping({
             alignItems={"flex-start"}
             gap={"20px"}
           >
-            <Text width={"716px"} textStyle={"B16R"}>
+            <Text textStyle={"B16R"}>
               이 목록에 대한 배송 옵션을 입력하세요. 이러한 옵션을 이 목록에만
               적용하거나 배송 프로필로 저장하여 향후 목록에 적용 할 수있습니다.
             </Text>
@@ -138,18 +139,18 @@ export default function Shipping({
                 height={"1px"}
                 alignSelf={"stretch"}
                 background={"var(--maincolorslinegrayeeeeee, #EEE)"}
-              ></Flex>
+              />
+              <SectionTitle
+                title={"출발지 우편번호*"}
+                description={undefined}
+                link={undefined}
+              />
               <Flex // 출발지 우편번호
                 display={"flex"}
                 alignSelf={"stretch"}
                 alignItems={"flex-start"}
                 gap={"40px"}
               >
-                <SectionTitle
-                  title={"출발지 우편번호*"}
-                  description={undefined}
-                  link={undefined}
-                />
                 <Input
                   width={"248px"}
                   placeholder={"우편번호 입력"}
@@ -158,47 +159,26 @@ export default function Shipping({
                 />
                 <DaumPostCode onAddressSelect={handleAddressSelect} />
               </Flex>
-              <Flex
-                display={"flex"}
-                alignSelf={"stretch"}
-                alignItems={"flex-start"}
-                gap={"40px"}
-              >
-                <SectionTitle
-                  title={"주소"}
-                  description={undefined}
-                  link={undefined}
-                />
+
+              <Input
+                width={"248px"}
+                placeholder={"기본주소를 입력해주세요."}
+                value={onAddressSelect["roadAddress"]}
+                isDisabled
+              />
+
+              {onAddressSelect["roadAddress"] && (
                 <Input
                   width={"248px"}
-                  placeholder={"기본주소를 입력해주세요."}
-                  value={onAddressSelect["roadAddress"]}
-                  isDisabled
+                  placeholder={"상세주소를 입력해주세요."}
                 />
-              </Flex>
-              <Flex
-                display={"flex"}
-                alignSelf={"stretch"}
-                alignItems={"flex-start"}
-                gap={"40px"}
-              >
-                <SectionTitle
-                  title={""}
-                  description={undefined}
-                  link={undefined}
-                />
-                {onAddressSelect["roadAddress"] && (
-                  <Input
-                    width={"248px"}
-                    placeholder={"상세주소를 입력해주세요."}
-                  />
-                )}
-              </Flex>
+              )}
               <Flex // 처리시간
+                flexDirection={"column"}
                 display={"flex"}
                 alignSelf={"stretch"}
                 alignItems={"flex-start"}
-                gap={"40px"}
+                gap={"12px"}
               >
                 <SectionTitle
                   title={"출고 소요일*"}
@@ -261,10 +241,11 @@ export default function Shipping({
                 background={"var(--maincolorslinegrayeeeeee, #EEE)"}
               ></Flex>
               <Flex // 배송
+                flexDirection={"column"}
                 display={"flex"}
                 alignSelf={"stretch"}
                 alignItems={"flex-start"}
-                gap={"40px"}
+                gap={"12px"}
               >
                 <SectionTitle
                   title={"배송*"}

@@ -335,19 +335,21 @@ export default function UploadPhotos() {
             setSection={setSection}
             pk={user?.shop?.pk}
           />
-          <StockAndPrice
+          {/* <StockAndPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}
             productCount={productCount}
             setProductCount={setProductCount}
             setProductSKU={setProductSKU}
-          />
+          /> */}
           <AddVariation
+            productName={productName}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
             detailCombinations={detailCombinations}
             setDetailCombinations={setDetailCombinations}
           />
+          <OpenInfo />
           <PersonalizeTab
             personalization={personalization}
             setPersonalization={setPersonalization}
@@ -356,7 +358,6 @@ export default function UploadPhotos() {
             isPersonalizationEnabled={isPersonalizationEnabled}
             setIsPersonalizationEnabled={setIsPersonalizationEnabled}
           />
-          <OpenInfo />
           <Shipping
             setPostalCode={setPostalCode}
             processingTime={processingTime}

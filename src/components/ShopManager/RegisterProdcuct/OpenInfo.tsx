@@ -77,7 +77,7 @@ export default function OpenInfo() {
         <Flex flexDirection={"column"} border={"1px solid #D9D9D9"}>
           <Flex backgroundColor={"#F2F2F2"}>
             <Flex
-              width={"160px"}
+              width={"180px"}
               padding={"10px 8px"}
               height={"38px"}
               alignItems={"center"}

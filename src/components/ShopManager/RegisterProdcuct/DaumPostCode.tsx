@@ -10,7 +10,7 @@ import { useDaumPostcodePopup } from "react-daum-postcode";
 
 const DaumPostCode = (props) => {
   const open = useDaumPostcodePopup(
-    "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
+    "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
   ); // 우편번호 검색 팝업을 띄우는 함수
 
   const handelComplete = (data) => {

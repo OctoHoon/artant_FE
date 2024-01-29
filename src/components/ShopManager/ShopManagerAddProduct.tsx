@@ -30,6 +30,7 @@ import {
   uploadProduct,
   uploadVideo,
 } from "../../services/productService";
+import OpenInfo from "./RegisterProdcuct/OpenInfo";
 
 export default function AddProduct() {
   const { userLoading, isLoggedIn, user } = useUser();
@@ -300,19 +301,21 @@ export default function AddProduct() {
               pk={user.shop.pk}
             />
           )}
-          <StockAndPrice
+          {/* <StockAndPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}
             productCount={productCount}
             setProductCount={setProductCount}
             setProductSKU={setProductSKU}
-          />
+          /> */}
           <AddVariation
+            productName={productName}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
             detailCombinations={detailCombinations}
             setDetailCombinations={setDetailCombinations}
           />
+          <OpenInfo />
           <PersonalizeTab
             personalization={personalization}
             setPersonalization={setPersonalization}

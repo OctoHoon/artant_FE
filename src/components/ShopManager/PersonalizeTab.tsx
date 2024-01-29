@@ -61,8 +61,13 @@ export default function PersonalizeTab({
       </Flex>
       {isPersonalizationEnabled && (
         <Flex alignSelf={"stretch"} gap={"60px"}>
-          <Flex flexDirection={"column"} width={"600px"}>
-            <Text>구매자를 위한 가이드</Text>
+          <Flex
+            flexDirection={"column"}
+            width={"600px"}
+            border={"1px solid #D9D9D9"}
+            padding={"10px"}
+          >
+            <Text>판매자를 위한 가이드</Text>
             <Text fontSize={"13px"}>
               구매자가 개인화를 원할 때 볼 수 있는 설명을 입력해주세요{" "}
             </Text>
@@ -77,7 +82,7 @@ export default function PersonalizeTab({
               borderRadius="5px"
               border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
               background="var(--maincolorsbg-white, #FFF)"
-              placeholder="예시 : 팔찌에 새길 이름을 입력해주세요. 최대 12글자입니다."
+              placeholder="예시 : 팔찌에 새길 이름을 입력해주세요.."
               onChange={(e) => {
                 setPersonalization(e.target.value);
               }}
@@ -87,7 +92,7 @@ export default function PersonalizeTab({
               isChecked={isOption}
               onChange={(e) => setIsOption(e.target.checked)}
             >
-              개인화는 옵션입니다
+              개인 맞춤 설정은 옵션입니다
             </Checkbox>
           </Flex>
           <Flex
@@ -95,6 +100,8 @@ export default function PersonalizeTab({
             justifyContent={"center"}
             alignItems={"center"}
             width={"600px"}
+            border={"1px solid #D9D9D9"}
+            padding={"10px"}
           >
             <Text>구매자가 볼 가이드</Text>
             <Box height={"20px"} />
@@ -111,7 +118,7 @@ export default function PersonalizeTab({
                 예시 :{" "}
                 {personalization
                   ? personalization
-                  : "팔찌에 새길 이름을 입력해주세요. 최대 12글자입니다."}
+                  : "팔찌에 새길 이름을 입력해주세요."}
               </Text>
               <Input
                 display="flex"

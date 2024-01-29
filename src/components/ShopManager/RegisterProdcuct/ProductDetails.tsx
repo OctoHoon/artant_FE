@@ -274,17 +274,21 @@ export default function ProductDetails({
         </Flex>
         {shippingOptionValue == 2 && (
           <Flex // 디지털 파일
-            display={"flex"}
+            flexDirection={"column"}
             alignSelf={"stretch"}
             alignItems={"flex-start"}
-            gap={"40px"}
+            gap={"12px"}
           >
             <SectionTitle
               title={"디지털 파일*"}
               description={undefined}
               link={undefined}
             />
-            <Flex alignItems={"flex-start"} gap={"20px"}>
+            <Flex
+              alignItems={"flex-start"}
+              gap={"12px"}
+              flexDirection={"column"}
+            >
               {digitalFile ? (
                 <Text>{digitalFile.name}</Text>
               ) : (
