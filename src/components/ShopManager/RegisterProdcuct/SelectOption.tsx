@@ -1,7 +1,15 @@
 import { Select } from "@chakra-ui/react";
 
-const SelectOption = ({ value, onChange, options, disabled, placeholder }) => (
+const SelectOption = ({
+  width = "auto",
+  value,
+  onChange,
+  options,
+  disabled,
+  placeholder,
+}) => (
   <Select
+    width={width}
     height="40px"
     flex="1 0 0"
     padding="10px 0px"

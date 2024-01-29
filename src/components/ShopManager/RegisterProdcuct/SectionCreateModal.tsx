@@ -11,14 +11,32 @@ import {
   ModalFooter,
   Button,
 } from "@chakra-ui/react";
+import { updateShop } from "../../../services/shopService";
 
 export default function CreateSectionModal({
+  shopPk,
+  sections,
   isOpen,
   onClose,
   sectionName,
   setSectionName,
 }) {
-  const handleSave = () => {
+  const handleSave = async () => {
+    try {
+      console.log(sections);
+      const newSection = {
+        title: sectionName,
+      };
+      let newSections = [...sections, newSection];
+      console.log(newSections);
+      const response = await updateShop(shopPk, {
+        sections_input: newSections,
+      });
+
+      // Handle any additional logic after successful creation
+    } catch (error) {
+      console.error("Error creating section:", error);
+    }
     onClose(); // Close the modal after saving
   };
 
@@ -30,11 +48,11 @@ export default function CreateSectionModal({
         <ModalCloseButton />
         <ModalBody>
           <FormControl id="section-name">
-            <FormLabel>섹션 이름</FormLabel>
+            <FormLabel>섹션 제목</FormLabel>
             <Input
               value={sectionName}
               onChange={(e) => setSectionName(e.target.value)}
-              placeholder="섹션 이름을 입력하세요"
+              placeholder="섹션 제목을 입력하세요"
             />
           </FormControl>
         </ModalBody>

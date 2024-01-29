@@ -25,6 +25,7 @@ import {
   uploadVideo,
 } from "../../services/productService";
 import { updateShop } from "../../services/shopService";
+import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
 
 export type SelectedOption = {
   name: string;
@@ -333,24 +334,22 @@ export default function UploadPhotos() {
             section={section}
             setSection={setSection}
             pk={user?.shop?.pk}
-            primary_color_input={primary_color_input}
-            setPrimaryColorInput={setPrimaryColorInput}
-            secondary_color_input={secondary_color_input}
-            setSecondaryColorInput={setSecondaryColorInput}
           />
-          <StockAndPrice
+          {/* <StockAndPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}
             productCount={productCount}
             setProductCount={setProductCount}
             setProductSKU={setProductSKU}
-          />
+          /> */}
           <AddVariation
+            productName={productName}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
             detailCombinations={detailCombinations}
             setDetailCombinations={setDetailCombinations}
           />
+          <OpenInfo />
           <PersonalizeTab
             personalization={personalization}
             setPersonalization={setPersonalization}

@@ -5,6 +5,9 @@ import SectionTitle from "./SectionTitle";
 import WhiteButton from "../../commons/Button/WhiteButton";
 import InputOption from "./InputOption";
 import SelectOption from "./SelectOption";
+import DaumPostcode from "react-daum-postcode";
+import DaumPostCode from "./DaumPostCode";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 export default function Shipping({
   setPostalCode,
@@ -75,6 +78,13 @@ export default function Shipping({
     }
   };
 
+  const [onAddressSelect, setOnAddressSelect] = useState({});
+  console.log(onAddressSelect);
+
+  const handleAddressSelect = (address) => {
+    setOnAddressSelect(address); // 주소 API 실행 후 받아온 data를 state에 저장
+  };
+
   return (
     <Flex // 배송
       display={"flex"}
@@ -85,12 +95,7 @@ export default function Shipping({
       gap={"32px"}
       border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
     >
-      <RegisterHeader
-        title={"배송"}
-        description={
-          " 배송 프로필, 주문 처리 일정 등 배송 정보가 정확한지 확인하여 쇼핑객에게 배송 시간과 비용에 대한 명확한 기대치를 제공하세요. 배송 설정에서 언제든지 업데이트할 수 있습니다."
-        }
-      />
+      <RegisterHeader title={"배송"} description={""} />
 
       <Flex
         display={"flex"}
@@ -100,6 +105,7 @@ export default function Shipping({
         gap={"24px"}
       >
         <Flex // 배송 옵션
+          flexDirection={"column"}
           display={"flex"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
@@ -118,7 +124,7 @@ export default function Shipping({
             alignItems={"flex-start"}
             gap={"20px"}
           >
-            <Text width={"716px"} textStyle={"B16R"}>
+            <Text textStyle={"B16R"}>
               이 목록에 대한 배송 옵션을 입력하세요. 이러한 옵션을 이 목록에만
               적용하거나 배송 프로필로 저장하여 향후 목록에 적용 할 수있습니다.
             </Text>
@@ -133,32 +139,49 @@ export default function Shipping({
                 height={"1px"}
                 alignSelf={"stretch"}
                 background={"var(--maincolorslinegrayeeeeee, #EEE)"}
-              ></Flex>
+              />
+              <SectionTitle
+                title={"출발지 우편번호*"}
+                description={undefined}
+                link={undefined}
+              />
               <Flex // 출발지 우편번호
                 display={"flex"}
                 alignSelf={"stretch"}
                 alignItems={"flex-start"}
                 gap={"40px"}
               >
-                <SectionTitle
-                  title={"출발지 우편번호*"}
-                  description={undefined}
-                  link={undefined}
-                />
-                <InputOption
+                <Input
                   width={"248px"}
                   placeholder={"우편번호 입력"}
-                  onChange={(e) => setPostalCode(e.target.value)}
+                  value={onAddressSelect["zonecode"]}
+                  isDisabled
                 />
+                <DaumPostCode onAddressSelect={handleAddressSelect} />
               </Flex>
+
+              <Input
+                width={"248px"}
+                placeholder={"기본주소를 입력해주세요."}
+                value={onAddressSelect["roadAddress"]}
+                isDisabled
+              />
+
+              {onAddressSelect["roadAddress"] && (
+                <Input
+                  width={"248px"}
+                  placeholder={"상세주소를 입력해주세요."}
+                />
+              )}
               <Flex // 처리시간
+                flexDirection={"column"}
                 display={"flex"}
                 alignSelf={"stretch"}
                 alignItems={"flex-start"}
-                gap={"40px"}
+                gap={"12px"}
               >
                 <SectionTitle
-                  title={"시간*"}
+                  title={"출고 소요일*"}
                   description={
                     "주문을 준비해서 우편으로 보내야 하나요? 쇼핑객들은 빠르게 배송되는 품목을 구매할 사능성이 더 높다는 점을 명심하세요."
                   }
@@ -218,10 +241,11 @@ export default function Shipping({
                 background={"var(--maincolorslinegrayeeeeee, #EEE)"}
               ></Flex>
               <Flex // 배송
+                flexDirection={"column"}
                 display={"flex"}
                 alignSelf={"stretch"}
                 alignItems={"flex-start"}
-                gap={"40px"}
+                gap={"12px"}
               >
                 <SectionTitle
                   title={"배송*"}

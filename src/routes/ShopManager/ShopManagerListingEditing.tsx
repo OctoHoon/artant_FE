@@ -28,6 +28,7 @@ import {
   uploadVideo,
 } from "../../services/productService";
 import { IMAGE_DELIVERY_URL } from "../../services/apiConfig";
+import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
 
 interface IUploadURLResponse {
   id: string;
@@ -368,24 +369,22 @@ export default function ShopManagerListingEditing() {
             section={undefined}
             setSection={undefined}
             pk={user.shop.pk}
-            primary_color_input={primary_color_input}
-            setPrimaryColorInput={setPrimaryColorInput}
-            secondary_color_input={secondary_color_input}
-            setSecondaryColorInput={setSecondaryColorInput}
           />
-          <StockAndPrice
+          {/* <StockAndPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}
             productCount={productCount}
             setProductCount={setProductCount}
             setProductSKU={setProductSKU}
-          />
+          /> */}
           <AddVariation
+            productName={productName}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
             detailCombinations={detailCombinations}
             setDetailCombinations={setDetailCombinations}
           />
+          <OpenInfo />
           <PersonalizeTab
             personalization={personalization}
             setPersonalization={setPersonalization}

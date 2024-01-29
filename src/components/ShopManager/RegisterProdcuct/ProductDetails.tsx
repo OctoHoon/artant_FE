@@ -8,14 +8,14 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
-import { color_options_dict, subsubCategory } from "../../data/options";
-import { useRef, useState } from "react";
+import { subsubCategory } from "../../data/options";
+import { useEffect, useRef, useState } from "react";
 import SectionTitle from "./SectionTitle";
 import RegisterHeader from "./RegisterHeader";
 import RadioOption from "./RadioOption";
 import InputOption from "./InputOption";
 import SelectOption from "./SelectOption";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getShopDetails } from "../../../services/shopService";
 import { SvgCamera } from "../EditShop/Svg";
 import SectionCreateModal from "./SectionCreateModal";
@@ -63,12 +63,9 @@ export default function ProductDetails({
   section,
   setSection,
   pk,
-  primary_color_input,
-  setPrimaryColorInput,
-  secondary_color_input,
-  setSecondaryColorInput,
 }) {
   const { isLoading, data } = useQuery(["shop", pk], getShopDetails);
+  const queryClient = useQueryClient();
 
   const handleCategoryChange = (event) => {
     const { value } = event.target;
@@ -82,9 +79,11 @@ export default function ProductDetails({
   };
 
   const handleAddTag = (tempTag) => {
-    const newTags = [...tags];
-    newTags.push(tempTag);
-    setTags(newTags);
+    if (tempTag) {
+      const newTags = [...tags];
+      newTags.push(tempTag);
+      setTags(newTags);
+    }
   };
 
   const removeTag = (index) => {
@@ -131,9 +130,14 @@ export default function ProductDetails({
     }
   };
 
-  console.log(primary_color_input);
+  const [sectionCandidate, setSectionCandidate] = useState([]);
 
-  console.log(digitalFile);
+  useEffect(() => {
+    {
+      data && setSectionCandidate(data.featured_sections);
+    }
+  }, [data]);
+
   return (
     <Flex // 목록 세부정보
       display={"flex"}
@@ -144,12 +148,7 @@ export default function ProductDetails({
       gap={"32px"}
       border={"1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"}
     >
-      <RegisterHeader
-        title={"작품 세부정보"}
-        description={
-          "당신의 작품에 대한 모든 것을 전 세계에 알리고 그들이 그것을 좋아할 이유를 알려주세요."
-        }
-      />
+      <RegisterHeader title={"작품 세부정보"} description={""} />
       <Flex
         display={"flex"}
         flexDirection={"column"}
@@ -158,18 +157,12 @@ export default function ProductDetails({
         gap={"24px"}
       >
         <Flex // 제목
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
-          <SectionTitle
-            title={"제목*"}
-            description={
-              "구매자가 귀하의 상품을 검색하는 데 사용할 키워드를 포함하십시오"
-            }
-            link={undefined}
-          />
+          <Text textStyle={"B14M"}>제목*</Text>
           <InputOption
             value={productName}
             placeholder={"제목을 입력하세요"}
@@ -177,100 +170,69 @@ export default function ProductDetails({
           />
         </Flex>
         <Flex // 이 목록 정보
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
-          <SectionTitle
-            title={"이 작품 정보*"}
-            description={undefined}
-            link={"아트앤트에서 허용되는 품목 유형에 대해 자세히 알아보세요."}
-          />
-          <SelectOption
-            placeholder="누가 만들었나요?"
-            options={whoMadeOptions}
-            value={whoMade}
-            onChange={(e) => setWhoMade(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
-
-          <SelectOption
-            placeholder="그것은 무엇입니까?"
-            options={whatIsItOptions}
-            value={whatMade}
-            onChange={(e) => setWhatMade(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
-
-          <SelectOption
-            placeholder="언제 만들었나요?"
-            options={whenMadeOptions}
-            value={whenMade}
-            onChange={(e) => setWhenMade(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
+          <Text textStyle={"B14M"}>이 목록 정보*</Text>
+          <Flex alignSelf={"stretch"} gap={"20px"}>
+            <SelectOption
+              placeholder="누가 만들었나요?"
+              options={whoMadeOptions}
+              value={whoMade}
+              onChange={(e) => setWhoMade(e.target.value)}
+              disabled={false} // Add other props like onChange, value as needed
+            />
+            <SelectOption
+              placeholder="그것은 무엇입니까?"
+              options={whatIsItOptions}
+              value={whatMade}
+              onChange={(e) => setWhatMade(e.target.value)}
+              disabled={false} // Add other props like onChange, value as needed
+            />
+            <SelectOption
+              placeholder="언제 만들었나요?"
+              options={whenMadeOptions}
+              value={whenMade}
+              onChange={(e) => setWhenMade(e.target.value)}
+              disabled={false} // Add other props like onChange, value as needed
+            />
+          </Flex>
         </Flex>
         <Flex // 카테고리
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
-          <SectionTitle
-            title={"카테고리*"}
-            description={
-              "더 많은 쇼핑객이 해당 상품을 찾는 데 도움이 되는 카테고리 제안을 받으려면 상품에 대한 2~3단어 설명을 입력하세요."
-            }
-            link={undefined}
-          />
-
-          <SelectOption
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            options={Object.keys(subsubCategory)}
-            placeholder="상위 카테고리 선택"
-            disabled={undefined}
-          />
-          <SelectOption
-            value={selectedSubCategory}
-            onChange={handleSubCategoryChange}
-            options={selectedCategory ? subsubCategory[selectedCategory] : []}
-            placeholder={
-              selectedCategory
-                ? "하위 카테고리 선택"
-                : "상위 카테고리를 먼저 선택하세요"
-            }
-            disabled={!selectedCategory}
-          />
-        </Flex>
-        <Flex>
-          <SectionTitle
-            title={"제품 특성"}
-            description={"카테고리에 해당하는 제품 특성을 입력해주세요"}
-            link={undefined}
-          />
-          <SelectOption
-            placeholder="메인 컬러"
-            options={color_options_dict}
-            value={primary_color_input}
-            onChange={(e) => setPrimaryColorInput(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
-
-          <SelectOption
-            placeholder="서브 컬러"
-            options={color_options_dict}
-            value={secondary_color_input}
-            onChange={(e) => setSecondaryColorInput(e.target.value)}
-            disabled={false} // Add other props like onChange, value as needed
-          />
+          <Text textStyle={"B14M"}>카테고리*</Text>
+          <Flex alignSelf={"stretch"} gap={"20px"}>
+            <SelectOption
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              options={Object.keys(subsubCategory)}
+              placeholder="상위 카테고리 선택"
+              disabled={undefined}
+            />
+            <SelectOption
+              value={selectedSubCategory}
+              onChange={handleSubCategoryChange}
+              options={selectedCategory ? subsubCategory[selectedCategory] : []}
+              placeholder={
+                selectedCategory
+                  ? "하위 카테고리 선택"
+                  : "상위 카테고리를 먼저 선택하세요"
+              }
+              disabled={!selectedCategory}
+            />
+          </Flex>
         </Flex>
         <Flex // 갱신옵션
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
           <SectionTitle
             title={"갱신 옵션*"}
@@ -291,10 +253,10 @@ export default function ProductDetails({
           />
         </Flex>
         <Flex // 배송 상품 유형
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
           <SectionTitle
             title={"유형*"}
@@ -312,17 +274,21 @@ export default function ProductDetails({
         </Flex>
         {shippingOptionValue == 2 && (
           <Flex // 디지털 파일
-            display={"flex"}
+            flexDirection={"column"}
             alignSelf={"stretch"}
             alignItems={"flex-start"}
-            gap={"40px"}
+            gap={"12px"}
           >
             <SectionTitle
               title={"디지털 파일*"}
               description={undefined}
               link={undefined}
             />
-            <Flex alignItems={"flex-start"} gap={"20px"}>
+            <Flex
+              alignItems={"flex-start"}
+              gap={"12px"}
+              flexDirection={"column"}
+            >
               {digitalFile ? (
                 <Text>{digitalFile.name}</Text>
               ) : (
@@ -364,22 +330,28 @@ export default function ProductDetails({
           </Flex>
         )}
         <Flex // 설명
-          display={"flex"}
+          flexDirection={"column"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
         >
           <SectionTitle
             title={"설명*"}
             description={
-              "제품의 가장 뛰어난 기능을 설명하는 간략한 개요부터 시작하세요. 쇼핑객은 처음에는 설명의 처음 몇 줄만 볼 수 있으므로 중요하게 생각하세요! 쇼핑객은 귀하의 프로세스와 제품 뒤에 숨겨진 이야기를 듣고 싶어합니다."
+              "제품의 가장 뛰어난 기능을 설명하는 간략한 개요부터 시작하세요. 쇼핑객은 처음에는 설명의 처음 몇 줄만 볼 수 있으므로 중요하게 생각하세요!"
             }
             link={undefined}
           />
-
+          <Text
+            color="var(--maincolorstextgray-595959, #666)"
+            textStyle={"B13R"}
+            lineHeight="140%"
+          >
+            무슨 말을 더 해야 할지 모르겠나요? 쇼핑객은 귀하의 프로세스와 이
+            제품 뒤에 숨겨진 이야기를 듣고 싶어합니다.
+          </Text>
+          <Box height={"12px"} />
           <Flex
             display={"flex"}
-            flexDirection={"column"}
             alignItems={"flex-start"}
             gap={"24px"}
             flex={"1 0 0"}
@@ -391,6 +363,7 @@ export default function ProductDetails({
               alignItems="flex-start"
               h={"240px"}
               gap={"8px"}
+              width={"1232px"}
               alignSelf="stretch"
               borderRadius="5px"
               border="1px solid var(--maincolorsstrokegrayd-9-d-9-d-9, #D9D9D9)"
@@ -401,14 +374,17 @@ export default function ProductDetails({
           </Flex>
         </Flex>
         <Flex // 섹션
+          flexDirection={"column"}
           display={"flex"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
           <SectionTitle
             title={"섹션"}
-            description={undefined}
+            description={
+              "쇼핑객이 쉽게 찾아볼 수 있도록 관련 목록을 섹션으로 그룹화합니다(예: 팔찌, 어버이날 선물, 털실)."
+            }
             link={undefined}
             isOption
           />
@@ -420,10 +396,7 @@ export default function ProductDetails({
             gap={"8px"}
           >
             {" "}
-            <Text textStyle={"B14R"}>
-              쇼핑객이 쉽게 찾아볼 수 있도록 관련 목록을 섹션으로
-              그룹화합니다(예: 팔찌, 어버이날 선물, 털실).
-            </Text>
+            <Text textStyle={"B14R"}></Text>
             <Text
               color="var(--maincolorstextblack-222222, #222)"
               textStyle={"B14R"}
@@ -435,15 +408,20 @@ export default function ProductDetails({
             >
               섹션 추가
             </Text>
-            {/* {section in data.featured_sections ? null : <Text>{section}</Text>} */}
             <SectionCreateModal
+              shopPk={pk}
+              sections={sectionCandidate}
               isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
+              onClose={() => {
+                setIsModalOpen(false);
+                queryClient.refetchQueries(["shop"]);
+              }}
               sectionName={section}
               setSectionName={setSection}
             />
             {!isLoading && (
               <SelectOption
+                width="306px"
                 value={section}
                 onChange={(e) => setSection(e.target.value)}
                 options={data.featured_sections.map((item) => item.title)}
@@ -454,30 +432,33 @@ export default function ProductDetails({
           </Flex>
         </Flex>
         <Flex // 태그
+          flexDirection={"column"}
           display={"flex"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
           <SectionTitle
             title={"태그"}
             description={
-              " 태그를 사용하면 이 작품을 검색해서 찾기 더욱 쉬워져요. 최대 13개까지 태그를 설정할 수 있어요."
+              "누군가가 귀하의 작품을 검색하기 위해 어떤 단어를 사용할 수 있습니까? 검색하려면 13개의 태그를 모두 사용하세요."
             }
-            link={"태그에 대한 아이디어를 얻으세요."}
+            link={""}
             isOption
           />
-
           <Flex
             display={"flex"}
             flexDirection={"column"}
             alignItems={"flex-start"}
             gap={"12px"}
           >
-            <TagInput
-              placeholder={"모양, 색상, 스타일, 기능 등"}
-              onAdd={handleAddTag}
-            />
+            <Flex gap={"20px"} alignItems={"center"} textStyle={"B12R"}>
+              <TagInput
+                placeholder={"모양, 색상, 스타일, 기능 등"}
+                onAdd={handleAddTag}
+              />
+              {13 - tags.length}개 남음
+            </Flex>
             <Flex gap={"12px"} alignItems={"flex-start"} flexWrap="wrap">
               {tags.map((tag, index) => (
                 <TagBox
@@ -491,10 +472,11 @@ export default function ProductDetails({
           </Flex>
         </Flex>
         <Flex // 재료
+          flexDirection={"column"}
           display={"flex"}
           alignSelf={"stretch"}
           alignItems={"flex-start"}
-          gap={"40px"}
+          gap={"12px"}
         >
           <SectionTitle
             title={"재료"}
@@ -508,10 +490,13 @@ export default function ProductDetails({
             alignItems={"flex-start"}
             gap={"12px"}
           >
-            <TagInput
-              placeholder={"원재료, 성분 등"}
-              onAdd={handleAddMaterial}
-            />
+            <Flex gap={"20px"} alignItems={"center"} textStyle={"B12R"}>
+              <TagInput
+                placeholder={"원재료, 성분 등"}
+                onAdd={handleAddMaterial}
+              />
+              {13 - materials.length}개 남음
+            </Flex>
             <Flex gap={"12px"} alignItems={"flex-start"} flexWrap="wrap">
               {materials.map((tag, index) => (
                 <TagBox
