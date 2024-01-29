@@ -278,6 +278,8 @@ export default function CorporateSignupForm() {
                 password={password}
                 isPasswordValid={isPasswordValid}
                 setPassword={setPassword}
+                setIsPasswordValid={setIsPasswordValid}
+                setPasswordValidationMessage={setPasswordValidationMessage}
                 handleValidatePassword={handleValidatePassword}
                 handlePasswordVisibility={handlePasswordVisibility}
                 passwordValidationMessage={passwordValidationMessage}

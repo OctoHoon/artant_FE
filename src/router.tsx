@@ -39,6 +39,7 @@ import Signup from "./routes/Signup";
 import KakaoConfirm from "./routes/KakaoConfirm";
 import CorporateSignup from "./routes/CorporateSignup";
 import AccountRecovery from "./routes/AccountRecovery";
+import ResetPassword from "./routes/ResetPassword";
 
 const router = createBrowserRouter(
   [
@@ -54,6 +55,10 @@ const router = createBrowserRouter(
         {
           path: "signup",
           element: <Signup />,
+        },
+        {
+          path: "reset-password",
+          element: <ResetPassword />,
         },
         {
           path: "account-recovery",
