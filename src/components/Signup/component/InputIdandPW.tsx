@@ -9,6 +9,7 @@ import {
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import SignupInput from "./SignupInput";
 import ValidationMessage from "./ValidationMessage";
+import { validateUserPassword } from "../Signup";
 
 export default function InputIdandPw({
   username,
@@ -20,6 +21,8 @@ export default function InputIdandPw({
   password,
   isPasswordValid,
   setPassword,
+  setIsPasswordValid,
+  setPasswordValidationMessage,
   handleValidatePassword,
   handlePasswordVisibility,
   passwordValidationMessage,
@@ -58,8 +61,15 @@ export default function InputIdandPw({
             value={password}
             isInvalid={!isPasswordValid}
             onChange={(e) => {
-              setPassword(e.target.value);
-              handleValidatePassword();
+              const newPassword = e.target.value;
+              setPassword(newPassword);
+              setTimeout(() => {
+                validateUserPassword(
+                  newPassword,
+                  setIsPasswordValid,
+                  setPasswordValidationMessage
+                );
+              }, 0);
             }}
             onBlur={handleValidatePassword}
           />

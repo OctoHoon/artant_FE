@@ -214,6 +214,8 @@ export default function SignupForm() {
           setPassword={setPassword}
           handleValidatePassword={handleValidatePassword}
           handlePasswordVisibility={handlePasswordVisibility}
+          setIsPasswordValid={setIsPasswordValid}
+          setPasswordValidationMessage={setPasswordValidationMessage}
           passwordValidationMessage={passwordValidationMessage}
           password_check={password_check}
           setPasswordCheck={setPasswordCheck}
