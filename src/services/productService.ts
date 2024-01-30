@@ -5,9 +5,6 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 
 export interface Variation {
   name: string;
-  is_sku_vary: boolean;
-  is_price_vary: boolean;
-  is_quantity_vary: boolean;
   options: { name: string }[];
 }
 
@@ -16,6 +13,7 @@ export interface Variant {
   option_two: string;
   sku: string;
   price: number;
+  original_price: number;
   quantity: number;
 }
 
@@ -33,6 +31,7 @@ export interface IUploadProductVariables {
   materials_input: string[];
   description: string;
   price: number;
+  original_price: number;
   quantity: number;
   sku: string;
   processing_min: number;

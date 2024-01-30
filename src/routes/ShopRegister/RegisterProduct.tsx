@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -8,12 +8,10 @@ import AddVariation from "../../components/ShopManager/RegisterProdcuct/AddVaria
 import PersonalizeTab from "../../components/ShopManager/PersonalizeTab";
 import Shipping from "../../components/ShopManager/RegisterProdcuct/Shipping";
 import Returns from "../../components/ShopManager/RegisterProdcuct/Returns";
-import StockAndPrice from "../../components/ShopManager/RegisterProdcuct/StockAndPrice";
 import ProductDetails from "../../components/ShopManager/RegisterProdcuct/ProductDetails";
 import WhiteButton from "../../components/commons/Button/WhiteButton";
 import AddVideo from "../../components/ShopManager/RegisterProdcuct/AddVideo";
 import AddPictures from "../../components/ShopManager/RegisterProdcuct/AddPictures";
-import BlackButton from "../../components/commons/Button/BlackButton";
 import useUser from "../../lib/useUser";
 import {
   IUploadProductVariables,
@@ -29,9 +27,6 @@ import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
 
 export type SelectedOption = {
   name: string;
-  is_sku_vary: boolean;
-  is_price_vary: boolean;
-  is_quantity_vary: boolean;
   options: OptionDetail[];
 };
 
@@ -63,7 +58,18 @@ export const ActionSection = ({ children, ...props }) => (
   </Flex>
 );
 
-export default function UploadPhotos() {
+export type OptionDetails = {
+  originalPrice: string;
+  price: string;
+  stock: string;
+  visible: boolean;
+};
+
+export type PriceMap = {
+  [key: string]: OptionDetails;
+};
+
+export default function RegisterProduct() {
   const { userLoading, isLoggedIn, user } = useUser();
 
   const navigate = useNavigate();
@@ -72,6 +78,7 @@ export default function UploadPhotos() {
   const [productName, setProductName] = useState(""); // 제품 이름
   const [productDescription, setProductDescription] = useState(""); // 제품 설명
   const [productPrice, setProductPrice] = useState(0); // 제품 가격
+  const [productOriginalPrice, setProductOriginalPrice] = useState(0); // 정가
   const [productCount, setProductCount] = useState(0); // 제품 수량
   const [productSKU, setProductSKU] = useState(""); // 제품 SKU
   const [refreshOptionValue, setRefreshOptionValue] = useState("1"); // 갱신 옵션
@@ -109,14 +116,72 @@ export default function UploadPhotos() {
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
   const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
   const shopPk = user?.shop?.pk;
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([]);
-  const [detailCombinations, setDetailCombinations] = useState<Variant[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([
+    { name: "", options: [] },
+    { name: "", options: [] },
+  ]);
+
+  const [combinations, setCombinations] = useState<string[][]>([]);
+  const [prices, setPrices] = useState<PriceMap>({
+    default: {
+      originalPrice: "0",
+      price: "0",
+      stock: "0",
+      visible: true,
+    },
+  });
+  console.log(prices);
+
   const [section, setSection] = useState();
 
   const uploadImageMutation = useMutation(uploadImage, {}); //cloudflare에 올림
   const uploadURLMutation = useMutation(getUploadURL, {}); //url 가져옴
 
-  console.log(detailCombinations);
+  const transformToVariants = (
+    combinations: string[][],
+    prices: PriceMap
+  ): Variant[] => {
+    if (combinations.length === 0) {
+      setProductOriginalPrice(parseInt(prices["default"]["originalPrice"]));
+      setProductPrice(parseInt(prices["default"]["price"]));
+      setProductCount(parseInt(prices["default"]["stock"]));
+      return [];
+    }
+
+    let totalStock = 0;
+    let minPrice = Number.MAX_VALUE;
+    let minOriginalPriceAtMinPrice = Number.MAX_VALUE;
+
+    const variants = combinations.map((combination) => {
+      const key = combination.join("-");
+      const priceDetail = prices[key];
+      const price = parseFloat(priceDetail.price);
+      const originalPrice = parseFloat(priceDetail.originalPrice);
+      const stock = parseInt(priceDetail.stock);
+
+      totalStock += stock;
+
+      if (price < minPrice) {
+        minPrice = price;
+        minOriginalPriceAtMinPrice = originalPrice;
+      }
+
+      return {
+        option_one: combination[0] || "",
+        option_two: combination[1] || "",
+        sku: "", // Implement generateSKU based on your logic
+        price,
+        original_price: originalPrice,
+        quantity: stock,
+      };
+    });
+
+    // Update the state with the calculated values
+    setProductCount(totalStock);
+    setProductPrice(minPrice);
+    setProductOriginalPrice(minOriginalPriceAtMinPrice);
+    return variants;
+  };
 
   const onSubmitImages = async () => {
     try {
@@ -203,7 +268,11 @@ export default function UploadPhotos() {
 
   console.log(selectedFiles);
 
-  const onSubmitAll = async () => {
+  const onSubmitAll = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const variantData = transformToVariants(combinations, prices);
+
     //validate 넣어야함
     if (
       productName &&
@@ -239,6 +308,7 @@ export default function UploadPhotos() {
           name: productName,
           description: productDescription,
           price: productPrice,
+          original_price: productOriginalPrice,
           category_name_input: selectedSubCategory,
           shopPK: shopPk!,
           tags_input: tags,
@@ -260,7 +330,7 @@ export default function UploadPhotos() {
           is_personalization_optional: isOption,
           personalization_guide: personalization,
           variations_input: selectedOptions,
-          variants_input: detailCombinations,
+          variants_input: variantData,
         };
 
         const result = await onSubmitProduct({ productData }); // shop에 product 등록
@@ -299,104 +369,115 @@ export default function UploadPhotos() {
         mt={"32px"}
         mb={"120px"}
       >
-        <Flex
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"flex-start"}
-          gap={"60px"}
-        >
-          {" "}
-          <RegisterProcess currentPage={2} />
-          <RegisterProductHeader />
-          <AddPictures
-            selectedFiles={selectedFiles}
-            setSelectedFiles={setSelectedFiles}
-            existingImages={[]}
-          />
-          <AddVideo setSelectedVideoFile={setSelectedVideoFile} />
-          <ProductDetails
-            productName={productName}
-            setProductName={setProductName}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            selectedSubCategory={selectedSubCategory}
-            setSelectedSubCategory={setSelectedSubCategory}
-            refreshOptionValue={refreshOptionValue}
-            setRefreshOptionValue={setRefreshOptionValue}
-            shippingOptionValue={shippingOptionValue}
-            setShippingOptionValue={setShippingOptionValue}
-            productDescription={productDescription}
-            setProductDescription={setProductDescription}
-            tags={tags}
-            setTags={setTags}
-            materials={materials}
-            setMaterials={setMaterials}
-            section={section}
-            setSection={setSection}
-            pk={user?.shop?.pk}
-          />
-          {/* <StockAndPrice
-            productPrice={productPrice}
-            setProductPrice={setProductPrice}
-            productCount={productCount}
-            setProductCount={setProductCount}
-            setProductSKU={setProductSKU}
-          /> */}
-          <AddVariation
-            productName={productName}
-            selectedOptions={selectedOptions}
-            setSelectedOptions={setSelectedOptions}
-            detailCombinations={detailCombinations}
-            setDetailCombinations={setDetailCombinations}
-          />
-          <OpenInfo />
-          <PersonalizeTab
-            personalization={personalization}
-            setPersonalization={setPersonalization}
-            isOption={isOption}
-            setIsOption={setIsOption}
-            isPersonalizationEnabled={isPersonalizationEnabled}
-            setIsPersonalizationEnabled={setIsPersonalizationEnabled}
-          />
-          <Shipping
-            setPostalCode={setPostalCode}
-            processingTime={processingTime}
-            setProcessingTime={setProcessingTime}
-            customProcessingTime={customProcessingTime}
-            setCustomProcessingTime={setCustomProcessingTime}
-            freeShipping={freeShipping}
-            setFreeShipping={setFreeShipping}
-            shippingCost={shippingCost}
-            setShippingCost={setShippingCost}
-          />
-          <Returns policy={policy} setPolicy={setPolicy} />
-          <ActionSection>
-            <Flex gap={"12px"} alignItems={"center"}>
-              <WhiteButton
-                title={"취소"}
-                borderRadius={"5px"}
-                onClick={undefined}
-              />
-              <Text textStyle={"B14R"}>
-                이목록은 아직 활성화 되지 않았습니다. 매장을 오픈하면 쇼핑객에게
-                제공됩니다.
-              </Text>
-            </Flex>
-            <Flex gap={"12px"} alignItems={"center"}>
-              <WhiteButton
-                title={"미리보기"}
-                borderRadius={"5px"}
-                onClick={undefined}
-              />
-              <BlackButton
-                title={"저장하고 계속"}
-                borderRadius={"5px"}
-                onClick={onSubmitAll}
-                isLoading={calculateLoadingState()}
-              />
-            </Flex>
-          </ActionSection>
-        </Flex>
+        <form onSubmit={onSubmitAll}>
+          <Flex
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"flex-start"}
+            gap={"60px"}
+          >
+            {" "}
+            <RegisterProcess currentPage={2} />
+            <RegisterProductHeader />
+            <AddPictures
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
+              existingImages={[]}
+            />
+            <AddVideo setSelectedVideoFile={setSelectedVideoFile} />
+            <ProductDetails
+              productName={productName}
+              setProductName={setProductName}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedSubCategory={selectedSubCategory}
+              setSelectedSubCategory={setSelectedSubCategory}
+              refreshOptionValue={refreshOptionValue}
+              setRefreshOptionValue={setRefreshOptionValue}
+              shippingOptionValue={shippingOptionValue}
+              setShippingOptionValue={setShippingOptionValue}
+              productDescription={productDescription}
+              setProductDescription={setProductDescription}
+              tags={tags}
+              setTags={setTags}
+              materials={materials}
+              setMaterials={setMaterials}
+              section={section}
+              setSection={setSection}
+              pk={user?.shop?.pk}
+            />
+            <AddVariation
+              productName={productName}
+              selectedOptions={selectedOptions}
+              setSelectedOptions={setSelectedOptions}
+              combinations={combinations}
+              setCombinations={setCombinations}
+              prices={prices}
+              setPrices={setPrices}
+            />
+            <OpenInfo />
+            <PersonalizeTab
+              personalization={personalization}
+              setPersonalization={setPersonalization}
+              isOption={isOption}
+              setIsOption={setIsOption}
+              isPersonalizationEnabled={isPersonalizationEnabled}
+              setIsPersonalizationEnabled={setIsPersonalizationEnabled}
+            />
+            <Shipping
+              setPostalCode={setPostalCode}
+              processingTime={processingTime}
+              setProcessingTime={setProcessingTime}
+              customProcessingTime={customProcessingTime}
+              setCustomProcessingTime={setCustomProcessingTime}
+              freeShipping={freeShipping}
+              setFreeShipping={setFreeShipping}
+              shippingCost={shippingCost}
+              setShippingCost={setShippingCost}
+            />
+            <Returns policy={policy} setPolicy={setPolicy} />
+            <ActionSection>
+              <Flex gap={"12px"} alignItems={"center"}>
+                <WhiteButton
+                  title={"취소"}
+                  borderRadius={"5px"}
+                  onClick={undefined}
+                />
+                <Text textStyle={"B14R"}>
+                  이목록은 아직 활성화 되지 않았습니다. 매장을 오픈하면
+                  쇼핑객에게 제공됩니다.
+                </Text>
+              </Flex>
+              <Flex gap={"12px"} alignItems={"center"}>
+                <WhiteButton
+                  title={"미리보기"}
+                  borderRadius={"5px"}
+                  onClick={undefined}
+                />
+
+                <Button
+                  type="submit"
+                  isLoading={calculateLoadingState()}
+                  padding={"10px 24px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  borderRadius={"5px"}
+                  background={"black"}
+                  fontSize={"16px"}
+                  fontWeight={"500"}
+                  color={"white"}
+                  textAlign={"center"}
+                  alignSelf={"start"}
+                  _hover={{
+                    background: "var(--maincolorsbggray-555555, #555)",
+                  }}
+                >
+                  {"저장하고 계속"}
+                </Button>
+              </Flex>
+            </ActionSection>
+          </Flex>
+        </form>
       </Flex>
     </>
   );

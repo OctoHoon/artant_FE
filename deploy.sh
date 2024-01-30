@@ -11,6 +11,8 @@ set -e # stops on the first error
 set -x # print commands for debugging
 
 cd artant-FE/
+
+git stash
 git fetch origin
 
 echo "Pulling latest changes from Git repository..."

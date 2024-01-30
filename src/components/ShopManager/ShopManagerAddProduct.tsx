@@ -50,7 +50,7 @@ export default function AddProduct() {
   const [productDescription, setProductDescription] = useState(""); // 제품 설명
   const [productPrice, setProductPrice] = useState(0); // 제품 가격
   const [productCount, setProductCount] = useState(0); // 제품 수량
-  const [productSKU, setProductSKU] = useState(""); // 제품 SKU
+  // const [productSKU, setProductSKU] = useState(""); // 제품 SKU
   const [refreshOptionValue, setRefreshOptionValue] = useState("1"); // 갱신 옵션
   const [shippingOptionValue, setShippingOptionValue] = useState("1"); // 갱신 옵션
   const [tags, setTags] = useState<string[]>([]);
@@ -79,8 +79,6 @@ export default function AddProduct() {
     exchange: true,
     timeframe: 14,
   });
-  const [primary_color_input, setPrimaryColorInput] = useState("");
-  const [secondary_color_input, setSecondaryColorInput] = useState("");
   // image, video files
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
   const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
@@ -219,7 +217,7 @@ export default function AddProduct() {
           secondary_color_input: "",
           section_input: section ?? "",
           quantity: 0,
-          sku: productSKU,
+          sku: "productSKU",
           processing_min: 3,
           processing_max: 7,
           shipping_price: 0,
@@ -314,6 +312,12 @@ export default function AddProduct() {
             setSelectedOptions={setSelectedOptions}
             detailCombinations={detailCombinations}
             setDetailCombinations={setDetailCombinations}
+            productPrice={undefined}
+            setProductPrice={undefined}
+            productCount={undefined}
+            setProductCount={undefined}
+            productOriginalPrice={undefined}
+            setProductOriginalPrice={undefined}
           />
           <OpenInfo />
           <PersonalizeTab

@@ -167,6 +167,7 @@ export default function ProductDetails({
             value={productName}
             placeholder={"제목을 입력하세요"}
             onChange={(e) => setProductName(e.target.value)}
+            required
           />
         </Flex>
         <Flex // 이 목록 정보
@@ -370,6 +371,7 @@ export default function ProductDetails({
               background="var(--maincolorsbg-white, #FFF)"
               placeholder="설명을 입력하세요"
               onChange={(e) => setProductDescription(e.target.value)}
+              required
             />
           </Flex>
         </Flex>
