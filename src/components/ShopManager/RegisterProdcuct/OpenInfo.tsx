@@ -20,7 +20,6 @@ export default function OpenInfo() {
   const handleInputProductInfo = (e, key) => {
     setProductInfo({ ...productInfo, [key]: e.target.value });
   };
-  console.log(productInfo);
   return (
     <Flex // 목록 세부정보
       display={"flex"}

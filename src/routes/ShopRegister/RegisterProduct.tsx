@@ -1,8 +1,5 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
-
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
 import AddVariation from "../../components/ShopManager/RegisterProdcuct/AddVariations";
 import PersonalizeTab from "../../components/ShopManager/PersonalizeTab";
@@ -13,39 +10,18 @@ import WhiteButton from "../../components/commons/Button/WhiteButton";
 import AddVideo from "../../components/ShopManager/RegisterProdcuct/AddVideo";
 import AddPictures from "../../components/ShopManager/RegisterProdcuct/AddPictures";
 import useUser from "../../lib/useUser";
-import {
-  IUploadProductVariables,
-  Variant,
-  getUploadURL,
-  getVideoUploadURL,
-  uploadImage,
-  uploadProduct,
-  uploadVideo,
-} from "../../services/productService";
+import { IUploadProductVariables } from "../../services/productService";
 import { updateShop } from "../../services/shopService";
 import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
-
-export type SelectedOption = {
-  name: string;
-  options: OptionDetail[];
-};
-
-type OptionDetail = {
-  name: string;
-};
-
-export type ProcessingTimeOption = {
-  key: string;
-  value: string;
-  min: number;
-  max: number;
-};
-
-export type Policy = {
-  return: boolean;
-  exchange: boolean;
-  timeframe: number;
-};
+import RegisterProductHeader from "../../components/ShopManager/RegisterProdcuct/RegisterProductHeader";
+import {
+  onSubmitProduct,
+  transformToVariants,
+  useProductState,
+  useUploadImages,
+  useUploadVideo,
+} from "../../components/ShopManager/RegisterProdcuct/RegisterProduct";
+import { useState } from "react";
 
 export const ActionSection = ({ children, ...props }) => (
   <Flex
@@ -58,247 +34,103 @@ export const ActionSection = ({ children, ...props }) => (
   </Flex>
 );
 
-export type OptionDetails = {
-  originalPrice: string;
-  price: string;
-  stock: string;
-  visible: boolean;
-};
-
-export type PriceMap = {
-  [key: string]: OptionDetails;
-};
-
 export default function RegisterProduct() {
   const { userLoading, isLoggedIn, user } = useUser();
 
   const navigate = useNavigate();
   // product value
-  const [productPK, setProductPK] = useState("");
-  const [productName, setProductName] = useState(""); // 제품 이름
-  const [productDescription, setProductDescription] = useState(""); // 제품 설명
-  const [productPrice, setProductPrice] = useState(0); // 제품 가격
-  const [productOriginalPrice, setProductOriginalPrice] = useState(0); // 정가
-  const [productCount, setProductCount] = useState(0); // 제품 수량
-  const [productSKU, setProductSKU] = useState(""); // 제품 SKU
-  const [refreshOptionValue, setRefreshOptionValue] = useState("1"); // 갱신 옵션
-  const [shippingOptionValue, setShippingOptionValue] = useState("1"); // 갱신 옵션
-  const [tags, setTags] = useState<string[]>([]);
-  const [materials, setMaterials] = useState<string[]>([]);
-  // 카테고리
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedSubCategory, setSelectedSubCategory] = useState("");
-  //personalization
-  const [isPersonalizationEnabled, setIsPersonalizationEnabled] =
-    useState(false);
-  const [personalization, setPersonalization] = useState("");
-  const [isOption, setIsOption] = useState(false);
-  //배송
-  const [postalCode, setPostalCode] = useState<string>();
-  const [processingTime, setProcessingTime] =
-    useState<ProcessingTimeOption | null>(null);
-  const [customProcessingTime, setCustomProcessingTime] = useState({
-    min: "",
-    max: "",
-  });
-  const [freeShipping, setFreeShipping] = useState<boolean | null>(null);
-  const [shippingCost, setShippingCost] = useState("0");
-  //exchange policy
-  const [policy, setPolicy] = useState<Policy>({
-    return: true,
-    exchange: true,
-    timeframe: 14,
-  });
-  const [primary_color_input, setPrimaryColorInput] = useState("");
-  const [secondary_color_input, setSecondaryColorInput] = useState("");
+  const {
+    productName,
+    setProductName,
+    productDescription,
+    setProductDescription,
+    productSKU,
+    setProductSKU,
+    refreshOptionValue,
+    setRefreshOptionValue,
+    shippingOptionValue,
+    setShippingOptionValue,
+    tags,
+    setTags,
+    materials,
+    setMaterials,
+    selectedCategory,
+    setSelectedCategory,
+    selectedSubCategory,
+    setSelectedSubCategory,
+    isPersonalizationEnabled,
+    setIsPersonalizationEnabled,
+    personalization,
+    setPersonalization,
+    isOption,
+    setIsOption,
+    postalCode,
+    setPostalCode,
+    processingTime,
+    setProcessingTime,
+    customProcessingTime,
+    setCustomProcessingTime,
+    freeShipping,
+    setFreeShipping,
+    shippingCost,
+    setShippingCost,
+    policy,
+    setPolicy,
+    selectedFiles,
+    setSelectedFiles,
+    selectedVideoFile,
+    setSelectedVideoFile,
+    selectedOptions,
+    setSelectedOptions,
+    combinations,
+    setCombinations,
+    prices,
+    setPrices,
+    section,
+    setSection,
+  } = useProductState();
 
-  // image, video files
-  const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
-  const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
-  const shopPk = user?.shop?.pk;
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([
-    { name: "", options: [] },
-    { name: "", options: [] },
-  ]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [combinations, setCombinations] = useState<string[][]>([]);
-  const [prices, setPrices] = useState<PriceMap>({
-    default: {
-      originalPrice: "0",
-      price: "0",
-      stock: "0",
-      visible: true,
-    },
-  });
-  console.log(prices);
-
-  const [section, setSection] = useState();
-
-  const uploadImageMutation = useMutation(uploadImage, {}); //cloudflare에 올림
-  const uploadURLMutation = useMutation(getUploadURL, {}); //url 가져옴
-
-  const transformToVariants = (
-    combinations: string[][],
-    prices: PriceMap
-  ): Variant[] => {
-    if (combinations.length === 0) {
-      setProductOriginalPrice(parseInt(prices["default"]["originalPrice"]));
-      setProductPrice(parseInt(prices["default"]["price"]));
-      setProductCount(parseInt(prices["default"]["stock"]));
-      return [];
-    }
-
-    let totalStock = 0;
-    let minPrice = Number.MAX_VALUE;
-    let minOriginalPriceAtMinPrice = Number.MAX_VALUE;
-
-    const variants = combinations.map((combination) => {
-      const key = combination.join("-");
-      const priceDetail = prices[key];
-      const price = parseFloat(priceDetail.price);
-      const originalPrice = parseFloat(priceDetail.originalPrice);
-      const stock = parseInt(priceDetail.stock);
-
-      totalStock += stock;
-
-      if (price < minPrice) {
-        minPrice = price;
-        minOriginalPriceAtMinPrice = originalPrice;
-      }
-
-      return {
-        option_one: combination[0] || "",
-        option_two: combination[1] || "",
-        sku: "", // Implement generateSKU based on your logic
-        price,
-        original_price: originalPrice,
-        quantity: stock,
-      };
-    });
-
-    // Update the state with the calculated values
-    setProductCount(totalStock);
-    setProductPrice(minPrice);
-    setProductOriginalPrice(minOriginalPriceAtMinPrice);
-    return variants;
-  };
-
-  const onSubmitImages = async () => {
-    try {
-      // Step 1: Get upload URLs for each file
-      const uploadURLResponses = await Promise.all(
-        selectedFiles.map(() => uploadURLMutation.mutateAsync())
-      );
-
-      // Step 2: Upload each file to the acquired URL
-      const uploadImageResponses = await Promise.all(
-        selectedFiles.map(async (file, index) => {
-          const response = uploadURLResponses[index];
-          return uploadImageMutation.mutateAsync({
-            uploadURL: response.uploadURL,
-            file: file,
-          });
-        })
-      );
-      console.log(uploadImageResponses);
-
-      // Step 3: Construct the images array
-      const images = uploadImageResponses.map(
-        (response) =>
-          `https://imagedelivery.net/bsWtnSHPIyo_nZ9jFOblFw/${response.result.id}/public` // Assuming the response contains the URL as 'imageUrl'
-      );
-
-      return images;
-    } catch (error) {
-      console.error("Error uploading photos:", error);
-      return []; // Return an empty array in case of an error
-    }
-  };
-
-  const uploadVideoMutation = useMutation(uploadVideo, {
-    onError: () => {
-      // mutate가 실패하면, 함수를 실행합니다.
-      console.log("uploadVideoMutation error");
-    },
-  });
-
-  const uploadVideoURLMutation = useMutation(getVideoUploadURL, {
-    onError: () => {
-      // mutate가 실패하면, 함수를 실행합니다.
-      console.log("uploadVideoURLMutation error");
-    },
-  });
-
-  const onSubmitVideo = async () => {
-    if (!selectedVideoFile) {
-      // console.error("No video file selected for upload.");
-      return "";
-    }
-    try {
-      // First, get the upload URL
-      const uploadURLData = await uploadVideoURLMutation.mutateAsync();
-      const cloudflareStreamUrl = `https://customer-8j0waj0pjwj8wz5e.cloudflarestream.com/${
-        uploadURLData.uploadURL.split("/")[3]
-      }/thumbnails/thumbnail.mp4?width=600&time=0s`;
-
-      // Then upload the video file
-      await uploadVideoMutation.mutateAsync({
-        uploadURL: uploadURLData.uploadURL,
-        file: selectedVideoFile,
-      });
-      return cloudflareStreamUrl;
-    } catch (error) {
-      // Handle errors that occur during the upload or video creation process
-      console.error("Error in video submission process:", error);
-      return "";
-    }
-  };
-
-  const onSubmitProduct = async ({ productData }) => {
-    try {
-      console.log(productData);
-      const result = await uploadProduct(productData);
-
-      return result;
-    } catch (error) {
-      console.error("상품 업로드 실패", error);
-      throw error;
-    }
-  };
-
-  console.log(selectedFiles);
+  const { uploadImages, isUploadingImages } = useUploadImages();
+  const { uploadVideos, isUploadingVideo } = useUploadVideo();
 
   const onSubmitAll = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const variantData = transformToVariants(combinations, prices);
+    const variantData = transformToVariants({
+      combinations,
+      prices,
+    });
 
     //validate 넣어야함
-    if (
-      productName &&
-      selectedFiles &&
-      productDescription &&
-      productPrice &&
-      shopPk &&
-      selectedSubCategory
-    ) {
+    if (selectedFiles.length === 0) {
+      alert("최소 한 장의 사진을 넣어주세요");
+      return;
+    }
+
+    setIsLoading(true);
+
+    if (variantData.minPrice) {
       try {
         // 순차적으로 비동기 함수 실행
         let images: string[] = [];
         let videoUrl = "";
         try {
-          videoUrl = await onSubmitVideo();
+          videoUrl = await uploadVideos({ selectedVideoFile });
           if (videoUrl == undefined) {
             videoUrl = "";
           }
         } catch (error) {
+          setIsLoading(false);
           console.log(error);
           alert("동영상 업로드 중 문제가 생겼습니다.");
         }
 
         try {
-          images = await onSubmitImages(); // product에 images 등록
+          images = await uploadImages({ selectedFiles }); // product에 images 등록
         } catch (error) {
+          setIsLoading(false);
           console.log(error);
           alert("사진 업로드 중 문제가 발생했습니다.");
         }
@@ -307,17 +139,15 @@ export default function RegisterProduct() {
         const productData: IUploadProductVariables = {
           name: productName,
           description: productDescription,
-          price: productPrice,
-          original_price: productOriginalPrice,
+          price: variantData.minPrice,
+          original_price: variantData.minOriginalPriceAtMinPrice,
           category_name_input: selectedSubCategory,
-          shopPK: shopPk!,
+          shopPK: user.shop.pk,
           tags_input: tags,
           materials_input: materials,
           made_by: "I did",
           product_type: "A finished product",
           product_creation_date: "Made To Order",
-          primary_color_input: primary_color_input,
-          secondary_color_input: secondary_color_input,
           section_input: section ?? "",
           quantity: 0,
           sku: productSKU,
@@ -330,7 +160,7 @@ export default function RegisterProduct() {
           is_personalization_optional: isOption,
           personalization_guide: personalization,
           variations_input: selectedOptions,
-          variants_input: variantData,
+          variants_input: variantData.variants,
         };
 
         const result = await onSubmitProduct({ productData }); // shop에 product 등록
@@ -339,25 +169,25 @@ export default function RegisterProduct() {
         const updateData = {
           register_step: 2,
         };
-        const response = await updateShop(shopPk, updateData);
-        navigate(`/your/shops/${shopPk}/onboarding/listings/${result["id"]}`);
+        await updateShop(user.shop.pk, updateData);
+        setIsLoading(false);
+        navigate(
+          `/your/shops/${user.shop.pk}/onboarding/listings/${result["id"]}`
+        );
       } catch (error) {
         console.log(error);
         alert(
           "작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!"
         );
+        setIsLoading(false);
         console.error("Error during submission:", error);
       }
     } else {
       alert("작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!");
+      setIsLoading(false);
     }
   };
 
-  const calculateLoadingState = () =>
-    uploadImageMutation.isLoading ||
-    uploadURLMutation.isLoading ||
-    uploadVideoMutation.isLoading ||
-    uploadVideoURLMutation.isLoading;
   return (
     <>
       {" "}
@@ -378,7 +208,12 @@ export default function RegisterProduct() {
           >
             {" "}
             <RegisterProcess currentPage={2} />
-            <RegisterProductHeader />
+            <RegisterProductHeader
+              title={"작품 만들기"}
+              subtitle={
+                "항목에 대한 사진과 세부정보를 추가하세요. 지금 당장 가능한 내용을 작성하세요. 나중에 편집할 수 있습니다."
+              }
+            />
             <AddPictures
               selectedFiles={selectedFiles}
               setSelectedFiles={setSelectedFiles}
@@ -456,8 +291,8 @@ export default function RegisterProduct() {
                 />
 
                 <Button
+                  isLoading={isLoading}
                   type="submit"
-                  isLoading={calculateLoadingState()}
                   padding={"10px 24px"}
                   justifyContent={"center"}
                   alignItems={"center"}
@@ -481,25 +316,4 @@ export default function RegisterProduct() {
       </Flex>
     </>
   );
-
-  function RegisterProductHeader() {
-    return (
-      <Flex
-        display={"flex"}
-        height={"68px"}
-        flexDirection={"column"}
-        alignItems={"flex-start"}
-        gap={"12px"}
-      >
-        {" "}
-        <Text textStyle={"H2R"} letterSpacing="0.5px">
-          작품 만들기
-        </Text>
-        <Text textStyle={"B14R"}>
-          항목에 대한 사진과 세부정보를 추가하세요. 지금 당장 가능한 내용을
-          작성하세요. 나중에 편집할 수 있습니다.
-        </Text>
-      </Flex>
-    );
-  }
 }

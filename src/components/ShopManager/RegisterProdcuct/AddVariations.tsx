@@ -10,7 +10,7 @@ import {
   Switch,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { PriceMap } from "../../../routes/ShopRegister/RegisterProduct";
+import { PriceMap } from "./RegisterProduct";
 
 const optionNumber = [
   {
@@ -308,6 +308,7 @@ export default function AddVariation({
                       onChange={(e) =>
                         handleDetailChange("default", field, e.target.value)
                       }
+                      isRequired
                     />
                   </td>
                 ))}
@@ -359,6 +360,7 @@ export default function AddVariation({
                             e.target.value
                           )
                         }
+                        isRequired
                       />
                     </td>
                   ))}

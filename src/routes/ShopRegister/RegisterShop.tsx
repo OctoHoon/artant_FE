@@ -1121,14 +1121,14 @@ export default function RegisterShop() {
                   alignSelf={"stretch"}
                 >
                   <Text fontSize={"24px"}>
-                    상점을 만들려면 어떻게 해야 하나요?
+                    갤러리를 만들려면 어떻게 해야 하나요?
                   </Text>
                   <Text
                     alignSelf={"stretch"}
                     color={"#666"}
                     lineHeight={"180%"}
                   >
-                    ARTANT에서 상점을 개설하는 것은 쉽습니다. ARTANT 계정
+                    ARTANT에서 갤러리를 개설하는 것은 쉽습니다. ARTANT 계정
                     만들기(아직 계정이 없는 경우), 갤러리 위치 및 통화 설정,
                     갤러리 이름 선택, 작품 생성, 결제 방법(지급 받고 싶은 방법)
                     설정, 마지막으로 청구 방법 설정 (ARTANT 수수료 지불 방법).{" "}
@@ -1169,7 +1169,7 @@ export default function RegisterShop() {
                   alignSelf={"stretch"}
                 >
                   <Text fontSize={"24px"}>
-                    상점을 만들려면 신용카드나 직불카드가 필요합니까?
+                    갤러리를 만들려면 신용카드나 직불카드가 필요합니까?
                   </Text>
                   <Text
                     alignSelf={"stretch"}

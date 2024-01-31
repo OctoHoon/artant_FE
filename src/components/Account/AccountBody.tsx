@@ -220,8 +220,8 @@ export default function AccountBody() {
             </Text>
             <Text>
               {" "}
-              {`\u2022`} 귀하의 프로필, 상점 및 목록은 더 이상 아트앤트 어디에도
-              표시되지 않습니다.
+              {`\u2022`} 귀하의 프로필, 갤러리 및 작품은 더 이상 아트앤트
+              어디에도 표시되지 않습니다.
             </Text>
             <Text>
               {" "}
@@ -313,7 +313,7 @@ export default function AccountBody() {
             </Radio>
             <Radio value="3">
               <Text fontSize={"14px"}>
-                다른 아트앤트 계정이나 상점으로 전환 중입니다.
+                다른 아트앤트 계정이나 갤러리로 전환 중입니다.
               </Text>
             </Radio>
             <Radio value="4">

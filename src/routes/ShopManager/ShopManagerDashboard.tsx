@@ -59,7 +59,7 @@ export default function ShopManager() {
           </Flex>
         </Flex>
         <Flex alignItems={"center"} justifyContent={"flex-end"} gap={"12px"}>
-          <Text>상점 공유하기</Text>
+          <Text>갤러리 공유하기</Text>
           <Flex
             width={"36px"}
             height={"36px"}
@@ -125,7 +125,7 @@ export default function ShopManager() {
                   있습니다.
                 </Text>
                 <Text>
-                  • 잘 팔리는 멋진 상점를 만드는 방법을 알아보세요. 보너스:
+                  • 잘 팔리는 멋진 갤러리를 만드는 방법을 알아보세요. 보너스:
                   사진과 키워드에 대한 팁도 확인하세요.
                 </Text>
                 <Text>
@@ -133,7 +133,7 @@ export default function ShopManager() {
                   기회가 많아집니다!
                 </Text>
                 <Text>
-                  • 여러분의 노력을 자랑하세요! 소셜 미디어나 친구들과 상점을
+                  • 여러분의 노력을 자랑하세요! 소셜 미디어나 친구들과 갤러리를
                   공유하세요.
                 </Text>
               </Flex>
@@ -220,7 +220,7 @@ export default function ShopManager() {
       </Flex>
       <Flex flexDirection={"column"} gap={"16px"} width={"1340px"}>
         <Text fontSize={"22px"} fontWeight={"500"}>
-          상점 체크 리스트
+          갤러리 체크 리스트
         </Text>
         <Flex
           padding={"40px 0px"}

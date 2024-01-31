@@ -252,7 +252,7 @@ export const AvatarMenuList = [
 
   {
     svg: <FaShopify />,
-    title: "상점 개설",
+    title: "갤러리 개설",
     link: "/your/shops/register",
   },
   {

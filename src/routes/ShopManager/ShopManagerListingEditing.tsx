@@ -1,10 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import AddPictures from "../../components/ShopManager/RegisterProdcuct/AddPictures";
 import AddVideo from "../../components/ShopManager/RegisterProdcuct/AddVideo";
 import ProductDetails from "../../components/ShopManager/RegisterProdcuct/ProductDetails";
-import StockAndPrice from "../../components/ShopManager/RegisterProdcuct/StockAndPrice";
 import AddVariation from "../../components/ShopManager/RegisterProdcuct/AddVariations";
 import PersonalizeTab from "../../components/ShopManager/PersonalizeTab";
 import Shipping from "../../components/ShopManager/RegisterProdcuct/Shipping";
@@ -29,43 +28,8 @@ import {
 } from "../../services/productService";
 import { IMAGE_DELIVERY_URL } from "../../services/apiConfig";
 import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
-
-interface IUploadURLResponse {
-  id: string;
-  uploadURL: string;
-}
-
-type OptionCategory = "Primary Color" | "Secondary Color" | "Size" | "Material";
-
-type SelectedOption = {
-  variation: OptionCategory | string;
-  detail: string[];
-  selectPrice: boolean;
-  selectQuantity: boolean;
-  selectSku: boolean;
-};
-
-type DetailCombination = {
-  detail1: string;
-  detail2: string;
-  price?: number;
-  quantity?: number;
-  sku?: string;
-  visible?: boolean;
-};
-
-type ProcessingTimeOption = {
-  key: string;
-  value: string;
-  min: number;
-  max: number;
-};
-
-type Policy = {
-  return: boolean;
-  exchange: boolean;
-  timeframe: number;
-};
+import RegisterProductHeader from "../../components/ShopManager/RegisterProdcuct/RegisterProductHeader";
+import { useProductState } from "../../components/ShopManager/RegisterProdcuct/RegisterProduct";
 
 export default function ShopManagerListingEditing() {
   const { userLoading, isLoggedIn, user } = useUser();
@@ -80,51 +44,67 @@ export default function ShopManagerListingEditing() {
   const shopPk = data && data.shop_pk;
 
   const navigate = useNavigate();
-  // product value
-  const [productName, setProductName] = useState(""); // 제품 이름
-  const [productDescription, setProductDescription] = useState(""); // 제품 설명
-  const [productPrice, setProductPrice] = useState(0); // 제품 가격
-  const [productCount, setProductCount] = useState(0); // 제품 수량
-  const [productSKU, setProductSKU] = useState(""); // 제품 SKU
-  const [refreshOptionValue, setRefreshOptionValue] = useState("1"); // 갱신 옵션
-  const [shippingOptionValue, setShippingOptionValue] = useState("1"); // 갱신 옵션
-  const [tags, setTags] = useState<string[]>([]);
-  const [materials, setMaterials] = useState<string[]>([]);
-  // 카테고리
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedSubCategory, setSelectedSubCategory] = useState("");
-  //personalization
-  const [isPersonalizationEnabled, setIsPersonalizationEnabled] =
-    useState(false);
-  const [personalization, setPersonalization] = useState("");
-  const [isOption, setIsOption] = useState(false);
-  //배송
-  const [postalCode, setPostalCode] = useState<string>();
-  const [processingTime, setProcessingTime] =
-    useState<ProcessingTimeOption | null>(null);
-  const [customProcessingTime, setCustomProcessingTime] = useState({
-    min: "",
-    max: "",
-  });
-  const [freeShipping, setFreeShipping] = useState<boolean | null>(null);
-  const [shippingCost, setShippingCost] = useState("0");
-  //exchange policy
-  const [policy, setPolicy] = useState<Policy>({
-    return: true,
-    exchange: true,
-    timeframe: 14,
-  });
+
+  const {
+    productName,
+    setProductName,
+    productDescription,
+    setProductDescription,
+    productPrice,
+    setProductPrice,
+    productOriginalPrice,
+    setProductOriginalPrice,
+    productCount,
+    setProductCount,
+    productSKU,
+    setProductSKU,
+    refreshOptionValue,
+    setRefreshOptionValue,
+    shippingOptionValue,
+    setShippingOptionValue,
+    tags,
+    setTags,
+    materials,
+    setMaterials,
+    selectedCategory,
+    setSelectedCategory,
+    selectedSubCategory,
+    setSelectedSubCategory,
+    isPersonalizationEnabled,
+    setIsPersonalizationEnabled,
+    personalization,
+    setPersonalization,
+    isOption,
+    setIsOption,
+    postalCode,
+    setPostalCode,
+    processingTime,
+    setProcessingTime,
+    customProcessingTime,
+    setCustomProcessingTime,
+    freeShipping,
+    setFreeShipping,
+    shippingCost,
+    setShippingCost,
+    policy,
+    setPolicy,
+    selectedFiles,
+    setSelectedFiles,
+    selectedVideoFile,
+    setSelectedVideoFile,
+    selectedOptions,
+    setSelectedOptions,
+    combinations,
+    setCombinations,
+    prices,
+    setPrices,
+    section,
+    setSection,
+  } = useProductState();
+
   // image, video files
   const [existingImages, setExistingImages] = useState([]);
   const [existingVideo, setExistingVideo] = useState("");
-  const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
-  const [selectedVideoFile, setSelectedVideoFile] = useState<File>();
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([]);
-  const [detailCombinations, setDetailCombinations] = useState<
-    DetailCombination[]
-  >([]);
-  const [primary_color_input, setPrimaryColorInput] = useState("");
-  const [secondary_color_input, setSecondaryColorInput] = useState("");
 
   useEffect(() => {
     // Pre-populate form fields when data is available
@@ -139,6 +119,7 @@ export default function ShopManagerListingEditing() {
       setProductCount(data.quantity);
       setSelectedCategory(data.category);
       setSelectedSubCategory(data.subCategory);
+      setSection(data.section);
       // ... set other details like description, price, etc.
     }
   }, [data]);
@@ -273,6 +254,7 @@ export default function ShopManagerListingEditing() {
     personalization_guide: "",
     variations_input: [],
     variants_input: [],
+    original_price: productOriginalPrice,
   };
 
   const onSubmitProduct = async () => {
@@ -339,7 +321,10 @@ export default function ShopManagerListingEditing() {
           alignItems={"flex-start"}
           gap={"60px"}
         >
-          <RegisterProductHeader />
+          <RegisterProductHeader
+            title={"작품 수정하기"}
+            subtitle={"항목에 대한 사진과 세부정보를 수정하세요."}
+          />
           <AddPictures
             selectedFiles={selectedFiles}
             setSelectedFiles={setSelectedFiles}
@@ -366,23 +351,19 @@ export default function ShopManagerListingEditing() {
             setTags={setTags}
             materials={materials}
             setMaterials={setMaterials}
-            section={undefined}
-            setSection={undefined}
+            section={section}
+            setSection={setSection}
             pk={user.shop.pk}
           />
-          {/* <StockAndPrice
-            productPrice={productPrice}
-            setProductPrice={setProductPrice}
-            productCount={productCount}
-            setProductCount={setProductCount}
-            setProductSKU={setProductSKU}
-          /> */}
+
           <AddVariation
             productName={productName}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
-            detailCombinations={detailCombinations}
-            setDetailCombinations={setDetailCombinations}
+            combinations={combinations}
+            setCombinations={setCombinations}
+            prices={prices}
+            setPrices={setPrices}
           />
           <OpenInfo />
           <PersonalizeTab
@@ -423,30 +404,11 @@ export default function ShopManagerListingEditing() {
                 title={"저장하고 계속"}
                 borderRadius={"5px"}
                 onClick={undefined}
-                isLoading={calculateLoadingState()}
               />
             </Flex>
           </ActionSection>
         </Flex>
       </Flex>
     </>
-  );
-}
-
-function RegisterProductHeader() {
-  return (
-    <Flex
-      display={"flex"}
-      height={"68px"}
-      flexDirection={"column"}
-      alignItems={"flex-start"}
-      gap={"12px"}
-    >
-      {" "}
-      <Text textStyle={"H2R"} letterSpacing="0.5px">
-        작품 수정하기
-      </Text>
-      <Text textStyle={"B14R"}>항목에 대한 사진과 세부정보를 수정하세요.</Text>
-    </Flex>
   );
 }

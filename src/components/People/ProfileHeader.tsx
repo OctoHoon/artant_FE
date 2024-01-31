@@ -95,7 +95,7 @@ export default function ProfileHeader() {
             border={index != 0 ? "2px" : 0}
           />
           <Box height="10px" />
-          <Text textAlign={"center"}>즐겨찾은 상점</Text>
+          <Text textAlign={"center"}>즐겨찾은 갤러리</Text>
         </Box>
       </Flex>
       <Box height={"60px"} />

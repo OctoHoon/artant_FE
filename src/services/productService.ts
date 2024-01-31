@@ -24,8 +24,8 @@ export interface IUploadProductVariables {
   product_type: string;
   product_creation_date: string;
   category_name_input: string;
-  primary_color_input: string;
-  secondary_color_input: string;
+  primary_color_input?: string;
+  secondary_color_input?: string;
   tags_input: string[];
   section_input: string;
   materials_input: string[];

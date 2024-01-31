@@ -80,7 +80,6 @@ export default function Shipping({
   };
 
   const [onAddressSelect, setOnAddressSelect] = useState({});
-  console.log(onAddressSelect);
 
   const handleAddressSelect = (address) => {
     setOnAddressSelect(address); // 주소 API 실행 후 받아온 data를 state에 저장

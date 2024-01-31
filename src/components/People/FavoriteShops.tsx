@@ -26,10 +26,10 @@ export default function FavoriteItems({ data }) {
       <Flex justifyContent={"space-between"}>
         <Box>
           <Flex alignItems={"baseline"}>
-            <Text fontSize={"22px"}>즐겨찾은 상점</Text>
+            <Text fontSize={"22px"}>즐겨찾은 갤러리</Text>
             <Box width="6px" />
             <Text color={"#595959"} fontSize={"8px"}>
-              8개의 상점
+              8개의 갤러리
             </Text>
           </Flex>
           <Flex alignItems={"center"}>
@@ -159,7 +159,7 @@ export default function FavoriteItems({ data }) {
         <Box width="12px" />
         <Flex gap="6px">
           <Checkbox />
-          오픈 상점
+          오픈 갤러리
         </Flex>
       </Flex>
       <Box height={"40px"} />
@@ -177,7 +177,7 @@ export default function FavoriteItems({ data }) {
       </Flex>
 
       <Text fontSize={"24px"} fontWeight={"500"}>
-        당신이 좋아할 것 같은 상점
+        당신이 좋아할 것 같은 갤러리
       </Text>
       <Box height="40px" />
       <Wrap spacing={5} justify={"space-around"}>

@@ -183,21 +183,24 @@ export default function ProductDetails({
               options={whoMadeOptions}
               value={whoMade}
               onChange={(e) => setWhoMade(e.target.value)}
-              disabled={false} // Add other props like onChange, value as needed
+              disabled={false}
+              isRequired={true}
             />
             <SelectOption
               placeholder="그것은 무엇입니까?"
               options={whatIsItOptions}
               value={whatMade}
               onChange={(e) => setWhatMade(e.target.value)}
-              disabled={false} // Add other props like onChange, value as needed
+              disabled={false}
+              isRequired={true}
             />
             <SelectOption
               placeholder="언제 만들었나요?"
               options={whenMadeOptions}
               value={whenMade}
               onChange={(e) => setWhenMade(e.target.value)}
-              disabled={false} // Add other props like onChange, value as needed
+              disabled={false}
+              isRequired={true}
             />
           </Flex>
         </Flex>
@@ -215,6 +218,7 @@ export default function ProductDetails({
               options={Object.keys(subsubCategory)}
               placeholder="상위 카테고리 선택"
               disabled={undefined}
+              isRequired={true}
             />
             <SelectOption
               value={selectedSubCategory}
@@ -226,6 +230,7 @@ export default function ProductDetails({
                   : "상위 카테고리를 먼저 선택하세요"
               }
               disabled={!selectedCategory}
+              isRequired={true}
             />
           </Flex>
         </Flex>
