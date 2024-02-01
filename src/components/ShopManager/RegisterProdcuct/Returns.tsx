@@ -14,7 +14,7 @@ export default function Returns({ policy, setPolicy }) {
   const [changePolicy, setChangePolicy] = useState<boolean>(false);
 
   return (
-    <Flex // 목록 세부정보
+    <Flex // 작품 세부정보
       display={"flex"}
       width={"1280px"}
       padding={"24px"}
@@ -25,7 +25,7 @@ export default function Returns({ policy, setPolicy }) {
     >
       <RegisterHeader
         title={"반품 및 교환"}
-        description={"선택한 정책이 이 목록에 적용됩니다."}
+        description={"선택한 정책이 이 작품에 적용됩니다."}
       />
 
       <Flex alignItems={"flex-start"} gap={"40px"} alignSelf={"stretch"}>
@@ -170,7 +170,7 @@ const CreatingPolicy = ({ policy, setChangePolicy, setPolicy }) => {
             <li>구매자는 30일 이내에 반품해야합니다</li>
             <li>구매자는 반품 배송비용을 지불해야 합니다</li>
             <li>
-              구매자는 상품이 원상태로 반품되지 않은 경우 해당하는 만큼의 손실에
+              구매자는 작품이 원상태로 반품되지 않은 경우 해당하는 만큼의 손실에
               책임을 져야합니다
             </li>
           </Flex>

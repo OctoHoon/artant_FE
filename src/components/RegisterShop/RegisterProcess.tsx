@@ -13,7 +13,7 @@ export default function RegisterProcess({ currentPage }) {
       gap={"32px"}
     >
       <ProcessComponent step={"1"} page={currentPage} text={"갤러리이름지정"} />
-      <ProcessComponent step={"2"} page={currentPage} text={"상품등록"} />
+      <ProcessComponent step={"2"} page={currentPage} text={"작품등록"} />
       <ProcessComponent step={"3"} page={currentPage} text={"지급방식"} />
       <ProcessComponent step={"4"} page={currentPage} text={"결제 설정"} />
     </Flex>

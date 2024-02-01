@@ -3,11 +3,9 @@ import {
   Button,
   Checkbox,
   Flex,
-  FormControl,
   Input,
   Radio,
   Select,
-  Switch,
   Text,
 } from "@chakra-ui/react";
 import BlackButton from "../../components/commons/Button/BlackButton";
@@ -350,7 +348,7 @@ export default function ShopManagerOrders() {
                 </Text>
                 <Text fontSize={"13px"}>
                   처리시간을 검토하여 주문을 처리하는데 걸리는 시간을 정확하게
-                  반영하는지 확인하세요. 이를 통해 구매자는 언제 주문상품을 받게
+                  반영하는지 확인하세요. 이를 통해 구매자는 언제 주문작품을 받게
                   될지 알 수 있습니다.
                 </Text>
               </Flex>

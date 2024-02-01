@@ -34,7 +34,7 @@ export const tabList = [
     ),
   },
   {
-    name: "상품목록",
+    name: "작품목록",
     path: "listings",
     icon: () => (
       <svg

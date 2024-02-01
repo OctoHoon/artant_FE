@@ -170,7 +170,7 @@ export default function Itemlists() {
           marginLeft={0}
           marginBottom={"21px"}
         >
-          개의 상품이 있습니다
+          개의 작품이 있습니다
         </Text>
       </HStack>
       <HStack marginTop={"20px"} justifyContent={"space-between"}>

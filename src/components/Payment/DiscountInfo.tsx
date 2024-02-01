@@ -54,7 +54,7 @@ export default function DiscountInfo({ data }) {
           fontSize={"14px"}
         >
           <Box width={"200px"} fontWeight={"700"} alignItems={"center"}>
-            상품할인
+            작품할인
           </Box>
           <Flex alignItems={"baseline"}>
             {" "}
@@ -94,7 +94,7 @@ export default function DiscountInfo({ data }) {
                   />
                 </g>
               </svg>
-              상품즉시할인
+              작품즉시할인
             </Flex>
           </Box>
           <Flex alignItems={"baseline"}>

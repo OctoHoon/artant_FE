@@ -111,7 +111,11 @@ export default function RegisterProduct() {
 
     setIsLoading(true);
 
-    if (variantData.minPrice) {
+    if (
+      variantData.minPrice &&
+      variantData.minOriginalPriceAtMinPrice &&
+      variantData.totalStock
+    ) {
       try {
         // 순차적으로 비동기 함수 실행
         let images: string[] = [];
@@ -175,15 +179,12 @@ export default function RegisterProduct() {
           `/your/shops/${user.shop.pk}/onboarding/listings/${result["id"]}`
         );
       } catch (error) {
-        console.log(error);
-        alert(
-          "작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!"
-        );
+        alert("상품 업로드 중 문제가 생겼습니다. 개발자에게 문제를 알려주세요");
         setIsLoading(false);
         console.error("Error during submission:", error);
       }
     } else {
-      alert("작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!");
+      alert("가격, 재고를 등록했는지 확인하세요!");
       setIsLoading(false);
     }
   };
@@ -279,7 +280,7 @@ export default function RegisterProduct() {
                   onClick={undefined}
                 />
                 <Text textStyle={"B14R"}>
-                  이목록은 아직 활성화 되지 않았습니다. 매장을 오픈하면
+                  이 작품은 아직 활성화 되지 않았습니다. 매장을 오픈하면
                   쇼핑객에게 제공됩니다.
                 </Text>
               </Flex>

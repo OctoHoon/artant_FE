@@ -93,7 +93,7 @@ export default function CartBody({ data }) {
               </g>
             </svg>
             구매자를 위한 아트앤트의 구매 보호 프로그램으로 자신 있게 구매하고 ,
-            드문 경우지만 상품이 도착하지 않거나, 손상된 상태로 도착하거나,
+            드문 경우지만 작품이 도착하지 않거나, 손상된 상태로 도착하거나,
             설명과 다른 경우 전액 환불을 받으세요. 자격 보기
           </Flex>
         </Box>
@@ -110,7 +110,7 @@ export default function CartBody({ data }) {
               전체선택
             </Flex>
             <Flex gap="16px" alignItems={"center"}>
-              품절상품삭제
+              품절작품삭제
               <Box
                 width="1px"
                 height="10px"

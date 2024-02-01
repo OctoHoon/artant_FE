@@ -61,15 +61,15 @@ export default function OpenInfo() {
           <ArtantCheckBox
             isChecked={lookAtDetail}
             onChange={(e) => setLookAtDetail(e.target.checked)}
-            text={"전체 상품 상세페이지 참조"}
+            text={"전체 작품 상세페이지 참조"}
           />
         </Flex>
       </Flex>
       <Box height={"12px"} />
-      <Text>각 카테고리에 해당하는 상품 고시정보를 선택하여 입력해주세요.</Text>
+      <Text>각 카테고리에 해당하는 작품 고시정보를 선택하여 입력해주세요.</Text>
       <Text>
-        판매 상품에 여러 구성품이 포함되어 있는 경우 모든 구성품에 대해
-        '상품정보제공고시'를 상품 상세페이지에 제공해주세요.
+        판매 작품에 여러 구성품이 포함되어 있는 경우 모든 구성품에 대해
+        '상품정보제공고시'를 작품 상세페이지에 제공해주세요.
       </Text>
       <Box height={"32px"} />
       <Box p={5} borderWidth="1px" width={"full"}>
@@ -140,7 +140,7 @@ function TableColumn({
           value={value}
           isRequired={!invalid}
           height={"40px"}
-          placeholder={invalid ? "상품상세페이지 참조" : placeholder}
+          placeholder={invalid ? "작품상세페이지 참조" : placeholder}
           isDisabled={invalid}
           onChange={handleInputProductInfo}
         />

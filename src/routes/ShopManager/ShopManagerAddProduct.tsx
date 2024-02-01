@@ -159,15 +159,12 @@ export default function AddProduct() {
         navigate(`/your/shops/me/listings`);
       } catch (error) {
         setIsLoading(false);
-        console.log(error);
-        alert(
-          "작품명, 작품설명, 카테고리, 가격, 사진을 등록했는지 확인하세요!"
-        );
+        alert("상품 업로드 중 문제가 생겼습니다. 개발자에게 문제를 알려주세요");
         console.error("Error during submission:", error);
       }
     } else {
+      alert("가격, 재고를 등록했는지 확인하세요!");
       setIsLoading(false);
-      alert("뭐지");
     }
   };
 
@@ -263,7 +260,7 @@ export default function AddProduct() {
                   onClick={undefined}
                 />
                 <Text textStyle={"B14R"}>
-                  이목록은 아직 활성화 되지 않았습니다. 매장을 오픈하면
+                  이 작품은 아직 활성화 되지 않았습니다. 매장을 오픈하면
                   쇼핑객에게 제공됩니다.
                 </Text>
               </Flex>

@@ -107,7 +107,7 @@ export default function CartPanel({ data }) {
             />
           </g>
         </svg>
-        전체 상품 : {data && data.length}개
+        전체 작품 : {data && data.length}개
       </Box>
       <Box
         display="flex"
@@ -156,7 +156,7 @@ export default function CartPanel({ data }) {
             alignItems={"baseline"}
             alignSelf={"stretch"}
           >
-            <div>상품할인</div>
+            <div>작품할인</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
               -{(totalOriginalPrice - totalPrice).toLocaleString()}
               {<Text fontSize={"16px"}>원</Text>}

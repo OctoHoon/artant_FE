@@ -14,7 +14,7 @@ export default function FavoriteItems({ data }) {
       <Flex justifyContent={"space-between"}>
         <Box>
           <Flex alignItems={"baseline"}>
-            <Text fontSize={"22px"}>즐겨찾은 상품</Text>
+            <Text fontSize={"22px"}>즐겨찾은 작품</Text>
             <Box width="6px" />
             <Text color={"#595959"} fontSize={"8px"}>
               {data.length}개의 작품

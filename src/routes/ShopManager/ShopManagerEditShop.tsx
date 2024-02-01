@@ -195,7 +195,7 @@ export default function ShopManagerEditShop() {
                   </Flex>
                   <Flex>
                     <Text width={"352px"} padding={"24px"}>
-                      상품 정책
+                      작품 정책
                     </Text>
                     <Flex
                       gap={"20px"}

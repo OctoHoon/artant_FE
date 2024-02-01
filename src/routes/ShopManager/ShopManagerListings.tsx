@@ -13,13 +13,13 @@ import {
 import BlackButton from "../../components/commons/Button/BlackButton";
 import PaginationController from "../../components/commons/PaginationController";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useUser from "../../lib/useUser";
 import { getShopProducts } from "../../services/shopService";
 
 export default function ShopManagerListings() {
-  const { userLoading, isLoggedIn, user } = useUser();
+  const { user } = useUser();
   const shopPK = user?.shop.pk || null;
   const [page, setPage] = useState(1);
   const { isLoading, data } = useQuery(
@@ -44,7 +44,7 @@ export default function ShopManagerListings() {
         fontWeight={"500"}
         fontSize={"22px"}
       >
-        상품목록
+        작품 목록
         <Flex gap={"24px"}>
           <Input placeholder="제목, 태그 검색" width={"400px"} />
           <Link to={"/your/shops/me/listings/create"}>
@@ -79,7 +79,7 @@ export default function ShopManagerListings() {
                   />
                 </g>
               </svg>
-              목록 추가
+              작품 추가
             </Button>
           </Link>
         </Flex>
@@ -463,7 +463,7 @@ function ShopManagerListingsCard({ item }) {
                 />
               </g>
             </svg>
-            상품 편집
+            작품 편집
           </Flex>
         </Button>
       </Flex>

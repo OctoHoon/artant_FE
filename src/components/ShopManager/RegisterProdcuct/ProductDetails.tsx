@@ -176,7 +176,7 @@ export default function ProductDetails({
           alignItems={"flex-start"}
           gap={"12px"}
         >
-          <Text textStyle={"B14M"}>이 목록 정보*</Text>
+          <Text textStyle={"B14M"}>이 작품 정보*</Text>
           <Flex alignSelf={"stretch"} gap={"20px"}>
             <SelectOption
               placeholder="누가 만들었나요?"
@@ -243,7 +243,7 @@ export default function ProductDetails({
           <SectionTitle
             title={"갱신 옵션*"}
             description={
-              "각 갱신은 4개월 동안 또는 목록이 매진될 때까지 지속됩니다."
+              "각 갱신은 4개월 동안 또는 작품이 매진될 때까지 지속됩니다."
             }
             link={"자동 갱신에 대해 자세히 알아보기"}
           />
@@ -252,10 +252,10 @@ export default function ProductDetails({
             OptionValue={refreshOptionValue}
             option1={"자동 갱신"}
             description1={
-              " 이 목록은 매번 500원으로 만료되므로 갱신됩니다(권장)."
+              " 이 작품은 매번 500원으로 만료되므로 갱신됩니다(권장)."
             }
             option2={"수동 갱신"}
-            description2={"만료된 목록을 직접 갱신하겠습니다."}
+            description2={"만료된 작품을 직접 갱신하겠습니다."}
           />
         </Flex>
         <Flex // 배송 상품 유형
@@ -390,7 +390,7 @@ export default function ProductDetails({
           <SectionTitle
             title={"섹션"}
             description={
-              "쇼핑객이 쉽게 찾아볼 수 있도록 관련 목록을 섹션으로 그룹화합니다(예: 팔찌, 어버이날 선물, 털실)."
+              "쇼핑객이 쉽게 찾아볼 수 있도록 관련 작품을 섹션으로 그룹화합니다(예: 팔찌, 어버이날 선물, 털실)."
             }
             link={undefined}
             isOption

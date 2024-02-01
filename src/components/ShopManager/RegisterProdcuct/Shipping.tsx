@@ -127,8 +127,8 @@ export default function Shipping({
             gap={"20px"}
           >
             <Text textStyle={"B16R"}>
-              이 목록에 대한 배송 옵션을 입력하세요. 이러한 옵션을 이 목록에만
-              적용하거나 배송 프로필로 저장하여 향후 목록에 적용할 수 있습니다.
+              이 작품에 대한 배송 옵션을 입력하세요. 이러한 옵션을 이 작품에만
+              적용하거나 배송 프로필로 저장하여 향후 작품에 적용할 수 있습니다.
             </Text>
             <Flex
               display={"flex"}
@@ -202,7 +202,7 @@ export default function Shipping({
                     onChange={handleSelectChange}
                     options={processingTimeOptions}
                     disabled={false}
-                    placeholder={"상품 준비 시간을 선택하세요"}
+                    placeholder={"작품 준비 시간을 선택하세요"}
                   />
 
                   {processingTime?.value === "custom" && (
@@ -300,7 +300,7 @@ export default function Shipping({
                     <SectionTitle
                       title={"묶음 배송*"}
                       description={
-                        "출고 정보가 같은 상품만 묶음배송 할 수 있습니다.(착불배송 선택 불가)."
+                        "출고 정보가 같은 작품만 묶음배송 할 수 있습니다.(착불배송 선택 불가)."
                       }
                       link={undefined}
                     />
@@ -454,7 +454,7 @@ export default function Shipping({
               >
                 <Flex>
                   <Text textStyle={"B14R"}>
-                    원하는 경우 이러한 옵션을 저장하여 향후 목록에 적용할 수
+                    원하는 경우 이러한 옵션을 저장하여 향후 작품에 적용할 수
                     있습니다.
                   </Text>
                   <Text

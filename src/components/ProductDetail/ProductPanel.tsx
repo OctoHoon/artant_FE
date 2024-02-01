@@ -607,7 +607,7 @@ export default function ProductPanel({ data, pk }) {
                     as="u"
                     fontFamily={"Spoqa Han Sans Neo"}
                   >
-                    상품준비중
+                    작품준비중
                   </Text>
                 </Box>
                 <FaChevronRight size={"18px"} />
@@ -786,7 +786,7 @@ export default function ProductPanel({ data, pk }) {
                 fontWeight="400"
                 letterSpacing="-0.042px"
               >
-                상품 정책 보기
+                작품 정책 보기
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

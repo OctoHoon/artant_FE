@@ -262,7 +262,7 @@ export default function ShopManagerListingEditing() {
       const result = await uploadProduct(productData);
       return result;
     } catch (error) {
-      console.error("상품 업로드 실패", error);
+      console.error("작품 업로드 실패", error);
       throw error;
     }
   };
