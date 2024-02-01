@@ -81,7 +81,7 @@ export default function ReviewItem({ review }) {
               letterSpacing="-0.042px"
               width="85px"
             >
-              구매한 상품:
+              구매한 작품:
             </Text>
             <Text
               marginTop={"8px"}

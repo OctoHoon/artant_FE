@@ -1,13 +1,12 @@
-import { Flex, Input, Select, Button, Text, Box } from "@chakra-ui/react";
+import { Flex, Input, Text, Box } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import RegisterHeader from "./RegisterHeader";
 import SectionTitle from "./SectionTitle";
 import WhiteButton from "../../commons/Button/WhiteButton";
 import InputOption from "./InputOption";
 import SelectOption from "./SelectOption";
-import DaumPostcode from "react-daum-postcode";
 import DaumPostCode from "./DaumPostCode";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
+import RadioOption from "./RadioOption";
 
 export default function Shipping({
   setPostalCode,
@@ -33,7 +32,9 @@ export default function Shipping({
 
   const shippingPriceOptions = [
     { label: "무료배송", value: "true" },
-    { label: "고정가격", value: "false" },
+    { label: "유료 배송", value: "true" },
+    { label: "조건부 무료배송", value: "true" },
+    { label: "착불배송", value: "false" },
   ];
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -79,7 +80,6 @@ export default function Shipping({
   };
 
   const [onAddressSelect, setOnAddressSelect] = useState({});
-  console.log(onAddressSelect);
 
   const handleAddressSelect = (address) => {
     setOnAddressSelect(address); // 주소 API 실행 후 받아온 data를 state에 저장
@@ -98,6 +98,7 @@ export default function Shipping({
       <RegisterHeader title={"배송"} description={""} />
 
       <Flex
+        width={"1232px"}
         display={"flex"}
         flexDirection={"column"}
         alignSelf={"stretch"}
@@ -118,6 +119,7 @@ export default function Shipping({
           />
 
           <Flex
+            alignSelf={"stretch"}
             display={"flex"}
             flexDirection={"column"}
             flex={"1 0 0"}
@@ -125,8 +127,8 @@ export default function Shipping({
             gap={"20px"}
           >
             <Text textStyle={"B16R"}>
-              이 목록에 대한 배송 옵션을 입력하세요. 이러한 옵션을 이 목록에만
-              적용하거나 배송 프로필로 저장하여 향후 목록에 적용 할 수있습니다.
+              이 작품에 대한 배송 옵션을 입력하세요. 이러한 옵션을 이 작품에만
+              적용하거나 배송 프로필로 저장하여 향후 작품에 적용할 수 있습니다.
             </Text>
             <Flex
               display={"flex"}
@@ -200,7 +202,7 @@ export default function Shipping({
                     onChange={handleSelectChange}
                     options={processingTimeOptions}
                     disabled={false}
-                    placeholder={"상품 준비 시간을 선택하세요"}
+                    placeholder={"작품 준비 시간을 선택하세요"}
                   />
 
                   {processingTime?.value === "custom" && (
@@ -265,7 +267,7 @@ export default function Shipping({
                     alignItems={"flex-start"}
                     gap={"6px"}
                   >
-                    <Text textStyle={"B14R"}>배송 서비스</Text>
+                    <Text textStyle={"B14M"}>배송 방법*</Text>
                     <SelectOption
                       value={undefined}
                       onChange={undefined}
@@ -280,11 +282,48 @@ export default function Shipping({
                     alignItems={"flex-start"}
                     gap={"6px"}
                   >
+                    <Text textStyle={"B14M"}>택배사*</Text>
+                    <SelectOption
+                      value={undefined}
+                      onChange={undefined}
+                      options={shippingOptions}
+                      disabled={false}
+                      placeholder={"택배사를 선택하세요"}
+                    />
+                  </Flex>
+                  <Flex // 갱신옵션
+                    flexDirection={"column"}
+                    alignSelf={"stretch"}
+                    alignItems={"flex-start"}
+                    gap={"12px"}
+                  >
+                    <SectionTitle
+                      title={"묶음 배송*"}
+                      description={
+                        "출고 정보가 같은 작품만 묶음배송 할 수 있습니다.(착불배송 선택 불가)."
+                      }
+                      link={undefined}
+                    />
+                    <RadioOption
+                      setOptionValue={undefined}
+                      OptionValue={undefined}
+                      option1={"가능"}
+                      description1={undefined}
+                      option2={"불가능"}
+                      description2={undefined}
+                    />
+                  </Flex>
+                  <Flex
+                    display={"flex"}
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    gap={"6px"}
+                  >
                     <Text
                       color="var(--maincolorstextblack-222222, #222)"
-                      textStyle={"B14R"}
+                      textStyle={"B14M"}
                     >
-                      배송비
+                      배송비 종류*
                     </Text>
                     <SelectOption
                       value={freeShipping}
@@ -297,28 +336,108 @@ export default function Shipping({
                       }}
                       options={shippingPriceOptions}
                       disabled={false}
-                      placeholder={"배송비를 선택하세요"}
+                      placeholder={"배송비 종류를 선택하세요"}
                     />
                     {freeShipping === false && (
-                      <Flex
-                        marginTop={"10px"}
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"flex-start"}
-                        gap={"6px"}
-                      >
-                        <Text
-                          color="var(--maincolorstextblack-222222, #222)"
-                          textStyle={"B14R"}
+                      <Flex gap="12px">
+                        <Flex
+                          marginTop={"10px"}
+                          display={"flex"}
+                          flexDirection={"column"}
+                          alignItems={"flex-start"}
+                          gap={"6px"}
                         >
-                          배송비를 설정하세요
-                        </Text>
-                        <InputOption
-                          placeholder={"배송비"}
-                          onChange={(e) => setShippingCost(e.target.value)}
-                        />
+                          <Text
+                            color="var(--maincolorstextblack-222222, #222)"
+                            textStyle={"B14R"}
+                          >
+                            기본배송비
+                          </Text>
+                          <InputOption
+                            placeholder={"배송비"}
+                            onChange={(e) => setShippingCost(e.target.value)}
+                          />
+                        </Flex>
+                        <Flex
+                          marginTop={"10px"}
+                          display={"flex"}
+                          flexDirection={"column"}
+                          alignItems={"flex-start"}
+                          gap={"6px"}
+                        >
+                          <Text
+                            color="var(--maincolorstextblack-222222, #222)"
+                            textStyle={"B14R"}
+                          >
+                            무료배송 조건 금액
+                          </Text>
+                          <InputOption
+                            placeholder={"배송비"}
+                            onChange={(e) => setShippingCost(e.target.value)}
+                          />
+                        </Flex>
                       </Flex>
                     )}
+                  </Flex>
+                </Flex>
+              </Flex>
+
+              <Flex
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"flex-start"}
+                gap={"6px"}
+              >
+                <Text
+                  color="var(--maincolorstextblack-222222, #222)"
+                  textStyle={"B14M"}
+                >
+                  제주/도서산간 배송여부*
+                </Text>
+                <RadioOption
+                  setOptionValue={undefined}
+                  OptionValue={undefined}
+                  option1={"가능"}
+                  description1={undefined}
+                  option2={"불가능"}
+                  description2={undefined}
+                />
+                <Flex gap="12px">
+                  <Flex
+                    marginTop={"10px"}
+                    display={"flex"}
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    gap={"6px"}
+                  >
+                    <Text
+                      color="var(--maincolorstextblack-222222, #222)"
+                      textStyle={"B14R"}
+                    >
+                      제주지역
+                    </Text>
+                    <InputOption
+                      placeholder={"배송비"}
+                      onChange={(e) => setShippingCost(e.target.value)}
+                    />
+                  </Flex>
+                  <Flex
+                    marginTop={"10px"}
+                    display={"flex"}
+                    flexDirection={"column"}
+                    alignItems={"flex-start"}
+                    gap={"6px"}
+                  >
+                    <Text
+                      color="var(--maincolorstextblack-222222, #222)"
+                      textStyle={"B14R"}
+                    >
+                      제주외 지역
+                    </Text>
+                    <InputOption
+                      placeholder={"배송비"}
+                      onChange={(e) => setShippingCost(e.target.value)}
+                    />
                   </Flex>
                 </Flex>
               </Flex>
@@ -335,7 +454,7 @@ export default function Shipping({
               >
                 <Flex>
                   <Text textStyle={"B14R"}>
-                    원하는 경우 이러한 옵션을 저장하여 향후 목록에 적용할 수
+                    원하는 경우 이러한 옵션을 저장하여 향후 작품에 적용할 수
                     있습니다.
                   </Text>
                   <Text
@@ -347,7 +466,10 @@ export default function Shipping({
                     배송 프로필 작동 방식
                   </Text>
                 </Flex>
-                <WhiteButton title={"배송 프로필 저장"} onClick={undefined} />
+                <Flex gap={"6px"}>
+                  <WhiteButton title={"배송 프로필 저장"} onClick={undefined} />
+                  <WhiteButton title={"배송 프로필 선택"} onClick={undefined} />
+                </Flex>
               </Flex>
               <Flex
                 height={"1px"}
@@ -369,41 +491,6 @@ export default function Shipping({
             link={undefined}
           />
           <Flex alignItems={"center"} gap={"40px"} flex={"1 0 0"}>
-            <Flex
-              width={"600px"}
-              flexDirection={"column"}
-              alignItems={"flex-start"}
-              gap={"20px"}
-            >
-              {" "}
-              <Flex
-                display={"flex"}
-                flexDirection={"column"}
-                alignItems={"flex-start"}
-                gap={"16px"}
-              >
-                <Flex
-                  display={"flex"}
-                  flexDirection={"column"}
-                  alignItems={"flex-start"}
-                  gap={"6px"}
-                >
-                  <Text textStyle={"B16R"}>기본 배송</Text>
-                  <Select
-                    height={"40px"}
-                    width={"600px"}
-                    gap={"10px"}
-                    flexDirection={"column"}
-                    justifyContent={"center"}
-                    alignItems={"flex-start"}
-                    colorScheme="white"
-                    color="#595959"
-                    textStyle={"B14R"}
-                    placeholder="배송 서비스 선택"
-                  ></Select>
-                </Flex>
-              </Flex>
-            </Flex>
             <Flex
               display={"flex"}
               alignItems={"center"}

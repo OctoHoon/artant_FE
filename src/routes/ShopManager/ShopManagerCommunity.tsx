@@ -144,7 +144,7 @@ export default function ShopManagerCommunity() {
               />
               <DiscussBar
                 avatar={undefined}
-                title={"장바구니 상품 추가"}
+                title={"장바구니 작품 추가"}
                 name={"마리"}
                 status={"매장 관리 중"}
                 time={"10분 전"}
@@ -162,7 +162,7 @@ export default function ShopManagerCommunity() {
               />
               <DiscussBar
                 avatar={undefined}
-                title={"상품 비평가 환영"}
+                title={"작품 비평가 환영"}
                 name={"마리"}
                 status={"매장 관리 중"}
                 time={"10분 전"}

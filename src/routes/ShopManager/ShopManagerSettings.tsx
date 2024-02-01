@@ -78,10 +78,10 @@ export default function ShopManagerSettings() {
                       <Td>
                         <Flex flexDirection={"column"} gap={"12px"}>
                           <Text fontSize={"18px"} fontWeight={"500"}>
-                            목록 크레딧
+                            작품 크레딧
                           </Text>
                           <Text color={"#666"}>
-                            목록을 생성하거나 갱신하는데 사용할 수 있는 크레딧
+                            작품을 생성하거나 갱신하는데 사용할 수 있는 크레딧
                           </Text>
                         </Flex>
                       </Td>
@@ -196,9 +196,9 @@ export default function ShopManagerSettings() {
                   <Divider />
                   <Text fontSize={"16px"}>크레딧은 어떻게 작동하나요?</Text>
                   <Text color={"#666"}>
-                    매월 같은 날 목록과 아트앤트 광고 크레딧을 받게 됩니다.
+                    매월 같은 날 작품과 아트앤트 광고 크레딧을 받게 됩니다.
                     이월되지는 않지만 매달 새로운 크레딧을 받게 됩니다. 크레딧을
-                    사용하고 나면 추가 목록 또는 아트앤트 광고 캠페인에 대한
+                    사용하고 나면 추가 작품 또는 아트앤트 광고 캠페인에 대한
                     비용이 청구됩니다.
                   </Text>
                   <Divider />
@@ -207,7 +207,7 @@ export default function ShopManagerSettings() {
                     대우를 받을 수 있나요?
                   </Text>
                   <Text color={"#666"}>
-                    아니요, 유료 구독은 아트앤트 정책의 검색 또는 시행에 목록이
+                    아니요, 유료 구독은 아트앤트 정책의 검색 또는 시행에 작품이
                     표시되는 방식에 영향을 미치지 않습니다.
                   </Text>
                   <Divider />

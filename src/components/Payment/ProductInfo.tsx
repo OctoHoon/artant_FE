@@ -15,7 +15,7 @@ export default function ProductInfo({ data }) {
         fontSize={"22px"}
         fontWeight={"700"}
       >
-        주문상품 : {data.length}개
+        주문작품 : {data.length}개
       </Box>
       <Box
         alignSelf={"stretch"}

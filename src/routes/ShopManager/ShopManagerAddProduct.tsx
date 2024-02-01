@@ -1,44 +1,36 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
-import AddVariation from "../../components/ShopManager/RegisterProdcuct/AddVariations";
+
+import { useEffect, useState } from "react";
+
 import PersonalizeTab from "../../components/ShopManager/PersonalizeTab";
-import Shipping from "../../components/ShopManager/RegisterProdcuct/Shipping";
+import AddVariation from "../../components/ShopManager/RegisterProdcuct/AddVariations";
 import Returns from "../../components/ShopManager/RegisterProdcuct/Returns";
-import ProductDetails from "../../components/ShopManager/RegisterProdcuct/ProductDetails";
+import Shipping from "../../components/ShopManager/RegisterProdcuct/Shipping";
+import { ActionSection } from "../ShopRegister/RegisterProduct";
 import WhiteButton from "../../components/commons/Button/WhiteButton";
-import AddVideo from "../../components/ShopManager/RegisterProdcuct/AddVideo";
 import AddPictures from "../../components/ShopManager/RegisterProdcuct/AddPictures";
+import AddVideo from "../../components/ShopManager/RegisterProdcuct/AddVideo";
+import ProductDetails from "../../components/ShopManager/RegisterProdcuct/ProductDetails";
 import useUser from "../../lib/useUser";
 import { IUploadProductVariables } from "../../services/productService";
-import { updateShop } from "../../services/shopService";
 import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
 import RegisterProductHeader from "../../components/ShopManager/RegisterProdcuct/RegisterProductHeader";
 import {
+  useProductState,
   onSubmitProduct,
   transformToVariants,
-  useProductState,
   useUploadImages,
   useUploadVideo,
 } from "../../components/ShopManager/RegisterProdcuct/RegisterProduct";
-import { useState } from "react";
 
-export const ActionSection = ({ children, ...props }) => (
-  <Flex
-    width="1280px"
-    justifyContent="space-between"
-    alignItems="center"
-    {...props}
-  >
-    {children}
-  </Flex>
-);
-
-export default function RegisterProduct() {
+export default function AddProduct() {
   const { userLoading, isLoggedIn, user } = useUser();
+  console.log(user);
 
   const navigate = useNavigate();
-  // product value
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     productName,
     setProductName,
@@ -90,10 +82,8 @@ export default function RegisterProduct() {
     setSection,
   } = useProductState();
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { uploadImages, isUploadingImages } = useUploadImages();
-  const { uploadVideos, isUploadingVideo } = useUploadVideo();
+  const { uploadImages } = useUploadImages();
+  const { uploadVideos } = useUploadVideo();
 
   const onSubmitAll = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,18 +94,14 @@ export default function RegisterProduct() {
     });
 
     //validate 넣어야함
+
     if (selectedFiles.length === 0) {
       alert("최소 한 장의 사진을 넣어주세요");
       return;
     }
-
     setIsLoading(true);
 
-    if (
-      variantData.minPrice &&
-      variantData.minOriginalPriceAtMinPrice &&
-      variantData.totalStock
-    ) {
+    if (variantData.minPrice) {
       try {
         // 순차적으로 비동기 함수 실행
         let images: string[] = [];
@@ -167,20 +153,13 @@ export default function RegisterProduct() {
           variants_input: variantData.variants,
         };
 
-        const result = await onSubmitProduct({ productData }); // shop에 product 등록
+        await onSubmitProduct({ productData }); // shop에 product 등록
         setSelectedFiles([]);
         await new Promise((resolve) => setTimeout(resolve, 3000));
-        const updateData = {
-          register_step: 2,
-        };
-        await updateShop(user.shop.pk, updateData);
-        setIsLoading(false);
-        navigate(
-          `/your/shops/${user.shop.pk}/onboarding/listings/${result["id"]}`
-        );
+        navigate(`/your/shops/me/listings`);
       } catch (error) {
-        alert("상품 업로드 중 문제가 생겼습니다. 개발자에게 문제를 알려주세요");
         setIsLoading(false);
+        alert("상품 업로드 중 문제가 생겼습니다. 개발자에게 문제를 알려주세요");
         console.error("Error during submission:", error);
       }
     } else {
@@ -208,11 +187,10 @@ export default function RegisterProduct() {
             gap={"60px"}
           >
             {" "}
-            <RegisterProcess currentPage={2} />
             <RegisterProductHeader
               title={"작품 만들기"}
               subtitle={
-                "항목에 대한 사진과 세부정보를 추가하세요. 지금 당장 가능한 내용을 작성하세요. 나중에 편집할 수 있습니다."
+                " 항목에 대한 사진과 세부정보를 추가하세요. 지금 당장 가능한 내용을 작성하세요. 나중에 편집할 수 있습니다."
               }
             />
             <AddPictures
@@ -221,27 +199,29 @@ export default function RegisterProduct() {
               existingImages={[]}
             />
             <AddVideo setSelectedVideoFile={setSelectedVideoFile} />
-            <ProductDetails
-              productName={productName}
-              setProductName={setProductName}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              selectedSubCategory={selectedSubCategory}
-              setSelectedSubCategory={setSelectedSubCategory}
-              refreshOptionValue={refreshOptionValue}
-              setRefreshOptionValue={setRefreshOptionValue}
-              shippingOptionValue={shippingOptionValue}
-              setShippingOptionValue={setShippingOptionValue}
-              productDescription={productDescription}
-              setProductDescription={setProductDescription}
-              tags={tags}
-              setTags={setTags}
-              materials={materials}
-              setMaterials={setMaterials}
-              section={section}
-              setSection={setSection}
-              pk={user?.shop?.pk}
-            />
+            {!userLoading && (
+              <ProductDetails
+                productName={productName}
+                setProductName={setProductName}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                selectedSubCategory={selectedSubCategory}
+                setSelectedSubCategory={setSelectedSubCategory}
+                refreshOptionValue={refreshOptionValue}
+                setRefreshOptionValue={setRefreshOptionValue}
+                shippingOptionValue={shippingOptionValue}
+                setShippingOptionValue={setShippingOptionValue}
+                productDescription={productDescription}
+                setProductDescription={setProductDescription}
+                tags={tags}
+                setTags={setTags}
+                materials={materials}
+                setMaterials={setMaterials}
+                section={section}
+                setSection={setSection}
+                pk={user.shop.pk}
+              />
+            )}
             <AddVariation
               productName={productName}
               selectedOptions={selectedOptions}
@@ -290,7 +270,6 @@ export default function RegisterProduct() {
                   borderRadius={"5px"}
                   onClick={undefined}
                 />
-
                 <Button
                   isLoading={isLoading}
                   type="submit"

@@ -8,9 +8,9 @@ import {
   Box,
   Input,
   Switch,
-  Th,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { PriceMap } from "./RegisterProduct";
 
 const optionNumber = [
   {
@@ -27,79 +27,37 @@ const optionNumber = [
   },
 ];
 
-const variationOptions = [
-  {
-    value: "size",
-    label: "크기",
-  },
-  {
-    value: "custom",
-    label: "직접 입력",
-  },
-];
-
-type Option = {
-  name: string;
-  variations: string[];
-};
-
-type OptionDetails = {
-  originalPrice: string;
-  price: string;
-  stock: string;
-  visible: boolean;
-};
-
-type PriceMap = {
-  [key: string]: OptionDetails;
-};
-
 export default function AddVariation({
   productName,
   selectedOptions,
   setSelectedOptions,
-  detailCombinations,
-  setDetailCombinations,
+  combinations,
+  setCombinations,
+  prices,
+  setPrices,
 }) {
   const [optionNumbers, setOptionNumbers] = useState("0");
 
-  const [options, setOptions] = useState([
-    { name: "", variations: [] },
-    { name: "", variations: [] },
-  ]);
-
-  const handleVariationTypeChange = (index, value) => {
-    const newOptions = [...options];
-    newOptions[index].name = value;
-    setOptions(newOptions);
-  };
-
   const handleOptionNameChange = (index, value) => {
-    const newOptions = [...options];
+    const newOptions = [...selectedOptions];
     newOptions[index].name = value;
-    setOptions(newOptions);
+    setSelectedOptions(newOptions);
   };
 
   const handleVariationChange = (index, value) => {
-    const newOptions = [...options];
-    newOptions[index].variations = value.split(",");
-    setOptions(newOptions);
+    const newOptions = [...selectedOptions];
+    newOptions[index].options = value.replace(/(\s*)/g, "").split(",");
+    setSelectedOptions(newOptions);
   };
 
-  const [combinations, setCombinations] = useState<string[][]>([]);
-  const [prices, setPrices] = useState<PriceMap>({
-    default: {
-      originalPrice: "0",
-      price: "0",
-      stock: "0",
-      visible: true,
-    },
-  });
-
+  // 옵션 숫자 바꿀 때 처리 해줌.
   const initialzeCombinations = ({ optionNumber }) => {
     setCombinations([]);
     if (optionNumber === "0") {
-      setOptions([{ name: "", variations: [] }]);
+      setSelectedOptions([
+        { name: "", options: [] },
+        { name: "", options: [] },
+      ]);
       const initialPrices: PriceMap = {};
       initialPrices["default"] = {
         originalPrice: "0",
@@ -109,30 +67,28 @@ export default function AddVariation({
       };
       setPrices(initialPrices);
     } else {
-      let newOptions = options[0];
-      setOptions([newOptions, { name: "", variations: [] }]);
+      let newOptions = selectedOptions[0];
+      setSelectedOptions([newOptions, { name: "", options: [] }]);
     }
   };
 
-  const generateCombinations = ({ optionNumber }) => {
-    if (optionNumber === "0") {
-      setCombinations([["-"]]);
-      initializePrices([["-"]]);
-      return;
-    }
-
-    if (optionNumber === "1") {
-      setCombinations(options[0].variations.map((variation) => [variation]));
-      initializePrices(options[0].variations.map((variation) => [variation]));
+  const generateCombinations = () => {
+    if (optionNumbers === "1") {
+      setCombinations(
+        selectedOptions[0].options.map((variation) => [variation])
+      );
+      initializePrices(
+        selectedOptions[0].options.map((variation) => [variation])
+      );
       return;
     }
 
     let result: string[][] = [[]];
 
-    options.forEach((option) => {
+    selectedOptions.forEach((option) => {
       let currentCombinations: string[][] = [];
       result.forEach((existingCombination) => {
-        option.variations.forEach((variation) => {
+        option.options.forEach((variation) => {
           currentCombinations.push([...existingCombination, variation]);
         });
       });
@@ -158,7 +114,7 @@ export default function AddVariation({
 
   const handleDetailChange = (
     combination: string,
-    detail: keyof OptionDetails,
+    detail: string,
     value: string | boolean
   ) => {
     setPrices((prevPrices) => ({
@@ -169,7 +125,6 @@ export default function AddVariation({
       },
     }));
   };
-  console.log(prices);
 
   return (
     <Flex // 변형
@@ -232,7 +187,9 @@ export default function AddVariation({
           <Box width={"1232px"} height={"1px"} background={"#EEEEEE"} />
           <Flex flexDirection={"column"} gap={"12px"}>
             <Flex>
-              <Text width={options[0].name !== "size" ? "400px" : "140px"}>
+              <Text
+                width={selectedOptions[0].name !== "size" ? "400px" : "140px"}
+              >
                 옵션명
               </Text>
               <Text>옵션값</Text>
@@ -312,12 +269,7 @@ export default function AddVariation({
                 />
               </Flex>
             )}
-            <Button
-              width={"240px"}
-              onClick={() =>
-                generateCombinations({ optionNumber: optionNumbers })
-              }
-            >
+            <Button width={"240px"} onClick={generateCombinations}>
               옵션목록으로 적용
             </Button>
           </Flex>
@@ -346,43 +298,20 @@ export default function AddVariation({
             <tbody>
               <tr>
                 <td>{productName}</td>
-                <td>
-                  <Input
-                    border={"0"}
-                    textAlign={"center"}
-                    type="number"
-                    value={prices["default"].originalPrice}
-                    onChange={(e) =>
-                      handleDetailChange(
-                        "default",
-                        "originalPrice",
-                        e.target.value
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <Input
-                    border={"0"}
-                    textAlign={"center"}
-                    type="number"
-                    value={prices["default"].price}
-                    onChange={(e) =>
-                      handleDetailChange("default", "price", e.target.value)
-                    }
-                  />
-                </td>
-                <td>
-                  <Input
-                    border={"0"}
-                    textAlign={"center"}
-                    type="number"
-                    value={prices["default"].stock}
-                    onChange={(e) =>
-                      handleDetailChange("default", "stock", e.target.value)
-                    }
-                  />
-                </td>
+                {["originalPrice", "price", "stock"].map((field) => (
+                  <td key={field}>
+                    <Input
+                      border={"0"}
+                      textAlign={"center"}
+                      type="number"
+                      value={prices["default"][field]}
+                      onChange={(e) =>
+                        handleDetailChange("default", field, e.target.value)
+                      }
+                      isRequired
+                    />
+                  </td>
+                ))}
               </tr>
             </tbody>
           </Table>
@@ -401,7 +330,7 @@ export default function AddVariation({
               >
                 <th>
                   <Text>옵션명</Text>
-                  {options.map((option) => (
+                  {selectedOptions.map((option) => (
                     <>{option.name}</>
                   ))}
                 </th>
@@ -417,51 +346,25 @@ export default function AddVariation({
                   {combination.map((item, idx) => (
                     <>{item}</>
                   ))}
-                  <td>
-                    <Input
-                      border={"0"}
-                      textAlign={"center"}
-                      type="number"
-                      value={prices[combination.join("-")].originalPrice}
-                      onChange={(e) =>
-                        handleDetailChange(
-                          combination.join("-"),
-                          "originalPrice",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </td>
-                  <td>
-                    <Input
-                      border={"0"}
-                      textAlign={"center"}
-                      type="number"
-                      value={prices[combination.join("-")].price}
-                      onChange={(e) =>
-                        handleDetailChange(
-                          combination.join("-"),
-                          "price",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </td>
-                  <td>
-                    <Input
-                      border={"0"}
-                      textAlign={"center"}
-                      type="number"
-                      value={prices[combination.join("-")].stock}
-                      onChange={(e) =>
-                        handleDetailChange(
-                          combination.join("-"),
-                          "stock",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </td>
+                  {["originalPrice", "price", "stock"].map((field) => (
+                    <td key={field}>
+                      <Input
+                        border={"0"}
+                        textAlign={"center"}
+                        type="number"
+                        value={prices[combination.join("-")][field]}
+                        onChange={(e) =>
+                          handleDetailChange(
+                            combination.join("-"),
+                            field,
+                            e.target.value
+                          )
+                        }
+                        isRequired
+                      />
+                    </td>
+                  ))}
+
                   <td>
                     <Switch
                       isChecked={prices[combination.join("-")].visible}

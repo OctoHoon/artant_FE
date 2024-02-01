@@ -268,7 +268,7 @@ export default function RegisterBilling() {
               >
                 <Box>
                   <Flex gap={"4px"}>
-                    <Text>귀하의 상점 작품에 대한 청구서에 </Text>
+                    <Text>귀하의 갤러리 작품에 대한 청구서에 </Text>
                     <Text color={"#F12E24"} fontWeight={"500"}>
                       {" "}
                       500원{" "}
@@ -294,12 +294,12 @@ export default function RegisterBilling() {
               alignSelf={"stretch"}
             >
               <Text>
-                상점열기를 클릭하면 <Text as="u">이용약관</Text>에 동의하게
+                갤러리 열기를 클릭하면 <Text as="u">이용약관</Text>에 동의하게
                 됩니다.
               </Text>
 
               <BlackButton
-                title={"상점열기"}
+                title={"갤러리 열기"}
                 borderRadius={"5px"}
                 flex="1 0 0"
                 onClick={handleButtonClick}

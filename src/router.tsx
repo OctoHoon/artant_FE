@@ -29,7 +29,7 @@ import ShopManagerArtantSeller from "./routes/ShopManager/ShopMangerArtantSeller
 import ShopManagerStats from "./routes/ShopManager/ShopManagerStats";
 import ShopManagerFinance from "./routes/ShopManager/ShopManagerFinance";
 import ShopManagerEditShop from "./routes/ShopManager/ShopManagerEditShop";
-import ShopManagerAddProduct from "./components/ShopManager/ShopManagerAddProduct";
+import ShopManagerAddProduct from "./routes/ShopManager/ShopManagerAddProduct";
 import Review from "./routes/Review";
 import EventDetail from "./routes/EventDetail";
 import EventDetailTwo from "./routes/EventDetailTwo";

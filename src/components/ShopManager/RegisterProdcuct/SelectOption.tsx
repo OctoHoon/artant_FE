@@ -7,6 +7,7 @@ const SelectOption = ({
   options,
   disabled,
   placeholder,
+  isRequired = false,
 }) => (
   <Select
     width={width}
@@ -23,6 +24,7 @@ const SelectOption = ({
     value={value}
     onChange={onChange}
     disabled={disabled}
+    isRequired={isRequired}
   >
     <option value="">{placeholder}</option>
     {options.map((option) => (

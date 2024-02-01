@@ -195,7 +195,7 @@ export default function ShopManagerEditShop() {
                   </Flex>
                   <Flex>
                     <Text width={"352px"} padding={"24px"}>
-                      상품 정책
+                      작품 정책
                     </Text>
                     <Flex
                       gap={"20px"}
@@ -204,7 +204,7 @@ export default function ShopManagerEditShop() {
                       borderBottom={"1px solid #EEE"}
                     >
                       <Flex alignSelf={"stretch"} flexDirection={"column"}>
-                        <Text>간단한 상점 정책 설정</Text>
+                        <Text>간단한 갤러리 정책 설정</Text>
                         <Text>
                           몇초만에 매장 정책을 만들 수 있는 빠른 템플릿을 제공해
                           드립니다.

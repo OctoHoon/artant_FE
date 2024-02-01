@@ -355,7 +355,7 @@ export default function ShopManagerStats() {
               </Text>
               <Text fontSize={"13px"} fontWeight={"400"} lineHeight={"150%"}>
                 Google, Instagram, Facebook, Pinterest, Bing 등 트래픽이 많은
-                사이트에서 상품을 홍보하여 신규 구매자를 바로 상점으로
+                사이트에서 상품을 홍보하여 신규 구매자를 바로 갤러리로
                 유도합니다. 위험 부담이 없는 광고로, 판매자의 아이템을 홍보하는
                 데 필요한 선불 비용을 부담합니다. 판매에 성공할 때만 비용을
                 지불하면 됩니다.{" "}

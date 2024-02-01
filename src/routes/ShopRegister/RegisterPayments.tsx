@@ -460,7 +460,7 @@ export default function RegisterPayments() {
               <Flex alignItems={"center"} gap={"8px"}>
                 <LockBlack />
                 <Text fontSize={"16px"}>
-                  마켓플레이스와 신규 판매자를 보호하기 위해 일부 신규 상점을
+                  마켓플레이스와 신규 판매자를 보호하기 위해 일부 신규 갤러리를
                   위해 수익금의 일정 비율을 임시 준비금으로 적립할 수 있습니다.
                 </Text>
               </Flex>

@@ -1,6 +1,4 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
-import Footer from "../../components/commons/Footer";
-import ProfileHeader from "../../components/People/ProfileHeader";
 import RegisterProcess from "../../components/RegisterShop/RegisterProcess";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -88,7 +86,7 @@ export default function RegisterShopName() {
                   lineHeight="140%" /* 이렇게 설정하면 19.6px로 계산됩니다. */
                   letterSpacing="-0.042px"
                 >
-                  첫 번째 판매에 한 걸음 더 가까워졌습니다. 목록을 몇 개 더
+                  첫 번째 판매에 한 걸음 더 가까워졌습니다. 작품을 몇 개 더
                   추가해 보세요. 5개부터 시작하는 것이 좋습니다.
                   <br /> 이를 통해 구매자는 귀하의 매장을 찾을 수있는 더 많은
                   기회를 얻을 수 있습니다.

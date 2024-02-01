@@ -6,12 +6,14 @@ export default function InputOption({
   onChange,
   width = "full",
   disabled = false,
+  required = false,
 }) {
   return (
     <Input
       value={value}
       disabled={disabled}
       width={width}
+      required={required}
       display="flex"
       padding="0px 16px"
       alignItems="center"

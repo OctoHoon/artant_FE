@@ -67,7 +67,7 @@ export default function RegisterShopName() {
             textAlign="center"
             letterSpacing="-0.3px"
           >
-            상점 이름을 지정하세요
+            갤러리 이름을 지정하세요
           </Text>
           <Text
             width={"620px"}
@@ -107,7 +107,7 @@ export default function RegisterShopName() {
                 borderRadius="5px"
                 border="1px solid var(--maincolorsstrokegrayc-4-c-4-c-4, #C4C4C4)"
                 background="var(--maincolorsbg-white, #FFF)"
-                placeholder="상점 이름을 입력하세요"
+                placeholder="갤러리 이름을 입력하세요"
                 onChange={(e) => setInputText(e.target.value)}
               />
               <Flex
@@ -164,7 +164,7 @@ export default function RegisterShopName() {
                       lineHeight="normal"
                       letterSpacing="-0.048px"
                     >
-                      상점 이름을 다시 입력해주세요!
+                      갤러리 이름을 다시 입력해주세요!
                     </Text>
                   </>
                 )

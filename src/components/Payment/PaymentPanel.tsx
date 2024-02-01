@@ -141,7 +141,7 @@ export default function PaymentPanel({ data }) {
             alignItems={"baseline"}
             alignSelf={"stretch"}
           >
-            <div>상품할인</div>
+            <div>작품할인</div>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
               -{(totalOriginalPrice - totalPrice).toLocaleString()}{" "}
               {<Text fontSize={"16px"}>원</Text>}
@@ -178,7 +178,7 @@ export default function PaymentPanel({ data }) {
                   />
                 </g>
               </svg>
-              상품할인
+              작품할인
             </Flex>
             <Flex fontSize={"22px"} alignItems={"baseline"}>
               -{(totalOriginalPrice - totalPrice).toLocaleString()}{" "}

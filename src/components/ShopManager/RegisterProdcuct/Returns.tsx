@@ -14,7 +14,7 @@ export default function Returns({ policy, setPolicy }) {
   const [changePolicy, setChangePolicy] = useState<boolean>(false);
 
   return (
-    <Flex // 목록 세부정보
+    <Flex // 작품 세부정보
       display={"flex"}
       width={"1280px"}
       padding={"24px"}
@@ -25,7 +25,7 @@ export default function Returns({ policy, setPolicy }) {
     >
       <RegisterHeader
         title={"반품 및 교환"}
-        description={"선택한 정책이 이 목록에 적용됩니다."}
+        description={"선택한 정책이 이 작품에 적용됩니다."}
       />
 
       <Flex alignItems={"flex-start"} gap={"40px"} alignSelf={"stretch"}>
@@ -80,8 +80,13 @@ const CheckPolicy = ({ policy, setChangePolicy }) => {
               {policy.exchange && "교환"}
               {!policy.return && !policy.exchange && "반품 및 교환 불가"}
             </Text>
-            <SvgCalendar />
-            <Text textStyle={"B16M"}>{policy.timeframe}일</Text>
+            {(policy.return || policy.exchagne) && (
+              <>
+                {" "}
+                <SvgCalendar />
+                <Text textStyle={"B16M"}>{policy.timeframe}일</Text>
+              </>
+            )}
           </Flex>
 
           <Text width={"440px"} textStyle={"B16R"}>
@@ -116,6 +121,7 @@ const CreatingPolicy = ({ policy, setChangePolicy, setPolicy }) => {
       <Text textStyle={"B16M"}>교환 반품 정책 설정</Text>
       <Flex gap={"40px"}>
         <Switch
+          colorScheme={"red"}
           id={`return-switch`}
           size={"lg"}
           isChecked={tempPolicy.return}
@@ -129,6 +135,7 @@ const CreatingPolicy = ({ policy, setChangePolicy, setPolicy }) => {
       </Flex>
       <Flex gap={"40px"}>
         <Switch
+          colorScheme={"red"}
           id={`exchange-switch`}
           size={"lg"}
           isChecked={tempPolicy.exchange}
@@ -140,31 +147,36 @@ const CreatingPolicy = ({ policy, setChangePolicy, setPolicy }) => {
           <Text>교환을 허용합니다</Text>
         </Flex>
       </Flex>
-      <Text textStyle={"B16M"} marginTop={"10px"}>
-        기간
-      </Text>
-      <Text>구매자는 이 기간 안에 연락하고 제품을 반송해야합니다.</Text>
-      <Select
-        width={"400px"}
-        value={tempPolicy.timeframe}
-        onChange={(e) => handlePolicyChange("timeframe", e.target.value)}
-      >
-        {options.map((detail) => (
-          <option key={detail} value={detail}>
-            {`${detail}일 이내`}
-          </option>
-        ))}
-      </Select>
-      <Flex flexDirection={"column"} marginY={"30px"}>
-        <Text textStyle={"B16M"}>반품 조건</Text>
-        <li>구매자는 교환과 반품이 가능합니다</li>
-        <li>구매자는 30일 이내에 반품해야합니다</li>
-        <li>구매자는 반품 배송비용을 지불해야 합니다</li>
-        <li>
-          구매자는 상품이 원상태로 반품되지 않은 경우 해당하는 만큼의 손실에
-          책임을 져야합니다
-        </li>
-      </Flex>
+      {(tempPolicy["return"] || tempPolicy["exchange"]) && (
+        <>
+          <Text textStyle={"B16M"} marginTop={"10px"}>
+            기간
+          </Text>
+          <Text>구매자는 이 기간 안에 연락하고 제품을 반송해야합니다.</Text>
+          <Select
+            width={"400px"}
+            value={tempPolicy.timeframe}
+            onChange={(e) => handlePolicyChange("timeframe", e.target.value)}
+          >
+            {options.map((detail) => (
+              <option key={detail} value={detail}>
+                {`${detail}일 이내`}
+              </option>
+            ))}
+          </Select>
+          <Flex flexDirection={"column"} marginY={"30px"}>
+            <Text textStyle={"B16M"}>반품 조건</Text>
+            <li>구매자는 교환과 반품이 가능합니다</li>
+            <li>구매자는 30일 이내에 반품해야합니다</li>
+            <li>구매자는 반품 배송비용을 지불해야 합니다</li>
+            <li>
+              구매자는 작품이 원상태로 반품되지 않은 경우 해당하는 만큼의 손실에
+              책임을 져야합니다
+            </li>
+          </Flex>
+        </>
+      )}
+
       <Flex justifyContent={"space-between"}>
         <WhiteButton
           title={"취소"}

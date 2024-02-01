@@ -132,7 +132,7 @@ export default function StockAndPrice({
               textStyle={"B13R"}
               lineHeight="140%"
             >
-              이 목록은 매진될 때까지 자동으로 갱신됩니다. 매번 500원의 상장
+              이 작품은 매진될 때까지 자동으로 갱신됩니다. 매번 500원의 상장
               수수료가 청구됩니다.
             </Text>
           </Flex>
