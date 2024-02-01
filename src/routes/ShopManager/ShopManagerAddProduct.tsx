@@ -3,26 +3,26 @@ import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-import PersonalizeTab from "./PersonalizeTab";
-import AddVariation from "./RegisterProdcuct/AddVariations";
-import Returns from "./RegisterProdcuct/Returns";
-import Shipping from "./RegisterProdcuct/Shipping";
-import { ActionSection } from "../../routes/ShopRegister/RegisterProduct";
-import WhiteButton from "../commons/Button/WhiteButton";
-import AddPictures from "./RegisterProdcuct/AddPictures";
-import AddVideo from "./RegisterProdcuct/AddVideo";
-import ProductDetails from "./RegisterProdcuct/ProductDetails";
+import PersonalizeTab from "../../components/ShopManager/PersonalizeTab";
+import AddVariation from "../../components/ShopManager/RegisterProdcuct/AddVariations";
+import Returns from "../../components/ShopManager/RegisterProdcuct/Returns";
+import Shipping from "../../components/ShopManager/RegisterProdcuct/Shipping";
+import { ActionSection } from "../ShopRegister/RegisterProduct";
+import WhiteButton from "../../components/commons/Button/WhiteButton";
+import AddPictures from "../../components/ShopManager/RegisterProdcuct/AddPictures";
+import AddVideo from "../../components/ShopManager/RegisterProdcuct/AddVideo";
+import ProductDetails from "../../components/ShopManager/RegisterProdcuct/ProductDetails";
 import useUser from "../../lib/useUser";
 import { IUploadProductVariables } from "../../services/productService";
-import OpenInfo from "./RegisterProdcuct/OpenInfo";
-import RegisterProductHeader from "./RegisterProdcuct/RegisterProductHeader";
+import OpenInfo from "../../components/ShopManager/RegisterProdcuct/OpenInfo";
+import RegisterProductHeader from "../../components/ShopManager/RegisterProdcuct/RegisterProductHeader";
 import {
   useProductState,
   onSubmitProduct,
   transformToVariants,
   useUploadImages,
   useUploadVideo,
-} from "./RegisterProdcuct/RegisterProduct";
+} from "../../components/ShopManager/RegisterProdcuct/RegisterProduct";
 
 export default function AddProduct() {
   const { userLoading, isLoggedIn, user } = useUser();
