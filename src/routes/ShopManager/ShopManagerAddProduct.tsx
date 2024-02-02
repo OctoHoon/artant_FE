@@ -80,6 +80,8 @@ export default function AddProduct() {
     setPrices,
     section,
     setSection,
+    optionNumbers,
+    setOptionNumbers,
   } = useProductState();
 
   const { uploadImages } = useUploadImages();
@@ -89,6 +91,8 @@ export default function AddProduct() {
     e.preventDefault();
 
     const variantData = transformToVariants({
+      optionNumbers,
+      selectedOptions,
       combinations,
       prices,
     });
@@ -149,7 +153,7 @@ export default function AddProduct() {
           is_personalization_enabled: isPersonalizationEnabled,
           is_personalization_optional: isOption,
           personalization_guide: personalization,
-          variations_input: selectedOptions,
+          variations_input: variantData.variations,
           variants_input: variantData.variants,
         };
 
@@ -230,6 +234,8 @@ export default function AddProduct() {
               setCombinations={setCombinations}
               prices={prices}
               setPrices={setPrices}
+              optionNumbers={optionNumbers}
+              setOptionNumbers={setOptionNumbers}
             />
             <OpenInfo />
             <PersonalizeTab

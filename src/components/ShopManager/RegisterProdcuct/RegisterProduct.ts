@@ -74,6 +74,7 @@ export const useProductState = () => {
   }); // 교환 정책
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]); // 선택된 파일들
   const [selectedVideoFile, setSelectedVideoFile] = useState<File>(); // 선택된 비디오 파일
+  const [optionNumbers, setOptionNumbers] = useState("0");
   const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([
     { name: "", options: [] },
     { name: "", options: [] },
@@ -139,49 +140,93 @@ export const useProductState = () => {
     setPrices,
     section,
     setSection,
+    optionNumbers,
+    setOptionNumbers,
   };
 };
 
-export const transformToVariants = ({ combinations, prices }) => {
-  if (combinations.length === 0) {
-    const variants = [];
-    const minOriginalPriceAtMinPrice = parseInt(
-      prices["default"]["originalPrice"]
-    );
-    const minPrice = parseInt(prices["default"]["price"]);
-    const totalStock = parseInt(prices["default"]["stock"]);
-    return { variants, totalStock, minPrice, minOriginalPriceAtMinPrice };
+export const transformToVariants = ({
+  optionNumbers,
+  selectedOptions,
+  combinations,
+  prices,
+}) => {
+  const hasSelectedOptions = optionNumbers === "2";
+  const variations = selectedOptions.slice(0, optionNumbers);
+  if (optionNumbers === "0") {
+    return createDefaultVariant(prices);
   }
 
   let totalStock = 0;
   let minPrice = Number.MAX_VALUE;
   let minOriginalPriceAtMinPrice = Number.MAX_VALUE;
 
-  const variants = combinations.map((combination) => {
-    const key = combination.join("-");
-    const priceDetail = prices[key];
-    const price = parseFloat(priceDetail.price);
-    const originalPrice = parseFloat(priceDetail.originalPrice);
-    const stock = parseInt(priceDetail.stock);
+  const variants = combinations.map((combination) =>
+    createVariant({
+      combination,
+      prices,
+      hasSelectedOptions,
+      updateStock: (stock) => (totalStock += stock),
+      updatePrice: (price, originalPrice) => {
+        if (price < minPrice) {
+          minPrice = price;
+          minOriginalPriceAtMinPrice = originalPrice;
+        }
+      },
+    })
+  );
 
-    totalStock += stock;
-
-    if (price < minPrice) {
-      minPrice = price;
-      minOriginalPriceAtMinPrice = originalPrice;
-    }
-
-    return {
-      option_one: combination[0] || "",
-      option_two: combination[1] || "",
-      sku: "", // Implement generateSKU based on your logic
-      price,
-      original_price: originalPrice,
-      quantity: stock,
-    };
-  });
-  return { variants, totalStock, minPrice, minOriginalPriceAtMinPrice };
+  return {
+    variations,
+    variants,
+    totalStock,
+    minPrice,
+    minOriginalPriceAtMinPrice,
+  };
 };
+
+function createDefaultVariant(prices) {
+  const defaultPrice = prices["default"];
+  return {
+    variations: [],
+    variants: [],
+    totalStock: parseInt(defaultPrice["stock"]),
+    minPrice: parseInt(defaultPrice["price"]),
+    minOriginalPriceAtMinPrice: parseInt(defaultPrice["originalPrice"]),
+  };
+}
+
+function createVariant({
+  combination,
+  prices,
+  hasSelectedOptions,
+  updateStock,
+  updatePrice,
+}) {
+  const key = hasSelectedOptions ? combination.join("-") : combination[0];
+  console.log(key);
+  const { price, originalPrice, stock } = extractPriceDetails(prices[key]);
+
+  updateStock(stock);
+  updatePrice(price, originalPrice);
+
+  return {
+    option_one: combination[0] || "",
+    option_two: hasSelectedOptions ? combination[1] || "" : undefined,
+    sku: "", // Implement generateSKU based on your logic
+    price,
+    original_price: originalPrice,
+    quantity: stock,
+  };
+}
+
+function extractPriceDetails(priceDetail) {
+  return {
+    price: parseFloat(priceDetail.price),
+    originalPrice: parseFloat(priceDetail.originalPrice),
+    stock: parseInt(priceDetail.stock),
+  };
+}
 
 export const onSubmitProduct = async ({ productData }) => {
   try {

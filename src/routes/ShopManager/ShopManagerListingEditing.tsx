@@ -100,6 +100,8 @@ export default function ShopManagerListingEditing() {
     setPrices,
     section,
     setSection,
+    optionNumbers,
+    setOptionNumbers,
   } = useProductState();
 
   // image, video files
@@ -364,6 +366,8 @@ export default function ShopManagerListingEditing() {
             setCombinations={setCombinations}
             prices={prices}
             setPrices={setPrices}
+            optionNumbers={optionNumbers}
+            setOptionNumbers={setOptionNumbers}
           />
           <OpenInfo />
           <PersonalizeTab

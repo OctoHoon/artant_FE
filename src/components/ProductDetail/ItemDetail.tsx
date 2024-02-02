@@ -21,11 +21,7 @@ export default function ItemDetailPage({ shop_pk, is_liked }) {
         <ProductImage is_liked={is_liked} />
         <ReviewSection shop_pk={shop_pk} />
       </Flex>
-      {!isLoading ? (
-        <ProductPanel data={data} pk={pk} />
-      ) : (
-        <Box width={"500"} />
-      )}
+      {data ? <ProductPanel data={data} pk={pk} /> : <Box width={"500"} />}
     </Flex>
   );
 }

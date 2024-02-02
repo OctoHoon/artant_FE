@@ -88,17 +88,21 @@ export default function RegisterProduct() {
     setPrices,
     section,
     setSection,
+    optionNumbers,
+    setOptionNumbers,
   } = useProductState();
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { uploadImages, isUploadingImages } = useUploadImages();
-  const { uploadVideos, isUploadingVideo } = useUploadVideo();
+  const { uploadImages } = useUploadImages();
+  const { uploadVideos } = useUploadVideo();
 
   const onSubmitAll = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const variantData = transformToVariants({
+      optionNumbers,
+      selectedOptions,
       combinations,
       prices,
     });
@@ -250,6 +254,8 @@ export default function RegisterProduct() {
               setCombinations={setCombinations}
               prices={prices}
               setPrices={setPrices}
+              optionNumbers={optionNumbers}
+              setOptionNumbers={setOptionNumbers}
             />
             <OpenInfo />
             <PersonalizeTab
