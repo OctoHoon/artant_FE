@@ -9,7 +9,6 @@ import {
   Input,
   Switch,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
 import { PriceMap } from "./RegisterProduct";
 
 const optionNumber = [
@@ -28,6 +27,8 @@ const optionNumber = [
 ];
 
 export default function AddVariation({
+  optionNumbers,
+  setOptionNumbers,
   productName,
   selectedOptions,
   setSelectedOptions,
@@ -36,8 +37,6 @@ export default function AddVariation({
   prices,
   setPrices,
 }) {
-  const [optionNumbers, setOptionNumbers] = useState("0");
-
   const handleOptionNameChange = (index, value) => {
     const newOptions = [...selectedOptions];
     newOptions[index].name = value;
