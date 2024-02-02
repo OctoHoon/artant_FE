@@ -40,6 +40,26 @@ import BlackButton from "../commons/Button/BlackButton";
 import LoginModal from "../commons/LoginModal";
 
 export default function ProductPanel({ data, pk }) {
+  const [selectedOptionOne, setSelectedOptionOne] = useState("");
+  const [optionTwoValues, setOptionTwoValues] = useState([]);
+
+  const handleOptionOneChange = (event) => {
+    const value = event.target.value;
+    setSelectedOptionOne(value);
+
+    const selectedOption = data.options.option_values.find(
+      (option) => option.option_one === value
+    );
+    if (selectedOption) {
+      setOptionTwoValues(selectedOption.option_two);
+    } else {
+      setOptionTwoValues([]);
+    }
+  };
+
+  console.log(data.options.option_names);
+  console.log(data.options.option_values);
+
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -214,48 +234,71 @@ export default function ProductPanel({ data, pk }) {
           </Text>
         </Flex>
         <Box height={"24px"} />
-        {data.separate_options?.map((options, index) => (
-          <Box key={index}>
+
+        {data.options.option_names.length === 1 && (
+          <>
             <Flex>
-              <Text textStyle={"B14R"}>{Object.keys(options)}</Text>
+              <Text textStyle={"B14R"}>{data.options.option_names[0]}</Text>
               <Text color="#BC0000" textStyle={"B14R"}>
                 *
               </Text>
             </Flex>
-            <Box width="100%" alignSelf={"start"}>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  width="100%"
-                  colorScheme="white"
-                  color="#595959"
-                  textAlign={"start"}
-                  borderWidth={"2px"}
-                  rightIcon={<FaChevronDown />}
-                  fontSize="16px"
-                  fontWeight="400"
-                  letterSpacing={"-0.3px"}
-                >
-                  {index === 0 ? option1 : option2}
-                </MenuButton>
-                <MenuList width="150%">
-                  {options[Object.keys(options)[0]].map(
-                    (option, optionIndex) => (
-                      <MenuItemTab
-                        key={optionIndex}
-                        title={option}
-                        set={() => {
-                          index === 0 ? setOption1(option) : setOption2(option);
-                        }}
-                      />
-                    )
-                  )}
-                </MenuList>
-              </Menu>
-            </Box>
-            <Box height="12px" />
-          </Box>
-        ))}
+            <Select
+              placeholder={data.options.option_names[0]}
+              onChange={() => {}}
+            >
+              {data.options.option_values.option_one.map((variation, index) => (
+                <option key={index} value={variation}>
+                  {variation}
+                </option>
+              ))}
+            </Select>
+
+            <Box height={"12px"} />
+          </>
+        )}
+
+        {data.options.option_names.length === 2 && (
+          <>
+            <Flex>
+              <Text textStyle={"B14R"}>{data.options.option_names[0]}</Text>
+              <Text color="#BC0000" textStyle={"B14R"}>
+                *
+              </Text>
+            </Flex>
+            <Select
+              placeholder={data.options.option_names[0]}
+              onChange={handleOptionOneChange}
+            >
+              {data.options.option_values.map((variation, index) => (
+                <option key={index} value={variation.option_one}>
+                  {variation.option_one}
+                </option>
+              ))}
+            </Select>
+
+            <Box height={"12px"} />
+            <Flex>
+              <Text textStyle={"B14R"}>{data.options.option_names[1]}</Text>
+              <Text color="#BC0000" textStyle={"B14R"}>
+                *
+              </Text>
+            </Flex>
+            <Select
+              isDisabled={!selectedOptionOne}
+              placeholder={data.options.option_names[1]}
+              onChange={() => {}}
+            >
+              {optionTwoValues.map((value, index) => (
+                <option key={index} value={value}>
+                  {value}
+                </option>
+              ))}
+            </Select>
+            <Box height={"12px"} />
+          </>
+        )}
+
         <Box height="12px" />
 
         <BlackButton
