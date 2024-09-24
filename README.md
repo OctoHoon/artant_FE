@@ -1,6 +1,26 @@
 #  🐜 미술품 거래 플랫폼 (ArtAnt)
 
-![screencapture-127-0-0-1-3000-items-2024-09-24-11_56_15 (1)](https://github.com/user-attachments/assets/e9b740d4-407c-4c8b-8611-ce60217d3f31)
+#### Home Page
+
+* **Home Page**
+
+<table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/9fdbcf5f-4630-4deb-9eb5-e0131790cfce"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/82577d22-4663-42f6-ae6e-b0ea8d79e9a7"></td>
+  </tr>
+</table>
+
+
+* **Product and Shop Page**
+
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/0d300ad7-c587-4487-8a75-4ae9ced60eeb"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/6f5cc509-1ea8-4db4-914f-9f5f88c32f5e"></td>
+  </tr>
+</table>
+
 
 
 # Getting Started with Create React App
