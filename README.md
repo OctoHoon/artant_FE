@@ -1,18 +1,25 @@
 #  🐜 미술품 거래 플랫폼 (ArtAnt)
 
+ > - Artant는 사용자가 예술 작품을 발견하고, 감상하고, 판매할 수 있는 플랫폼입니다. Artant는 다양한 예술 작품을 쉽게 탐색하고, 예술에 대한 깊이 있는 경험을 선사하는 것을 목표로 합니다.
+이 레포지토리는 미술품 거래 C2C 플랫폼 Artant의 MVP 프론트엔드로, 웹 사이트의 기본 흐름과 사용자 경험을 중점으로 구현되었으며 결제나 휴대폰 인증 같은 세부 기능은 포함되지 않았습니다.
 #### 홈 페이지
 
 * **홈 화면**
+> - 상단 배너에서 유명한 갤러리들을 확인할 수 있습니다.
+>  - 신상품, 추천 작품, 뉴스 이벤트 및 카데고리를 확인할 수 있습니다.
+>  - 카테고리 별로 정리된 작품들을 확인할 수 있으며, 검색 기능 및 필터 기능을 통해 원하는 작품을 선별할 수 있습니다.
 
 <table>
   <tr>
-    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/9fdbcf5f-4630-4deb-9eb5-e0131790cfce"></td>
-    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/82577d22-4663-42f6-ae6e-b0ea8d79e9a7"></td>
+    <td valign="top"><img width="400" alt="api" src="https://github.com/user-attachments/assets/9fdbcf5f-4630-4deb-9eb5-e0131790cfce"></td>
+    <td valign="top"><img width="400" alt="api" src="https://github.com/user-attachments/assets/82577d22-4663-42f6-ae6e-b0ea8d79e9a7"> </td>
+    <td valign="top"><img width="200" alt="api" src="https://github.com/user-attachments/assets/c8bc5d8a-cc28-4822-9dd1-1d9fe54ea760"></td>
   </tr>
 </table>
 
 * **로그인/회원가입**
-
+ > - 기본적인 로그인 및 회원가입을 할 수 있습니다.
+>  - 카카오 로그인을 통해 간편 로그인 및 회원가입을 할 수 있으며, 구글과 네이버 로그인은 미구현 상태입니다.
 <table>
   <tr>
     <td valign="top"><img width="400" alt="api" src="https://github.com/user-attachments/assets/e49430c0-8326-45a7-b19c-71bc241c324a"></td>
@@ -21,7 +28,9 @@
 </table>
 
 * **아이디/비밀번호 찾기**
-
+> - 아이디/비밀번호 찾기 화면입니다.
+> - 이메일을 통해 비밀번호를 변경할 수 있으며, AWS SES 서비스를 활용해 구현했습니다.
+> - 휴대폰 인증 기능은 구현하지 않았습니다.
 <table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/aa41802e-f692-481c-ad6d-efe3d78ff0b2"></td>
@@ -29,10 +38,10 @@
   </tr>
 </table>
 
-
-
 * **작품 및 갤러리 화면**
-
+> - 아이디/비밀번호 찾기 화면입니다.
+> - 이메일을 통해 비밀번호를 변경할 수 있으며, AWS SES 서비스를 활용해 구현했습니다.
+> - 휴대폰 인증 기능은 구현하지 않았습니다.
 <table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/0d300ad7-c587-4487-8a75-4ae9ced60eeb"></td>
