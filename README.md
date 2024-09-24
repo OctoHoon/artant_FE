@@ -1,8 +1,8 @@
 #  🐜 미술품 거래 플랫폼 (ArtAnt)
 
-#### Home Page
+#### 홈 페이지
 
-* **Home Page**
+* **홈 화면**
 
 <table>
   <tr>
@@ -13,7 +13,7 @@
 
 * **로그인/회원가입**
 
- <table>
+<table>
   <tr>
     <td valign="top"><img width="400" alt="api" src="https://github.com/user-attachments/assets/e49430c0-8326-45a7-b19c-71bc241c324a"></td>
     <td valign="top"><img width="600" alt="api" src="https://github.com/user-attachments/assets/7cf840c2-2bdf-4489-bc56-404c33d56726"></td>
@@ -21,8 +21,8 @@
 </table>
 
 * **아이디/비밀번호 찾기**
-  
- <table>
+
+<table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/aa41802e-f692-481c-ad6d-efe3d78ff0b2"></td>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/0c83478c-e544-4f5e-8204-84364479be42"></td>
@@ -33,7 +33,7 @@
 
 * **작품 및 갤러리 화면**
 
-  <table>
+<table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/0d300ad7-c587-4487-8a75-4ae9ced60eeb"></td>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/6f5cc509-1ea8-4db4-914f-9f5f88c32f5e"></td>
@@ -42,7 +42,7 @@
 
 * **프로필 화면**
 
-  <table>
+<table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/40f0163d-9eea-48a4-a6ec-b3a8ec057101"></td>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/00e9784e-5dc1-4b31-a678-ab15feee34fb"></td>
@@ -51,13 +51,13 @@
 
 * **갤러리 개설 및 작품 등록 화면**
 
-  <table>
+<table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/9ef23e35-ac21-427f-849c-3c87b0351b95"></td>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/4bdf8d59-21c2-4308-b628-9046dc201f05"></td>
   </tr>
 </table>
-  <table>
+<table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/9ec0b0e3-e5d4-4d01-b547-7b402fe2a718"></td>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/1a4f128d-dc0b-430e-b715-6cbaf443cfae"></td>
@@ -66,16 +66,18 @@
 
 * **장바구니 화면**
 
-  <table>
+<table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/06d9f834-b421-49f7-9bef-6dd103143b25"></td>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/2358dda4-1ef6-4049-bc1a-8e2dee50f333"></td>
   </tr>
 </table>
 
-* **장바구니 화면**
+#### 판매자 페이지
 
-  <table>
+* **판매자 화면**
+
+<table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/5a5f428a-f2e8-466b-a01b-e508cefd65bd"></td>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/1a31a20c-8c5b-48aa-a71d-8affdc5eb947"></td>
