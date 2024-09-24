@@ -11,8 +11,27 @@
   </tr>
 </table>
 
+* **로그인/회원가입**
 
-* **Product and Shop Page**
+ <table>
+  <tr>
+    <td valign="top"><img width="400" alt="api" src="https://github.com/user-attachments/assets/e49430c0-8326-45a7-b19c-71bc241c324a"></td>
+    <td valign="top"><img width="600" alt="api" src="https://github.com/user-attachments/assets/7cf840c2-2bdf-4489-bc56-404c33d56726"></td>
+  </tr>
+</table>
+
+* **아이디/비밀번호 찾기**
+  
+ <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/aa41802e-f692-481c-ad6d-efe3d78ff0b2"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/0c83478c-e544-4f5e-8204-84364479be42"></td>
+  </tr>
+</table>
+
+
+
+* **작품 및 갤러리 화면**
 
   <table>
   <tr>
@@ -21,6 +40,61 @@
   </tr>
 </table>
 
+* **프로필 화면**
+
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/40f0163d-9eea-48a4-a6ec-b3a8ec057101"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/00e9784e-5dc1-4b31-a678-ab15feee34fb"></td>
+  </tr>
+</table>
+
+* **갤러리 개설 및 작품 등록 화면**
+
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/9ef23e35-ac21-427f-849c-3c87b0351b95"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/4bdf8d59-21c2-4308-b628-9046dc201f05"></td>
+  </tr>
+</table>
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/9ec0b0e3-e5d4-4d01-b547-7b402fe2a718"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/1a4f128d-dc0b-430e-b715-6cbaf443cfae"></td>
+  </tr>
+</table>
+
+* **장바구니 화면**
+
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/06d9f834-b421-49f7-9bef-6dd103143b25"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/2358dda4-1ef6-4049-bc1a-8e2dee50f333"></td>
+  </tr>
+</table>
+
+* **장바구니 화면**
+
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/5a5f428a-f2e8-466b-a01b-e508cefd65bd"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/1a31a20c-8c5b-48aa-a71d-8affdc5eb947"></td>
+  </tr>
+</table>
+
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/6a100da1-3a2c-43af-a9a6-87a8da3edc5c"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/ad415fd8-8387-463c-bb35-09b11ee0ca5a"></td>
+  </tr>
+</table>
+
+  <table>
+  <tr>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/7b84bf10-ae42-480f-ac9d-8e6a6ccc5a1d"></td>
+    <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/c115ee77-aa8b-4c05-9206-e87897bf3c32"></td>
+  </tr>
+</table>
 
 
 # Getting Started with Create React App
