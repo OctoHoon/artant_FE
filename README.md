@@ -1,3 +1,8 @@
+#  🐜 미술품 거래 플랫폼 (ArtAnt)
+
+![screencapture-127-0-0-1-3000-items-2024-09-24-11_56_15 (1)](https://github.com/user-attachments/assets/e9b740d4-407c-4c8b-8611-ce60217d3f31)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
