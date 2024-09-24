@@ -1,7 +1,26 @@
 #  🐜 미술품 거래 플랫폼 (ArtAnt)
-
+## 프로젝트 소개
  > - Artant는 사용자가 예술 작품을 발견하고, 감상하고, 판매할 수 있는 플랫폼입니다. Artant는 다양한 예술 작품을 쉽게 탐색하고, 예술에 대한 깊이 있는 경험을 선사하는 것을 목표로 합니다.
 이 레포지토리는 미술품 거래 C2C 플랫폼 Artant의 MVP 프론트엔드로, 웹 사이트의 기본 흐름과 사용자 경험을 중점으로 구현되었으며 결제나 휴대폰 인증 같은 세부 기능은 포함되지 않았습니다.
+
+## 팀원 소개
+> - @Octohoon 프론트엔드 및 백엔드
+> - @lvecon 프론트엔드 및 백엔드
+
+## 사용 기술 스택
+
+- **Frontend**
+  - React: 사용자 인터페이스 구축
+- **Backend**
+  - Django: 서버 사이드 로직 구현
+- **Cloud Services**
+  - AWS RDS: 데이터베이스 관리
+  - AWS EC2: 서버 호스팅
+  - AWS SES: 이메일 서비스
+  - CloudFlare Images: 이미지 및 동영상 관리
+
+## UI
+
 #### 홈 페이지
 
 * **홈 화면**
@@ -29,7 +48,7 @@
 
 * **아이디/비밀번호 찾기**
 > - 아이디/비밀번호 찾기 화면입니다.
-> - 이메일을 통해 비밀번호를 변경할 수 있으며, AWS SES 서비스를 활용해 구현했습니다.
+> - 이메일을 전송해 비밀번호를 변경할 수 있으며, AWS SES 서비스를 활용해 구현했습니다.
 > - 휴대폰 인증 기능은 구현하지 않았습니다.
 <table>
   <tr>
@@ -39,9 +58,9 @@
 </table>
 
 * **작품 및 갤러리 화면**
-> - 아이디/비밀번호 찾기 화면입니다.
-> - 이메일을 통해 비밀번호를 변경할 수 있으며, AWS SES 서비스를 활용해 구현했습니다.
-> - 휴대폰 인증 기능은 구현하지 않았습니다.
+> - 작품의 상세 정보를 확인 할 수 있습니다.
+> - 판매자의 다른 작품, 그리고 최근 방문한 작품을 볼 수 있습니다.
+> - 작가의 갤러리 상세 정보를 확인 할 수 있습니다.
 <table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/0d300ad7-c587-4487-8a75-4ae9ced60eeb"></td>
@@ -50,7 +69,7 @@
 </table>
 
 * **프로필 화면**
-
+> - 좋아요한 작품, 그리고 팔로우한 갤러리들을 모아 볼 수 있습니다.
 <table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/40f0163d-9eea-48a4-a6ec-b3a8ec057101"></td>
@@ -59,7 +78,10 @@
 </table>
 
 * **갤러리 개설 및 작품 등록 화면**
-
+> - 갤러리를 오픈해 작품을 판매할 수 있습니다.
+> - 작품 사진, 동영상, 가격, 이름, 재료 등의 정보를 기입해 작품을 등록할 수 있습니다.
+> - 등록한 사진과 동영상은 CloudFlare images를 통해 관리됩니다.
+> - 사진 등록 과정에서 이미지를 자유롭게 자를 수 있으며, react-cropper를 이용해 구현되었습니다.
 <table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/9ef23e35-ac21-427f-849c-3c87b0351b95"></td>
@@ -74,7 +96,8 @@
 </table>
 
 * **장바구니 화면**
-
+> - 작품을 장바구니에 담고, 장바구니 화면에서 구매할 수 있습니다.
+> - 결제 및 구매 기능은 구현하지 않았습니다.
 <table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/06d9f834-b421-49f7-9bef-6dd103143b25"></td>
@@ -85,7 +108,9 @@
 #### 판매자 페이지
 
 * **판매자 화면**
-
+> - 판매자가 본인의 갤러리를 관리할 수 있습니다.
+> - 작품을 등록할 수 있습니다.
+> - 메시지 확인, 통계 확인 등은 UI만 구현되었습니다.
 <table>
   <tr>
     <td valign="top"><img width="500" alt="api" src="https://github.com/user-attachments/assets/5a5f428a-f2e8-466b-a01b-e508cefd65bd"></td>
@@ -107,50 +132,3 @@
   </tr>
 </table>
 
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
